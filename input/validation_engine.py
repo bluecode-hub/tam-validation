@@ -1,0 +1,228 @@
+from __future__ import annotations
+
+import csv
+import json
+import logging
+from io import BytesIO
+from pathlib import Path
+from typing import Iterable
+
+from domain_grouping import group_urls_by_domain, root_domain
+from domain_index import DomainIndexCache
+from llm_validator import LLMValidator, OpenAIHTTPValidator
+from models import CompanyData, DiscoveryResult, PageContent, ValidationResult
+from retrieval import generate_retrieval_queries, html_to_text, pages_for_domain, retrieve_top_k
+
+try:
+    from pypdf import PdfReader
+except ImportError:  # pragma: no cover - depends on optional runtime dependency
+    PdfReader = None
+
+logger = logging.getLogger(__name__)
+
+
+def validate_company_domain(
+    company: CompanyData,
+    domain_pages: list[PageContent],
+    index_cache: DomainIndexCache | None = None,
+    validator: LLMValidator | None = None,
+    top_k: int = 5,
+    use_evidence_boost: bool = True,
+) -> ValidationResult:
+    cache = index_cache or DomainIndexCache()
+    evidence_validator = validator or OpenAIHTTPValidator()
+    domain = root_domain(company.domain or (domain_pages[0].url if domain_pages else ""))
+    logger.info(
+        "Validating company=%s domain=%s target=%s company_score=%.4f",
+        company.company_name,
+        company.domain or domain,
+        company.target_category,
+        company.company_score,
+    )
+    if not domain or not domain_pages:
+        logger.warning("No domain pages available for %s", company.domain or company.company_name)
+        return ValidationResult(
+            validated=None,
+            confidence=0.0,
+            entity_type="unknown",
+            evidence_pages=[],
+            supporting_snippets=[],
+            reasoning="No domain pages were available for validation.",
+        )
+    index = cache.get_or_build(domain, domain_pages)
+    if not index.pages:
+        logger.warning("No indexable page content available for %s", company.domain or company.company_name)
+        return ValidationResult(
+            validated=None,
+            confidence=0.0,
+            entity_type="unknown",
+            evidence_pages=[],
+            supporting_snippets=[],
+            reasoning="Domain pages were present, but none contained indexable text for validation.",
+        )
+    queries = generate_retrieval_queries(company)
+    logger.info("Generated %d retrieval queries for %s", len(queries), domain)
+    logger.debug("Retrieval queries for %s: %s", domain, queries)
+    retrieved = retrieve_top_k(index, queries, k=top_k, use_evidence_boost=use_evidence_boost)
+    logger.info("Retrieved %d evidence pages for %s", len(retrieved), domain)
+    if not retrieved:
+        logger.warning("No retrievable evidence pages found for %s", company.domain or company.company_name)
+        return ValidationResult(
+            validated=None,
+            confidence=0.0,
+            entity_type="unknown",
+            evidence_pages=[],
+            supporting_snippets=[],
+            reasoning="No relevant evidence pages were retrieved for validation.",
+        )
+    for index_number, page in enumerate(retrieved, start=1):
+        logger.info(
+            "  Evidence page %d score=%.4f url=%s",
+            index_number,
+            page.score,
+            page.url,
+        )
+    judgment = evidence_validator.validate(company, retrieved)
+    reasoning = judgment.reasoning or "LLM returned no reasoning."
+    return ValidationResult(
+        validated=judgment.validated,
+        confidence=judgment.confidence,
+        entity_type=judgment.entity_type,
+        evidence_pages=[item.url for item in judgment.evidence] or [page.url for page in retrieved],
+        supporting_snippets=[item.quote for item in judgment.evidence] or [page.content_snippet for page in retrieved],
+        reasoning=reasoning,
+    )
+
+
+def validate_batch(
+    companies: Iterable[CompanyData],
+    pages: list[PageContent],
+    validator: LLMValidator | None = None,
+    top_k: int = 5,
+    use_evidence_boost: bool = True,
+) -> dict[str, ValidationResult]:
+    cache = DomainIndexCache()
+    evidence_validator = validator or OpenAIHTTPValidator()
+    results: dict[str, ValidationResult] = {}
+    for company in companies:
+        domain = root_domain(company.domain)
+        domain_pages = pages_for_domain(pages, domain)
+        results[company.domain or company.company_name] = validate_company_domain(
+            company,
+            domain_pages,
+            index_cache=cache,
+            validator=evidence_validator,
+            top_k=top_k,
+            use_evidence_boost=use_evidence_boost,
+        )
+    logger.info("Validated %d companies", len(results))
+    return results
+
+
+def load_discovery_results(cache_dir: Path) -> list[DiscoveryResult]:
+    results: list[DiscoveryResult] = []
+    for path in cache_dir.glob("*.json"):
+        with path.open("r", encoding="utf-8", errors="ignore") as handle:
+            data = json.load(handle)
+        for row in data:
+            url = row.get("href") or row.get("url") or ""
+            results.append(
+                DiscoveryResult(
+                    url=url,
+                    title=row.get("title", ""),
+                    snippet=row.get("body") or row.get("snippet", ""),
+                    domain=root_domain(url),
+                )
+            )
+    return results
+
+
+def load_page_contents(
+    pages_dir: Path,
+    domains: Iterable[str] | None = None,
+    max_chars_per_page: int = 500_000,
+    extract_pdfs: bool = True,
+) -> list[PageContent]:
+    wanted_domains = {root_domain(domain) for domain in domains or [] if domain}
+    pages: list[PageContent] = []
+    for path in pages_dir.glob("*.html"):
+        url = url_from_cache_filename(path.name)
+        if wanted_domains and root_domain(url) not in wanted_domains:
+            continue
+        if _is_pdf_url(url) and extract_pdfs:
+            content = extract_pdf_text(path, max_bytes=max_chars_per_page)
+            source_type = "pdf"
+        else:
+            with path.open("r", encoding="utf-8", errors="ignore") as handle:
+                html = handle.read(max_chars_per_page)
+            content = html_to_text(html)
+            source_type = "pdf_raw" if _is_pdf_url(url) else "html"
+        pages.append(
+            PageContent(
+                url=url,
+                content=content,
+                metadata={"source_path": str(path), "source_type": source_type},
+            )
+        )
+    logger.info("Loaded %d cached pages", len(pages))
+    return pages
+
+
+def extract_pdf_text(path: Path, max_bytes: int = 500_000) -> str:
+    if PdfReader is None:
+        logger.warning("pypdf is not installed; unable to extract text from PDF cache file %s", path)
+        return ""
+    try:
+        data = path.read_bytes()[:max_bytes]
+        reader = PdfReader(BytesIO(data))
+        parts = []
+        for page in reader.pages:
+            text = page.extract_text() or ""
+            if text.strip():
+                parts.append(text.strip())
+        return " ".join(" ".join(parts).split())
+    except Exception as exc:  # pragma: no cover - malformed PDFs vary by parser version
+        logger.warning("Failed to extract text from PDF cache file %s: %s", path, exc)
+        return ""
+
+
+def _is_pdf_url(url: str) -> bool:
+    return url.lower().split("?", 1)[0].endswith(".pdf")
+
+
+def url_from_cache_filename(filename: str) -> str:
+    stem = filename[:-5] if filename.endswith(".html") else filename
+    without_hash = stem.rsplit("_", 1)[0]
+    if "_" not in without_hash:
+        return f"https://{without_hash}/"
+    domain, path = without_hash.split("_", 1)
+    clean_path = path.replace("_index.html", "").replace("_", "/").strip("/")
+    return f"https://{domain}/{clean_path}" if clean_path else f"https://{domain}/"
+
+
+def load_companies(csv_path: Path, target_category: str) -> list[CompanyData]:
+    with csv_path.open("r", encoding="utf-8", errors="replace", newline="") as handle:
+        reader = csv.DictReader(handle)
+        return [
+            CompanyData(
+                company_name=row["company_name"],
+                company_score=float(row.get("score") or 0.0),
+                target_category=target_category,
+                domain=row.get("domain", ""),
+            )
+            for row in reader
+        ]
+
+
+def build_domain_indexes_from_discovery(
+    discovery_results: list[DiscoveryResult],
+    pages: list[PageContent],
+    cache: DomainIndexCache | None = None,
+):
+    index_cache = cache or DomainIndexCache()
+    grouped = group_urls_by_domain(discovery_results)
+    return {
+        domain: index_cache.get_or_build(domain, pages_for_domain(pages, domain))
+        for domain in grouped
+        if pages_for_domain(pages, domain)
+    }

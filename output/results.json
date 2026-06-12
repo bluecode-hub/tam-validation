@@ -1,0 +1,50 @@
+{
+  "orangemali.com": {
+    "validated": false,
+    "confidence": 0.7,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://www.orangemali.com/fr/catalogue/paiement.html",
+      "https://www.orangemali.com/fr/faq-maxit.html",
+      "https://boutique.orangemali.com/"
+    ],
+    "supporting_snippets": [
+      "Les services de paiement | Orange Mali Particulier Business Fondation Institutionnel Boutique Orange Nos agences Engagement Confort + Offres Offres Offres Mobiles Offres prépayées Forfaits mobiles Téléphones mobiles Prêt smartphone Services",
+      "Prêt smartphone Services Mobile eSIM Services+ Internet Sur mon mobile A la maison La fibre Orange Conditions générales de vente So’box Fibre Int",
+      "Our services with confidence Delivery FAQ Contact us Our secured payment options Universe Terms of use NEW New Kit Djabarani 24 549 500 CFA New Fignè Douma 55 000 CFA New ORANGE NOLA FUN 3 27 500 CFA New KIT KOGNO MOUSSO 902 500 CFA"
+    ],
+    "reasoning": "The retrieved pages contain some mentions of 'Prêt smartphone' which could imply smartphone financing, but there is no explicit information confirming that Orangemali.com directly provides, finances, underwrites, leases, or sells smartphones in installments. The contents are ambiguous and insufficient; therefore, the appropriate classification is 'unknown' with partial confidence."
+  },
+  "bdm-sa.com": {
+    "validated": false,
+    "confidence": 0.9,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://www.bdm-sa.com/",
+      "https://www.bdm-sa.com/credit-immediat-bdm-sa",
+      "https://www.bdm-sa.com/credit-immediat-bdm-sa-particulier"
+    ],
+    "supporting_snippets": [
+      "La Banque de Développement du Mali BDM NET Autonomie, confidentialité et sécurité OPÉRATIONS CONSULTATION VIREMENT Pour un ensemble d'opérations bancaire",
+      "Crédit immédiat BDM-SA – La Banque de Développement du Mali",
+      "Crédit immédiat BDM-SA particulier – La Banque de Développement du Mali"
+    ],
+    "reasoning": "None of the retrieved pages explicitly mention that La Banque de Développement du Mali directly offers, finances, underwrites, leases, or sells smartphones on installments. The content mostly references general banking and credit operations without specific evidence of smartphone financing services. There is no indication of third-party partner involvement or an aggregator role either. Given the absence of explicit evidence, the entity type is best classified as 'unknown' with a high confidence the target service is not directly provided."
+  },
+  "ml.coinafrique.com": {
+    "validated": false,
+    "confidence": 0.9,
+    "entity_type": "aggregator",
+    "evidence_pages": [
+      "https://ml.coinafrique.com/annonce/telephones-et-tablettes/iphone-12-3009809",
+      "https://ml.coinafrique.com/annonce/telephones-et-tablettes/iphone-3030814",
+      "https://ml.coinafrique.com/annonce/telephones-et-tablettes/nothing-phone-256gb-5172173"
+    ],
+    "supporting_snippets": [
+      "Téléphones & Tablettes iPhone 12 neufs et occasions au Mali - CoinAfrique Mali Nous aimerions vous montrer des notifications pour les dernières nouveautés et mises à jour.",
+      "Téléphones & Tablettes iPhone neufs et occasions au Mali - CoinAfrique Mali Nous aimerions vous montrer des notifications pour les dernières nouveautés et mises à jour.",
+      "Téléphones & Tablettes Nothing phone - 256Gb neufs et occasions au Mali - CoinAfrique Mali Nous aimerions vous montrer des notifications pour les dernières nouveautés et mises à jour."
+    ],
+    "reasoning": "All retrieved pages are listings of phones for sale on CoinAfrique under the Téléphones & Tablettes category. There is no mention of Téléphones & Tablettes directly providing financing, leasing, or installment purchase services. The company appears to be an aggregator or marketplace listing third-party sales rather than a direct provider or financier of smartphone financing."
+  }
+}

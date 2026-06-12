@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGU BMSKIBARU</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5b843 0%, #000000 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #f5b843 0%, #bd8d33 100%);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            font-weight: 750;
+            color: #000000;
+        }
+
+        .content {
+            padding: 1.5rem;
+        }
+
+        .toc {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid #f5b843;
+        }
+
+        .toc h3 {
+            color: #f5b843;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .toc ul {
+            list-style: none;
+        }
+
+        .toc li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .toc li:last-child {
+            border-bottom: none;
+        }
+
+        .toc a {
+            color: #495057;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .toc a:hover {
+            color: #f5b843;
+        }
+
+        .article {
+            margin-bottom: 2rem;
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-left: 4px solid #f5b843;
+        }
+
+        .article h2 {
+            color: #f5b843;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .article p {
+            margin-bottom: 1rem;
+            text-align: justify;
+            line-height: 1.7;
+        }
+
+        .article ul, .article ol {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .article li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 1rem;
+            border-radius: 5px;
+            border-left: 4px solid #ffc107;
+            margin: 1rem 0;
+        }
+
+        .important {
+            background: #f5f3f0;
+            padding: 1rem;
+            border-radius: 5px;
+            border-left: 4px solid #000000;
+            margin: 1rem 0;
+        }
+
+        .contact-info {
+            background: #e8f4fd;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #015AAA;
+            margin: 1.5rem 0;
+        }
+
+
+        .contact-info h4 {
+            color: #000000;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info a {
+            color: #015AAA;
+            font-weight: 600;
+        }
+
+        .signature-section {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            border: 2px solid #f5b843;
+        }
+
+        .signature-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+        }
+
+        .signature-box {
+            flex: 1;
+            text-align: center;
+            padding: 1rem;
+            margin: 0 1rem;
+            min-height: 120px;
+            border: 2px dashed #f5b843;
+            border-radius: 5px;
+        }
+
+        .signature-box h5 {
+            color: #f5b843;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #f5b843;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(245, 184, 67, 0.3);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 184, 67, 0.4);
+        }
+
+        .checkbox-section {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid #f5b843;
+            margin: 1.5rem 0;
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            margin: 1rem 0;
+            font-weight: 500;
+        }
+
+        .checkbox-option input[type="checkbox"] {
+            margin-right: 0.5rem;
+            transform: scale(1.2);
+            accent-color: #f5b843;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 1.5rem 1rem;
+            }
+            
+            .header h1 {
+                font-size: 1.3rem;
+            }
+            
+            .header .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .content {
+                padding: 1rem;
+            }
+            
+            .article {
+                padding: 1rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .toc {
+                padding: 1rem;
+            }
+            
+            .signature-row {
+                flex-direction: column;
+            }
+            
+            .signature-box {
+                margin: 1rem 0;
+            }
+            
+            .back-to-top {
+                bottom: 1rem;
+                right: 1rem;
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.1rem;
+            }
+            
+            .header .subtitle {
+                font-size: 1rem;
+            }
+            
+            .article h2 {
+                font-size: 1.1rem;
+            }
+            
+            .content {
+                padding: 0.5rem;
+            }
+            
+            .article {
+                padding: 0.8rem;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Conditions Générales d'Utilisation</h1>
+            <div class="subtitle">BMSKIBARU</div>
+        </header>
+
+        <div class="content">
+            <div class="toc">
+                <h3>📋 Sommaire</h3>
+                <ul>
+                    <li><a href="#article1">Article 1 : Objet</a></li>
+                    <li><a href="#article2">Article 2 : Modalités d'identification</a></li>
+                    <li><a href="#article3">Article 3 : Utilisation du service Virement</a></li>
+                    <li><a href="#article4">Article 4 : Évolution du produit</a></li>
+                    <li><a href="#article5">Article 5 : Informations bancaires transmises</a></li>
+                    <li><a href="#article6">Article 6 : Conditions financières</a></li>
+                    <li><a href="#article7">Article 7 : Responsabilités des Parties</a></li>
+                    <li><a href="#article8">Article 8 : Précautions</a></li>
+                    <li><a href="#article9">Article 9 : Durée - Résiliation de l'abonnement</a></li>
+                    <li><a href="#article10">Article 10 : Modification de la convention</a></li>
+                    <li><a href="#article11">Article 11 : Documents contractuels et loi applicable</a></li>
+                    <li><a href="#article12">Article 12 : Nature des données personnelles traitées</a></li>
+                    <li><a href="#article13">Article 13 : Finalités</a></li>
+                    <li><a href="#article14">Article 14 : Durée de conservation</a></li>
+                    <li><a href="#article15">Article 15 : Sécurité</a></li>
+                    <li><a href="#article16">Article 16 : Transfert des données</a></li>
+                    <li><a href="#article17">Article 17 : Droit des personnes</a></li>
+                    <li><a href="#article18">Article 18 : Consentement</a></li>
+                </ul>
+            </div>
+
+            <article class="article" id="article1">
+                <h2>Article 1 : Objet</h2>
+                <p><strong>1.</strong> BMSKIBARU est une application de mobile Banking permettant aux banques et aux institutions financières d'offrir à leurs clients à tout moment et en tout lieu un accès à leur argent à l'aide de leur téléphone mobile ou leur ordinateur via le SMS ou l’internet.</p>
+                <p>BMSKIBARU permet aux clients d'effectuer des transactions bancaires telles que la vérification du solde, le transfert de fonds, le paiement des services publics, les demandes de services bancaires sans avoir besoin de se rendre dans une agence bancaire.</p>
+                <p>Pour les Clients de la BMS, la plateforme de BMSKIBARU permet de réduire le temps et les frais de déplacement en agence. Pour les banques, BMSKIBARU permet de réduire l’encombrement des agences et libère le personnel pour des tâches encore plus productives.</p>
+                <p><strong>2.</strong> La présente convention définit les conditions dans lesquelles la BMS met à la disposition de son client L’Abonné qui l'accepte, « BMSKIBARU », le service permettant d’interagir avec son compte, de procéder à des opérations et d’avoir des informations bancaires à partir de son ordinateur, sa tablette ou de son smartphone ; téléchargeable sur Play Store, Apple Store et sur le Web via le site Internet de la Banque.</p>
+                <p><strong>3.</strong> Les services offerts sur ces canaux ne sont pas limitatifs et comprennent :</p>
+                <ul>
+                    <li>Les services d’identification (identification pour avoir accès et utiliser l’application)</li>
+                    <li>Les services d’information (notification sur les opérations, informations générales)</li>
+                    <li>Les services périodiques (transmission périodique de relevés bancaires)</li>
+                    <li>Les services d’opérations bancaires</li>
+                    <li>Les services de consultation des opérations</li>
+                    <li>Les services de messageries</li>
+                    <li>Les services de localisation (localisation des agences bancaires et des DAB – actif uniquement avec l’autorisation de l’utilisateur)</li>
+                    <li>Les services de paiement</li>
+                </ul>
+            </article>
+
+            <article class="article" id="article2">
+                <h2>Article 2 : Modalités d'identification</h2>
+                <p><strong>2.1.</strong> L’Abonné accède à « BMSKIBARU » après s'être identifié par la composition d’un identifiant et d’un mot de passe qui lui sont communiqués par la BMS par SMS sur le numéro de téléphone mobile transmis par L’Abonné.</p>
+                <div class="important">
+                    <strong>Important :</strong> L’Abonné peut, à son initiative et à tout moment, modifier son mot de passe, ce qui lui est conseillé de faire fréquemment et en particulier dès la réception de son premier mot de passe.
+                </div>
+                <p>L’Abonné doit prendre toutes les mesures propres à assurer la sécurité du mot de passe. Il doit donc être tenu absolument secret et n'être communiqué à personne. Il ne doit notamment pas l'inscrire sur un quelconque document. L’Abonné est responsable de sa conservation et de son utilisation.</p>
+                <p>Le mot de passe a un caractère strictement confidentiel. Il ne circule sur les réseaux de télécommunications que sous forme cryptée. En cas d'abonnement joint, les Co-Abonnés sont solidairement responsables de la conservation et de l'utilisation du mot de passe. Il est, en conséquence, expressément convenu que toute utilisation de BMSKIBARU précédée de la saisie de l’identifiant et du mot de passe est réputée émaner de L’Abonné lui-même ou de son Co-Abonné.</p>
+                <p><strong>2.2.</strong> La BMS se réserve le droit de suspendre l'accès à « BMSKIBARU » d'une manière générale ou par l'intermédiaire d'une clé d'accès particulière, si elle devait relever des faits laissant présumer l'utilisation frauduleuse ou la tentative d'utilisation frauduleuse de ses services. Elle en informe aussitôt le ou les intéressés, par tout moyen à sa convenance.</p>
+            </article>
+
+            <article class="article" id="article3">
+                <h2>Article 3 : Utilisation du service Virement</h2>
+                <p>Les virements dont le montant excèdent une certaine limite seront soumis à l’arbitrage de la BMS. La BMS se réserve le droit de rejeter toute opération de virement de fonds via BMSKIBARU dans les cas suivants :</p>
+                <ul>
+                    <li>Absence ou défaut de provision du compte à débiter</li>
+                    <li>Comptes erronés</li>
+                    <li>Non-respect de toutes ou parties des conditions établies par la présente convention</li>
+                    <li>Non-respect des dispositions relatives à la réglementation en vigueur sur la lutte contre le blanchiment</li>
+                </ul>
+                <div class="important">
+                    <strong>Important :</strong> La validation effectuée par le client sur l’application digitale BMSKIBARU tient lieu d’autorisation expresse donnée à la Banque pour débiter automatiquement son compte principal du montant spécifié et créditer le compte indiqué, sans tout autre préalable.
+                </div>
+            </article>
+
+            <article class="article" id="article4">
+                <h2>Article 4 : Évolution du produit – Mise à disposition des services</h2>
+                <p>En fonction, notamment, des évolutions technologiques, la Banque apportera à « BMSKIBARU » les évolutions et adaptations qui s'imposent ou lui semblent souhaitables. La Banque informera L’Abonné de ces évolutions par tout moyen.</p>
+            </article>
+
+            <article class="article" id="article5">
+                <h2>Article 5 : Informations bancaires transmises</h2>
+                <p><strong>5.1.</strong> Les informations sont fournies par BMSKIBARU à la date précisée sur l'écran récepteur et sous réserve des opérations en cours de traitement au moment de la mise à disposition.</p>
+                <p><strong>5.2.</strong> Le client reconnaît que les informations fournies par le service sont données à titre indicatif. Seuls les relevés de compte adressés périodiquement au client ont valeur probante.</p>
+            </article>
+
+            <article class="article" id="article6">
+                <h2>Article 6 : Conditions financières</h2>
+                <p><strong>6.1.</strong> L'abonnement à « BMSKIBARU » est gratuit ; toutefois, le service fait l'objet d’une facturation mensuelle. La facturation du service se fait chaque fin de mois selon que le client soit un particulier ou une entreprise.</p>
+                <p><strong>6.2.</strong> Les tarifs sont fonction de la formule d’abonnement et sont consultables sur le site ou dans les conditions de banque affichées ou mises à disposition par la Banque.</p>
+                <p><strong>6.3.</strong> L’Abonné fait son affaire personnelle du règlement des communications et autres charges dont le coût est directement facturé par l'exploitant du réseau de télécommunication.</p>
+                <p>Toute modification des tarifs ou des modalités de facturation sera précisée à L’Abonné par tout moyen et notamment sous la rubrique « Messages » de « BMSKIBARU », trente jours au moins avant sa date d'entrée en vigueur. Si L’Abonné ne l'accepte pas, il lui est loisible de résilier la présente convention. L'utilisation de « BMSKIBARU », postérieurement à l'entrée en vigueur des modifications tarifaires, vaudra acceptation de celles-ci par L’Abonné.</p>
+            </article>
+
+            <article class="article" id="article7">
+                <h2>Article 7 : Responsabilités des Parties</h2>
+                <p><strong>7.1.</strong> La BMS s’engage à mettre tout en œuvre pour assurer, dans des conditions optimales, le fonctionnement de « BMSKIBARU », la confidentialité des informations communiquées et la sécurité des opérations bancaires en ligne. Ainsi, toutes les informations personnelles — et en particulier les données bancaires, l’identifiant et le mot de passe — circulant sur les réseaux de télécommunications sont systématiquement cryptées.</p>
+                <p><strong>7.2.</strong> La BMS n'est pas responsable du transport des données, de la qualité et de la disponibilité des réseaux de télécommunications ni des interruptions de service par suite de cas fortuits ou de force majeure et en particulier, sans que cette liste ne soit exhaustive, celles qui se produiraient du fait :</p>
+                <ul>
+                    <li>De conflits sociaux — même partiels — survenant à la BMS ou chez tout autre intermédiaire intervenant dans le fonctionnement de ce service ;</li>
+                    <li>De défaut de fourniture de courant électrique ;</li>
+                    <li>D'interruptions de service consécutives à un mauvais fonctionnement du matériel de L’Abonné ou du réseau de télécommunications.</li>
+                </ul>
+                <p><strong>7.3.</strong> Les enregistrements par les appareils de la BMS qui sont utilisés pour la réception des instructions ou leur reproduction sur un support informatique ou papier constituent pour la BMS et L’Abonné la preuve desdites instructions et la justification de leur imputation au compte de L’Abonné. La Banque n’est tenue de conserver ces renseignements ou reproductions que pendant un an.</p>
+                <p><strong>7.4.</strong> La Banque s'engage à ne faire usage des informations nominatives recueillies dans le cadre de « BMSKIBARU » que pour les seules nécessités de leur gestion et pour satisfaire aux obligations légales et réglementaires. Elle s'engage par ailleurs à assurer leur confidentialité conformément aux règles prescrites définissant les modalités d’octroi des autorisations de fournitures de services de télécommunications. Ces informations peuvent donner lieu aux droits d'accès et de rectification, par l'intermédiaire de l'agence sur les livres de laquelle est tenu le compte de facturation.</p>
+                <p>Par ailleurs, le client reconnaît avoir été informé par la Banque des risques que présente l’utilisation des moyens électroniques comme outil de communication, tels que :</p>
+                <ul>
+                    <li>La défaillance technique du système,</li>
+                    <li>Les erreurs d’adressage,</li>
+                    <li>L’usage abusif ou frauduleux,</li>
+                    <li>L’altération du message.</li>
+                </ul>
+                <p>Le Client assume entièrement, tout en dégageant pleinement la responsabilité de la Banque, les éventuelles conséquences afférentes au présent contrat, sachant que la Banque demeure uniquement tenue de vérifier la conformité apparente des signatures figurant sur les documents reçus par rapport au(x) spécimen(s) déposé(s).</p>
+                <p>La responsabilité de la Banque ne pourra nullement être engagée en cas de fraude ou acte malveillant qui surviendrait relativement à l’utilisation de l’ordinateur, la tablette, le smartphone, le télécopieur, le télex, le SWIFT ou de tout autre moyen électronique utilisé dans le cadre de la présente convention.</p>
+            </article>
+
+            <article class="article" id="article8">
+                <h2>Article 8 : Précautions</h2>
+                <p><strong>8.1.</strong> Pour protéger le caractère confidentiel de ses données bancaires, L’Abonné est invité à prendre les précautions adéquates, en fonction de son propre matériel et logiciel pour, soit prévenir la mémorisation dans son micro-ordinateur des données consultées, soit procéder à la suppression de celles-ci une fois la consultation terminée. S'il importe des données bancaires sur un logiciel de gestion, L’Abonné veillera à en interdire l'accès aux tiers non autorisés.</p>
+                <p><strong>8.2.</strong> Il appartient, d'autre part, à L’Abonné de prendre toutes mesures appropriées pour protéger les données et/ou les logiciels stockés ou chargés sur son équipement informatique de la contamination par des virus ou de tentatives d'intrusion.</p>
+            </article>
+
+            <article class="article" id="article9">
+                <h2>Article 9 : Durée – Résiliation de l'abonnement</h2>
+                <p><strong>9.1.</strong> L’Abonné peut mettre fin au présent contrat sur demande écrite avec accusé de réception. La résiliation prend alors effet au plus tard trente (30) jours après prélèvement des éventuelles facturations en cours.</p>
+                <p><strong>9.2.</strong> La résiliation par la BMS produit les mêmes effets.</p>
+                <p><strong>9.3.</strong> La Banque pourra suspendre ou mettre fin au service dans les cas suivants :</p>
+                <ul>
+                    <li>En cas de non-paiement des services ;</li>
+                    <li>Si les opérateurs auxquels elle fait appel lui interdisent de continuer la prestation ;</li>
+                    <li>En cas de décès, incapacité de L’Abonné, incident sur le compte ou ouverture d'une procédure collective.</li>
+                </ul>
+                <p><strong>9.4.</strong> La présente convention prendra fin automatiquement en cas de clôture du compte support.</p>
+            </article>
+
+            <article class="article" id="article10">
+                <h2>Article 10 : Modification de la convention</h2>
+                <p>Toute modification de la présente convention sera notifiée à L’Abonné au moins trente jours avant sa date d'entrée en vigueur, par tout moyen, et notamment sous la rubrique « Messages » de « BMSKIBARU », ou par l'intermédiaire de messages spécifiques ou inclus dans une lettre d’information de la Banque adressée à L’Abonné.</p>
+            </article>
+
+            <article class="article" id="article11">
+                <h2>Article 11 : Documents contractuels et loi applicable</h2>
+                <p><strong>11.1.</strong> Le présent document « CONDITIONS GÉNÉRALES D’UTILISATION (CGU) » fait partie intégrante des documents contractuels du Contrat d’Abonnement.</p>
+                <p><strong>11.2.</strong> La présente convention est soumise au droit ivoirien.</p>
+                <p><strong>11.3.</strong> En cas de litige sur la validité, l’interprétation ou l’exécution des présentes et de ses annexes, compétence est expressément attribuée au Tribunal de Commerce d’Abidjan nonobstant la pluralité de défendeurs.</p>
+            </article>
+
+            <article class="article" id="article12">
+                <h2>Article 12 : Nature des données personnelles traitées</h2>
+                <p>Les catégories de données personnelles pouvant être collectées sur l’application sont les suivantes :</p>
+                <ul>
+                    <li>Données d’identification (Nom, Prénom, type de pièce d’identité, numéro de la pièce, photo de la pièce)</li>
+                    <li>Données biométriques (photo, image du visage, empreinte digitale) — <em>recueillies uniquement après l’obtention de l’autorisation de l’utilisateur</em></li>
+                    <li>Le dispositif biométrique est sans stockage de données biométriques dans l’application BMSKIBARU. Les données biométriques sont uniquement créées et conservées sur le terminal de l’utilisateur.</li>
+                    <li>L’utilisation, la modification et la suppression des données biométriques sont à la seule initiative de l’utilisateur.</li>
+                    <li>Numéro de téléphone</li>
+                    <li>Adresse e-mail</li>
+                    <li>Adresse IP de l’appareil</li>
+                    <li>Type d’appareil (smartphone, tablette)</li>
+                    <li>Système d’exploitation (Android, iOS)</li>
+                    <li>Version de l’application Vsign Secure</li>
+                    <li>Dates et heures de connexion à l’application</li>
+                    <li>Transactions effectuées via l’application</li>
+                    <li>Codes de confirmation utilisés</li>
+                    <li>Données d’ordre économique et financier</li>
+                    <li>Données de connexion</li>
+                    <li>Données de géolocalisation</li>
+                </ul>
+                <div class="important">
+                    <strong>Important :</strong> Le dispositif biométrique est un dispositif sans base de données centrale : les données restent sur le terminal de l’utilisateur.
+                </div>
+            </article>
+
+            <article class="article" id="article13">
+                <h2>Article 13 : Finalités</h2>
+                <p>La Banque s’engage à ne faire usage des informations nominatives recueillies dans le cadre de l’application que pour les seules nécessités de leur gestion et pour satisfaire aux obligations légales et réglementaires.</p>
+                <p>Elle s'engage par ailleurs à assurer leur confidentialité conformément aux règles prescrites par la loi en vigueur en matière de protection des données à caractère personnel.</p>
+                <p>Les finalités pour lesquelles la Banque traite les données à caractère personnel sont les suivantes :</p>
+                <ul>
+                    <li>La gestion des activités bancaires des clients</li>
+                    <li>La gestion des activités de banque en ligne</li>
+                </ul>
+            </article>
+
+            <article class="article" id="article14">
+                <h2>Article 14 : Durée de conservation</h2>
+                <p>Les données d’accès sont conservées durant le temps de l’utilisation de l’application. La BMS se réserve le droit d’archiver vos données pendant une durée qui ne saurait excéder une période de dix (10) ans.</p>
+            </article>
+
+            <article class="article" id="article15">
+                <h2>Article 15 : Sécurité</h2>
+                <p>La BMS met en place les moyens organisationnels, logiciels, juridiques, techniques et physiques aptes à assurer la confidentialité et la sécurité de vos données personnelles. Ces mesures permettent de garantir la disponibilité, la confidentialité et l’intégrité de vos données.</p>
+                <div class="important">
+                    <strong>Important :</strong> L'accès à vos données personnelles est strictement limité aux employés et préposés de la Banque, habilités en raison de leurs fonctions et tenus à une obligation de confidentialité.
+                </div>
+                <p>Cependant, les données collectées pourront éventuellement être communiquées à des sous-traitants chargés contractuellement de l'exécution des tâches nécessaires au bon fonctionnement de l’application et de ses services ainsi qu’à la bonne gestion de la relation avec vous. Dans le cadre de leurs prestations, les sous-traitants n’ont qu’un accès limité à vos données et ont une obligation contractuelle de les utiliser en conformité avec les dispositions de la législation applicable en matière de protection des données personnelles.</p>
+                <p>En dehors des cas énoncés ci-dessus, la BMS s’engage à ne pas vendre, louer, céder ou donner accès à des tiers à vos données sans votre consentement préalable.</p>
+            </article>
+
+            <article class="article" id="article16">
+                <h2>Article 16 : Transfert des données</h2>
+                <p>En cas de transfert hors de la zone UEMOA, vos données seront transférées dans le strict respect de la réglementation applicable.</p>
+                <p>Ce transfert intervient dans la stricte limite nécessaire au bon fonctionnement du service. Ce transfert sera opéré vers un État dont la législation en matière de protection des données personnelles a été reconnue comme présentant un niveau de protection équivalent à la loi malienne relative à la protection des données à caractère personnel.</p>
+            </article>
+
+            <article class="article" id="article17">
+                <h2>Article 17 : Droit des personnes</h2>
+                <p>En vertu des dispositions de la loi relative à la protection des données à caractère personnel au Mali, vous disposez des droits suivants :</p>
+                <ul>
+                    <li>Le droit d’être informé</li>
+                    <li>Le droit d’accès</li>
+                    <li>Le droit de rectification</li>
+                    <li>Le droit à l’effacement/droit à l’oubli</li>
+                    <li>Le droit de retirer votre consentement</li>
+                    <li>Le droit de vous opposer</li>
+                    <li>Le droit à la portabilité de vos données</li>
+                </ul>
+                <p>Vous pouvez exercer ces droits conformément à notre procédure de gestion des droits des personnes concernées.</p>
+                <p>Afin d’exercer vos droits, vous devrez notamment préciser vos nom, prénom, adresse électronique et identifiant d’utilisateur. Vous devrez joindre à votre demande tout élément permettant de vous identifier avec certitude.</p>
+                <p>Conformément à la loi relative à la protection des données à caractère personnel en Côte d’Ivoire, vous avez le droit de saisir et d’introduire une réclamation auprès de l’Autorité de protection des données du pays pour contester les pratiques de la BMS si ces pratiques portent atteinte à votre vie privée, à vos droits et libertés.</p>
+                <div class="contact-info">
+                    <h4>💬 Pour exercer vos droits ou adresser vos préoccupations :</h4>
+                    <p><strong>Email :</strong> <a href="mailto:dpo@bms-sa.com">dpo@bms-sa.com</a></p>
+                    <p><strong>Téléphone :</strong> <strong>(+223) 20 70 30 00</strong></p>
+                    <p><strong>Adresse :</strong> Siège social : Immeuble BMS SA, Hamdallaye ACI 2000, Bamako – MALI, ou au sein de l’une de nos agences.</p>
+                </div>
+            </article>
+
+            <article class="article" id="article18">
+                <h2>Article 18 : Consentement</h2>
+                <p>L’utilisation de l’Application BMSKIBARU est subordonnée à l’acceptation des présentes CGU. Lors de l’installation de l’application, le futur Utilisateur doit :</p>
+                <ul>
+                    <li>Cliquer sur la case « J’accepte et je valide » pour continuer la souscription s’il est d’accord</li>
+                    <li>Ou refuser et abandonner le processus de souscription s’il n’accepte pas les conditions</li>
+                </ul>
+                <div class="highlight">
+                    <strong>En cochant la case « J’accepte et je valide »</strong>, je déclare avoir pris connaissance et accepter sans réserve les Conditions Générales d’Utilisation (CGU) de l’Application.
+                </div>
+                <p>Si les CGU sont amenées à être modifiées ultérieurement, un moyen d’information du client est prévu par affichage automatique, lors d’une reconnexion, de la nouvelle version des CGU avec obligation de cliquer sur un bouton « Accepter » pour rentrer dans l’application.</p>
+            </article>
+        </div>
+    </div>
+    <button class="back-to-top" onclick="scrollToTop()" title="Retour en haut">↑</button>
+
+    <script>
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Afficher/masquer le bouton retour en haut
+        window.addEventListener('scroll', function() {
+            const backToTop = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTop.style.display = 'block';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+
+        // Masquer initialement le bouton
+        document.querySelector('.back-to-top').style.display = 'none';
+
+        // Navigation fluide pour les liens du sommaire
+        document.querySelectorAll('.toc a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-ng">
+<head>
+
+<meta charset="utf-8">
+<!-- 
+	This website is powered by TYPO3 - inspiring people to share!
+	TYPO3 is a free open source Content Management Framework initially created by Kasper Skaarhoj and licensed under GNU/GPL.
+	TYPO3 is copyright 1998-2024 of Kasper Skaarhoj. Extensions are copyright of their respective owners.
+	Information and contribution at https://typo3.org/
+-->
+
+
+<link rel="shortcut icon" href="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/favicon.png" type="image/png">
+<title>Installment</title>
+<meta name="generator" content="TYPO3 CMS" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="twitter:card" content="summary" />
+
+
+<link rel="stylesheet" type="text/css" href="https://d13pvy8xd75yde.cloudfront.net/phantom/typo3temp/assets/css/7015c8c4ac.css?1619585694" media="all">
+<link rel="stylesheet" type="text/css" href="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Css/global_new.css?1697192761" media="all">
+<link rel="stylesheet" type="text/css" href="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Css/swiper.min.css?1620283105" media="all">
+<link rel="stylesheet" type="text/css" href="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Css/footerLink/footerLink.css?1631769020" media="all">
+
+
+
+<script src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Javascript/jquery-1.8.1.min.js?1620283106"></script>
+<script src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Javascript/swiper.min.js?1620283106"></script>
+
+<script src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Javascript/xn-help.js?1623318391"></script>
+
+
+<link rel="canonical" href="/ng/installment"/>
+</head>
+<body>
+
+        
+<!-- 公共部分 -->
+<script>
+	window.rootApiUrl = 'https://shop.mobile-phantom.com/';
+	window.rootSite = 'ng';
+	window.rootLang = 'English';
+	window.rootImgPath = 'https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/';
+	window.tabletWidth = 1200;
+	window.mobileWidth = 650;
+</script>
+<script>
+	<!-- Google Tag Manager -->
+	(function (w, d, s, l, i) {
+		w[l] = w[l] || []; w[l].push({
+			'gtm.start':
+				new Date().getTime(), event: 'gtm.js'
+		}); var f = d.getElementsByTagName(s)[0],
+			j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+				'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+	})(window, document, 'script', 'dataLayer', 'GTM-TCR9LFL');
+// < !--End Google Tag Manager-- >
+</script>
+
+<link rel="canonical" href="/ng/terms-of-use" />
+<!-- <script src="https://d13pvy8xd75yde.cloudfront.net/newfileadmin/templates/js/jquery-3.5.1.js?1558333906"
+	type="text/javascript"></script> -->
+<script src="/utils/jvrh-min-new-240423.js" type="text/javascript" defer></script>
+<!-- <script src="/utils/vue.js"></script> -->
+<!-- <script src="/utils/request.js" type="text/javascript"></script> -->
+<!-- <script src="/utils/hashes.js"></script> -->
+
+<!-- 公共部分 -->
+
+<nav class="top-nav isHomePage opaque" id="head_app">
+	<div class="top-nav-pc">
+		<div class="top-nav-left">
+			<a class="top-nav-logo" href="/ng/homepage">
+				<img
+					src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Images_New/icon/logo.svg">
+			</a>
+		</div>
+		<div class="top-nav-middle">
+			<div class="top-nav-menu">
+
+				<div class="menu-item product">
+
+					<a class="first-menu has-second" href="javascript:;">PHANTOM</a>
+
+
+
+
+					<div class="second-menu-list">
+
+						<a class="second-menu-link" v-for="(item,index) in productsList" :key="index"
+							@click="goProductDetail(item)">
+							<img :src="item.colorImages[0].identifier">
+							<span>{{item.title}}</span>
+						</a>
+
+						<!-- <a class="second-menu-link" href="/ng/phantom-v-fold">
+							<img src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/product/phantomvfold/nav_black.png">
+							<span>PHANTOM V Fold</span>
+						</a>
+
+						<a class="second-menu-link" href="/ng/phantom-x2-pro">
+							<img src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/product/phantomx2pro/phantomx2pro_nav.png">
+							<span>PHANTOM X2 Pro</span>
+						</a>
+
+						<a class="second-menu-link" href="/ng/phantom-x2">
+							<img src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/product/phantomx2/phantomx2_nav.png">
+							<span>PHANTOM X2</span>
+						</a>
+
+						<a class="second-menu-link" href="/ng/phantom">
+							<img src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/Phantom-X.png">
+							<span>PHANTOM X</span>
+						</a> -->
+
+					</div>
+
+
+
+				</div>
+
+				<div class="menu-item product">
+
+					<a class="first-menu has-second" href="/ng/accessories">ACCESSORIES</a>
+
+
+
+
+					<div class="second-menu-list">
+
+						<a class="second-menu-link" href="/ng/tecnowatch1">
+							<img
+								src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/Watch1.png">
+							<span>Watch 1</span>
+						</a>
+
+						<a class="second-menu-link" href="/ng/gimbal">
+							<img
+								src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/Handheld-PTZ.png">
+							<span>Handheld PTZ</span>
+						</a>
+
+						<a class="second-menu-link" href="/ng/hipods-h3">
+							<img
+								src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/Hipods-H3.png">
+							<span>Hipods-H3</span>
+						</a>
+
+					</div>
+
+
+
+				</div>
+
+				<div class="menu-item information">
+
+					<a class="first-menu no-second" href="https://www.tecno-mobile.com/nga/store">STORES</a>
+
+
+
+				</div>
+
+				<div class="menu-item information">
+
+					<a class="first-menu no-second" href="/ng/support">SUPPORT</a>
+
+
+
+				</div>
+
+				<div class="menu-item information">
+
+					<a class="first-menu has-second" href="/ng/community-index">COMMUNITY</a>
+
+
+
+
+					<div class="second-menu-list">
+
+						<a class="second-menu-link" href="/ng/community-activity">
+							<span>Activity</span>
+						</a>
+
+						<a class="second-menu-link" href="/ng/community-t-spot">
+							<span>T-Spot</span>
+						</a>
+
+					</div>
+
+
+
+				</div>
+
+				<div class="menu-item information">
+
+					<a class="first-menu no-second" href="/ng/hios13fold">HiOS</a>
+
+
+
+				</div>
+
+			</div>
+		</div>
+		<div class="top-nav-right">
+
+			<div class="top-nav-search">
+				<form class="global-search-form" action="https://www.tecno-mobile.com/search/"
+					data-gtm-form-interact-id="0">
+					<input name="q" autocomplete="off" placeholder="Search Phantom" data-gtm-form-interact-field-id="0">
+					<button type="submit">
+						<img
+							src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Images_New/icon/search.svg">
+					</button>
+				</form>
+			</div>
+
+
+			<div class="top-nav-user">
+                <div class="user_icon" @click="goLogin" >
+                    <img action="showPersonals" src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Images_New/icon/user.svg">
+                    <img v-if="loginStatus" class="user-down-img" src="/utils/down.png" alt="userDownImg">
+                </div>
+                <div class="personal-links-box" v-if="loginStatus">
+                    <p>
+                        <a href="/mall">Personal center</a>
+                    </p>
+                    <p @click="loginOut">
+                        <a>Logout</a>
+                    </p>
+                </div>
+            </div>
+
+
+		</div>
+	</div>
+
+	<div class="top-nav-mb">
+		<div class="top-nav-left">
+			<div class="nav-switch" action="navSwitch"></div>
+		</div>
+		<div class="top-nav-middle">
+			<a class="top-nav-logo" href="homepage">
+				<img
+					src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Images_New/icon/logo.svg">
+			</a>
+		</div>
+		<div class="top-nav-right">
+
+			<div class="top-nav-user">
+                <div class="user_icon" @click="goLogin" >
+                    <img action="showPersonals" src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Images_New/icon/user.svg">
+                    <img v-if="loginStatus" class="user-down-img" src="/utils/down.png" alt="userDownImg">
+                </div>
+                <div class="personal-links-box" v-if="loginStatus">
+                    <p>
+                        <a href="/mall">Personal center</a>
+                    </p>
+                    <p @click="loginOut">
+                        <a>Logout</a>
+                    </p>
+                </div>
+            </div>
+
+
+		</div>
+		<div class="open-menu">
+
+			<div class="top-nav-search">
+				<form class="global-search-form" action="https://www.tecno-mobile.com/search/">
+					<input name="q" autocomplete="off" placeholder="Search Phantom">
+					<button type="submit">
+						<img
+							src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Images_New/icon/search.svg">
+					</button>
+				</form>
+			</div>
+
+
+			<div class="top-nav-menu">
+
+				<div class="menu-item product">
+
+					<a class="first-menu has-second" href="javascript:;">PHANTOM</a>
+
+
+
+
+					<div class="second-menu-list">
+
+						<a class="second-menu-link" v-for="(item,index) in productsList" :key="index"
+							@click="goProductDetail(item)">
+							<img :src="item.colorImages[0].identifier">
+							<span>{{item.title}}</span>
+						</a>
+
+						<!-- <a class="second-menu-link" href="phantom-v-fold">
+							<img src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/product/phantomvfold/nav_black.png">
+							<span>PHANTOM V Fold</span>
+						</a>
+
+						<a class="second-menu-link" href="phantom-x2-pro">
+							<img src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/product/phantomx2pro/phantomx2pro_nav.png">
+							<span>PHANTOM X2 Pro</span>
+						</a>
+
+						<a class="second-menu-link" href="phantom-x2">
+							<img src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/product/phantomx2/phantomx2_nav.png">
+							<span>PHANTOM X2</span>
+						</a>
+
+						<a class="second-menu-link" href="phantom">
+							<img src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/Phantom-X.png">
+							<span>PHANTOM X</span>
+						</a> -->
+
+					</div>
+
+
+
+				</div>
+
+				<div class="menu-item product">
+
+					<a class="first-menu has-second" href="accessories">ACCESSORIES</a>
+
+
+
+
+					<div class="second-menu-list">
+
+						<a class="second-menu-link" href="tecnowatch1">
+							<img
+								src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/Watch1.png">
+							<span>Watch 1</span>
+						</a>
+
+						<a class="second-menu-link" href="gimbal">
+							<img
+								src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/Handheld-PTZ.png">
+							<span>Handheld PTZ</span>
+						</a>
+
+						<a class="second-menu-link" href="hipods-h3">
+							<img
+								src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/Hipods-H3.png">
+							<span>Hipods-H3</span>
+						</a>
+
+					</div>
+
+
+
+				</div>
+
+				<div class="menu-item information">
+
+					<a class="first-menu no-second" href="stores">STORES</a>
+
+
+
+				</div>
+
+				<div class="menu-item information">
+
+					<a class="first-menu no-second" href="support">SUPPORT</a>
+
+
+
+				</div>
+
+				<div class="menu-item information">
+
+					<a class="first-menu has-second" href="community-index">COMMUNITY</a>
+
+
+
+
+					<div class="second-menu-list">
+
+						<a class="second-menu-link" href="community-activity">
+							<span>Activity</span>
+						</a>
+
+						<a class="second-menu-link" href="community-t-spot">
+							<span>T-Spot</span>
+						</a>
+
+					</div>
+
+
+
+				</div>
+
+				<div class="menu-item information">
+
+					<a class="first-menu no-second" href="/ng/hios13fold">HiOS</a>
+
+
+
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+
+
+</nav>
+<script src="/utils/product/product.js" defer></script>
+<link rel="stylesheet" type="text/css" href="/utils/login.css" media="all">
+
+
+            
+    
+
+
+
+
+
+<div class="footer-link-page installment">
+    <div class="page-title">Installment</div>
+    <div class="page-banner">
+        <img src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/footerLink/installment-banner.png">
+    </div>
+	
+			<div class="section">
+				Just pay 68,400 Naira first payment, and daily payment 1,299 Naira through EASYBUY
+			</div>
+		
+</div>
+<footer>
+	<div class="footer-top">
+		<div class="footer-top-left">
+			<div class="footer-top-left-items">
+				<div class="item-title">
+					<span>About PHANTOM</span>
+					<img class="show-in-mb" action="showBottomLinks"
+						src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/select.svg">
+				</div>
+				<div class="item-links">
+					<a href="/ng/about-us">About Us</a>
+					<a href="/ng/news-list">News</a>
+
+				</div>
+			</div>
+			<div class="footer-top-left-items">
+				<div class="item-title">
+					<span>Products</span>
+					<img class="show-in-mb" action="showBottomLinks"
+						src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/select.svg">
+				</div>
+				<div class="item-links">
+					<div id="product-item-list">
+						<a v-for="(item,index) in productsList" :key="index"
+							@click="goProductDetail(item)">{{item.title}}</a>
+					</div>
+					<!-- 
+
+					<a href="/ng/phantom-v-fold">PHANTOM V Fold</a>
+
+
+					<a href="/ng/phantom-x2-pro">PHANTOM X2 Pro</a>
+
+
+					<a href="/ng/phantom-x2">PHANTOM X2</a>
+
+					<a href="/ng/phantom">PHANTOM X</a> -->
+
+
+					<a href="/ng/accessories">Accessories</a>
+
+				</div>
+			</div>
+			<div class="footer-top-left-items">
+				<div class="item-title">
+
+					<span>Support</span>
+
+					<img class="show-in-mb" action="showBottomLinks"
+						src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/select.svg">
+				</div>
+				<div class="item-links">
+
+					<a target="_blank" href="https://www.tecno-mobile.com/nga/warranty">Warranty Check</a>
+
+
+					<a target="_blank" href="https://www.tecno-mobile.com/nga/carlcare">Carlcare</a>
+
+
+					<a target="_blank" href="https://www.tecno-mobile.com/nga/downloads">Download</a>
+
+
+					<a target="_blank" href="https://www.tecno-mobile.com/nga/faq">FAQ</a>
+
+				</div>
+			</div>
+
+			<div class="footer-top-left-items">
+				<div class="item-title">
+					<span>Community</span>
+					<img class="show-in-mb" action="showBottomLinks"
+						src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/select.svg">
+				</div>
+				<div class="item-links">
+					<a href="/ng/community-activity">Activity</a>
+					<a href="/ng/community-t-spot">T-Spot</a>
+				</div>
+			</div>
+
+
+			<div class="footer-top-left-items">
+				<div class="item-title">
+					<span>Offers</span>
+					<img class="show-in-mb" action="showBottomLinks"
+						src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/select.svg">
+				</div>
+				<div class="item-links">
+					<a href="/ng/shop-on-line">Shop On Line</a>
+					<a href="/ng/my-order">My Order</a>
+					<a href="/ng/return-policy">Return Policy</a>
+
+
+					<a href="/ng/shopping-help">Shopping Help</a>
+					<a href="/ng/customer-service">Customer Service</a>
+					<a href="/ng/genuine-guaranteed">Genuine Guaranteed</a>
+				</div>
+			</div>
+
+			<div class="footer-top-left-items">
+				<div class="item-title">
+					<span>APP&amp;Service</span>
+					<img class="show-in-mb" action="showBottomLinks"
+						src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/select.svg">
+				</div>
+				<div class="item-links">
+
+					<a href="/ng/hios13fold">HiOS</a>
+
+					<a target="_blank" href="https://www.boomplaymusic.com/">Boomplay Music</a>
+				</div>
+			</div>
+		</div>
+		<div class="footer-top-right">
+			<div class="language show-in-mb">
+				<a class="choose-country" action="chooseLanguage">
+
+					<span>Nigeria</span>
+					<img
+						src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/NG.png">
+
+				</a>
+				<div class="language-box">
+    <div class="language-content">
+        <div class="language-close">
+            <img action="closeLanguage"
+                src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/circle-bg-close.svg">
+        </div>
+        <div class="language-tips">
+            <span class="tips-word">
+                CHOOSE YOUR COUNTRY OR REGION
+            </span>
+        </div>
+        <div class="continents-content">
+            <div class="continents-view active" action="changeContinents" tab="africa">
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/language/Africa.png">
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/language/Africa-active.png">
+                <span>Africa</span>
+            </div>
+            <div class="continents-view" action="changeContinents" tab="asia">
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/language/Asia.png">
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/language/Asia-active.png">
+                <span>Asia</span>
+            </div>
+            <div class="continents-view" action="changeContinents" tab="southAmerica">
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/language/South-America.png">
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/language/South-America-active.png">
+                <span>South America</span>
+            </div>
+            <div class="continents-view" action="changeContinents" tab="northAmerica">
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/language/North-America.png">
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/language/North-America-active.png">
+                <span>North America</span>
+            </div>
+            <div class="continents-view" action="changeContinents" tab="europe">
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/language/Europe.png">
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/language/Europe-active.png">
+                <span>Europe</span>
+            </div>
+        </div>
+        <div class="country-content">
+            <div class="country-continents active" action="openCountry" tab="africa">
+                <span>Africa</span>
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/close.svg">
+            </div>
+            <div class="country-list active" tabcontent="africa">
+                <a href="https://www.mobile-phantom.com/ng">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/NG.png">
+                    <span>Nigeria</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/ke">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/KE.png">
+                    <span>Kenya</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/gh">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/GH.png">
+                    <span>Ghana</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/sn">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/SN.png">
+                    <span>Sénégal</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/ci">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/CI.png">
+                    <span>Côte d'Ivoire</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/bf">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/BF.png">
+                    <span>Burkina Faso</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/cm">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/CM.png">
+                    <span>Cameroun</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/mz">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/MZ.png">
+                    <span>Moçambique</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/ao">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/AO.png">
+                    <span>Angola</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/ug">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/UG.png">
+                    <span>Uganda</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/tz">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/TZ.png">
+                    <span>Tanzania</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/zm">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/ZM.png">
+                    <span>Zambia</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/ml">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/ML.png">
+                    <span>Mali</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/ne">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/NE.png">
+                    <span>Niger</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/za">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/ZA.png">
+                    <span>South Africa</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/rw">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/RW.png">
+                    <span>Rwanda</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/tg">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/TG.png">
+                    <span>Togolaise</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/bj">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/BJ.png">
+                    <span>Bénin</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/gn">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/GN.png">
+                    <span>Guinée</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/eg">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/EG.png">
+                    <span>مصر‎</span>
+                </a>
+            </div>
+
+            <div class="country-continents" action="openCountry" tab="asia">
+                <span>Asia</span>
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/close.svg">
+            </div>
+            <div class="country-list" tabcontent="asia">
+                <a href="https://www.mobile-phantom.com/ae">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/AE.png">
+                    <span>UAE</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/sa">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/SA.png">
+                    <span>المملكة العربية السعودية</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/lb">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/LB.png">
+                    <span>لبنان</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/iq">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/IQ.png">
+                    <span>العراق</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/jo">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/JO.png">
+                    <span>الأردن</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/ph">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/PH.png">
+                    <span>Philippines</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/my">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/MY.png">
+                    <span>Malaysia</span>
+                </a>
+            </div>
+
+            <div class="country-continents" action="openCountry" tab="southAmerica">
+                <span>South America</span>
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/close.svg">
+            </div>
+            <div class="country-list" tabcontent="southAmerica">
+                <a href="https://www.mobile-phantom.com/co">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/CO.png">
+                    <span>Colombia</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/bo">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/BO.png">
+                    <span>Bolivia</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/ec">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/EC.png">
+                    <span>Ecuador</span>
+                </a>
+            </div>
+
+            <div class="country-continents" action="openCountry" tab="northAmerica">
+                <span>North America</span>
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/close.svg">
+            </div>
+            <div class="country-list" tabcontent="northAmerica">
+            </div>
+
+            <div class="country-continents" action="openCountry" tab="europe">
+                <span>Europe</span>
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/close.svg">
+            </div>
+            <div class="country-list" tabcontent="europe">
+                <!--/* <a href="https://www.mobile-phantom.com/ru">
+    <img src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/RU.png">
+    <span>Russian</span>
+</a>
+<a href="https://www.mobile-phantom.com/tr">
+    <img src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/TR.png">
+    <span>Türkiye</span>
+</a> */-->
+            </div>
+        </div>
+        <div class="global-home">
+            <a href="https://www.mobile-phantom.com">
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/language.svg">
+                <span>Global Home</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .not-found-page .bg {
+        background-image: url(/fileadmin/sitedesign/Resources/Public/Image/404-bg-pc.png);
+    }
+
+    @media (min-width: 1201px) {
+        .spec-part-new .spec-accordion-content {
+            margin: -136px 30px 0 304px !important;
+        }
+    }
+
+    .top-nav.isHomePage,
+    .top-nav .top-nav-pc .top-nav-menu .menu-item .second-menu-list {
+        background-color: rgba(0, 0, 0, 0.75);
+    }
+    .top-nav .top-nav-pc .top-nav-menu .menu-item .second-menu-list .second-menu-link{
+        opacity: 0.75;
+    }
+</style>
+
+<!--详情页购买按钮样式-->
+<style>
+    .buy_mask {
+        display: none;
+        position: fixed;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, .9);
+        width: 100%;
+        height: 100vh;
+        z-index: 9999;
+        .circle{
+            background: unset !important;
+            width: 50px !important;
+            height: 50px !important;
+        }
+    }
+    .buy_mask img{
+        width: 70%;
+    }
+    .buy_mask .buy_box {
+        width: 50%;
+        height: 29vw;
+        background-color: #ffffff;
+        position: relative;
+        overflow: hidden;
+        border: 1px #0000002b solid;
+    }
+    .buy_mask .title{
+        font-size: 30px;
+        box-shadow: 1px 2px rgba(0, 0, 0, .1);
+        text-align: center;
+        height: auto;
+        font-weight: 700;
+        padding: 15px;
+    }
+    .buy_mask .shop_list span{
+        font-size: 1vw;
+        font-weight:600;
+        display: block;
+        text-align: center;
+        margin: 1vw auto;
+    }
+    .buy_mask button{
+        position: absolute;
+        top: 6vw;
+        right: 16vw;
+    }
+    .buy_mask .shop_list {
+        width: 100%;
+        height: 23vw;
+        overflow: auto;
+    }
+    .buy_mask .shop_list ul{
+        display: grid;
+        grid-template-columns:repeat(2, 1fr);
+        padding: unset;
+        margin: unset;
+        height: 100%;
+    }
+    .buy_mask .shop_list li{
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        a{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    @media (max-width: 1080px) {
+        .buy_mask .buy_box {
+            width: 90%;
+            height: 66vw;
+        }
+        .buy_mask button{
+            position: absolute;
+            top: 30vw;
+            right: 3vw;
+        }
+        .buy_mask .title{
+            font-size: 6vw;
+            /*height: 14vw;*/
+            /*line-height: 14vw;*/
+        }
+        .buy_mask .shop_list span{
+            font-size: 3vw;
+            margin: 3vw auto;
+        }
+
+        .buy_mask .shop_list {
+            height: 52vw;
+        }
+        .buy_mask .shop_list li {
+            /*width: 50%;*/
+            /*height: 50%;*/
+            margin: auto;
+        }
+    }
+</style>
+<!--详情页购买按钮样式 end-->
+
+<script>
+    // let homePagenew = location.pathname
+    // let homeUrl_str = homePagenew.split('/')
+    // console.log(homeUrl_str,'homeUrl_str....')
+    // if((homeUrl_str.length==3&&homeUrl_str[1].length==2)||homeUrl_str.length==2){
+    //     $('.top-nav').addClass('isHomePage')
+    // }
+    $('#head_app').addClass('isHomePage')
+    // if ($('#head_app').hasClass('isHomePage')) {
+    //     $('#head_app').removeClass('isHomePage')
+    // }
+
+
+    // <!--詳情頁購買按鈕js-->
+    $('.showBuyMask').click(()=>{
+        $('.buy_mask').css({
+            'display':'flex'
+        })
+        $('body').css({
+            'overflow':'hidden'
+        })
+    })
+    $('.buy_mask .close').click(()=>{
+        $('.buy_mask').css({
+            'display':'none'
+        })
+        $('body').css({
+            'overflow':'auto'
+        })
+    })
+</script>
+
+			</div>
+			<div class="logo">
+				<div class="tecno-logo">
+					<img
+						src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/TECNO-logo.png">
+				</div>
+				<img
+					src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/logo-black.png">
+			</div>
+			<div class="outside-website">
+				<a target="_blank" href="https://business.facebook.com/TECNOMobileNigeria/">
+					<i class="iconfont"></i>
+				</a>
+				<a target="_blank" href="https://twitter.com/TecnoMobileNG">
+					<i class="iconfont"></i>
+				</a>
+
+				<a target="_blank" href="https://www.instagram.com/TecnoMobileNG/">
+					<i class="iconfont"></i>
+				</a>
+
+
+			</div>
+		</div>
+	</div>
+	<div class="footer-bottom">
+		<div class="copyright show-in-pc">
+			© 2021 TECNO PHANTOM
+		</div>
+		<div class="footer-bottom-links">
+			<a href="/ng/privacy-policy">Privacy Policy</a>
+			<a href="/ng/terms-of-use">Terms Of Use</a>
+			<a href="/ng/site-map">Site Map</a>
+		</div>
+		<div class="language show-in-pc">
+			<a class="choose-country" action="chooseLanguage">
+
+				<span>Nigeria</span>
+				<img
+					src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/NG.png">
+
+			</a>
+			<div class="language-box">
+    <div class="language-content">
+        <div class="language-close">
+            <img action="closeLanguage"
+                src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/circle-bg-close.svg">
+        </div>
+        <div class="language-tips">
+            <span class="tips-word">
+                CHOOSE YOUR COUNTRY OR REGION
+            </span>
+        </div>
+        <div class="continents-content">
+            <div class="continents-view active" action="changeContinents" tab="africa">
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/language/Africa.png">
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/language/Africa-active.png">
+                <span>Africa</span>
+            </div>
+            <div class="continents-view" action="changeContinents" tab="asia">
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/language/Asia.png">
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/language/Asia-active.png">
+                <span>Asia</span>
+            </div>
+            <div class="continents-view" action="changeContinents" tab="southAmerica">
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/language/South-America.png">
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/language/South-America-active.png">
+                <span>South America</span>
+            </div>
+            <div class="continents-view" action="changeContinents" tab="northAmerica">
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/language/North-America.png">
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/language/North-America-active.png">
+                <span>North America</span>
+            </div>
+            <div class="continents-view" action="changeContinents" tab="europe">
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/language/Europe.png">
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/language/Europe-active.png">
+                <span>Europe</span>
+            </div>
+        </div>
+        <div class="country-content">
+            <div class="country-continents active" action="openCountry" tab="africa">
+                <span>Africa</span>
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/close.svg">
+            </div>
+            <div class="country-list active" tabcontent="africa">
+                <a href="https://www.mobile-phantom.com/ng">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/NG.png">
+                    <span>Nigeria</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/ke">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/KE.png">
+                    <span>Kenya</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/gh">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/GH.png">
+                    <span>Ghana</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/sn">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/SN.png">
+                    <span>Sénégal</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/ci">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/CI.png">
+                    <span>Côte d'Ivoire</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/bf">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/BF.png">
+                    <span>Burkina Faso</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/cm">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/CM.png">
+                    <span>Cameroun</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/mz">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/MZ.png">
+                    <span>Moçambique</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/ao">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/AO.png">
+                    <span>Angola</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/ug">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/UG.png">
+                    <span>Uganda</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/tz">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/TZ.png">
+                    <span>Tanzania</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/zm">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/ZM.png">
+                    <span>Zambia</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/ml">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/ML.png">
+                    <span>Mali</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/ne">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/NE.png">
+                    <span>Niger</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/za">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/ZA.png">
+                    <span>South Africa</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/rw">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/RW.png">
+                    <span>Rwanda</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/tg">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/TG.png">
+                    <span>Togolaise</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/bj">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/BJ.png">
+                    <span>Bénin</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/gn">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/GN.png">
+                    <span>Guinée</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/eg">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/EG.png">
+                    <span>مصر‎</span>
+                </a>
+            </div>
+
+            <div class="country-continents" action="openCountry" tab="asia">
+                <span>Asia</span>
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/close.svg">
+            </div>
+            <div class="country-list" tabcontent="asia">
+                <a href="https://www.mobile-phantom.com/ae">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/AE.png">
+                    <span>UAE</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/sa">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/SA.png">
+                    <span>المملكة العربية السعودية</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/lb">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/LB.png">
+                    <span>لبنان</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/iq">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/IQ.png">
+                    <span>العراق</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/jo">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/JO.png">
+                    <span>الأردن</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/ph">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/PH.png">
+                    <span>Philippines</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/my">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/MY.png">
+                    <span>Malaysia</span>
+                </a>
+            </div>
+
+            <div class="country-continents" action="openCountry" tab="southAmerica">
+                <span>South America</span>
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/close.svg">
+            </div>
+            <div class="country-list" tabcontent="southAmerica">
+                <a href="https://www.mobile-phantom.com/co">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/CO.png">
+                    <span>Colombia</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/bo">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/BO.png">
+                    <span>Bolivia</span>
+                </a>
+                <a href="https://www.mobile-phantom.com/ec">
+                    <img
+                        src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/EC.png">
+                    <span>Ecuador</span>
+                </a>
+            </div>
+
+            <div class="country-continents" action="openCountry" tab="northAmerica">
+                <span>North America</span>
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/close.svg">
+            </div>
+            <div class="country-list" tabcontent="northAmerica">
+            </div>
+
+            <div class="country-continents" action="openCountry" tab="europe">
+                <span>Europe</span>
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/close.svg">
+            </div>
+            <div class="country-list" tabcontent="europe">
+                <!--/* <a href="https://www.mobile-phantom.com/ru">
+    <img src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/RU.png">
+    <span>Russian</span>
+</a>
+<a href="https://www.mobile-phantom.com/tr">
+    <img src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Icons/Flags/TR.png">
+    <span>Türkiye</span>
+</a> */-->
+            </div>
+        </div>
+        <div class="global-home">
+            <a href="https://www.mobile-phantom.com">
+                <img
+                    src="https://d13pvy8xd75yde.cloudfront.net/phantom/fileadmin/sitedesign/Resources/Public/Image/language.svg">
+                <span>Global Home</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .not-found-page .bg {
+        background-image: url(/fileadmin/sitedesign/Resources/Public/Image/404-bg-pc.png);
+    }
+
+    @media (min-width: 1201px) {
+        .spec-part-new .spec-accordion-content {
+            margin: -136px 30px 0 304px !important;
+        }
+    }
+
+    .top-nav.isHomePage,
+    .top-nav .top-nav-pc .top-nav-menu .menu-item .second-menu-list {
+        background-color: rgba(0, 0, 0, 0.75);
+    }
+    .top-nav .top-nav-pc .top-nav-menu .menu-item .second-menu-list .second-menu-link{
+        opacity: 0.75;
+    }
+</style>
+
+<!--详情页购买按钮样式-->
+<style>
+    .buy_mask {
+        display: none;
+        position: fixed;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, .9);
+        width: 100%;
+        height: 100vh;
+        z-index: 9999;
+        .circle{
+            background: unset !important;
+            width: 50px !important;
+            height: 50px !important;
+        }
+    }
+    .buy_mask img{
+        width: 70%;
+    }
+    .buy_mask .buy_box {
+        width: 50%;
+        height: 29vw;
+        background-color: #ffffff;
+        position: relative;
+        overflow: hidden;
+        border: 1px #0000002b solid;
+    }
+    .buy_mask .title{
+        font-size: 30px;
+        box-shadow: 1px 2px rgba(0, 0, 0, .1);
+        text-align: center;
+        height: auto;
+        font-weight: 700;
+        padding: 15px;
+    }
+    .buy_mask .shop_list span{
+        font-size: 1vw;
+        font-weight:600;
+        display: block;
+        text-align: center;
+        margin: 1vw auto;
+    }
+    .buy_mask button{
+        position: absolute;
+        top: 6vw;
+        right: 16vw;
+    }
+    .buy_mask .shop_list {
+        width: 100%;
+        height: 23vw;
+        overflow: auto;
+    }
+    .buy_mask .shop_list ul{
+        display: grid;
+        grid-template-columns:repeat(2, 1fr);
+        padding: unset;
+        margin: unset;
+        height: 100%;
+    }
+    .buy_mask .shop_list li{
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        a{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    @media (max-width: 1080px) {
+        .buy_mask .buy_box {
+            width: 90%;
+            height: 66vw;
+        }
+        .buy_mask button{
+            position: absolute;
+            top: 30vw;
+            right: 3vw;
+        }
+        .buy_mask .title{
+            font-size: 6vw;
+            /*height: 14vw;*/
+            /*line-height: 14vw;*/
+        }
+        .buy_mask .shop_list span{
+            font-size: 3vw;
+            margin: 3vw auto;
+        }
+
+        .buy_mask .shop_list {
+            height: 52vw;
+        }
+        .buy_mask .shop_list li {
+            /*width: 50%;*/
+            /*height: 50%;*/
+            margin: auto;
+        }
+    }
+</style>
+<!--详情页购买按钮样式 end-->
+
+<script>
+    // let homePagenew = location.pathname
+    // let homeUrl_str = homePagenew.split('/')
+    // console.log(homeUrl_str,'homeUrl_str....')
+    // if((homeUrl_str.length==3&&homeUrl_str[1].length==2)||homeUrl_str.length==2){
+    //     $('.top-nav').addClass('isHomePage')
+    // }
+    $('#head_app').addClass('isHomePage')
+    // if ($('#head_app').hasClass('isHomePage')) {
+    //     $('#head_app').removeClass('isHomePage')
+    // }
+
+
+    // <!--詳情頁購買按鈕js-->
+    $('.showBuyMask').click(()=>{
+        $('.buy_mask').css({
+            'display':'flex'
+        })
+        $('body').css({
+            'overflow':'hidden'
+        })
+    })
+    $('.buy_mask .close').click(()=>{
+        $('.buy_mask').css({
+            'display':'none'
+        })
+        $('body').css({
+            'overflow':'auto'
+        })
+    })
+</script>
+
+		</div>
+		<div class="copyright show-in-mb">
+			© 2021 TECNO PHANTOM
+		</div>
+	</div>
+
+	<div class="go-to-top show-in-pc" action="goToTop" style="display: block;">
+		<i class="iconfont"></i>
+	</div>
+</footer>
+<script defer>
+	let productList
+	let times = setInterval(() => {
+		productList = localStorage.getItem('productsList')
+
+		if (!!productList) {
+			let productList1 = JSON.parse(productList)
+			const list = document.getElementById('product-item-list');
+			// 清空旧列表项
+			while (list.firstChild) {
+				list.removeChild(list.firstChild);
+			}
+			productList1.forEach(el => {
+				const a = document.createElement('a');
+				a.textContent = el.title;
+				a.href = el.detailUrl
+				list.appendChild(a);
+
+			})
+
+			clearInterval(times)
+		}
+	}, 1000)
+
+
+
+
+</script>
+<!-- 公共部分 -->
+<!-- BEGIN LivePerson Monitor. -->
+<script
+	type="text/javascript">window.lpTag = window.lpTag || {}, 'undefined' == typeof window.lpTag._tagCount ? (window.lpTag = { wl: lpTag.wl || null, scp: lpTag.scp || null, site: '66840224' || '', section: lpTag.section || '', tagletSection: lpTag.tagletSection || null, autoStart: lpTag.autoStart !== !1, ovr: lpTag.ovr || {}, _v: '1.10.0', _tagCount: 1, protocol: 'https:', events: { bind: function (t, e, i) { lpTag.defer(function () { lpTag.events.bind(t, e, i) }, 0) }, trigger: function (t, e, i) { lpTag.defer(function () { lpTag.events.trigger(t, e, i) }, 1) } }, defer: function (t, e) { 0 === e ? (this._defB = this._defB || [], this._defB.push(t)) : 1 === e ? (this._defT = this._defT || [], this._defT.push(t)) : (this._defL = this._defL || [], this._defL.push(t)) }, load: function (t, e, i) { var n = this; setTimeout(function () { n._load(t, e, i) }, 0) }, _load: function (t, e, i) { var n = t; t || (n = this.protocol + '//' + (this.ovr && this.ovr.domain ? this.ovr.domain : 'lptag.liveperson.net') + '/tag/tag.js?site=' + this.site); var o = document.createElement('script'); o.setAttribute('charset', e ? e : 'UTF-8'), i && o.setAttribute('id', i), o.setAttribute('src', n), document.getElementsByTagName('head').item(0).appendChild(o) }, init: function () { this._timing = this._timing || {}, this._timing.start = (new Date).getTime(); var t = this; window.attachEvent ? window.attachEvent('onload', function () { t._domReady('domReady') }) : (window.addEventListener('DOMContentLoaded', function () { t._domReady('contReady') }, !1), window.addEventListener('load', function () { t._domReady('domReady') }, !1)), 'undefined' === typeof window._lptStop && this.load() }, start: function () { this.autoStart = !0 }, _domReady: function (t) { this.isDom || (this.isDom = !0, this.events.trigger('LPT', 'DOM_READY', { t: t })), this._timing[t] = (new Date).getTime() }, vars: lpTag.vars || [], dbs: lpTag.dbs || [], ctn: lpTag.ctn || [], sdes: lpTag.sdes || [], hooks: lpTag.hooks || [], identities: lpTag.identities || [], ev: lpTag.ev || [] }, lpTag.init()) : window.lpTag._tagCount += 1;</script>
+<!-- END LivePerson Monitor. -->
+
+
+
+
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TCR9LFL" height="0" width="0"
+		style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+
+<!-- Facebook Pixel Code -->
+
+<script>
+	!function (f, b, e, v, n, t, s) {
+		if (f.fbq) return; n = f.fbq = function () {
+			n.callMethod ?
+				n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+		};
+		if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+		n.queue = []; t = b.createElement(e); t.async = !0;
+		t.src = v; s = b.getElementsByTagName(e)[0];
+		s.parentNode.insertBefore(t, s)
+	}(window, document, 'script',
+		'https://connect.facebook.net/en_US/fbevents.js');
+	fbq('init', '857004341866857');
+	fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+		src="https://www.facebook.com/tr?id=857004341866857&ev=PageView&noscript=1" /></noscript>
+
+<!-- End Facebook Pixel Code -->
+<!-- Global site tag (gtag.js) - Google Ads: 610765814 -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-610765814"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() { dataLayer.push(arguments); }
+	gtag('js', new Date());
+	gtag('config', 'AW-610765814');
+</script>
+
+
+<!-- Twitter single-event website tag code -->
+
+<script src="//platform.twitter.com/oct.js" type="text/javascript"></script>
+<!-- <script type="text/javascript">
+	twttr.conversion.trackPid('o670j', { tw_sale_amount: 0, tw_order_quantity: 0 });
+</script> -->
+<noscript>
+	<img height="1" width="1" style="display:none;" alt=""
+		src="https://analytics.twitter.com/i/adsct?txn_id=o670j&p_id=Twitter&tw_sale_amount=0&tw_order_quantity=0" />
+	<img height="1" width="1" style="display:none;" alt=""
+		src="//t.co/i/adsct?txn_id=o670j&p_id=Twitter&tw_sale_amount=0&tw_order_quantity=0" />
+</noscript>
+
+<!-- End Twitter single-event website tag code -->
+<!-- 公共部分 -->
+
+<!-- <script src="/utils/product/product.js" defer></script>
+<link rel="stylesheet" type="text/css" href="/utils/login.css" media="all"> -->
+
+
+
+<script src="/utils/global_new_240801.js" defer></script>
+
+
+</body>
+</html>

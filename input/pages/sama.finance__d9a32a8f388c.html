@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sama Finance</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="assets/css/themes.css">
+    <!-- Favicons -->
+    <link href="assets/images/favicon_sf.png" rel="icon">
+    <link href="assets/images/favicon_sf.png" rel="apple-touch-icon">
+<style>
+    .entreprise{
+    background: #AD0216!important;
+  }
+</style>    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+     
+    <div class="container">
+<!-- Header -->
+    <!-- <nav class="navbar navbar-expand-lg bg-danger fixed-top" data-bs-theme="dark"> -->
+    <nav class="navbar navbar-expand-lg bg-danger" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index">
+            <img src="assets/images/logo_sf5.png" alt="" id="logo_sf">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <!-- <span class="navbar-toggler-icon"></span> -->
+            <i class="bi bi-list-ul" id="menu_mobile"></i>
+          </button>
+
+          
+
+          <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav me-auto">
+              
+              <li class="nav-item">
+                <a class="nav-link active" href="index" id="btn_menu_top">Accueil
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="index#apropos" id="btn_menu_top">A propos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="index#simulateur" id="btn_menu_top">Simulateur</a>
+              </li>
+
+              <!-- <li class="nav-item">
+                <a class="nav-link" href="#appli" id="btn_menu_top">Appli</a>
+              </li> -->
+
+              <li class="nav-item">
+                <a class="nav-link" href="index#contacts_us" id="btn_menu_top">Contact</a>
+              </li>
+              <!-- <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Separated link</a>
+                </div>
+              </li> -->
+            </ul>
+            <div class="d-flex">
+              <!-- <input class="form-control me-sm-2" type="search" placeholder="Search"> -->
+              <a href="apps"><button class="btn btn-danger my-2 my-sm-0" type="submit" id="access">Téléchargez l'application</button> </a>
+            </div>
+          </div>
+        </div>
+      </nav><!-- Header -->
+<!-- <button onclick="topFunction()" id="goToTop" title="En haut">
+        <img src="https://uploads.commoninja.com/searchengine/wordpress/back-to-top-pro.png">
+    </button> -->
+<!-- Carousel -->
+<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="assets/images/banner/Couverture du site img3.jpg" class="d-block w-100" alt="...">
+          </div>
+
+          <div class="carousel-item">
+            <img src="assets/images/banner/Couverture du site img2.jpg" class="d-block w-100" alt="...">
+          </div>
+
+        <div class="carousel-item">
+          <img src="assets/images/banner/Couverture du site avec le logo.jpg" class="d-block w-100" alt="...">
+          </div>
+
+          <!-- <div class="carousel-item">
+          <img src="https://creditaccess.ci/wp-content/uploads/2023/12/WhatsApp-Image-2023-12-14-at-18.35.54.jpeg" class="d-block w-100" alt="...">
+             <img src="https://creditaccess.ci/wp-content/uploads/2024/01/Slide-Site-Web-2.jpg" class="d-block w-100" alt="..."> 
+          </div> -->
+
+          <div class="carousel-item">
+            <img src="assets/images/banner/Groupe 5.png" class="d-block w-100" alt="...">
+          </div>
+
+          
+          
+          <div class="carousel-item">
+            <img src="assets/images/banner/Groupe 6.png" class="d-block w-100" alt="...">
+          </div>
+          
+          <!-- <div class="carousel-item">
+            <img src="https://creditaccess.ci/wp-content/uploads/2024/01/Slide-Site-Web-2.jpg" class="d-block w-100" alt="...">
+          </div>
+
+          <div class="carousel-item">
+            <img src="https://creditaccess.ci/wp-content/uploads/2023/05/Couverture-facebook-1-1536x585-2.jpg" class="d-block w-100" alt="...">
+          </div> -->
+
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div><!-- Carousel -->
+
+<!-- Bottom_Menu -->
+    <div class="col-md-12 mb-1" id="Clientcontainer_1">
+
+        <div class="container py-3 bg-light" id="container_1">
+          <div class="row">
+
+          <div class="col-md-4" id="dropdown">
+            <a href="#">
+            <div class="d-grid gap-2">
+                <button class="btn btn-primary" type="button" id="btn_sous_menu">OUVRIR UN COMPTE</button>
+            </div>
+
+              <div id="dropdown-content">
+                <a href="devenir-client">Particulier <i class="bi bi-arrow-right-circle-fill" id="fleche_dropdown"></i></a>
+                <a href="devenir-client-pro">Entreprise <i class="bi bi-arrow-right-circle-fill" id="fleche_dropdown"></i></a>
+              </div>
+            </a>
+
+            <style>
+              /* Styles pour le menu */
+              #dropdown {
+                position: relative;
+                display: inline-block;
+              }
+
+              #dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 100%;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+              }
+
+              #dropdown:hover #dropdown-content {
+                display: block;
+                /* margin-top: 10px; */
+              }
+
+              #fleche_dropdown{
+                display: none;
+                float: right;
+              }
+
+              #dropdown-content a {
+                color: black;
+                padding: 10px 16px;
+                border-bottom: 1px solid #dedede;
+                text-decoration: none;
+                display: block;
+                font-size: 15px;
+                font-weight: bold;
+              }
+
+              #dropdown-content a:hover{
+                background-color: #051E7A;
+                color: white;
+              }
+
+              #dropdown-content a:hover #fleche_dropdown {display:none;}
+              #dropdown-content a:hover #fleche_dropdown {display:initial}
+              </style>
+             
+          </div>
+
+          <div class="col-md-4" id="dropdown">
+            <a href="#">
+              <div class="d-grid gap-2">
+                <button class="btn btn-primary" type="button" id="btn_sous_menu">EPARGNER CHEZ NOUS</button>
+              </div>
+
+              <div id="dropdown-content">
+                <a href="epargner_chez_nous">Particulier <i class="bi bi-arrow-right-circle-fill" id="fleche_dropdown"></i></a>
+                <a href="epargner_chez_nous_pro">Entreprise <i class="bi bi-arrow-right-circle-fill" id="fleche_dropdown"></i></a>
+              </div>
+
+            </a>
+
+          </div>
+
+          <div class="col-md-4" id="dropdown">
+            <a href="#">
+              <div class="d-grid gap-2">
+                <button class="btn btn-primary" type="button" id="btn_sous_menu">EMPRUNTER CHEZ NOUS</button>
+              </div>
+
+              <div id="dropdown-content">
+                <a href="emprunter_chez_nous">Particulier <i class="bi bi-arrow-right-circle-fill" id="fleche_dropdown"></i></a>
+                <a href="emprunter_chez_nous_pro">Entreprise <i class="bi bi-arrow-right-circle-fill" id="fleche_dropdown"></i></a>
+              </div>
+
+            </a>
+
+              <!-- <a href="#">
+
+              <div class="card mb-3" style="max-width: 540px;">
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                      <img src="https://creditaccess.ci/wp-content/uploads/2023/02/CREDIT-e1676395029108.png" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <h5 class="card-title" id="title_1">EMPRUNTER CHEZ NOUS</h5>
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+              </a> -->
+          </div>
+
+
+          
+
+          
+          </div>
+        </div>
+      </div>
+<!-- Bottom_Menu -->
+    <br>
+    <!-- <br> -->
+    <!-- <h3 class="text-center"><b id="appssf"><a href="#" style="color:#fff!important;">Télécharger l'application en version ( APK ) <i class="bi bi-download"></i></a></b></h3>  -->
+    <br>
+    <style>
+      /* #appssf p{
+        color: red;
+      } */
+      #appssf{
+        opacity: 0.9;
+        transition: opacity 0.3s;
+        background-color: red;
+        color: white;
+        border-radius: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: 5px;
+        padding-top: 5px;
+        text-align: center;
+        color: #fff!important;
+        /* text-decoration: underline; */
+        /* font-size: 24px;
+        color: #fff;
+        text-decoration: none;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        opacity: 0.9;
+        transition: opacity 0.3s;
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 5px;
+        position: fixed;
+        bottom: 20px;
+        right: 30px; */
+      }
+    </style>
+
+<br>
+<!-- PME-PRO -->
+<h1 class="text-center" id="cibles_titles" style="color:#AD0216;">Nos cibles</h1>
+    <br>
+    <p class="text-center" id="cibles_titles_p">Une gamme de produits adaptés à vos besoins</p>
+
+    <div class="container">
+        <div class="px-4 py-3 my-3 text-center">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-3" id="card_pack_pro">
+                        <div class="card" >
+                            <a href="comptes?type=pme" id="ctn_img_pro"><img src="assets/images/bg/cibles3.jpg" class="card-img-top" alt="..." id="img_pro"></a>
+                            <div class="card-body">
+                              <!-- <a href="#"> -->
+                                <h5 class="card-title">PME</h5>
+                            <!-- </a> -->
+                            </div>
+                          </div>
+                    </div>
+
+                    <div class="col-md-3"  id="card_pack_pro">
+                        <div class="card" >
+                            <a href="#" id="ctn_img_pro"><img src="assets/images/bg/tpe.png" class="card-img-top" alt="..." id="img_pro"></a>
+                            <div class="card-body">
+                                <!-- <a href="#"> -->
+                                    <h5 class="card-title">TPE</h5>
+                                <!-- </a> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3"  id="card_pack_pro">
+                        <div class="card">
+                            <a href="#" id="ctn_img_pro"><img src="assets/images/bg/ong_et_cooperative.png" class="card-img-top" alt="..." id="img_pro"></a>
+                            <div class="card-body">
+                                <!-- <a href="#"> -->
+                                    <h5 class="card-title">ONG & COOPÉRATIVES</h5>
+                                <!-- </a> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3" id="card_pack_pro">
+                        <div class="card">
+                            <a href="#" id="ctn_img_pro"><img src="assets/images/bg/particulier.png" class="card-img-top" alt="..." id="img_pro"></a>
+                            <div class="card-body">
+                                <!-- <a href="#"> -->
+                                    <h5 class="card-title">PARTICULIERS</h5>
+                                <!-- </a> -->
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+          </div>
+    </div>
+
+    <div class="b-example-divider"></div>
+
+    <style>
+        #ctn_img_pro{
+            width: 100%;
+            
+            object-fit: cover;
+        }
+        #img_pro{
+            width: 100%;
+            /* max-height: 280px; */
+            height: 260px;
+            object-fit: cover;
+        }
+
+        .card-title{
+            font-size: 15px!important;
+            color: #011d7c!important;
+        }
+    </style><!-- PME-PRO -->
+
+<!-- Nos produits -->
+<!-- <h1 class="text-center text-danger">Nos Produits Digitaux</h1> -->
+<h1 class="text-center" style="color:#AD0216;">Nos Produits</h1>
+    <p class="text-center">Nos innovations pour vous accompagner</p>
+    <div class="col-md-12" id="pack" style="background-color: #fefefe!important;">
+        <!-- <div class="col-md-12" id="pack" style="background-color: #031247!important;"> -->
+        <div class="container">
+    <div class="row">
+
+        <div class="col-md-5" id="pack_single">
+           <div class="services-item">
+               <div class="services-content">
+
+                <div class="row" id="contenair_img_pack">
+
+                <div class="col-md-6">
+                <img src="assets/images/avances2.png" alt=""  id="img_products">
+                </div>
+                <div class="col-md-6">
+                    <div class="services-text">
+                        <h3 class="services-title"><a href="#" id="pack_title">Avances</a></h3>
+                    </div>
+                    <div class="services-desc">
+                        <p id="pack_body">
+                            Besoin d'une avance ? <br>
+                            Nous avons la solution pour vous !
+                        </p>
+                    </div>
+                    <a class="bouton_pack" href="produits-avances" style="float: right;"><i class="bi bi-chevron-right" id="chevron_1"></i>&nbsp;&nbsp; Je decouvre &nbsp;&nbsp;<i class="bi bi-chevron-right" id="chevron_2"></i></a>
+                
+                </div>
+
+                </div>
+            </div>
+           </div> 
+        </div>
+
+        <div class="col-md-5" id="pack_single">
+           <div class="services-item">
+               <div class="services-content">
+
+                <div class="row" id="contenair_img_pack">
+                
+                <div class="col-md-6">
+
+                <img src="assets/images/prets2.png" alt=""   id="img_products">
+
+                </div>
+
+                <div class="col-md-6">
+
+                   <div class="services-text">
+                       <h3 class="services-title"><a href="#" id="pack_title">Prêts</a></h3>
+                   </div>
+                   <div class="services-desc">
+                       <p id="pack_body">
+                          Selon vos besoins, nous avons l'offre qu'il vous faut.
+                       </p>
+                   </div>
+                   <a class="bouton_pack" href="produits-prets" style="float: right;"><i class="bi bi-chevron-right" id="chevron_1"></i>&nbsp;&nbsp; Je decouvre &nbsp;&nbsp;<i class="bi bi-chevron-right" id="chevron_2"></i></a>
+                </div>
+                   <!-- <a class="bouton_pack" href="#" style="float: right;">&nbsp;&nbsp; Je decouvre &nbsp;&nbsp;<i class="bi bi-chevron-right"></i></a> -->
+               </div>
+           </div> 
+        </div>
+        </div>
+ </div>
+<br>
+ <div class="row">
+
+    <div class="col-md-5" id="pack_single">
+       <div class="services-item">
+           <div class="services-content">
+
+            <div class="row" id="contenair_img_pack">
+
+            <div class="col-md-6">
+            <img src="assets/images/dat2.png" alt=""  id="img_products">
+            </div>
+            <div class="col-md-6">
+                <div class="services-text">
+                    <h3 class="services-title"><a href="#" id="pack_title">DAT</a></h3>
+                </div>
+                <div class="services-desc">
+                    <p id="pack_body">
+                    Vous avez un objectif à Court ou moyen terme nous vous aidons à épargner. Découvrez notre produit DAT
+                    </p>
+                </div>
+                <a class="bouton_pack" href="produits-dat" style="float: right;"><i class="bi bi-chevron-right" id="chevron_1"></i>&nbsp;&nbsp; Je decouvre &nbsp;&nbsp;<i class="bi bi-chevron-right" id="chevron_2"></i></a>
+            
+            </div>
+
+            </div>
+        </div>
+       </div> 
+    </div>
+
+    <div class="col-md-5" id="pack_single">
+       <div class="services-item">
+           <div class="services-content">
+
+            <div class="row" id="contenair_img_pack">
+            
+            <div class="col-md-6">
+
+            <img src="assets/images/epargne2.png" alt=""  id="img_products">
+
+            </div>
+
+            <div class="col-md-6">
+
+               <div class="services-text">
+                   <h3 class="services-title"><a href="#" id="pack_title">Epargne</a></h3>
+               </div>
+               <div class="services-desc">
+                   <p id="pack_body">
+                        Nous vous proposons une épargne rémunérée défiant toute concurrence et facile d'accès.
+                   </p>
+               </div>
+               <a class="bouton_pack" href="produits-epargne" style="float: right;"><i class="bi bi-chevron-right" id="chevron_1"></i>&nbsp;&nbsp; Je decouvre &nbsp;&nbsp;<i class="bi bi-chevron-right" id="chevron_2"></i></a>
+            </div>
+               <!-- <a class="bouton_pack" href="#" style="float: right;">&nbsp;&nbsp; Je decouvre &nbsp;&nbsp;<i class="bi bi-chevron-right"></i></a> -->
+           </div>
+       </div> 
+    </div>
+    </div>
+</div>
+
+</div>
+
+</div>
+
+</div><!-- Nos produits -->
+
+<!-- Agences -->
+    <!-- Agences -->
+    <div id="appli">
+    <style>
+        #appli{
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            background: url(assets/images/bg/testi12-bg.jpg);
+        }
+        
+    </style>
+<!-- Applications -->
+<div class="col-md-12"id="apps">
+            
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="assets/images/banner/Appli_SAMA_FINANCE.png" alt="" id="img_apps">
+            </div>
+
+            <div class="col-md-6">
+                <h1 id="title_apps"> <b class="sm">SAMA</b> <b class="sf">FINANCE</b> </h1>
+                    <h4 > Téléchargez l'application SAMA Finance pour IOS ou Android et effectuez des opérations à tout moment. </h4>
+                    <div class="btn-part">
+                    <a class="readon learn-more contact-us" href="#" id="partage"> <img src="assets/images/playstore.png"> Play Store</a>
+                    &nbsp;
+                    &nbsp;
+                    <a class="readon learn-more contact-us" href="#" id="partage"> <img src="assets/images/ios.png"> App Store</a>
+                     </div>
+            </div>
+        </div>
+    </div>
+
+    </div><!-- Applications -->
+</div>
+<!-- <br>
+<br> -->
+<!-- Actualités -->
+<!-- Actualités -->
+<br>
+<div id="simulateur">
+<style>
+    #simulateur{
+        padding:10px;
+        margin-bottom:10px;
+        background: url(assets/images/bg/services-bg.jpg);
+        /* box-shadow: -1px 21px 25px 0px rgba(0, 0, 0, 0.12); */
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+</style>
+<!-- Apropos -->
+<head>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> -->
+	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js"></script>
+	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
+	<script src="https://use.fontawesome.com/fd9dba5260.js"></script>
+
+</head>
+<h2 id="title_simulateur">Simulateur de prêt</h2>
+            <div class="col-md-12 mt-3 bg13">
+                <div class="container" >
+                    <div class="row">
+                        <div class="col-md-6" id="img_simulateur">
+                            <img src="assets/images/bg/simulateurIMG.jpg" alt="" style="width:100%; border-radius: 10px;">
+                            <!-- <img src="https://www.cofinacotedivoire.com/wp-content/uploads/2021/03/homme-ordi-775x1024.jpg" alt=""> -->
+                        </div>
+
+                        <div class="col-md-6" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" id="content_simulateur">
+
+                            <br><br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                <span class="badge bg-danger" style="float:right; cursor:pointer; padding:5px;" id="mtnSaisir" onclick="saisirMtn()">Je saisi le montant</span>
+                                <!-- <a >Je veux saisir le montant</a> -->
+                                <span class="badge bg-danger" style="float:right; display:none; cursor:pointer;" id="mtnSaisrCache" onclick="saisirMtnC()">Cacher le champ</span>
+                                    <div class="mb-3">
+                                        <label for="credit" class="form-label">Montant du crédit <code>*</code> </label>
+                                        <!-- <input type="number" class="form-control" id="credit" placeholder="Montant du crédit"> -->
+                                        
+                                        <div>
+                                        <!-- <p style="float:left">100 000 FCFA</p>
+                                        <p style="float:right">25 000 000 FCFA</p> -->
+                                        <!-- <input
+                                            #sf_input
+                                            id="sf_input"
+                                            class="form-control"
+                                            type="number"
+                                            value="100000"
+                                            step="100000"
+                                            min="100000"
+                                            max="25000000"
+                                            oninput="creditInput(this.value)"
+                                            style="float:right" /> -->
+                                            
+                                            
+                                        <h1 style="text-align:center;" id="creditResultat">100 000 FCFA</h1>
+                                        <!-- <h1 style="text-align:center"><input type="text" name="creditResultat" id="creditResultat"></h1> -->
+                                        
+                                        <div class="col-md-12">
+                                                    <input style="display:none"
+                                                    #sf_input
+                                                    id="sf_input"
+                                                    class="form-control"
+                                                    type="number"
+                                                    value="100000"
+                                                    step="100000"
+                                                    min="100000"
+                                                    max="10000000"
+                                                    oninput="creditInput(this.value)"
+                                                    />
+                                        </div>
+                                        
+                                        </div>
+                                        
+                                        <!-- <br> -->
+
+
+                                        <!-- <div class="slider-wrapper slider-strips">
+                                            <input class="input-range" data-slider-id='ex1Slider' id="credit" type="text" data-slider-min="100000" data-slider-max="25000000" data-slider-step="100000"  data-slider-split="true"  data-slider-value="100000" onclick="creditRange(this.value)" onkeyup="creditRange(this.value)" onmousemove="creditRange(this.value)" onchange="creditRange(this.value)" />
+                                        </div> -->
+                                        <input type="range" class="custom-range form-range range-personnalise" id="credit" min="100000" max="10000000" step="100000" value="100000" onclick="creditRange(this.value)" onkeyup="creditRange(this.value)" onmousemove="creditRange(this.value)" onchange="creditRange(this.value)">
+                                        <!-- <input type="range" class="form-range" id="credit" min="100000" max="25000000" step="100000" value="100000" onclick="creditRange(this.value)" onmousemove="creditRange(this.value)" onkeyup="creditRange(this.value)"> -->
+                                        <style>
+                                            /* #credit, #durree {
+                                                background: #AD0215;
+                                                color: white!important;
+                                            } */
+                                        </style>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                    <label for="durree" class="form-label">Durée en mois <code>*</code> </label>
+                                    <p style="float:right" id="durreeResultat">3 mois</p>
+                                    <!-- <div class="slider-wrapper slider-strips">
+                                            <input class="input-range" data-slider-id='ex1Slider' type="text" data-slider-min="3" data-slider-max="36" data-slider-step="3"  data-slider-split="true"  data-slider-value="3" id="durree" onclick="dureeUpdateValue(this.value)" onmousemove="dureeUpdateValue(this.value)" onchange="dureeUpdateValue(this.value)"/>
+                                        </div> -->
+
+                                        <!-- <p style="float:right" id="durreeResultat">3 mois</p> -->
+                                        <!-- <input type="number" class="form-control" id="durree" placeholder="Durée en année"> -->
+                                        <input type="range" class="custom-range form-range range-personnalise" id="durree" min="3" max="36" step="3" value="3" onclick="dureeUpdateValue(this.value)" onmousemove="dureeUpdateValue(this.value)" onchange="dureeUpdateValue(this.value)">
+                                    </div>
+        
+                                    <!-- <div class="mb-3"> -->
+                                        <!-- <label for="taux" class="form-label">Taux nominal annuel <code>*</code> </label> -->
+                                        <input type="hidden" class="form-control" id="taux" placeholder="Taux nominal annuel" value="1.5" disabled>
+                                    <!-- </div> -->
+
+                                    <div class="mb-3">
+                                        <!-- <label for="exampleFormControlInput1" class="form-label">Taux nominal annuel <code>*</code> </label> -->
+                                        <input type="submit" class="form-control" onclick="calculer()" value="Calculer" style="background: #031247; color:#fff; border-radius:10px;">
+                                    </div>
+        
+                                </div>
+
+                                
+
+                                
+                            </div>
+
+                            <script type="text/javascript">
+                                // var creditInput;
+                                // var creditRange;
+                                function saisirMtn() {
+                                    if(document.getElementById('sf_input').style.display = "block"){
+                                        document.getElementById('mtnSaisir').style.display = "none";
+                                        document.getElementById('mtnSaisrCache').style.display = "block";
+                                        document.getElementById('credit').style.display = "none";
+                                        document.getElementById("creditResultat").style.display = "none";
+                                    }else{
+                                        document.getElementById('sf_input').style.display = "none"
+                                    }
+                                    
+                                }
+
+                                function saisirMtnC() {    
+                                    // if(document.getElementById('sf_input').style.display = "none")
+                                    // {
+                                        document.getElementById('sf_input').style.display = "none";
+                                        document.getElementById('mtnSaisrCache').style.display = "none";
+                                        document.getElementById('mtnSaisir').style.display = "block";
+                                        document.getElementById('credit').style.display = "block";
+                                        document.getElementById("creditResultat").style.display = "block";
+                                    // }
+                                    // else{
+                                    //     document.getElementById('credit').style.display = "block";
+                                    // }
+                                }
+
+                                function creditInput(value)
+                                  {
+                                   var creditInput = document.getElementById('sf_input');
+                                //    console.log(creditInput.value);
+
+                                   creditUpdateValue(creditInput.value, "myInput");
+
+                                  }
+
+                                  function creditRange(value)
+                                  {
+                                    
+                                   var creditRange =document.getElementById('credit');
+                                   creditUpdateValue(creditRange.value, "myRange");
+                                    // console.log(creditRange.value);
+                                  }
+
+
+                                
+                                const AMOUNT_FORMAT = new Intl.NumberFormat("fr-FR", {
+                                    minimumFractionDigits: 0,
+                                    maximumFractionDigits: 0,
+                                  });
+                                  
+                                 
+
+                                  function creditUpdateValue(value, type) {
+                                    if(type == "myRange"){
+                                        var sfInput = document.getElementById('sf_input');
+                                        sfInput.value = value;
+                                        
+                                    }else if(type == "myInput"){
+                                        var creditT = document.getElementById('credit');
+                                        creditT.value = value;
+                                    }
+
+                                        // var id = document.getElementById('testtest');
+                                        // console.log(id.value);
+
+                                        if (value===100000) {
+                                            document.getElementById("creditResultat").textContent =  AMOUNT_FORMAT.format(Math.round(value)) + " FCFA"; 
+                                        }else{
+                                            document.getElementById("creditResultat").textContent =  AMOUNT_FORMAT.format(Math.round(value)) + " FCFA"; 
+                                        }
+                                    }
+
+                                    function dureeUpdateValue(value) {
+                                            document.getElementById("durreeResultat").textContent =  value+ " mois"; 
+                                        
+                                    }
+
+                                    function total(nbCredit, nbDurree, nbTaux){
+                                        var credit = nbCredit;
+                                        var durree = nbDurree;
+                                        var taux = nbTaux;
+                                        var interet = ((credit*durree*taux)/100);
+
+                                        return interet;
+                                     }
+                            
+                                    function calculer() {
+                                            var nbCredit= parseInt(document.getElementById("credit").value);
+                                            var nbDurree= parseInt(document.getElementById("durree").value);  
+                                            var nbTaux= parseFloat(document.getElementById("taux").value);
+                                            // var sommeInteret = total(nbCredit, nbDurree, nbTaux);
+                                            // var Interet = AMOUNT_FORMAT.format(Math.round(sommeInteret));
+                                            // var montantCredit = AMOUNT_FORMAT.format(Math.round(nbCredit));
+                                            // var durreCredit = AMOUNT_FORMAT.format(Math.round(nbDurree));
+                                            // var tauxCredit  = nbTaux;
+                                            // var TotalPlusInteret = AMOUNT_FORMAT.format(Math.round(nbCredit+sommeInteret));
+                                            // document.getElementById("creditResultat").innerHTML = montantCredit +' FCFA';
+                                            // document.getElementById("creditResultats").innerHTML = montantCredit +' FCFA';
+                                            // document.getElementById("durreeResultat").innerHTML = durreCredit +' mois';
+                                            // document.getElementById("durreeResultats").innerHTML = durreCredit;
+                                            // document.getElementById("tauxResultat").innerHTML = tauxCredit +' %';
+                                            // document.getElementById("interet").innerHTML = Interet +' FCFA';
+                                            // document.getElementById("total").innerHTML = TotalPlusInteret +' FCFA';
+                                            // document.getElementById( 'result_simulateur' ).style.display = 'block';
+
+                                            window.location.href = "simulateur-prets.php?mnt="+nbCredit+"&taux="+nbTaux+"&duree="+nbDurree;
+                                            
+                                    }
+                                    
+                                    function closeBtn()
+                                    {
+                                        // document.getElementById('closes').style.display = 'none';
+                                        document.getElementById( 'result_simulateur' ).style.display = 'none';
+                                    }
+                            
+                            </script>
+                            
+                        </div>
+
+                        <style>
+
+                                /* Définir la taille de la piste et de la poignée du range */
+                            .range-personnalise {
+                                width: 300px; /* Définir la largeur souhaitée de la barre */
+                                height: 30px; /* Définir la hauteur souhaitée de la barre */
+                            }
+
+                            .range-personnalise::-webkit-slider-thumb {
+                                width: 26px; /* Définir la largeur souhaitée de la poignée */
+                                height: 26px; /* Définir la hauteur souhaitée de la poignée */
+                                background-color: #007bff; /* Couleur de fond de la poignée */
+                                border: none; /* Supprimer les bordures */
+                                border-radius: 50%; /* Rendre la poignée ronde */
+                                cursor: pointer; /* Curseur pointer au survol */
+                                -webkit-appearance: none; /* Désactiver l'apparence par défaut */
+                                appearance: none;
+                                margin-top: -7px; /* Ajuster la position de la poignée pour l'aligner avec la piste */
+                            }
+
+
+                            #result_simulateur{
+                                display: none;
+                                background: #e1e1e1;
+                                border-radius: 10px;
+                                padding: 20px;
+                                margin-top: 5px;
+                                color: black;
+                            }
+                            #total_simulateur{
+                                font-size: 20px;
+                                font-weight: bold;
+                            }
+                            #total{
+                                background: #AD0215; 
+                                float:right; 
+                                padding:10px; 
+                                border-radius:10px; 
+                                color:#fff;
+                            }
+                            div.resultat p{
+                                font-weight: bold;
+                            }
+                            #sf_input{
+                                font-weight: bold;
+                                font-size: 27px;
+                                text-align: center;
+                            }
+                            #close{
+                                background: #AD0216!important;
+                                box-shadow: 0px 6px 18px #00000029;
+                            }
+                            #fermer{
+                                display: none;
+                            }
+                            #close:hover #fermer {display:initial}
+
+
+                            .slider-selection {
+                                /* background: #f77500 !important; */
+                                background: #AD0216 !important;
+                            }
+                            .slider-success .slider-selection {
+                                background-color: #5cb85c !important;
+                            }
+                            .slider-primary .slider-selection {
+                                background-color: #428bca !important;
+                            }
+                            .slider-info .slider-selection {
+                                background-color: #5bc0de !important;
+                            }
+                            .slider-warning .slider-selection {
+                                background-color: #f0ad4e !important;
+                            }
+                            .slider-danger .slider-selection {
+                                background-color: #d9534f !important;
+                            }
+                            .slider.slider-horizontal {
+                                width: 100% !important;
+                                height: 20px;
+                            }
+                            .slider-handle {
+                                background-color: #fff !important;
+                                background-image: none !important;
+                                -webkit-box-shadow: 1px 1px 24px -2px rgba(0,0,0,0.75) !important;
+                                -moz-box-shadow: 1px 1px 24px -2px rgba(0,0,0,0.75) !important;
+                                box-shadow: 1px 1px 24px -2px rgba(0,0,0,0.75) !important;
+                            }
+
+                            .slider-strips .slider-selection {
+                                background-image: repeating-linear-gradient(-45deg, transparent, transparent 5px, rgba(255,252,252,0.08) 5px, rgba(252,252,252,0.08) 10px) !important;
+                                background-image: -ms-repeating-linear-gradient(-45deg, transparent, transparent 5px, rgba(255,252,252,0.08) 5px, rgba(252,252,252,0.08) 10px) !important;
+                                background-image: -o-repeating-linear-gradient(-45deg, transparent, transparent 5px, rgba(255,252,252,0.08) 5px, rgba(252,252,252,0.08) 10px) !important;
+                                background-image: -webkit-repeating-linear-gradient(-45deg, transparent, transparent 5px, rgba(255,252,252,0.08) 5px, rgba(252,252,252,0.08) 10px) !important; 
+                            }
+                            .tooltip-inner {
+                                max-width: 200px;
+                                padding: 3px 8px;
+                                color: #bdbdbd !important;
+                                text-align: center;
+                                background-color: transparent !important;
+                                border-radius: 4px;
+                            }
+                            .tooltip.top .tooltip-arrow {
+                                display: none !important;
+                            }
+                            .slider .tooltip.top {
+                                margin-top: -25px !important;
+                            }
+                            .well {
+                                background: transparent !important;
+                                border: none !important;
+                                box-shadow: none !important;
+                                width: 100% !important;
+                                padding: 0;
+                            }
+                            .slider-ghost .slider-track {
+                                height: 5px !important;
+                            }
+                            .slider-ghost .slider-handle {
+                                top: -2px !important;
+                                /* border: 5px solid #f77500; */
+                                border: 5px solid #AD0216;
+                            }
+                            .slider-success.slider-ghost .slider-handle {
+                                border-color: #5cb85c;
+                            }
+                            .slider-primary.slider-ghost .slider-handle {
+                                border-color: #428bca;
+                            }
+                            .slider-info.slider-ghost .slider-handle {
+                                border-color: #5bc0de;
+                            }
+                            .slider-warning.slider-ghost .slider-handle {
+                                border-color: #f0ad4e;
+                            }
+                            .slider-danger.slider-ghost .slider-handle {
+                                border-color: #d9534f;
+                            }
+
+                            .form-range {
+                                width: 100%;
+                                height: 1.5rem;
+                                padding-left: 20px;
+                                padding-right: 20px;
+                                -webkit-appearance: none;
+                                -moz-appearance: none;
+                                appearance: none;
+                                background-color: transparent;
+                            }
+                        </style>
+
+                        <div class="col-md-12" id="result_simulateur">
+                                    <div class="resultat">
+                                    <b style="float:right; color:white;cursor: pointer;"><span class="badge rounded-pill bg-danger" id="close" onclick="closeBtn()"><b id="fermer">Fermer</b> <i class="bi bi-x-circle" id="icon_fermer"></i></span></b>
+                                        <h4>RÉSULTATS DE LA SIMULATION </h4>
+                                        
+                                        <p>Montant du crédit <b style="float:right" id="creditResultats">0 FCFA</b></p>
+                                        <hr>
+                                        <p>Durée en mois  <b style="float:right" id="durreeResultats">0</b></p>
+                                        <hr>
+                                        <p>Taux <b style="float:right" id="tauxResultat">1.5 %</b></p>
+                                        <!-- <p>Montant de l’échéance <b style="float:right"> 499 FCFA</b></p> -->
+                                        <hr>
+                                        
+                                        <!-- <p style="background: #707070; border-radius:10px; padding:10px; color:#fff">Intérêts : <b style="float:right" id="interet">0 FCFA</b></p> -->
+                                        <p>Intérêts <b style="float:right" id="interet">0 FCFA</b></p>
+                                        <hr>
+                                        <p><b id="total_simulateur">Montant total du prêt </b><b id="total">0 FCFA</b> </p>
+                                    </div>
+                                </div>
+
+                    </div>
+                    
+                </div>
+            </div>
+
+            <script>
+                (function( $ ){
+$( document ).ready( function() {
+	$( '.input-range').each(function(){
+		var value = $(this).attr('data-slider-value');
+		var separator = value.indexOf(',');
+		if( separator !== -1 ){
+			value = value.split(',');
+			value.forEach(function(item, i, arr) {
+				arr[ i ] = parseFloat( item );
+			});
+		} else {
+			value = parseFloat( value );
+		}
+		$( this ).slider({
+			formatter: function(value) {
+				console.log(value);
+				return '$' + value;
+			},
+			min: parseFloat( $( this ).attr('data-slider-min') ),
+			max: parseFloat( $( this ).attr('data-slider-max') ), 
+			range: $( this ).attr('data-slider-range'),
+			value: value,
+			tooltip_split: $( this ).attr('data-slider-tooltip_split'),
+			tooltip: $( this ).attr('data-slider-tooltip')
+		});
+	});
+	
+ } );
+} )( jQuery );
+            </script><!-- Apropos -->
+</div>
+
+<br>
+<div id="apropos">
+<style>
+    #apropos{
+        padding:10px;
+        margin-bottom:10px;
+        background: url(assets/images/bg/counter-bg.png);
+        /* box-shadow: -1px 21px 25px 0px rgba(0, 0, 0, 0.12); */
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+</style>
+<!-- Apropos -->
+<div class="container">
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="images">
+                    <img src="assets/images/about/about-2-1-1.png" alt="" style="width:100%;"> 
+                </div> 
+            </div>
+
+            <div class="col-md-6" id="content_apropos">
+                <!-- <div class="titre_apropos" style="font-size:20px; font-weight:bold; text-align:center;">Qui sommes-nous ?</div> -->
+                <div class="titre_apropos" style="font-weight:bold; text-align:center;"><h1>Qui sommes-nous ?</h1></div>
+                <br>
+                
+                <p class="margin-0 pb-15">
+
+                    SAMA Finance, historiquement Première Agence de Microfinance (PAMF Mali), est l'une des premières institutions de microfinance créées au Mali avec plus de 15 ans d'existence.
+                    <br><br>
+                    En effet, créée le 1er août 2005, elle est inscrite au registre des SFD de la République du Mali sous le numéro D/C.08.060 et exerce son activité sous l'agrément N°2017-4093/MF-SG du 06 décembre 2017.
+                    <br><br>
+                    SAMA Finance a pour mission de participer à l'inclusion financière en offrant des services digitaux de microfinance accessibles à tous.
+                    <br><br>
+                    Nous proposons une gamme de produits et services financiers simples, adaptés à vos besoins, avec des conditions tarifaires abordables et transparentes.
+                    <br><br>
+                    Gérez votre compte SAMA Finance en <a href="#">téléchargeant l'application</a>  SAMA Money, sur <a href="#">iOS</a> ou <a href="#">Android</a>.
+
+                </p>
+            </div>
+
+        </div>
+</div>
+
+<style>
+    .images{
+        width: 100%;
+    }
+</style><!-- Apropos -->
+</div>
+
+
+<div id="contacts_us">
+<style>
+    #contacts_us{
+    padding:20px;
+    margin-bottom:10px;
+    /* background: url(assets/images/bg/cta-bg.jpg)!important; */
+    /* background: url(assets/images/bg/testi12-bg.jpg)!important; */
+    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+    }
+</style>
+
+<!-- Contact -->
+<div class="col-md-12" id="content_contacts">
+    <div class="container">
+        <h2 style="text-align:center; padding:3px;" id="title_contacts">Nous contacter</h2>
+        <br>
+        <div class="row" style="margin:auto">
+        
+
+            <div class="col-md-6" id="infos_maps">
+                <!-- <iframe src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJA91ZSXzNUQ4R_-7w5kYWJ-o&key=AIzaSyD-k-OUHA9RbgIl96fBsE8oNn1y9zfpLLU" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe> -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3893.294970621994!2d-8.031880525458426!3d12.628644122305614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTLCsDM3JzQzLjEiTiA4wrAwMSc0NS41Ilc!5e0!3m2!1sfr!2sml!4v1714679776832!5m2!1sfr!2sml" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    
+                    <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3893.294970621994!2d-8.031880525458426!3d12.628644122305614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTLCsDM3JzQzLjEiTiA4wrAwMSc0NS41Ilc!5e0!3m2!1sfr!2sml!4v1714679776832!5m2!1sfr!2sml" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
+                    <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3893.1088191321746!2d-8.025108625458287!3d12.640865422044183!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xe51cd7c4959dd03%3A0xea271646e6f0eeff!2sSAMA%20Money%20Mali%20%7C%20Si%C3%A8ge!5e0!3m2!1sfr!2sml!4v1714679608479!5m2!1sfr!2sml" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
+            </div>
+
+            <div class="col-md-6" id="contact_container">
+                <style>
+                    h4#titres_contacts{
+                        font-size: 25px;
+                    }
+                    h4#infos_contacts{
+                        font-size: 15px!important;
+                    }
+                    h4#infos_contacts_wa{
+                        font-size: 16px!important;
+                    }
+                    #contact_container{
+                        padding: 0px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+
+                    #infos_maps{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                </style>
+                <div id="contacts">
+                <h4 id="titres_contacts">Contacts Siège </h4>
+                    <br>
+                    <h4 id="infos_contacts"><i class="bi bi-geo-alt"></i> Hamdallaye ACI 2000, Bamako, Mali</h4> <br>
+
+                    <h4 id="infos_contacts"><i class="bi bi-envelope"></i> <a href="/cdn-cgi/l/email-protection#573e3931381724363a3679313e3936393432"><span class="__cf_email__" data-cfemail="f990979f96b98a989498d79f909798979a9c">[email&#160;protected]</span></a></h4><br>
+                    
+                    <h4 id="infos_contacts"><i class="bi bi-telephone"></i> <a href="tel:+22320220707">+223 20 29 83 83</a></h4><br>
+                                        
+                    <h4 id="infos_contacts_wa"><i class="bi bi-whatsapp" style="color:green!important"></i> <a href="https://api.whatsapp.com/send?phone=22362010101&text=Bonjour%20,%20J%27ai%20une%20question%20sur%20SAMA%20FINANCE">+223 62 01 01 01 ( Whatsapp )</a></h4><br>
+                </div>
+                   
+            </div>
+
+        </div>
+
+    </div>
+</div><!-- Contact -->
+</div>
+
+<div id="contacts_us">
+<style>
+    #contacts_us{
+    padding:20px;
+    margin-bottom:10px;
+    /* background: url(assets/images/bg/cta-bg.jpg)!important; */
+    /* background: url(assets/images/bg/testi12-bg.jpg)!important; */
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+</style>
+
+<!-- Contact -->
+<div class="col-md-12" id="content_contacts">
+    <div class="container">
+
+        <!-- ----------------------NOS AGENCES -------------------------- -->
+        <br>
+        <div class="row">
+            <div class="col-md-4">
+            <h2 style="background: #051e7a;text-align:center; padding: 10px; border-radius:10px; color:white;">Nos agences</h2>
+            <div class="tab">
+            <button class="tablinks" onclick="openCity(event, 'bko_siege')" id="defaultOpen">
+                Agence Siège 
+                <br>
+                <div id="logo_agency"><img src="assets/images/favicon_sf.png" alt="logo"></div>
+                <div id="contact_agency"> <i class="bi bi-geo-alt"></i> ACI 2 000</div>
+                <div id="contact_agency"> <i class="bi bi-telephone"></i> +223 20 29 83 83</div>
+            
+            </button>
+
+            <button class="tablinks" onclick="openCity(event, 'bko_marche')">
+                Grand Marché Bamako 
+                <br>
+                <div id="logo_agency"><img src="assets/images/favicon_sf.png" alt="logo"></div>
+                <div id="contact_agency"> <i class="bi bi-geo-alt"></i> Dibida</div>
+                <div id="contact_agency"> <i class="bi bi-telephone"></i> +223 20 29 83 83</div>
+
+            </button>
+
+            <button class="tablinks" onclick="openCity(event, 'sko')">
+                Agence de Sikasso
+                <br>
+                <div id="logo_agency"><img src="assets/images/favicon_sf.png" alt="logo"></div>
+                <div id="contact_agency"> <i class="bi bi-geo-alt"></i>Sikasso Voxon</div>
+                <div id="contact_agency"> <i class="bi bi-telephone"></i> +223 20 29 83 83</div>
+            </button>
+            
+            <button class="tablinks" onclick="openCity(event, 'mopti')">
+                Agence de Mopti
+                <br>
+                <div id="logo_agency"><img src="assets/images/favicon_sf.png" alt="logo"></div>
+                <div id="contact_agency"> <i class="bi bi-geo-alt"></i> Mopti, Grand Marché</div>
+                <div id="contact_agency"> <i class="bi bi-telephone"></i> +223 20 29 83 83</div>
+            </button>
+
+            <button class="tablinks" onclick="openCity(event, 'segou')">
+                Point Sama Finance Segou
+                <br>
+                <div id="logo_agency"><img src="assets/images/favicon_sf.png" alt="logo"></div>
+                <div id="contact_agency"> <i class="bi bi-geo-alt"></i>  Segou, Angouleme</div>
+                <div id="contact_agency"> <i class="bi bi-telephone"></i> +223 20 29 83 83</div>
+            </button>
+
+            <button class="tablinks" onclick="openCity(event, 'nioro')">
+                Point Sama Finance Nioro du Sahel
+                <br>
+                <div id="logo_agency"><img src="assets/images/favicon_sf.png" alt="logo"></div>
+                <div id="contact_agency"> <i class="bi bi-geo-alt"></i> Nioro</div>
+                <div id="contact_agency"> <i class="bi bi-telephone"></i> +223 20 29 83 83</div>
+            </button>
+            </div>
+            </div>
+            <div class="col-md-8" id="infos_maps">
+
+            <div id="bko_siege" class="tabcontent">
+                <h3>Agence Siège</h3>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3893.169711217042!2d-8.005411924929204!3d12.63686898764858!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTLCsDM4JzEyLjciTiA4wrAwMCcxMC4yIlc!5e0!3m2!1sfr!2sml!4v1714726296532!5m2!1sfr!2sml" width="100%" height="90%" frameborder="0" style="border:0" allowfullscreen></iframe>
+                <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3893.294970621994!2d-8.031880525458426!3d12.628644122305614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTLCsDM3JzQzLjEiTiA4wrAwMSc0NS41Ilc!5e0!3m2!1sfr!2sml!4v1714679776832!5m2!1sfr!2sml" width="100%" height="90%" frameborder="0" style="border:0" allowfullscreen></iframe> -->
+                </div>
+
+                <div id="bko_marche" class="tabcontent">
+                <h3>Grand Marché Bamako</h3>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3893.169711217042!2d-8.005411924929204!3d12.63686898764858!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTLCsDM4JzEyLjciTiA4wrAwMCcxMC4yIlc!5e0!3m2!1sfr!2sml!4v1714726296532!5m2!1sfr!2sml" width="100%" height="90%" frameborder="0" style="border:0" allowfullscreen></iframe>
+                <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3893.294970621994!2d-8.031880525458426!3d12.628644122305614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTLCsDM3JzQzLjEiTiA4wrAwMSc0NS41Ilc!5e0!3m2!1sfr!2sml!4v1714679776832!5m2!1sfr!2sml" width="100%" height="90%" frameborder="0" style="border:0" allowfullscreen></iframe> -->
+                </div>
+
+                <div id="sko" class="tabcontent">
+                <h3>Agence de Sikasso</h3>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3905.518734971335!2d-5.669313818066227!3d11.313329621740165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xe4a550007e528db%3A0x62fc3cf7c0c33a93!2sAgence%20SAMA%20Money%20de%20Sikasso!5e0!3m2!1sfr!2sml!4v1715463770754!5m2!1sfr!2sml" width="100%" height="90%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3893.294970621994!2d-8.031880525458426!3d12.628644122305614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTLCsDM3JzQzLjEiTiA4wrAwMSc0NS41Ilc!5e0!3m2!1sfr!2sml!4v1714679776832!5m2!1sfr!2sml" width="100%" height="90%" frameborder="0" style="border:0" allowfullscreen></iframe> -->
+                </div>
+
+                <div id="mopti" class="tabcontent">
+                <h3>Agence de Mopti</h3>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3893.294970621994!2d-8.031880525458426!3d12.628644122305614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTLCsDM3JzQzLjEiTiA4wrAwMSc0NS41Ilc!5e0!3m2!1sfr!2sml!4v1714679776832!5m2!1sfr!2sml" width="100%" height="90%" frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div>
+
+                <div id="segou" class="tabcontent">
+                <h3>Point Sama Finance Segou</h3>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1940.3433470626228!2d-6.248298!3d13.43171!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xe48a9d7b8dd7de5%3A0x899e7b76a532383e!2sAngoul%C3%AAme!5e0!3m2!1sfr!2sml!4v1715463410446!5m2!1sfr!2sml" width="100%" height="90%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d877.9540829934715!2d-6.248505282800836!3d13.431915432241803!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xe48a9d7b8dd7de5%3A0x899e7b76a532383e!2sAngoul%C3%AAme!5e1!3m2!1sfr!2sml!4v1715462191397!5m2!1sfr!2sml" width="100%" height="90%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
+                <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3893.294970621994!2d-8.031880525458426!3d12.628644122305614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTLCsDM3JzQzLjEiTiA4wrAwMSc0NS41Ilc!5e0!3m2!1sfr!2sml!4v1714679776832!5m2!1sfr!2sml" width="100%" height="90%" frameborder="0" style="border:0" allowfullscreen></iframe> -->
+                </div>
+
+
+                <div id="nioro" class="tabcontent">
+                <h3>Point Sama Finance Nioro du Sahel</h3>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3893.294970621994!2d-8.031880525458426!3d12.628644122305614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTLCsDM3JzQzLjEiTiA4wrAwMSc0NS41Ilc!5e0!3m2!1sfr!2sml!4v1714679776832!5m2!1sfr!2sml" width="100%" height="90%" frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div>
+
+
+                <div id="mopti" class="tabcontent">
+                <h3>Agence de Mopti</h3>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3862.8001764387764!2d-4.204594023596602!3d14.496157643495685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xe3911b9ada440f5%3A0xc73ccaeeb3a8eb09!2sMarch%C3%A9%20de%20Mopti!5e0!3m2!1sfr!2sml!4v1715463318025!5m2!1sfr!2sml" width="100%" height="90%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d898963.4213602673!2d-7.486772421875009!3d13.448333100000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xe48a9ba9e62627b%3A0x7ddf9cb882b21cd4!2sGrand%20march%C3%A9!5e1!3m2!1sfr!2sml!4v1715462391686!5m2!1sfr!2sml" width="100%" height="90%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
+                <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3893.294970621994!2d-8.031880525458426!3d12.628644122305614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTLCsDM3JzQzLjEiTiA4wrAwMSc0NS41Ilc!5e0!3m2!1sfr!2sml!4v1714679776832!5m2!1sfr!2sml" width="100%" height="90%" frameborder="0" style="border:0" allowfullscreen></iframe> -->
+                </div>
+            </div>
+
+            <style>
+                .tablinks{
+                    border-top: 1px solid #ccc!important;
+                }
+                #contact_agency{
+                    font-size: 12px;
+                    color: red;
+                    margin: 5px;
+                }
+                #logo_agency{
+                    float: right;
+                    width: 30px;
+                }
+
+                #logo_agency img{
+                    /* float: right; */
+                    width: 100%;
+                }
+/* Style the tab */
+.tab {
+  float: left;
+  /* border: 1px solid red; */
+  background-color: #f3f3f3;
+  /* border-radius: 10px; */
+  padding: 10px;
+  width: 100%;
+  height: 400px;
+  overflow-y: scroll;
+  scrollbar-color: white #051e7a;
+  scrollbar-width: thin;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  /* border-radius: 10px; */
+  display: block;
+  background-color: inherit;
+  color: black;
+  padding: 20px;
+  margin-bottom: 10px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 15px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #fff;
+  /* border-radius: 10px; */
+  color: #051e7a;
+
+}
+
+/* Create an active/current "tab button" class */
+.tab button.active {
+    font-weight: bold;
+  background-color: #fff;
+  /* background-color: #051e7a; */
+  color: #051e7a;
+  /* border-radius: 10px; */
+}
+
+/* Style the tab content */
+.tabcontent {
+  /* float: left; */
+  /* padding: 0px 12px; */
+  /* border: 1px solid #ccc;
+  width: 100%;
+  border-left: none;
+  height: 300px; */
+  width: 100%;
+  height: 400px;
+}
+</style>
+
+        </div>
+        
+
+        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+            function openCity(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+            }
+
+            // Get the element with id="defaultOpen" and click on it
+            document.getElementById("defaultOpen").click();
+        </script>
+
+    </div>
+</div>
+
+<br><!-- Contact -->
+</div>
+
+<!-- Footer -->
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sama Finance</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="assets/css/themes.css">
+    <!-- Favicons -->
+    <link href="assets/images/favicon_sf.png" rel="icon">
+    <link href="assets/images/favicon_sf.png" rel="apple-touch-icon">
+<style>
+    .entreprise{
+    background: #AD0216!important;
+  }
+</style><div class="col-md-12 text-white" id="footer">
+<div class="container">
+    
+    <footer class="py-5">
+        <div class="container" style="display: flex;
+    justify-content: center;
+    align-items: center;">
+            <div class="network" style="margin:auto">
+                <ul class="list-unstyled d-flex">
+                    <!-- <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24"><i class="bi bi-twitter-x" id="icon_social"></i></svg></a></li> -->
+                    <li class="ms-3"><a class="link-body-emphasis" href="https://twitter.com/SamaFinanceML"><svg class="bi" width="24" height="24"><i class="bi bi-twitter-x" id="icon_social"></i></svg></a></li>
+                    <li class="ms-3"><a class="link-body-emphasis" href="https://www.tiktok.com/@samafinance"><svg class="bi" width="24" height="24"><i class="bi bi-tiktok" id="icon_social"></i></svg></a></li>
+                    <li class="ms-3"><a class="link-body-emphasis" href="https://ml.linkedin.com/company/sama-microfinance?trk=public_post_main-feed-card-text"><svg class="bi" width="24" height="24"><i class="bi bi-linkedin" id="icon_social"></i></svg></a></li>
+                    <li class="ms-3"><a class="link-body-emphasis" href="https://www.facebook.com/samafinanceml"><svg class="bi" width="24" height="24"><i class="bi bi-facebook" id="icon_social"></i></svg></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-12">
+        <div id="mc_embed_signup">
+            <form action="https://finance.us17.list-manage.com/subscribe/post?u=9780c7c885eddaccba4debb03&amp;id=c90876c192&amp;f_id=00d1c2e1f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_self" novalidate="">
+                <div id="mc_embed_signup_scroll">
+                    <div class="row">
+                    <div class="col-md-4 text-center">
+                        <h4>S’inscrire à notre newsletter</h4>
+                        <div class="indicates-required" style="display:none"><span class="asterisk">*</span> indique "obligatoire"</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="d-flex flex-column flex-sm-row w-100 gap-2 mc-field-group mb-2">
+                        <label for="mce-EMAIL" class="visually-hidden">Adresse e-mail <span class="asterisk">*</span></label>
+                        <input id="mce-EMAIL" type="email" name="EMAIL" class="form-control required email" placeholder="Entrez votre adresse e-mail" required="" value="">
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div id="mce-responses" class="clear foot">
+                            <div class="response" id="mce-error-response" style="display: none;"></div>
+                            <div class="response" id="mce-success-response" style="display: none;"></div>
+                        </div>
+                        <div aria-hidden="true" style="position: absolute; left: -5000px;">
+                            <input type="text" name="b_9780c7c885eddaccba4debb03_c90876c192" tabindex="-1" value="">
+                        </div>
+                        <div class="optionalParent">
+                            <div class="clear foot">
+                                <div class="d-grid gap-2">
+                                <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary button" value="Je m'inscris" style="background:#011d7c!important;border:0px">
+                                </div>
+                                <p style="margin: 0px auto; display:none;"><a href="http://eepurl.com/iPieMY" title="Avec Mailchimp, les campagnes de marketing par e-mail sont un jeu d'enfant"><span style="display: inline-block; background-color: transparent; border-radius: 4px;"><img class="refferal_badge" src="https://digitalasset.intuit.com/render/content/dam/intuit/mc-fe/en_us/images/intuit-mc-rewards-text-dark.svg" alt="Intuit&nbsp;Mailchimp" style="width: 220px; height: 40px; display: flex; padding: 2px 0px; justify-content: center; align-items: center;"></span></a></p>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    
+            </div>
+            </form>
+          </div>
+        </div>
+        <br>
+      <div class="row">
+        <div class="col-md-4">
+            <a href="#">
+                <img src="assets/images/Logo_SAMA_FINANCE.png" alt="" style="width: 50%;">
+            </a>
+        </div>
+        <div class="col-md-4">
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2">
+                    <i class="bi bi-geo-alt-fill text-white"></i> Hamdallaye ACI 2000
+                </li>
+                <li class="nav-item mb-2">
+                    <i class="bi bi-telephone text-white"></i> <a href="tel:+22320298383" style="color:white!important">+223 20 29 83 83</a>
+                </li>
+                <li class="nav-item mb-2">
+                    <i class="bi bi-envelope text-white"></i> <a href="/cdn-cgi/l/email-protection#fc95929a93bc8f9d919dd29a95929d929f99" style="color:white!important"><span class="__cf_email__" data-cfemail="c3aaada5ac83b0a2aea2eda5aaada2ada0a6">[email&#160;protected]</span></a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <!-- <h5>INFORMATION UTILE</h5> -->
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="confidentialite" class="nav-link p-0 text-body-warning" id="link_footer">Politique de confidentialité</a></li>
+            </ul>
+        </div>
+      </div>
+  
+      <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+        <p style="text-align:center">© 2026 Sama Finance. All rights reserved.</p>
+        <!-- <ul class="list-unstyled d-flex">
+          <li class="ms-3"><a class="link-body-emphasis" href="https://twitter.com/SamaFinanceML"><svg class="bi" width="24" height="24"><i class="bi bi-twitter-x" id="icon_social"></i></svg></a></li>
+          <li class="ms-3"><a class="link-body-emphasis" href="https://www.tiktok.com/@samafinance"><svg class="bi" width="24" height="24"><i class="bi bi-tiktok" id="icon_social"></i></svg></a></li>
+          <li class="ms-3"><a class="link-body-emphasis" href="https://ml.linkedin.com/company/sama-microfinance?trk=public_post_main-feed-card-text"><svg class="bi" width="24" height="24"><i class="bi bi-linkedin" id="icon_social"></i></svg></a></li>
+          <li class="ms-3"><a class="link-body-emphasis" href="https://www.facebook.com/samafinanceml"><svg class="bi" width="24" height="24"><i class="bi bi-facebook" id="icon_social"></i></svg></a></li>
+        </ul> -->
+      </div>
+    </footer>
+  </div>
+</div>
+<style>
+    
+    footer.py-5 {
+    padding-top: 3rem !important;
+    padding-bottom: 0px !important;
+    }
+    #footer{
+      background-color: rgb(173 2 22);
+      /* background-color: #011d7c!important; */
+    }
+    #link_footer{
+      color: white!important;
+    }
+    #icon_social{
+      color: white!important;
+    }
+    #newsletter1{
+      padding: 10px;
+      width: 60%;
+      display: inline-block;
+    }
+
+    /* #btn_newsletter{
+      background: gray!important;
+      padding: 10px!important;
+      display: inline-block;
+    } */
+</style>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    var url = 'https://wati-integration-service.clare.ai/ShopifyWidget/shopifyWidget.js?56613';
+    var s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = url;
+    var options = {
+  "enabled":true,
+  "chatButtonSetting":{
+      "backgroundColor":"#4dc247",
+      "ctaText":"",
+      "borderRadius":"25",
+      "marginLeft":"0",
+      // "marginBottom":"100",
+      "marginBottom":"35",
+      "marginRight":"40",
+      "position":"right"
+  },
+  "brandSetting":{
+      "brandName":"Assistance SAMA FINANCE",
+      "brandSubTitle":"MICROFINANCE",
+      "brandImg":"assets/images/favicon_sur_bleu.png",
+      "welcomeText":"Bonjour !\n Comment peut-on vous aider ?",
+      // "messageText":"Bonjour , J'ai une question sur {{page_link}}",
+      "messageText":"Bonjour , J'ai une question sur SAMA FINANCE",
+      "backgroundColor":"#051E7A",
+      "ctaText":"Envoyer un message WhatsApp",
+      "borderRadius":"25",
+      "autoShow":false,
+      "phoneNumber":"22362010101"
+  }
+};
+    s.onload = function() {
+        CreateWhatsappChatWidget(options);
+    };
+    var x = document.getElementsByTagName('script')[0];
+    x.parentNode.insertBefore(s, x);
+</script><!-- Footer -->
+</div>
+
+<style>
+
+    #goToTop {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  /* background-color: transparent; */
+/*  background-color: red;*/
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 4px;
+}
+
+#goToTop img{
+  width: 40px;
+}
+
+#goToTop img:hover {
+  width: 50px;
+/*  background-color: #555;*/
+}
+
+</style>
+
+  <script>
+    function showPopup() {
+      const lastPopupDate = localStorage.getItem("lastPopupDate");
+      const today = new Date().toLocaleDateString();
+
+      // if (lastPopupDate !== today) {
+        document.getElementById("popup").style.display = "flex";
+        localStorage.setItem("lastPopupDate", today);
+      // }
+    }
+
+    function closePopup() {
+      window.location.href = "apps.php";
+      document.getElementById("popup").style.display = "none";
+    }
+
+    function closePopups() {
+      // se ferme automatiquement au bout de 10s
+      document.getElementById("popup").style.display = "none";
+    }
+
+    // une fonction pour fermer automatiquement le popup au bout de 10s
+    setInterval(closePopups, 10000);
+    // setTimeout(closePopups, 10000);
+    // setTimeout(closePopups(), 10000);
+
+    window.onload = showPopup;
+  </script>
+
+<style>
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .popup-content {
+      background: white;
+      padding: 20px;
+      max-width: 500px;
+      width: 80%;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .popup-close-btn {
+      /* background: #051e7a; */
+      color: white;
+      /* padding: 10px 20px; */
+      border: none;
+      /* border-radius: 5px; */
+      cursor: pointer;
+      /* margin-top: 10px; */
+    }
+  </style>
+
+
+<script>
+// Get the button
+let mybutton = document.getElementById("goToTop");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
+
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"04dd12c7134d48a5bd7bcd6440cb0370","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>

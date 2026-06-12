@@ -1,0 +1,4 @@
+input/__pycache__/
+input/pages/
+input/serp_cache/
+.env

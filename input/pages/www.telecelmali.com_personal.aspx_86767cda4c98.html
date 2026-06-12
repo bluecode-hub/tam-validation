@@ -1,0 +1,807 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>
+	Telecel - Les Prépayés
+</title>
+
+    <!-- ==== Favicons ==== -->
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon"><link rel="icon" href="img/favicon.png" type="image/x-icon">
+
+    <!-- ==== Stylesheet ==== -->
+    <link href="css/imports.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE9 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+			<script src="js/html5shiv.min.js"></script>
+			<script src="js/respond.min.js"></script>
+		<![endif]-->
+
+    <!-- ==== jQuery Library ==== -->
+    <script src="js/jquery-3.1.0.min.js"></script>
+    <script src="js/jquery.fancybox.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB328xEn5ZPNXjOvgonBWyHTjFUTtdJOOM"></script>
+
+    
+    <link href="css/personal.css" rel="stylesheet">
+</head>
+<body class="scrolled">
+    <form method="post" action="./personal.aspx" id="frm_main">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="so84iUtH9Pcm7ZEJsKmoIWPuS5bqK+T0PNfLwsa53472XS27uWdkwdX/Whi3EeDmVm66VV3rmBKyVODvzMEZHFHJZTBG+8tLTaQqBENeAs69p/DtLs5Qpkt+ae6CPa41+s0m2CdjURROr9NJd3V7pXX5SxEOZuyGzXfbvQ+Fa6lJzNVBOHz54ijm20R5jVkk+9F0WE6rjGaKKzaFaHmTxpg6sXJaDx/qbPUbhXZl9rKwkF7Px4K12uFxWa7nUfLE8CxiUA2SXVVMWlBzMRQNHSpAIPI22K+b4KEC2IRXlTv14JJ6PdZNc90qXpj82Vs1YllHbPuAW0hcoVIPpi79h657/eAdoux0m8dPnzhkleaIk+iHKsbDEeRJOcxrMgEvmGTLpS3+rXOb5DbmlXAzYQFmHtZQkT4IQJKTB6DbgVpzQQ0fXhaGrQiyFEf5Sx5wy3XK9yijlDrlG8CeMH0Bc+dwP9D3oG1xByuCjdmerkE9rE1d7MeaoJsV1u/CY83OEo/wV+LU/r3Q9BRfptXqmRPkiNGiOkVh4FE6PFBxFC7yo8a7CXb2YUmO9NymDyjiWhYZUuswL3ptjvcv1+wDAwkf3CC+lahj3r1meVtyNa1iNqWFeRUbRlp3RxYVcr3DX7McUCW1Jjqg+lSspaqNQu3YTD3C2UtSOp47/1ivakGdQnGgPfMf93+siBAa2liEkCGwXCR1ChIGsrUB/pqYyKtTQCv84J0MZwRa8RFDD7RHGalm/jqFVFH0MKhd9/t1AxqeQiw1ToNiY6rULxwvKl4f4NGOdNIGWAUYikxcUanxvKCrauxHBJ522Py5kiWrEVmYifYyRHDnraOopBdT1ZlGIb5gtEqwf0kwUm7ay7PI8CMuPzStZ7ohreFyZEzYu47AC5IlOxuz19VfH+vwBf3K1JKE8a5+FzMjRXploOlyDuZx8Z/edbFjaP0Skchikbuw+fQGJtSLna3xIlNRAhmKUF3rOaITLJoRB59UNnu/+lO6rowfNYFaRqWsZN/D0zBX2DK3tZRAbWu/DrShq+Ky07gfkEpB3T1ix/6UXW+nxrKIHOiEsM9qDjHVI4x2gp85ZGI6zZJNudhTHo6ucpCRS6VAPswYco2N2onTUadiLLVgs5DIOGvGQheLgR3t4PmSGh7baYON7BBnHePulsDdlMpm+6k8U482a82RGeG/4zjuHRCqUpSCykeEFz+409fjt3tWwoMw43jF6NYPj4quv6g7fxu9UhQwH/YZdSgJS5uISjn4qnfGDcDxTZUCB2HLh+sBCAjHL0x3DOmcwtMEwm8HL/5q53l2ncBbHp+OP9kUcbuCPI17/PvjWhmshvBEIYbuIIz/lBP6lxzYcUscij5LX+OOWK6Nhvi9cGviL1CsD4nWUE8JOyLM6gsF44ovE9uRApgABEetPaDrWkLwXfSzCey0wANs2e2r/Cq/fuRoyTMWAYlrlxgQOjmJl8EFgfAFBwvq1Y/zlF747sMZimAoSbmfuhXi0k6ZF62KppTRhdKY1XK6vOSSA4lmCmxbC5yICq3zhGeOLIzWYkFSDXFgJr1Cb1XPkZEBaQSbvROsoQvt9e8F8YQGsvVWu/WppnKW6tTW5Z2UJCR9zMw1Cq4/Orq6zPtr6V5w64yzI6mcqAXRgE/W1p9YqC3MZG5KTET2bm0aGAEUjJ2+97LDbtc3g7MyQ05nZIWCFbbzj9yVqgWxDgJfqiTYRR0gh5g6wfBujqGQ7n3zCS6UEQfQrnXQl+uOo8afZybqXKg2G0blMTk4VRhhV5DkazpL7shj2QoLYHdAMV0Ma7WMP9lZb4CTCjGBeN0rpbgaAbm91g3gu8Bgin0xCeOVwXMUAEEsNnhYegxUI/tR3VrZ98JUREWiDKFEd0128fZGANeWoXsZ1jrUNyo4hya2q1bLZTtCzZgIf6nlF+vhe384khkDwx9omKb42SPb9lec9gFwlM6ZGRe/aIARV+ouFPYyJjcZ2gBXjHsThIT64J3J4JAR8QVBZvY9dD52Qj8rLeLI+Ftnzrm3vXJaEoE/fBw+1/Krb6plGJJsU6GLPb9r0u2ac/GpZl0gP+gqq5Bkk5N9RYYDkhkm7etvjDXI3GAes5rJR6wUflw8pkYclFpm0kYDMBNaesQui2vcVo2c0R4Dumi3zuJgtnS9wCvxZqI3KRK6r9HkaanDbc/L22XAVDQ4n9+tExCJ2v/QVXltF8qHk/EC2em3b8vHoXpiGadYCOCLHT2I/HTzhk9+HJesvWAEYWIQ4z+/um3hZNhqxPT3q5Dd9ATpN57nwVWIZeh/YI/9pWmobuOxC+juD2XmanCupiSjOWGJWtZYr4+XxIELLzgl2HDWnosP8ghDoBVOM4JceajO4LZ7BjRBCc4oCcDXhhOpSnffWE84btagSbg34LsWIZf9QXI8TbaZNXVnVDPCNwCWaA+it+n9OxeMQVRiFwhkmsunaSSQKJBTCurGL+yoNOTNHM84JLHRgS5vt6Az7ojyqunAFXjY+yWtJGUNl2KPWnabWe+FK9mYeemotNaPQDL8ZXusqJtXUYsqqMrmTdQrBhbenQXNH8lBh46x5Vmxw+gsN3nclwThI6jv282v/NpvhPUJ04bd2sbxUwAV8YBvYdSoEvI/DjtkVxwFrnKipfbAqdBgefjAuKrorhiZBFT6PKh9ewAYTqPlcwhaRVpv/ymgapxc4X5wcNgAh8zGUvu1ub6oQXUQDrC3Cm82T1Q1UjR0JR/Z3ajpK4XN5UA7D9h7Xa5i9/3uQKGMnRjNB1NKPV3806CkeyW3YlLvdC/sArTYeQH+X8hTLmQtXTXAdG7Y94AucSQQrNkPO2ru/WhW2XqJhPzCUqwFcyUEFgtgNvwOPja5Je1bhi4ZmDubPcJU9BSGQB7iJuDv4z07gQwKRNJhs07h5/J8UHVdFcm9ZDiTtBUDzvpZiH6JIjAb8LM+umyvuDBtHALdBdhryJDIHF02EvlS+zfzOx6bKvK3y5hxk7YyT1dEJ0qFPvdIGrgcDdZu2LCrg5dfGLKnn6Wtq3WmqBhWXWwCfjs9Au6hWL07xUcHqLNcEafGD2Fo6IhD9+AAcrU5UM9dGlXGnhhMlcqcfbMIDS89L79uV1qbkCx9xihoXOZBk6BVo159wrK5J1PEuwJYg/E5uxPg2kB+2vgESJyMPpPODknIaSUZtbqxCJgel8sVDYQLB8A8CzmQAfEJn+sUBn5+nTKrSE15ugha1TlUlZ00BBkuP9v8ZNlpn4qYf4nwtqpFrBA4sK5Nwu2VczUqPX069JDp5KaFOFNs7sZYddkJzr0L4RdAyINHvMEgJkF56jK1PJd6xzN5l51daI2WHWPmQLh3goITRe/48n4M4Z1qwW70dzHKoliFCWMHCemkeVCvIGPH5abPzqD7y9gv160DWrTqYW49Gj8vruRuEtWam2kzIK+sl/pesuNHKCq5Ocxw2UPkisj+st1hekE32CsId5jZ6PwZw3AWPTCHWwVliKOxsdoFc8AcZQC6weG7XYO+gLPio7i07p2BnLlhXFqQeedKWME8pxsbuwwX2qWV38G9hbDwlwtwpvJrOYOYhM+WJb+rvP39ix2quTmuVMsK+5H9Rxmni0lR56m3rQ1Y5pHGb2maqUa3STxsS4sjg19DZuPFSPw4pqkOZO0agQ/5Dv/ycaJyd1uc1w2EQVLQzMho2DBdkf6UnADLQ5UnF8Boi+PKskfe6xvlZ0of/Jyg9hMkJNDFvCyu+XeNXN4+hi2zL11qSD7PS4xC+XDh6qxi7L/M10hTkLJKVNMiA4NqADsvfBprFkp59wHlrsO20kBKrV3WYCKBylaX5J6Ch7MLGSgu+ozxvXT8q93J/91hgsqePVgh8ss6KuybdD3qZ8wNFFseE9rWKtCjgaWvCgoKhagANkRBMV2G1d6yYbK1IFOdhU5mpFckZoDRJEDqxKhP944ECjpp6uQxuHdIZL10yH1CfBB4rNHUf6WVJIxJ0vDL/PHFoYBrnQIiFghQuJfEqK7sUrjrslPEnAtywPXpB6d4tZmQlYd1EF2JOvttX5Dr3aP9IsObSaVxCxFB6tbAmO/xy8943VlJ9xBLjJiMgObqSJ0is7NYwIVsUGnTHrOvLkkA71cxBqqzSHFBN0WTa3dwotq0zPbnaZt/QxV9kqNUPj/iqxsrsAiIYkcYqDfkyjkLYCzuTpGWuyUsnAMjUd2/i+FeGB5pXahrIzjwAZQ3CtZ/NCFltTz1WAPnuTnU/mDIv7jY6L0gEhmGk42cPw0SO/0w326+Z8LioFUra29mitOA4/rPXemrhQ+cwKtWgvqIHobweLiSet/kj4nTqlTUo4BHX5q5rV4UOxXCk1M+WY5+A8FiNk4Z++FM4QVHMnL0m55maHsUItgJzuPtHzLtTUVVDiwuQ4RjpMz2ZTTEVzjzWk1PrFS54TOhqSAka4rxj7XpQHaMCDmldISL3Y0s1Yivdqezh71jyZ9tEhLcpWTSh0aUmLnj/Xlpa0M3chhl7kmFHTyivTeowlhnrffcLGpUkkp34QpSjlpyPGiZAMbdtisHi7L0/mhorWyHrQzITqedRmHzWsYBuzp0JLtD71l7BzZeM7tuLQ51A62GnM4QJFQ4UhATJck8FvjraqQBpftDP1VGX8SmBE2VGdUEnomCC39jpMLnZ7A4b9Y/Swp8Hf31pl0HfFa6D1S78qD80ZVEWFMwC1H2VzQ9jUKz04psYSWJmV4g+fXeZYocEILnBt6vB9VrNTlkTT845mVPlPKdoRlMel+GayIXZhOQPToEp9dPRgMn85zPPISsRnJBfb7XbVShXzmAmJ3pzNGbppwGk9m9+AUJcUwkJBig/oCZixPqHapaduTB3j6CnINrxa/2kD4C+prRYu0ZEA8nNroo3v11WqYM/XbXAGO1qauJK6nVxlo3FYBo4nrMyRQXt8vX1M4T8BsTAbcJiNrQuFyl5x1xCkIThBrDjsRpgvXOhRga7lzLSPbVD7r9qu683aydX6h7izi23H0BUAyRrF4uCrNmIobj5yxsP1lTwF5EB7mTLFKyoEndSiTAY6RM/syu3FfTs968ba24dIpqgXKCqNi42uHXp3eGoJZoR/HMpZkSUXNHy4dra75zAGAugpAI/JmdEfKQgGLizzi3K9mE0kQBedeaQHOnkjCf/Nq6efsnfMykRDzQ/RNQrseplS/xraD8knpRXxtNRnqES89sTKjWaFKYGZHr0cN7abvprCpzynjZiKUsWMIeTnPFt41TWNk/mytWQDharkyDv9UdJBs6Fw8RyMHYLPrYI+YE2oILsJCqaMTTD/ACiqY1hP3ik47pPDW0kND+DOcuacUYjRETqLnTTVPNoGvHR6AFmjCqrgqF0ZFRShnSm0K7Gof9/bVaMCCdMHBZCmAQrXxTz4WUYrEu5GuIKWQXmhQ6dIQOpzPpuF12jdVw6z1qZ5CjHyb6zNFiPqZ7Cc42NSYlKJiR2QMuoubsYIXOJATrACOWlnFbhPS0KKEhViPWB1msqTF4I828XoohlXOYl36RDlXoAGCGWlq3e4fCSi2q69q83IO1YClpYdLSxI1f6WrJ0KOhJWiWldbmOASdHs3HQ7zHY90uTRVOEvRo0aj/ziU0UYJZ+Sh9OduFNP2vHJw4rlwcycRjkqAbH9HS8YUfANWmz1wIaUls/bcMw7+eQAR29uxhc/ksEL39XXUBOZ85D6ACgFdA8H9nLWoRb2lyAsJvkTKIc1sdsBeXkYpnoIg0yRgRT2NFzupKh65Zn+GPOQvfAAAqY2J+Uf4ghksxerOl5QUN/AKTpVr85FRF/EvyJHxPAfIFskP2R9cadLoDcuWJE9TaKSlH2DfwqJpD1jH5G/Y+BbLIS8K40JfERQF6ZG3AFVlAvwCRjcRCd/jG3cuO5isMYdpGIAMYziylXGyn48MVRraOu0PIzLd/VMPkLYQvgeJZFXh1CUVtUdpmCxnU641m/68cBi7h7rCqFJUHqaXRIGEvnD9s98UfabcNCfjs87uT4bWPEKyP2jmXuACFUi/FT1xaNQGIDSBI+d2arxFvYdWDBmPZUMaFfvM7SRM7vbuAo69CsbrH++2D/iAO09KZcBiNQL8ngzWSC0DoeldkFzBYpvxaPrJJX17NwUQanesvOOa7LzpF2aI0EWLpTjwd3tYdLidqQkWl/PX3i9ipYHZN3l5V7wo1AiHC65MG8KSEomjmE2/5oOO/qM3QcpvfPqmNXFogD1T4LZ8TX2QLSJKMWVDNd6NgieJLSy+RG0bIc5T2/ymE8gZb2eBoe67AwMa7991VBpIgvExpIzVUpBp67k0ve2RnNiBQdo38Ln7eAsqZ5I/8SgxikGVNmTf3CIeZve/zyDr7SkpilhVIvnJpfRNVCVNuI+WsCN8ak4G0Fo6Yr3MRKRpGpTW+kkbAQC4mXfYpeTG5RWSl6z7NrVPvCh/rxTZTd6gjcsNrVOJJtTzQ7UHRErIjxfwID7PJSQ7ehCkP8SX8LT3PifEX+twPbsdm+GQmkrM/hfss3I8uK4EcaWojHB/RHAEgujgwwtCe5aIW8fhIiyWHrPCqaCQktwuhQNvvDgchbUIFNXX7SgnWQ6c4zCsr4e6XaFJ/Y+iHAG3GVkL7J97SyRo9EscIqU2sL3GtyWeKqEA0w8drnunSTDSvP00OFSDfMInKE4P7miXV2/XjUm3Sor/0ZUHiFtTJkXlz1w6lBsbN6NRkvGDOFYSny5vQyHWZtFo6qjIi4HNv8YnZZ4/9N5eitSo/5FUhFxTwTqX2Oi8Dacuum+JsPyYeSaFhS5r7UomYqlP40K4i9Ud9dsr63RtvOj1f2Be2rGVVAUemvSOs7uAOy4KeiJT67xJVWtz5MC8sLpW4YH5sNBYNRvKj4xqIPKw4gdH0e5Aetjzbp1/tbuyt4Erj2xShwOj3FAE0dNU0+D+mQMCIFMXAn2gqDfuLht/cbVOL5eDcBNd0YZ4/OK/4fZCcM2UomrROxRYvowSJWJpRT02PU0fgwTyp40p7dlHufpsIrqWJHoIh98Gie+hxglmJJjcsJhLbBzwZuqNqWT8vixuMUL4jD8KZraDwTn9fkDK63AMYiLVpF24857YmGRmwzpsDNfIm5k04saAFS014d7wHmRrHDS0jhBWtgVfL9mFR+4gEltGODgi83V+qdzV+MLTo2Y3aKpPMwglS3XWZF/2CQFhKmQhK+b2p0VXEysfoCZDdF/bGkjNmmtrmqO+OlUZc4C4xX3MHvt6Zb1W48aKn2SjAZ+NUdZqVE2MM0xz9Neav1AlIP3wISBva9/xKJHJD0jFb5CvDZ64Vm5dCrKxI4L4Bol2elSbU1dbUL3DOBrrUiUMUnAa9wmWLcV082Gh0J9J6eFGstDDD82iQrJ5YOaWzdKCdcfFDsV55uLM0cZ9r+/b8RQFU2vMSGJeiDfxAOvevkCjROtDdlDNRnGH/MrlU9qoeUkTaBQOZigqyHghx0YhngQ0KjwwcAy8r5rFXMmVnE3j838es42bwQEVzksIuEuFmhjmKB+tj+UtcIC0vmx1skynKTR3JPLiPPQzvfJ8hya0+q30zVexVWHbGMtuNAp5COy2WspZD3WHehttGpRLSBvFzeBmbeWTgrnjlHhhiQZgBIT+tfJD9PyiLCvHrXayjjtOS5kPf0Le99+EFXK/HfExbEo3J8blOYrHYkMmIWCYx3b3UfwpCksgJIbUF5ceIQlft82ub3V60jnyuZsL1PKgviiiZr3kkVmi0D/kqf5D9xRYTWRdetHNHI3vfAypcn6ftVUZN5AwI49t6ySOTXbem/6llnMhg0MjBsF7FVbd9n85E/2KnWhOs5xMyQki88ErOKsalZ1mlR97eVgW6KySZ/Bt1P9W7s1+KgUCWjC4qXkW/c2T8PcynFv4KsGkJu/ogRtzQxyHhfVAm8sGFTeMRDbBLWeFhppHii87wSUa7gb4AmZN0rMdMR91oI8sVJDOsBmYX0uid4hmH14qP53Dwesa9P/SRB4qsN6HWqPv9AUNYRIpOUaWur8agSB1h26/5EaVfQmST2snJIAir4Yo+hU+/4N6X1x6KIw36UHBnSgY/4JSF8iktZ7MbvZ00qKG8h6KZ21Hm1iqwRQMTu/M0KFSaFPv9NKeKutnltUkqiwO+PoHb1M7Kv6ZcGhsb0mpW7g3yxEl2zRLehFPOqDRHqXDTsWgSP9a881dXQt1hFWHcVXOWFlmSc8tvurN7KcP1ZTI9g4vTyH7Agenv7oXCSvkKs4WKAQo6XpynakaIL0xaxPsk51eaIbSE6cHywdv9h5vZwIB19TK18cXqteP7Mhacnn+uCabP3nLyvWD02QVte8xcAdf6iTG9GfVxhxMsueczfPePJhuj/oD5a2rcsWLVA+AeMJiB1TDDK0wUJayXfbIiKaPO4r1ctmbgaQ3vY0lTb2Cj2D1fortjLVhBlNZXD+pHnMTtf+zTW06QYV0STiLs1lcR3lcjcaccfZBY0yBvRQb2F6ns7nJ+6n9GTlXQ5p2ziBVuUpjacU6QnAgiUTUyltzWGdZWdQFsjlCz/fXMyD5kCp8VlcUaD8RFAQisuaHpIgFDbcWvziGyzsybG7IWdC/r5rcwxXPbR10drQ9J4shmSU7t+/J2dhvOoHOHEyQGO9XTtL/5zR479dISYtq35x01AYiI+uKPbSRunMiTgj4GRPryW1zPImXMvUhuc9zqgglV9e3y9Snuis8U35dkyQrkkjFG8MHpoYhV7KWAH7irS72f6brB4PXs6c7C6eYmN7Ypa4FS3rOPKXTOarhJ1wdsdzsNGhk6dF6tV7a594RzZIwO/3voA3lUKqaoQzb6wHEnv/NlY5AELwtHy32mhanAuoJRKCTJE/EHwz5jdMbxM2Wf9BZ1f1aOVWeoqvPCxfyydYumTsm+4QyaAR4UNuJ/Z1sHjz0Aclh4D8idPEy3A8Xv6JoDwYU9LboqII2wH0pQwkQlZGpmzEGJ78xsQYajZNz+1yW6Hl1+/ywF5Mks3rXpwJYmR/yDszClK9nsQ2aB2VdxZi6DFPpVENgZdL05DW0fD2UxH7FAKvK/eNyTgy6AYsts9RJWwRxxzrLZfjctkisTlX2eeGZXSpTGa9sQdYuvqT+ClvPL1P2S+Xp9Xkcv5BjJ4NlNwsKKMF9Cv/z+zCgpivfRqL62ZhB0ETlA4+//aysaz5/AyBT3JplZqIltma1gAePa1fa0jSDhH+wt3/S+WjlVecKGQaA/YH1+sM6h7WPuQ3b/B8BuSKuFxMLi6rn5Ic+ugY0xZaU/ITDQIsVCz1Ieu6k1WZE3q3eSJX4PIkfQqtzE7x/Xe8kpiXs7O492AFd+fdP5X6EQOgbpXuKvlFLnl71GCz71Kk7/MGxrYwXSGgiIQJUuxLCn5rdJhLM08QYjT/R/evXnFxKei2y1+wl4bAiTNkd6qu35N+DxJBivxAkRFBfnXIQt9QGswkSdhX+/0V7jv+KJ0p/cl7+sbbfoixwdLWr/vo0/AXSS5YCZAB/kdEvZWbkCPzDItNQN4MrLoa5jPujwymTvlnPyLoZj5dSZLcnNYxRMcbJ80nyrm2f2tNvBVJBqMtVxUwHFnkFYEsGcvGT9G/ddPXVItySkZKy2k3h8nX/U4juqwmpHkIFN6b/zk4YBUwO4giDy9JHhRmBdMLoxwmVy8QImAv/TZoPTwjcAbmNh7d1L4Ld2n8BLR3QtK/mTF2omRAGFFQEM36bjuZNDzI4L/cUtyzSkjzfwNyeTlTSdTwbwPX6R6le76gMdcVXtBNgRMX2JHfZCzDefBVSm38Qu3qLv1xqP+qYsEweBaCDA+upSVxx353RrtuqmzA1Fhdrrvw5xLVz4fpvouLPQC3msJOgzjq1tfputVFFn55uvpH4CHLYU864kCGXrW6TDDcF85LOHZRlf3SMkM2nmNcSC7S0Gx3nVn9RwVkAQsFlXF9TYFhSN9ANjRvO5hn+7hzWf6XmKSGqG655hsrfTdoUxXijxtxpCfaA+EYPZ+Xi+sgArcWfME/8YyTNci+IXIl0DMrd90SMD+OhpBePMVaw7AP7RlsZstbCIkSclvdzaxN00DyMFrtwxwpYyRYpDIBM3v7Ot+lv4pniidfhRt3J01Kf08s7tJ08VTKoemuhBc0O2GHGzy26Un5N4/v9zxspgEphu7g4Sk0M4zDKe7n3rNOiCkBHe8i7Cait65EtRmcDvOGYhWWtlMBGZBehvE59g1IpeJy9kF1FkFCwDYTLhq4mfOSlmBTvrZBf4/+b+SdRTlC3hpfW+bns7SUWPM2XujzkVJtPy4TogZN94SebWqx1nAEbEwT7IZP+h6WYf6LtIgh1Kb4ZGEh0CwKkSXDMKyo2t1ILll5hG8hFQ9SkV1UUhtZuQiDT2+U5URvNujtht1ZsnLQmvxcInknaidpk8DCgxCned2n3PrQogGhssHiYo3SLxUdLahrJzFN9XPY6ScveAPMJb3aMsS5EgpRyDUMK3UurOmMfvIMH2UCNo62vtOnke70eZwLKjIb2FuKZGnkouQ+VhDduLJnzvlo8TR3TzBP0U5C2/Aq2jSNb5AcUlW2JHByFAJHKPtZrEBDsY4EqqMIPqVCTh+dyZ6fMJfosC3jAyqvNrQ7OfH1OqOR4oXRbamijLFSyfdquqzCiuC3N8oF4KO8JVB4ErAAskiggY1aB+nk2P5C+0OaxEBLOzE/K5+1bPch1bMzDV76QrCnTgYSN7qGIxIXxC3S0dSMrR4Z551JLL8nAoZihJcAGZ65jSkb0CxSktcsFw+RlEX1UmUlEyzpPdAa2GRtiy6/iSbYShPtsirnxAd8qy0+COyip6JSoZ2RANq3zREkY12JD9gMhjXahadPC32kTh1L87UQdeczAuFojX7lZmUexRIgos8wkITZ6rpbE0iJuohFDkj1e8RYOxdYzE97DvHFcb93lbmXkAMGLaKiDquACaLzgBKKxZ5K2HqsZBfwlZFJUujJPaDBf55A2d4Sy00V5xXjSPQokZddopd1mAaY7qFLDZAcTdx676zXdRqR4keXi/T52r6mgceBH2iI8H0BlE1CEtHxFZgV/1YdAUb/WnTEQdtcgg+7kxzj43p1WCV1Q7TcdbWkTt1RX5mi6l9FYTNv2wNnbrL/2EzGvOtVBVlXMfJiAvaiRUTPWDMWDeTRhcSCnE3d0CmcvujTWTuXPF7/vsT0VUP70LdOCAeUkw7DjkJAEji0X4t4Ieb/ZHjvM3ZM7120BTN6Xk7BBqNful/gpV77iaN5pjmMjRoJtfv9hLGYuqVNGjV5voe8wDNBhJB2A7XhZWqpDkuhv0m/gp4hGU5lVWZnmziDQgsNsnwtPlvQ2O5kAFCh2rLi9bR8vArSheyElrZsg/0FeTaQaWQ1LZYAv4QJDlBDsPFejh2JI9DUcydNAekltq5V6Adj/dufZKwyTEM8xi6GY8JPNYpj6jngtZ3znPn7gVaPgDdA+5QJ3PuRqPieUszJ1jXF9IOSK5q7CGQfHpYh9e9sirgdBBXTAbXkYFkPJtw0QNcp8Jh6DmlKGZsQusNAejHWKl3dmPMEpSpbNvsx5CASha6vF9s+WboWhFNuV3lZtY1Fo9YLy3V0LXe48E4xWAPKbujubN6mI9ii0thhavw8hTEiwT+foP95AhTcFiey8OGWi5jfWPJ7jC6R8gAKXln1SGfimne4zcPW6h1rqMsBcckOY1IhITu1CD9yvno3QBhGevpQa9SAih9zgVSLWF5CbYnAt9A2/Axqfp3mF5e9Rcjc6O6PwrbtONLIVnXSHhrURp7dfpryunG9DIN5XdQvLWaDEa5f7xqN1z/nwx8C1bV3p2vZUXfouwOumYz4M9IBu/F146/qw8RnSs7wNr9EmKBEGjyBdkjI0ozA82Bw2ANkcaLitIBDIXMhyC3780zRkO7BsMm6Q4yJ1bP0Fk5cc9zjcPPaxO1HMajLvKHg7iIFODw8PnjQ4L/G8C4nuaTxsi6W48vxdOBGQQzjTwWDVk0Bmw/FWlmkO/GFi0xpvfCtJ99EfA+xYdoFtgqWm1CMMfPdy2HJeFM+6wlWnFD7N3R10As10JoUrGXtkCtNp/3ifnOr5fQrxCxPw3PCGuKgLuj5aGXnBfAOaFnOIAsPJqafIjaG8x9A0mzFrsHEQt5O3KKTuYVUYxkPz233DnakiNbjEuPqTBIQAywqK3gC1nFpFZHUBVvtPEONtWpnA2Tj9JDLGzFyC14fiSdvZomXJ5+EgVywKp8LrbFFo9e4eBNbNNIVMuNNhs0io9xq/JY4dG8/vSKDUEUnByMM12/btv/sNGiVV7a4P13++CpgVuvPzT4Dmo/T4Ar7THUy2O4lGzqxUUX/x0PU8Bpi95tJfF+bJytkBIGCu9m+xqbjsE2K8dHTI6FWG8TvDYy2JKCyHmAsw2IcaXQyJQocNvPYwIN/q8g/KVMWBQ36PJ62dVWzjRHuoXayN0QrC8IeKg3lMLBJMTl89xLOk4LNar8FCQDILAGHq1/JF7pM+Ev70uI1P6vhPKnioJ+sxAcxtTz5wghmYeFPE+iIC2GOmPD3TOAjx8jmtQ/H+5aMu97EDZAR6gRKgRf/ncQzdjxWkJiDyR6/C8ct3n1KxjT2XPbIQqfQb1O1s9LxCYK3WmjXcDLHSVah7AgSm1GzmC++JflQ9TqEzF84fyFnY4cCnjYx8jn/dkGRuVk8NWUxv+ibHqK5zxAd6ZlbeN5qci0Y//2nZcs5R8Bks5DXrTZDbmTL7LnT/vESgnIDPaGbtBf4sk0rdxjdFKZTQ8SPoWl3Q41rmPW4qGEIldbT2N/B7PfiWcrPLJgvN1wroTqSUD99H1ABAtP8hkHhhGaRAYJDfW9xDt9l7IbBLFdPlk7jxgMe7guZYpSwfv+AGgb6jYyf2uxAGGrimB7OP5+EQshQ4QK3dStxNbKyOVhA4tiTEqq1Tzx4XEj0/cn0LRIayw9XTVIvFz4XIB5ojJ/FoDNEY6kBw/TynrYPyPuV+bM2lxMkso1TZ5+rrRSqgfvuw7KIuG0yXI0K6uCzO7YrJs5r7xK6Vf/HMdYvPyCgg2+EfIURIryNWezBlB2W5xwPMu3FmbPYwrWH6mYl+qj9SyIy+uRw4/OIT9FkmeqgxVxrfjgi86X80nMNO1uy7Y354gznvCNLXv1LvdWd05zrBcVe3ByachFdDIx4S+uKOsF6H5pM7izoJfDc0O14/SeSJEzeDOJXa0B9hFytid6otGTj6OntjyzuHdKls73r4DN2gOZifsRLMdx+TZpZYSztSkMTQFoUKmxMAcFy10QSmXUQNbFKnUY1XLNouNQPmTTaNRfDEQlwrTFFeS6mKhOmEIyh1Gf2LQFaWtmzdF+cDei/w6gAhSuRy4rQrrh7zWt3fiKrLHfuE2AE9kkTKZXJIPU5bURYGiPqzqKMc8yw7kIpeWYd0AA/t03hq1jDLq05v1hYEiaH7isKKule8tsbdWRDKp75CKHvKaC3hDMRj1SeTKLMvMPxLukn/L286WyU72eXw5rorhn58APCZDYnHRB7/v3xHNFSPg5O22dAKyKMDN5j9vX3SpE9zCGuLx+ruvgpcW+jU2t2t8u5UX7IwpO4KMoSCMedwAgmtECoBFY1uQz0AF/v0sAqg5B2xRiU67e6ApAHmc+yL2WHcrpITjcfxDkJg6P2FVWCVWDGzeYHBAQ8TvRERJ1V+Z1atvf5FiuHp+zS9Ky910AiBNr6AGU8hovDfoMDdDFKATlEGiOyIGjcvcxIV3rKWBNcs+sRuU5/FNNxbMW1H9ldOYW4ohY0vnGjr9TYJQXw7UFTd+J8zyU7HlSfoYNAYEEX0DkOEJoJwrqNW8tzyEow8pI+XRaGNwgFFGLX8mUue5kNMVGYcW4TDqw/eCjgGkOJ5uGk+Jwdi8cmXVgcJTXQtktm1pzCqipCnYwwvwZyB2gQtplPmahaTzlHHXpLX32uGYPoXPyPLTIqKSo9zgJYrC235590LBb6X+Zh41a5HNmWmdmF4pHwbTOmQ05X4VDectsaS+LcqRHjQWKiERWbzj4KunZucV361t5f+0FJ1MIOU/mprzvcTjxVV5C3OAPFV1cq8WpA42vfzhKUwTSFODZ3DDGJga1jKFqt3hxeCCeavYV1soH2Zpgg3GEtjnPeh0GdbeQJDKPIoRdRbyrrD3QY9JnOVoH1DNDo3LwoDQs/lzer6+vPnOrrpgITeBXML6Lh15y3yrYTqqwEGrmpny9rXgJvN7IJx3skS3osAmdS5z6Nz7vB8SHXru6mEJGca7k5o1opL47Jhoah8aUPfM/093MUE3GbrHQMtlRqOnW8pBkdiY22FCNpbVDxriHXgM5Sek/h8RyzaYFtzUrIWnvy0/efyFGHg4kkk/kq6be99v2tnbm88eEfq4Oc/JG00lYmO92nuurAn1/5MgDN0mJSUy2N2Awh/w4Au/alTrtZfsPV3FgCh3cbl26f8A2RvNXtLELJSxREZpuI5KHSmGmK7WrZySGiTscTmF2BSv57BI3aFxM9E11bz630eZwyt8zJgthLDpJoh/Jp2B1H6kitEzCWklTz+/euCrvjL+XGtMgz5Zcw3GWe8+D/n0Vb5sVOFLVhqMGGbR4dfmIWdX+UlVN9+kg+s8vOk4DiYIwhHvsec9EuQkWhAh7Sl7ZfL8FXiQ/25zHlRfuybXsdp8dYtKwRCS2zDp6DmymnveUxQlQRZlnYG7BJi523oafl3NmlSSw2b/yDuX/Zt4Q93rl7exvNDnv49LvrMUJh/HqWIAZhd8t/cVlMMRqYEfbxlrKcBYV3XeDU8Inq79YPAoeZFnFQP7wiFERzW/6xIbTItdcQ2d+5p9YlYx3y0pqRydZ1HQgyBKqYFr5cMePJ62/fN8mfoVCrmPzUi6VKiN+0hM8KIqV9g+j7ETKyoaDd4fPNCK8q/uE82hF3qcYcxj1la2D7KvYVXKUisd5bQRjS8qq/VxXqg2nvq2EmOXkkV8KpSAx54e1ysFPmIRRnM6G9Yq8Z9QgXC5A+VL1uXABWdVNRlh7l0Hn8bBQDkFQ0RqhT8gu+w+tqlCT5Pc9gyej0iiP2w4fCZZtjKUPDvwlzm6z7oEbCB0cEiSS2sI1qJNjB/yCVNqTXY3CTCa44pI0BgJM3H8LcCJCK5VF/i9OvYuR705dAZShYd5mHfUmL40wR3kRE0CuvFhza0vU51zgF6drhMlO9sSyEY3yQA7JPjRMLNLWmaNOz4Bng1vb1F9F9wx63lPIodekY4LoDtVe69CLFn+AkCdsCWqVkFcpimxLyhm0l1d/v9tUGLEWwX9wEJWDP5PS19kSdJXMkxrPJxkvT7KB41U6G/KoGt4h8aY3149gyzWLpilE/WPCDvtomAeRUQDiNzQXaK7+sy7U9PYi1U1itbuXdt5CtqYS+TYfBStzN0SPVflGFXE4KjtWva5u4RwupHqPbpG5LxumYmtTq4zWzYE4g0kDtv8kniTMPMY3E22BBwsdiBYgYVQ95Uxy1XIOdHjXNY9JaEReg70DF7VFY9gkb6gbDNuPK9S5FrcmfEVhM+9aj8dOuw7iO/13eL4+MH72p9FcGnDohq2iqFhuIgRWI1EKIKXVfqhk2zzKSD6+PPBJPHm4SlYDg0WPTTfpCy90/JpGAtEVGRab8aYdpGYRNhF0+mlLS3om/U/PZFWAIKZjjEIsgJP2LgqE1c5j/YmUQtFjlheXXdfQ6w4XrhsvtpeY7KE4tqp5azYiYkkG3nvqne5VZcXftloY3Kcr5V9xh41RMLaUvOgwSgLJOrjWtg5e8ESPhVuemo/aEe/EF8YImuykgAFmEB/68FYw4RSvea01LTBNAthMn12m6PMiBveWnZQ7/8AKbjbnMrnj4iFQCZcLjHmB+5an8KkEYw+DXs5xGqJwiii/6sNhjTKJN6E0m1zqnFAXn0LW6vBbiDbih00A1PXsiT/0id3YLhEVjaC3RSCJOhNNpFeWeSQpEfd5xUvusoBRWDMlx02KvpMTUzmPqd6e+Dd2ZV1L23V/Mqx7uArHzAkx8bWpBG2CQnpPCTAZU+pz3IhLYl9lS79rFfnNbkmlQUjPXSF0mU/faN+s+HaRzxusgIFG+IrrS2EPtnlGJAMN4oB3n9UViwXSR067YAJxpawOO+Orqktmvrq0wWzKPd6zR86l5os8braLy1HwgQ6Wm53nGYCrjt329CvKxlEe+77CbuU1tKd07oYA0iSuNQfEWgnEvqzgXqt3mxseytv/IALsUUvhQQUQXbFw79qsOBZJLZMubs2VJJZBtCi31E6MZkeF5d3KId7BiF7CGEDYsMoZ0biQbu5DsvHRTi+qC6FDmM1nElhXf3zU5x5/PJXKVE3nJVGB/mFMeGCh7Nnsg8u5CgTVMkLB0trVADex/O6A2ZHN+Bl3hzPh0mywT3Vc5JLiqN2OtVU9/7F9Pwf1AAe6jT5ufQA0h8AFtoe5H5ol30t4yx3lcovVGe8b2X812CqdCxQ32uutxlHD4e1PaCoFSjv7V64FXDd5f268yOpnq7f4bamc8Fi1SizDyasqawKSIENW9E/diBVqyZvR6okptYyTpssSuS35HIp1nQqLvO8NnUlESifItIbLDZLXFQX9wtje61UH6yHWmlO2ZoRtMJhysGJAZ1Xzq6VnsdEgEOEph1HsAz+JjCkjsrHb9JU97oz9WRGjXnSPA+3PPalhpkUhXea89ZRDLS+cwWxy6XJTD/RZUSeaOTUrVXw/Ub+NlO/QcdncUcwSBNmKEsnV8NDb0h6hsuEe81whCcdeV6rC+Ovt1YQlKri4EpFR9gM4qCy0An5EZOJVMz+o/fMmw0pWdXAddnU9TeO7Wv6ii+62wAtujBseV9VDlEMdHyN8buUrVzzNICvaT9y5/QFiFAhWAGQtU96VNZ00Jj1GP9PZZsgG1j3w74cC+wQevPox3JQExPMKxkj9ckLxBbug35KByb2VnWlsA/LROg7GHN0lOWL0MET56XARd2b9b9Mqr4Rp1Aeg50FbM1ndS6kdrtvlWgFhJaTyIE++FC3wdHybbObkPJwc7FV7oWbE3n33pYMMvmUoSvu+Cof3Aouu2IuKk3BAjjcLEUeXBdyUbCoyoDJ1+nm4Zc5wKB4mMGAFU/BxIe9IjSzyc8+HpcgCLYvH6WDr+LMyPk48CQDc/NaoxLFdTJ6grjSQ38ltnEwoeBzQ4oz0yt2ABzCBwpwfL2TL/M+3BhxJjJmiIpiFyV4Qe601VeKwG58IU/rdYoZ9TbFPRpFHdbj97Bud67QHkJdk9A05ui6glxBLaAgYaFOD+4RySThGF3NrGChubaunRbd/VlfhVJAMY8iK6PgL9IM3Bg2ZtzU6T+GMn+xdkFqFhzWQ47Ayafc7qzBg/lWoxeiEIN/DG8TN3vYt6nABFVdzPRkBnXT3BI3sjIuIfkZWSes85r6MOzeU7uQ1jW/2eRBjGcrP99D4MmYOExcn9cDkmIlM25zQFwHU2ffGHVGYv6Ks2RUvs/yWzx9RD2VU3gMHw1oF4ZW2z8UP/Grs0BMnKWfSDFeSgNlbHYoWTWqeIf5MmyPjpjEv2re9RwwncsU03C7ipv/bw+rBk1IvII3KxMDt1AGlLYC1BgQxP2ZLDKZS47O+2orNYrF44h+ceKRhyyaTa6thW4O+1XYxnbPdaFZZzVVgsYv7V6R4IG+NwiuKDJfwjTx6hfXKKdfRiDpza95YFZp6r5ifOS7FoJpkKX1rHAc9dol8sQBxchQffCbJlPhLonr7/zBHbKn55CSZjJE2E45p0ZcTIDmLritBpzia/KBgD0UoB/wHNmKMDBx4mc+9+Yvnpa6Rcp7GXHTqbB30TlM0fF6qGZmIZbVCAeJbumIxoLVjvPsMKL88QaCzzu8cAO4a5lilu3xpu9z4Hjf/hi+KxWLaJWhfqnZHhPNCceJisPSge+E0nHORgHrS+G9F22j1tl619zLlJbcmqopBjp/eMxbzYezy4Gk9AC9gijUOJdANTDFpe9X6nG7VvMCGcLKoy2ozokAM2/yq8Juarkl4Cnor1bY5MxBluKG4Kw5sFQarBHs5klPfmJctwvd+4jJNEm7BLqq+FxSFY2xh13lEaDvKCYhfC+nN9k0auLQbetlBRZdP28fcgDIs7YeVFHC+XYXH9XFziorDUR9U2ECDmzsLtL6ibN/UsZQgheJRfD2+s8PKfROknpiAGwmdcvd1PYrQSKSYdrGCJLr3KyhEXnqSH+YETwkvRkzcXVFkG2zzUNsmH3EALsvirPfwymJTlP8J/gsW/LWiHnxg4X65L0WW26BBcU6Ttnlx9cm6mZlsZJgpY5ehG7R7YnlLYL7/AdF30JiHVIqFlkVo3fwKkk+0fAaYaTEjiNGIahVtbzgsEepKrOft2/BExoNbItkhHbg0IzrIKyZAwZ36Ps2Bd6FjvSiV7M0bDW38bqfn3ZA+/ZKpekiZFRxWkm4q96zoiDs6O8bdoC9fKzQhYRucLrDl7PfrnvGBh0/BCPJl7JodAikDAL5TK9rX3oHuTE215AnjONt3bRpsge+Z474WRcZc529EJtweem4WfxCvydI/CpRLkHdiQzP2QHAQHudwnys/ew3HDlIXSN+DC4yqfW+NGFB/o4/uVKsVyvcr1LWV8RHivOWyGzC5E59EGDnpHOeIzZEVDBoZZqqBP4w5kJgQEPx1jJDBenSGnxigZ4qCljChbaSbcYCRaf7onMTipqyViMhdjr1yfL/hNegb7zF+kJKw5dvRntzpuer8othLGPQ5R8WOn1o/rYtFKwJfVYJZK9TKYpFMBabiWRGSPXghqvS+p0wl82x+JkJtmrevBbyX1MYl8EgsDJaBJVfWj2f3hiKQQjkllU0sYeLkaWtddNpNm+Nkofd3e8bWKCxcSzBKBHxDRfsQIjIXILKe6yTriRmFRxUBAjcTMUfBltdoiEKCB0+8WTic3KPA+PaSBydF5ASjsG5cG1KImhXtY+wogGLbHMhA+KhLw11/k1631RPBzgpsZMLZVqIUb2wqHIM1rb3CsEKKJAKpuvivsixrmH9wzihYVriE0VyhjviG5y57mnfNhQa4q5/nVCvfq5bno0uWNU2TgMus+1+fHMAg4dF2WS8u/LhT/MA5NfCgKJIP60RIuxUbJj7NMI939CopURfRT48b2Xu47xkJOusuhNnKDjMKKsxmGpUtxJVwqcp6Rm4BaYpAa/+Ak4q+I+OxERVNE9h19Te+1IJBxjebJB3aVkb5r1/b3z67VKZ9mSHKh1/Lk3r3mW8stvfNAiH7cPzWKmLfwKzRkePcXsVn17+HnhF0EJGyfOfSFQwPD8GhrZY9QlIH9zP5/5AvtWSZgYdRWlY+GFndqhS07MEC0W68fJgl35crrmXofaZyIyM86Ul">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['frm_main'];
+if (!theForm) {
+    theForm = document.frm_main;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=pynGkmcFUV13He1Qd6_TZKtf-hOQHYseF1CETjMylwKw-zJgrBBOEOwm_S1bMLiQJSfQnowCempP2Q2_eMnGNg2&amp;t=638901289900000000" type="text/javascript"></script>
+
+
+<script src="/ScriptResource.axd?d=yeSNAJTOPtPimTGCAo3LlRUhUuiNfoqG2ZfJT5WHZksz5ISXWd4derqtVo8-hBDtVbHYzWuNPXR6ZNO0bxFwR_B21VWMzFmAhyPK6k2yIN4LJkx1o_bo0p1FHi0njQLI0&amp;t=7c776dc1" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+if (typeof(Sys) === 'undefined') throw new Error('ASP.NET Ajax client-side framework failed to load.');
+//]]>
+</script>
+
+<script src="/ScriptResource.axd?d=DT3YJR8QaqV61-teuz0hgorIqNK8n4mhG9r-bOigjf2pdEPOiM9h5Yjwibm_P1GqFZo6agDXn_bQ9SX_-tvBFKodllBGmD55kmnFUW1TS3AEDx5Uz5LYbiHI2ZbBQXdTNS2OXFg0GPw45UQpsL8F0w2&amp;t=7c776dc1" type="text/javascript"></script>
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="318A4EDC">
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="b+k1DU2SZED7OM3wf3LDy3jd1amVC3EJ4aZPylxHtF4BXRk5XxL+QRLE9mGjDaDrV0+FKM5cOZ2jpE7eNr8Jro9bdvt14GLn/aBplFwYVsNZs/XzFExIWdrAB9c7VPanHEK8ARGn/7KhrPWE9sGXkQ==">
+</div>
+        <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$smMain', 'frm_main', ['tctl00$upSubscribe','upSubscribe'], [], [], 90, 'ctl00');
+//]]>
+</script>
+
+
+        <!-- Preloader Start -->
+        <div id="preloader" style="display: none;">
+            <div class="preloader--spinners">
+                <div class="preloader--spinner preloader--spinner-1"></div>
+                <div class="preloader--spinner preloader--spinner-2"></div>
+            </div>
+        </div>
+        <!-- Preloader End -->
+
+        <!-- Wrapper Start -->
+        <div class="wrapper" id="personal-page">
+
+            <!-- Header Area Start -->
+            <header id="header">
+                <nav class="navbar">
+                    <div class="container">
+                        <!-- Header Navbar Header Start -->
+                        <div class="navbar-header">
+                            <!-- Header Nav Toggle Button Start -->
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#headerNav" aria-controls="headerNav">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <!-- Header Nav Toggle Button End -->
+
+                            <!-- Header Logo Start -->
+                            <a href="/" class="navbar-brand" title="Telecel"></a>
+                            <!-- Header Logo End -->
+                        </div>
+                        <!-- Header Navbar Header End -->
+
+                        <!-- Header Nav Start -->
+                        <div id="headerNav" class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li id="home_menu"><a href="/">ACCUEIL</a></li>
+                                <li id="offer-mobiles" class="dropdown active">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">OFFRES MOBILES<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li id="personal_menu" class="active"><a href="personal.aspx">PREPAYES</a></li>
+                                        <li id="business_menu"><a href="business.aspx">POSTPAYES</a></li>
+                                        <li id="mbb_menu"><a href="MBB.aspx">OFFRES INTERNET</a></li>
+                                    </ul>
+                                </li>
+                                <li id="products_menu"><a href="products.aspx">PRODUITS</a></li>
+                                <li id="stores_menu"><a href="stores.aspx">NOS POINTS DE VENTE</a></li>
+                                <li id="news_menu"><a href="news.aspx">ACTUALITÉS</a></li>
+                                <li id="contact_menu"><a href="contact.aspx">CONTACTEZ NOUS</a></li>
+                            </ul>
+                        </div>
+                        <!-- Header Nav End -->
+                        <div class="header--contact-social hidden-sm hidden-xs">
+                            <a href="https://www.facebook.com/telecel.officiel" target="_blank"><i class="fa fa-facebook"></i></a>
+                            <a href="#" target="_blank"><i class="fa fa-instagram"></i></a>
+                            <a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+            <!-- Header Area End -->
+
+            
+
+    <!-- Page Header Area Start -->
+    <div id="pageHeader" class="bg--overlay bg--img" style="background-image: url(&quot;img/page-header-bg.png&quot;);">
+        <div class="container">
+            <!-- Page Title Start -->
+            <div class="page-header--title">
+                <h2>
+                    LES PRÉPAYÉS</h2>
+            </div>
+            <!-- Page Title End -->
+
+            <!-- Page Breadcrumb Start -->
+            <div class="page-header--breadcrumb">
+                <ul class="breadcrumb">
+                    <li><a href="/">ACCUEIL</a></li>
+                    <li class="active">
+                        LES PRÉPAYÉS</li>
+                </ul>
+            </div>
+            <!-- Page Breadcrumb End -->
+        </div>
+    </div>
+    <!-- Page Header Area End -->
+
+    <!-- Prepaid Area Start -->
+    <div id="prepaid">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <!-- Section Title Start -->
+                    <div class="section--title">
+                        <h2>Les Prépayés</h2>
+
+<p>Vous pouvez recharger votre compte telecel de deux manières:<br>
+- par carte physique: Il suffit de composer *500*code de recharge#<br>
+- par recharge électronique auprès de nos revendeurs</p>
+                    </div>
+                    <!-- Section Title End -->
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <h2 class="title"><div>Recharges Physiques</div></h2>
+                <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                <div class="table-responsive text-center"><p>- Appels vers tous les réseaux nationaux à seulement 1,6F/S (96 F/minute)<br>
+- Appels vers l'International</p>
+
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<td>Zone</td>
+			<td>Zone 1</td>
+			<td>Zone 2</td>
+			<td>Zone 3</td>
+			<td>Zone 4</td>
+			<td>Zone 5</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Pays</td>
+			<td>Somalia,<br>
+			Egypt,<br>
+			Mauritius,<br>
+			Mayotte,<br>
+			Namibia,<br>
+			Reunion,<br>
+			South Africa</td>
+			<td>Comoros,<br>
+			Angola,<br>
+			Botswana,<br>
+			Cape Verde,<br>
+			Eritrea,<br>
+			Ethiopia,<br>
+			Ivory Coast,<br>
+			Kenya,<br>
+			Nigeria,<br>
+			Senegal,<br>
+			Sudan,<br>
+			Swaziland</td>
+			<td>Benin,<br>
+			Burkina Faso,<br>
+			Cameroon,<br>
+			Djibouti,<br>
+			Ghana,<br>
+			Libya,<br>
+			Lesotho,<br>
+			Morocco,<br>
+			Mozambique,<br>
+			Niger,<br>
+			Togo,<br>
+			Rwanda,<br>
+			South Sudan,<br>
+			Uganda</td>
+			<td>Congo,<br>
+			Equatorial Guinea,<br>
+			Mauritania,<br>
+			Guinea,<br>
+			Algeria,<br>
+			RDC,<br>
+			Gabon,<br>
+			Malawi,<br>
+			Tanzania,<br>
+			Zambia</td>
+			<td>Tunisia,<br>
+			Burundi,<br>
+			Central African Republic,<br>
+			Chad,<br>
+			Gambia,<br>
+			Madagascar,<br>
+			Seychelles,<br>
+			Sao Tome And Principe,<br>
+			Guinea-Bissau,<br>
+			Liberia,<br>
+			Sierra Leone,<br>
+			Zimbabwe</td>
+		</tr>
+		<tr>
+			<td>Tarif (TTC)</td>
+			<td>150F</td>
+			<td>198F</td>
+			<td>230F</td>
+			<td>250F</td>
+			<td>320F</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>Les appels vers tous les autres pays (non Africains) seront facturés à 150F TTC.</p>
+
+<p>&nbsp;</p>
+                </div></div></div><h2 class="title"><div>Recharges Electroniques (Flash)</div></h2>
+                <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                <div class="table-responsive text-center"><table class="reverse-table-striped table table-bordered">
+	<thead>
+		<tr>
+			<td>&nbsp;</td>
+			<td colspan="4">Telecel</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Valeur Faciale</td>
+			<td>Bonus Permanent</td>
+			<td>Bonus SMS</td>
+			<td>Validité</td>
+			<td>Délai de grâce</td>
+		</tr>
+		<tr>
+			<td>500</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>15</td>
+			<td>15 jours</td>
+		</tr>
+		<tr>
+			<td>1000</td>
+			<td>0</td>
+			<td>10 sms</td>
+			<td>30</td>
+			<td>30 jours</td>
+		</tr>
+		<tr>
+			<td>2000</td>
+			<td>0</td>
+			<td>10 sms</td>
+			<td>30</td>
+			<td>30 jours</td>
+		</tr>
+		<tr>
+			<td>5000</td>
+			<td>500</td>
+			<td>10 sms</td>
+			<td>60</td>
+			<td>60 jours</td>
+		</tr>
+		<tr>
+			<td>10000</td>
+			<td>2000</td>
+			<td>10 sms</td>
+			<td>60</td>
+			<td>90 jours</td>
+		</tr>
+		<tr>
+			<td>25000</td>
+			<td>6250</td>
+			<td>10 sms</td>
+			<td>90</td>
+			<td>120 jours</td>
+		</tr>
+		<tr>
+			<td>50000</td>
+			<td>12000</td>
+			<td>10 sms</td>
+			<td>90</td>
+			<td>120 jours</td>
+		</tr>
+	</tbody>
+</table>
+                </div></div></div>
+        </div>
+    </div>
+    <!-- Prepaid Area End -->
+
+    <!-- Services Area Start -->
+    <div id="services" class="bg--lightblue bd--bottom">
+        <div class="container">
+            <div class="accordion--content">
+                <div class="panel-group accordion" role="tablist" id="featuresAccordion">
+                    <!-- Accordion Item Start --><div class="panel panel-default"><div class="panel-heading" role="tab">
+            <a href="#featuresTab0" role="button" data-toggle="collapse" data-parent="#featuresAccordion">
+            <h4 class="panel-title">Recharge à distance<i class="fa fa-minus"></i></h4></a></div>
+            <div id="featuresTab0" class="panel-collapse collapse in" role="tabpanel">
+            <div class="panel-body"><p>Vous pouvez envoyer du crédit à vos proches en composant *501*numéro*Code de recharge#</p></div></div></div><!-- Accordion Item End --><!-- Accordion Item Start --><div class="panel panel-default"><div class="panel-heading" role="tab">
+            <a href="#featuresTab1" role="button" data-toggle="collapse" data-parent="#featuresAccordion" class="collapsed">
+            <h4 class="panel-title">Transfert de crédit<i class="fa fa-minus"></i></h4></a></div>
+            <div id="featuresTab1" class="panel-collapse collapse " role="tabpanel">
+            <div class="panel-body"><p>Ce service permet à un abonné prépayé de partager ses crédits de communication avec ses proches.</p>
+<p>Pour transférer du crédit composez sur l’écran du téléphone:<br>
+*510*montant* numéro*votre code # puis OK.<br>
+Vous pouvez envoyer entre 100F et 10 000F par transfert.</p></div></div></div><!-- Accordion Item End --><!-- Accordion Item Start --><div class="panel panel-default"><div class="panel-heading" role="tab">
+            <a href="#featuresTab2" role="button" data-toggle="collapse" data-parent="#featuresAccordion" class="collapsed">
+            <h4 class="panel-title">Numéros complices<i class="fa fa-minus"></i></h4></a></div>
+            <div id="featuresTab2" class="panel-collapse collapse " role="tabpanel">
+            <div class="panel-body"><p>Ce service vous permet de bénéficier d’un tarif préférentiel et de rester longtemps en communication avec vos proches. Vous avez la possibilité d’inscrire jusqu’à cinq (05) numéros parmi vos numéros complices.</p><br>
+<b>Fonctionnement</b>
+<ul>
+<li>Tarif des appels voix vers les numéros complices : 1,2 F/S</li>
+<li>Souscription au service : *507*1# puis OK</li>
+<li>Inscription d’un numéro : *507*numéro*1#</li>
+<li>Consultation de la liste des Numéros complices : *507#</li>
+<li>Suppression d’un numéro : *507*numéro*2#</li>
+</ul>
+<br>
+<b>Principes de facturation</b>
+<ul>
+<li>Ajout d’un numéro : 500 F</li>
+<li>Remplacement d’un numéro : 500 F</li>
+<li>la suppression et la consultation de la liste des numéros sont gratuites.</li>
+</ul></div></div></div><!-- Accordion Item End --><!-- Accordion Item Start --><div class="panel panel-default"><div class="panel-heading" role="tab">
+            <a href="#featuresTab3" role="button" data-toggle="collapse" data-parent="#featuresAccordion" class="collapsed">
+            <h4 class="panel-title">Les recharges Flash<i class="fa fa-minus"></i></h4></a></div>
+            <div id="featuresTab3" class="panel-collapse collapse " role="tabpanel">
+            <div class="panel-body"><p>Telecel vous permet de recharger votre numéro sans carte physique en vous rendant auprès de nos distributeurs agréés.</p></div></div></div><!-- Accordion Item End --><!-- Accordion Item Start --><div class="panel panel-default"><div class="panel-heading" role="tab">
+            <a href="#featuresTab4" role="button" data-toggle="collapse" data-parent="#featuresAccordion" class="collapsed">
+            <h4 class="panel-title">Bip telecel<i class="fa fa-minus"></i></h4></a></div>
+            <div id="featuresTab4" class="panel-collapse collapse " role="tabpanel">
+            <div class="panel-body"><p>Le service <b>«Bip telecel»</b> vous permet d’envoyer un SMS à votre correspondant sans même avoir du crédit, pour lui demander de vous rappeler sur votre mobile.</p>
+
+<p>Composez <b>*502*numéro# puis OK.</b><br>Vous recevrez également un SMS de confirmation.</p></div></div></div><!-- Accordion Item End --><!-- Accordion Item Start --><div class="panel panel-default"><div class="panel-heading" role="tab">
+            <a href="#featuresTab5" role="button" data-toggle="collapse" data-parent="#featuresAccordion" class="collapsed">
+            <h4 class="panel-title">Sou Baro<i class="fa fa-minus"></i></h4></a></div>
+            <div id="featuresTab5" class="panel-collapse collapse " role="tabpanel">
+            <div class="panel-body"><p>Avec Telecel, ne vous souciez plus de vos appels de nuit, appelez sans compter avec notre offre magique Sou Baro. Chaque jour, rechargez au moins 1000 FCFA et bénéficiez gratuitement:</p>
+
+<ol>
+<li>D’appels GRATUITS + 20 SMS vers tous les numéros Telecel de 22h à 7h du matin</li>
+<li>De 20 Mo valables de 23h à 7h</li>
+</ol></div></div></div><!-- Accordion Item End --><!-- Accordion Item Start --><div class="panel panel-default"><div class="panel-heading" role="tab">
+            <a href="#featuresTab6" role="button" data-toggle="collapse" data-parent="#featuresAccordion" class="collapsed">
+            <h4 class="panel-title">Roaming<i class="fa fa-minus"></i></h4></a></div>
+            <div id="featuresTab6" class="panel-collapse collapse " role="tabpanel">
+            <div class="panel-body"><p>Telecel vous permet de rester joignable sur votre numéro à l’étranger avec son service Roaming.</p></div></div></div><!-- Accordion Item End --><!-- Accordion Item Start --><div class="panel panel-default"><div class="panel-heading" role="tab">
+            <a href="#featuresTab7" role="button" data-toggle="collapse" data-parent="#featuresAccordion" class="collapsed">
+            <h4 class="panel-title">Appel en attente<i class="fa fa-minus"></i></h4></a></div>
+            <div id="featuresTab7" class="panel-collapse collapse " role="tabpanel">
+            <div class="panel-body"><p>Ce service vous permet de mettre en attente un appel en cours pour prendre un second appel entrant et reprendre ensuite la première communication. Ce service est gratuit et les appels sont facturés au tarif en vigueur.</p></div></div></div><!-- Accordion Item End --><!-- Accordion Item Start --><div class="panel panel-default"><div class="panel-heading" role="tab">
+            <a href="#featuresTab8" role="button" data-toggle="collapse" data-parent="#featuresAccordion" class="collapsed">
+            <h4 class="panel-title">Conférence téléphonique<i class="fa fa-minus"></i></h4></a></div>
+            <div id="featuresTab8" class="panel-collapse collapse " role="tabpanel">
+            <div class="panel-body"><p>C’est le service qui vous permet d’appeler successivement jusqu’à 5 numéros et de communiquer simultanément en toute fluidité.</p>
+<p><b>Tarif d’abonnement : Gratuit</b></p>
+<p><b>Principes de facturation</b><br><br>
+Chaque numéro appelé constitue une communication et est facturée selon la tarification en vigueur pour le profil abonné de l’appelant.</p>
+<b>Caractéristiques</b><br>
+<ul>
+<li>Possibilité de communiquer simultanément avec 5 personnes;</li>
+<li>Possibilité pour chacune des 5 personnes de communiquer simultanément avec 3 à 4 personnes suivant les performances des appareils;</li>
+<li>L’initiateur de la conférence supporte la facture de toutes les communications.</li>
+</ul><br>
+<b>Fonctionnement</b>
+<p>Appelez le 1er numéro et demandez-lui de rester en ligne, puis appelez le 2ème correspondant, le 1er est automatiquement mis en attente pendant que le second reste en ligne. Entrez dans le menu option qui s’affiche alors sur votre téléphone et validez « Conférence ». Vous pouvez dès lors communiquer avec vos deux correspondants. Répétez l’opération jusqu'à intégrer cinq de vos correspondants.</p></div></div></div><!-- Accordion Item End -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Services Area End -->
+
+    <!-- Prices Area Start -->
+    <div id="prices">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <!-- Section Title Start -->
+                    <div class="section--title">
+                        <h2 class="purple">TARIFS À L'INTERNATIONAL</h2>
+                    </div>
+                    <!-- Section Title End -->
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="table-responsive text-center">
+                        <table class="reverse-table-striped table table-bordered">
+	<thead>
+		<tr>
+			<td>&nbsp;</td>
+			<td colspan="4">Telecel</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Valeur Faciale</td>
+			<td>Bonus</td>
+			<td>Délai de validité</td>
+			<td>Délai de grâce</td>
+			<td>Bonus SMS</td>
+		</tr>
+		<tr>
+			<td>De 100f à 999f</td>
+			<td>&nbsp;</td>
+			<td>15 jours</td>
+			<td>15 jours</td>
+			<td>10 sms</td>
+		</tr>
+		<tr>
+			<td>De 1000f à 1999f</td>
+			<td>&nbsp;</td>
+			<td>30 jours</td>
+			<td>15 jours</td>
+			<td>10 sms</td>
+		</tr>
+		<tr>
+			<td>De 2000f à 4999f</td>
+			<td>%10</td>
+			<td>30 jours</td>
+			<td>30 jours</td>
+			<td>10 sms</td>
+		</tr>
+		<tr>
+			<td>De 5000f à 9999f</td>
+			<td>%15</td>
+			<td>60 jours</td>
+			<td>30 jours</td>
+			<td>10 sms</td>
+		</tr>
+		<tr>
+			<td>De 10000F à 19999f</td>
+			<td>%20</td>
+			<td>60 jours</td>
+			<td>60 jours</td>
+			<td>10 sms</td>
+		</tr>
+		<tr>
+			<td>De 20000F à 49999f</td>
+			<td>%25</td>
+			<td>90 jours</td>
+			<td>90 jours</td>
+			<td>10 sms</td>
+		</tr>
+		<tr>
+			<td>De 50 000F à 100 000f</td>
+			<td>%30</td>
+			<td>90 jours</td>
+			<td>120 jours</td>
+			<td>10 sms</td>
+		</tr>
+	</tbody>
+</table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Prices Area End -->
+
+    <!-- Promotions Area Start -->
+    <div id="promotions" class="bg--green">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <!-- Section Title Start -->
+                    <div class="section--title">
+                        <h2 class="white">LES PROMOTIONS</h2>
+                    </div>
+                    <!-- Section Title End -->
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="table-responsive text-center">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <td>Forfaits Onnet</td>
+                                    <td>Tarifs</td>
+                                    <td>Validité</td>
+                                    <td>Mode de souscription</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>5 min + 10 sms + 10 Mo</td><td>200 F</td><td>1 jr</td><td>*540*5#</td></tr><tr><td>30 min + 60 sms + 60 Mo</td><td>750 F</td><td>4 jrs</td><td>*540*30#</td></tr><tr><td>60 min + 100 sms + 100 Mo</td><td>1250 F</td><td>7 jrs</td><td>*540*60#</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Promotions Area End -->
+
+    <!-- Offers Area Start -->
+    <div id="offers">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <!-- Section Title Start -->
+                    <div class="section--title">
+                        <h2 class="purple">OFFRES</h2>
+                    </div>
+                    <!-- Section Title End -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Offers Slider Nav Start -->
+       
+        <!-- Offers Slider Nav End -->
+
+        <!-- Offers Items Start -->
+        <div class="offers--items">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="row">
+                            
+        <!-- Offers Item Start -->
+        <div class="col-md-4">
+        <div class="offers--item"><div class="offers--header">LES PRÉPAYÉS OFFRES</div>
+        <div class="offers--body"><h3><strong></strong></h3><p>Avec telecel, appelez à seulement 1F la seconde vers tous les réseaux au Mali, et à 1,5f la seconde</p>
+        </div>
+        <div class="offers--footer"><a href="offer.aspx?id=15" class="btn--red hover">EXPLORER</a></div></div></div>
+        <!-- Offers Item End -->
+        <!-- Offers Item Start -->
+        <div class="col-md-4 offers--item middle"><div class="offers--header">Les meilleurs tarifs du marché:</div>
+        <div class="offers--body"><h3><strong></strong></h3><p>Avec telecel, appelez à seulement 1F la seconde vers tous les réseaux au Mali, et à 1,5f la seconde</p></div>
+        <div class="offers--footer"><a href="offer.aspx?id=10" class="btn--default hover--red">EXPLORER</a></div></div>
+        <!-- Offers Item End -->
+        <!-- Offers Item Start -->
+        <div class="col-md-4">
+        <div class="offers--item"><div class="offers--header">Achat de kit: Fiyen Douman</div>
+        <div class="offers--body"><h3><strong></strong></h3><p>Achetez la SIM telecel à seulement 500F et bénéficiez<br><br></p>
+        </div>
+        <div class="offers--footer"><a href="offer.aspx?id=9" class="btn--red hover">EXPLORER</a></div></div></div>
+        <!-- Offers Item End -->
+
+                            <!-- Offers Item Start -->
+                            
+                            <!-- Offers Item End -->
+
+                            <!-- Offers Item Start -->
+                          
+                            <!-- Offers Item End -->
+
+                            <!-- Offers Item Start -->
+                            
+                            <!-- Offers Item End -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Offers Items End -->
+    </div>
+    <!-- Offers Area End -->
+
+
+
+            <!-- Subscribe Area Start -->
+            <div id="subscribe" style="height: 100px;">
+                <div class="subscribe--sticky">
+                    <div class="container">
+                        <!-- Subscribe Content Start -->
+                        <div class="subscribe--content">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <!-- Section Title Start -->
+                                    <div class="section--title">
+                                        <h2>Abonnez-vous à notre <span>Bulletin</span></h2>
+                                    </div>
+                                    <!-- Section Title End -->
+                                </div>
+
+                                <div class="col-md-8">
+                                    <div id="upSubscribe">
+	
+
+                                            <!-- Subscribe Form Start -->
+                                            <div class="subscribe--form">
+
+                                                <div class="input--text">
+                                                    <input name="ctl00$txtSubscribeEmail" type="text" id="txtSubscribeEmail" placeholder="Entrez votre adresse email">
+                                                </div>
+                                                <input type="submit" name="ctl00$btnSubscribe" value="Abonner" onclick="return txtSubscribeEmail_click();" id="btnSubscribe" class="btn--purple btn--purple--primary">
+                                            </div>
+                                            <!-- Subscribe Form End -->
+                                        
+</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Subscribe Content End -->
+                    </div>
+                </div>
+            </div>
+            <!-- Subscribe Area End -->
+
+            <!-- Footer Area Start -->
+            <footer id="footer">
+                <div class="container">
+                    <div class="row">
+                        <!-- Footer Widget Start -->
+                        <div class="col-md-3 footer--widget">
+                            <!-- Footer Links Widget Start -->
+                            <div class="footer--links">
+                                <h2>Plan du Site</h2>
+                                <ul>
+                                    <li><a href="/"><i class="fa fm fa-angle-double-right"></i>Accueil</a></li>
+                                    <li><a href="personal.aspx"><i class="fa fm fa-angle-double-right"></i>Prépayés</a></li>
+                                    <li><a href="business.aspx"><i class="fa fm fa-angle-double-right"></i>Postpayés</a></li>
+                                    <li><a href="mbb.aspx"><i class="fa fm fa-angle-double-right"></i>OFFRES INTERNET</a></li>
+                                    <li><a href="products.aspx"><i class="fa fm fa-angle-double-right"></i>Produits</a></li>
+                                    <li><a href="stores.aspx"><i class="fa fm fa-angle-double-right"></i>Nos Points de Vente</a></li>
+                                </ul>
+                            </div>
+                            <!-- Footer Links Widget End -->
+                        </div>
+                        <!-- Footer Widget End -->
+
+                        <!-- Footer Widget Start -->
+                        <div class="col-md-3 footer--widget">
+                            <!-- Footer Links Widget Start -->
+                            <div class="footer--links">
+                                <h2 class="invisible">&nbsp;</h2>
+                                <ul>
+                                    <li><a href="#">&nbsp;</a></li>
+                                    <li><a href="news.aspx"><i class="fa fm fa-angle-double-right"></i>Actualités</a></li>
+                                    <li><a href="faqs.aspx"><i class="fa fm fa-angle-double-right"></i>FAQ</a></li>
+                                    <li><a href="careers.aspx"><i class="fa fm fa-angle-double-right"></i>Carrières</a></li>
+                                    <li><a href="about.aspx"><i class="fa fm fa-angle-double-right"></i>À Propos de Telecel</a></li>
+                                    <li><a href="contact.aspx"><i class="fa fm fa-angle-double-right"></i>Contactez Nous</a></li>
+                                </ul>
+                            </div>
+                            <!-- Footer Links Widget End -->
+                        </div>
+                        <!-- Footer Widget End -->
+
+                        <!-- Footer Widget Start -->
+                        <div class="col-md-3 footer--widget col-md-offset-3">
+                            <!-- Footer Contact Widget Start -->
+                            <div class="footer--contact">
+                                <h2>Contact</h2>
+                                
+                                <a href="tel:+22340505050" class="btn--default btn--primary btn-block"><i class="fa fm fa-phone"></i>5050 / (223) 40 50 50 50</a>
+                                <a href="mailto:info@telecelmali.com" class="btn--default btn--primary btn-block"><i class="fa fm fa-envelope"></i>info@telecelmali.com</a>
+
+                                <div class="footer--contact-social">
+                                    <ul class="nav navbar-nav">
+                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-pinterest-p"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Footer Contact Widget End -->
+                        </div>
+                        <!-- Footer Widget End -->
+                    </div>
+                </div>
+
+                <!-- Footer Copyright Start -->
+                <div class="footer--copyright">
+                    <div class="container">
+                        <p style="display: inline;">© Tous les droits sont réservés. Telecel <span id="year">2026</span> | <a href="PrivacyPolicy.aspx" target="_blank">Politique De Confidentialité</a> | <a href="TermsConditions.aspx" target="_blank">Termes &amp; Conditions</a>.</p>
+                        <p class="vintob"><a href="http://www.vintob.com" target="_blank">VINTOB</a></p>
+                    </div>
+                </div>
+                <!-- Footer Copyright End -->
+            </footer>
+            <!-- Footer Area End -->
+
+            <!-- Back To Top Button Start -->
+            <div id="backToTop">
+                <a href="#top"><i class="fa fa-angle-up"></i></a>
+            </div>
+            <!-- Back To Top Button End -->
+        </div>
+        <!-- Wrapper End -->
+
+
+        <!-- ==== Bootstrap ==== -->
+        <script src="js/bootstrap.min.js"></script>
+
+        <!-- ==== Hover Intent Plugin ==== -->
+        <script src="js/jquery.hoverIntent.min.js"></script>
+
+        <!-- ==== Owl Carousel Plugin ==== -->
+        <script src="js/owl.carousel.min.js"></script>
+
+        <!-- ==== jQuery Validation Plugin ==== -->
+        <script src="js/jquery.validate.min.js"></script>
+
+        <!-- ==== jQuery Waypoints Plugin ==== -->
+        <script src="js/jquery.waypoints.min.js"></script>
+
+        <!-- ==== jQuery CounterUp Plugin ==== -->
+        <script src="js/jquery.counterup.min.js"></script>
+
+        <!-- ==== ScrollReveal Plugin ==== -->
+        <script src="js/scrollreveal.min.js"></script>
+
+        <!-- ==== RetinaJS Plugin ==== -->
+        
+
+        <!-- ==== Main Script ==== -->
+        <script src="js/main.js"></script>
+
+        <!-- ==== Common Script ==== -->
+        <script src="js/common.js"></script>
+
+        <script type="text/javascript">
+
+            function bindEvents() {
+                $("#btnSubscribe").click(function () {
+
+                    txtSubscribeEmail_click();
+                });
+            };
+
+            $(function () {
+                console.log("ready-subscribe!");
+            });
+
+            function txtSubscribeEmail_click() {
+
+                var email = $('#txtSubscribeEmail').val();
+                if (email.length == 0) { alert('Fill Email!'); return false; }
+                else if (!validateEmail(email)) { alert('Invalid Email!'); return false; }
+
+                return true;
+            }
+
+        </script>
+    
+
+<script type="text/javascript">
+//<![CDATA[
+PersonaliseActivePage('personal_menu', 'personal-page');//]]>
+</script>
+</form>
+
+
+</body></html>
