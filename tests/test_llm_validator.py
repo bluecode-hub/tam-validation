@@ -27,16 +27,28 @@ class LLMValidatorTests(unittest.TestCase):
         self.assertIn("referenced_entities", payload["output_schema"])
         self.assertIn("partner_details", payload["output_schema"])
 
-    def test_prompt_instructs_partner_only_to_focus_on_page_company(self):
+    def test_prompt_classifies_partner_only_as_unknown(self):
         payload = build_llm_payload(
             CompanyData("Retailer", 0.8, "smartphone_financing", "retailer.test"),
             [TopKPage("https://retailer.test/phones", 1.5, "Financing provided by BankCo.")],
         )
         prompt = build_llm_prompt(payload)
 
-        self.assertIn("partner_only", prompt)
-        self.assertIn("separate partner company", prompt)
-        self.assertIn("company/domain represented by the retrieved page itself", prompt)
+        self.assertNotIn('"partner_only"', prompt)
+        self.assertIn("Return unknown when the page only says financing is provided", prompt)
+        self.assertIn("separate partner or third party", prompt)
+        self.assertIn("page company/domain is not itself the direct financing provider", prompt)
+
+    def test_prompt_requires_direct_smartphone_financing_for_provider(self):
+        payload = build_llm_payload(
+            CompanyData("Orange", 0.8, "smartphone_financing", "orange.test"),
+            [TopKPage("https://orange.test/phones", 1.5, "We offer smartphone financing.")],
+        )
+        prompt = build_llm_prompt(payload)
+
+        self.assertIn("directly provides smartphone financing", prompt)
+        self.assertIn("page company/domain itself", prompt)
+        self.assertIn("not through a named partner, third-party lender", prompt)
 
     def test_prompt_instructs_aggregator_to_extract_referenced_companies(self):
         payload = build_llm_payload(
@@ -95,7 +107,7 @@ class LLMValidatorTests(unittest.TestCase):
         self.assertIs(judgment.validated, True)
         self.assertEqual(judgment.confidence, 0.86)
 
-    def test_parse_llm_judgment_keeps_partner_details(self):
+    def test_parse_llm_judgment_maps_legacy_partner_only_to_unknown(self):
         judgment = parse_llm_judgment(
             """
             {
@@ -112,7 +124,7 @@ class LLMValidatorTests(unittest.TestCase):
             """
         )
 
-        self.assertEqual(judgment.entity_type, "partner_only")
+        self.assertEqual(judgment.entity_type, "unknown")
         self.assertEqual(judgment.partner_details[0], "BankCo provides the financing.")
         self.assertIn("name: BankCo", judgment.partner_details[1])
 

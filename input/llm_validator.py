@@ -46,7 +46,7 @@ def build_llm_payload(
         "task": {
             "goal": "Map the page company and referenced entities, then determine whether this company/domain directly provides the target category.",
             "target_category": company.target_category,
-            "allowed_entity_types": ["provider", "aggregator", "partner_only", "unknown"],
+            "allowed_entity_types": ["provider", "aggregator", "unknown"],
             "rules": [
                 "Use only the provided retrieved chunks.",
                 "Do not use outside knowledge.",
@@ -54,14 +54,15 @@ def build_llm_payload(
                 "Then extract referenced_entities: every company, partner, provider, merchant, bank, telco, marketplace seller, or website/domain mentioned in the chunks that could relate to the target category.",
                 "For each referenced entity, capture name, domain, URL, role, financing responsibility, target relevance, source URL, and a supporting quote where present.",
                 "Use the entity map to decide entity_type. The entity extraction and page classification are interlinked and should be reasoned about together.",
-                "Return provider only if the company/domain directly offers, finances, underwrites, leases, or sells the target service on installments.",
+                "Return provider only when the retrieved page content explicitly says the page company/domain itself directly provides smartphone financing, phone installments, device financing, or an equivalent direct financing/leasing offer.",
+                "Provider evidence must be for financing offered by the page company/domain itself, not through a named partner, third-party lender, embedded payment processor, marketplace seller, affiliate, or external financing provider.",
+                "Do not infer provider status from generic payment method mentions, customer reviews, marketplace listings, comparison articles, blogs, or content saying financing is handled by another company.",
                 "Return aggregator for comparison sites, directories, review sites, affiliate pages, lead generation pages, or marketplaces listing third-party providers.",
-                "Return partner_only if the company only says financing is provided by a separate partner and the company is not itself the provider.",
-                "For partner_only pages, read and analyze the page content and focus the output on the company/domain represented by the retrieved page itself. If a separate partner company is named, extract concise partner details such as partner name, role, financing responsibility, and relationship to the page's company/domain.",
+                "Return unknown when the page only says financing is provided, underwritten, processed, or made available by a separate partner or third party and the page company/domain is not itself the direct financing provider.",
                 "For aggregator pages, read and analyze the full content. Identify and extract all company names mentioned in the content, especially for blog, listing, comparison, marketplace, directory, review, affiliate, or lead generation pages.",
                 "For aggregator pages, extract relevant company-related information available in the page, including company names, described roles/offers, URLs, domains, website references, and any relationship to the target category.",
                 "If an aggregator/blog page discusses multiple companies, include all referenced companies and their associated URLs/domains where possible.",
-                "The key distinction is: partner_only output focuses on the page's own company/domain and any named financing partner; aggregator output identifies all companies referenced within the content.",
+                "The key distinction is: provider requires direct smartphone-financing evidence for the page company/domain itself; aggregator identifies all companies referenced within blog/listing/comparison content; third-party or partner-financing-only evidence is unknown.",
                 "The entity_type, validated value, confidence, evidence, and reasoning must always judge the company/domain represented by the retrieved page itself, not the referenced partner or aggregator-listed companies.",
                 "Set extraction_confidence to your confidence that referenced_entities is complete for the provided chunks.",
                 "Set needs_additional_extraction to true when the page appears to be an aggregator/blog/listing with many company mentions or when referenced entity extraction is likely incomplete.",
@@ -106,7 +107,7 @@ def build_llm_payload(
                     "notes": "string",
                 }
             ],
-            "entity_type": "provider | aggregator | partner_only | unknown",
+            "entity_type": "provider | aggregator | unknown",
             "validated": "true | false | null",
             "confidence": "float between 0 and 1",
             "extraction_confidence": "float between 0 and 1",
@@ -114,7 +115,7 @@ def build_llm_payload(
             "evidence": [{"url": "string", "quote": "string", "reason": "string"}],
             "reasoning": "string",
             "partner_details": [
-                "string; for partner_only only, concise details about the separate partner company mentioned on the page"
+                "deprecated; leave empty. Partner-only pages should be classified as unknown."
             ],
             "aggregator_company_details": [
                 "string; for aggregator only, company names, roles/offers, URLs, domains, or website references mentioned in the page"
@@ -138,13 +139,6 @@ def build_referenced_company_payload(
     max_chars_per_page: int = 4_000,
 ) -> dict:
     mode_instructions = {
-        "partner_only": [
-            "The page/domain being validated is partner_only.",
-            "Focus on the company/domain represented by the retrieved page itself.",
-            "Extract separate partner company names mentioned in the chunks, especially any company responsible for financing, underwriting, installment payments, credit, leasing, or payment processing.",
-            "For each referenced partner company, return name, domain or URL if present, role, financing responsibility, and a supporting quote.",
-            "Do not reclassify the page company. Only extract referenced partner companies and their details.",
-        ],
         "aggregator": [
             "The page/domain being validated is an aggregator.",
             "Extract every company mentioned in the chunks, especially from blog, listing, comparison, marketplace, directory, review, affiliate, or lead generation content.",
@@ -213,7 +207,9 @@ def parse_llm_judgment(raw: str) -> LLMValidationJudgment:
         raise LLMValidationError(f"LLM returned invalid JSON: {exc}") from exc
 
     entity_type = data.get("entity_type")
-    if entity_type not in {"provider", "aggregator", "partner_only", "unknown"}:
+    if entity_type == "partner_only":
+        entity_type = "unknown"
+    if entity_type not in {"provider", "aggregator", "unknown"}:
         raise LLMValidationError(f"Invalid entity_type: {entity_type!r}")
 
     validated = _normalize_validated(data.get("validated"))

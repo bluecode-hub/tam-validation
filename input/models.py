@@ -4,7 +4,7 @@ from dataclasses import dataclass, field
 from typing import Any, Literal
 
 
-EntityType = Literal["provider", "aggregator", "partner_only", "unknown"]
+EntityType = Literal["provider", "aggregator", "unknown"]
 ValidationDecision = bool | None
 
 

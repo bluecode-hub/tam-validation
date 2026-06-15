@@ -145,7 +145,7 @@ def main() -> None:
     parser.add_argument(
         "--extract-referenced-companies",
         action="store_true",
-        help="Run a second LLM pass for partner_only and aggregator results to extract referenced companies.",
+        help="Run a second LLM pass for aggregator results to extract referenced companies.",
     )
     parser.add_argument("--verbose", action="store_true")
     args = parser.parse_args()
