@@ -24,6 +24,13 @@ CSV_FIELDNAMES = [
     "evidence_pages",
     "supporting_snippets",
     "reasoning",
+    "page_company",
+    "referenced_entities",
+    "extraction_confidence",
+    "needs_additional_extraction",
+    "partner_details",
+    "aggregator_company_details",
+    "referenced_companies",
 ]
 
 
@@ -92,6 +99,19 @@ def csv_row(domain: str, result: ValidationResult) -> dict[str, object]:
         "evidence_pages": " | ".join(result.evidence_pages),
         "supporting_snippets": " | ".join(result.supporting_snippets),
         "reasoning": result.reasoning,
+        "page_company": json.dumps(asdict(result.page_company) if result.page_company else None, ensure_ascii=False),
+        "referenced_entities": json.dumps(
+            [asdict(company) for company in result.referenced_entities],
+            ensure_ascii=False,
+        ),
+        "extraction_confidence": result.extraction_confidence,
+        "needs_additional_extraction": result.needs_additional_extraction,
+        "partner_details": " | ".join(result.partner_details),
+        "aggregator_company_details": " | ".join(result.aggregator_company_details),
+        "referenced_companies": json.dumps(
+            [asdict(company) for company in result.referenced_companies],
+            ensure_ascii=False,
+        ),
     }
 
 
@@ -109,7 +129,7 @@ def main() -> None:
     parser.add_argument("--json-output", type=Path, default=None)
     parser.add_argument("--csv-output", type=Path, default=None)
     parser.add_argument("--llm-log-output", type=Path, default=None)
-    parser.add_argument("--top-k", type=int, default=5)
+    parser.add_argument("--top-k", type=int, default=8)
     parser.add_argument(
         "--retrieval-mode",
         choices=["boosted", "bm25"],
@@ -121,6 +141,11 @@ def main() -> None:
         choices=["extract", "raw"],
         default="extract",
         help="Extract PDF text with pypdf or use the old raw cached-text behavior.",
+    )
+    parser.add_argument(
+        "--extract-referenced-companies",
+        action="store_true",
+        help="Run a second LLM pass for partner_only and aggregator results to extract referenced companies.",
     )
     parser.add_argument("--verbose", action="store_true")
     args = parser.parse_args()
@@ -138,6 +163,7 @@ def main() -> None:
     )
     logging.info("Retrieval mode: %s", args.retrieval_mode)
     logging.info("PDF mode: %s", args.pdf_mode)
+    logging.info("Referenced-company extraction: %s", args.extract_referenced_companies)
     pages = load_page_contents(
         input_dir / "pages",
         domains=[company.domain for company in companies],
@@ -161,6 +187,7 @@ def main() -> None:
             validator=validator,
             top_k=args.top_k,
             use_evidence_boost=args.retrieval_mode == "boosted",
+            extract_referenced_companies=args.extract_referenced_companies,
         )
         results[domain] = result
         append_csv_result(csv_output, domain, result)

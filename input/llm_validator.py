@@ -10,7 +10,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Protocol
 
-from models import CompanyData, EvidenceQuote, LLMValidationJudgment, TopKPage
+from models import CompanyData, EvidenceQuote, LLMValidationJudgment, ReferencedCompany, TopKPage
 
 logger = logging.getLogger(__name__)
 
@@ -27,6 +27,14 @@ class LLMValidator(Protocol):
     ) -> LLMValidationJudgment:
         ...
 
+    def extract_referenced_companies(
+        self,
+        company: CompanyData,
+        retrieved_pages: list[TopKPage],
+        entity_type: str,
+    ) -> list[ReferencedCompany]:
+        ...
+
 
 def build_llm_payload(
     company: CompanyData,
@@ -36,15 +44,27 @@ def build_llm_payload(
     return {
         "company": asdict(company),
         "task": {
-            "goal": "Determine whether this company/domain directly provides the target category.",
+            "goal": "Map the page company and referenced entities, then determine whether this company/domain directly provides the target category.",
             "target_category": company.target_category,
             "allowed_entity_types": ["provider", "aggregator", "partner_only", "unknown"],
             "rules": [
-                "Use only the provided retrieved pages.",
+                "Use only the provided retrieved chunks.",
                 "Do not use outside knowledge.",
+                "First identify the page_company: the company/domain represented by the retrieved page itself.",
+                "Then extract referenced_entities: every company, partner, provider, merchant, bank, telco, marketplace seller, or website/domain mentioned in the chunks that could relate to the target category.",
+                "For each referenced entity, capture name, domain, URL, role, financing responsibility, target relevance, source URL, and a supporting quote where present.",
+                "Use the entity map to decide entity_type. The entity extraction and page classification are interlinked and should be reasoned about together.",
                 "Return provider only if the company/domain directly offers, finances, underwrites, leases, or sells the target service on installments.",
                 "Return aggregator for comparison sites, directories, review sites, affiliate pages, lead generation pages, or marketplaces listing third-party providers.",
                 "Return partner_only if the company only says financing is provided by a separate partner and the company is not itself the provider.",
+                "For partner_only pages, read and analyze the page content and focus the output on the company/domain represented by the retrieved page itself. If a separate partner company is named, extract concise partner details such as partner name, role, financing responsibility, and relationship to the page's company/domain.",
+                "For aggregator pages, read and analyze the full content. Identify and extract all company names mentioned in the content, especially for blog, listing, comparison, marketplace, directory, review, affiliate, or lead generation pages.",
+                "For aggregator pages, extract relevant company-related information available in the page, including company names, described roles/offers, URLs, domains, website references, and any relationship to the target category.",
+                "If an aggregator/blog page discusses multiple companies, include all referenced companies and their associated URLs/domains where possible.",
+                "The key distinction is: partner_only output focuses on the page's own company/domain and any named financing partner; aggregator output identifies all companies referenced within the content.",
+                "The entity_type, validated value, confidence, evidence, and reasoning must always judge the company/domain represented by the retrieved page itself, not the referenced partner or aggregator-listed companies.",
+                "Set extraction_confidence to your confidence that referenced_entities is complete for the provided chunks.",
+                "Set needs_additional_extraction to true when the page appears to be an aggregator/blog/listing with many company mentions or when referenced entity extraction is likely incomplete.",
                 "Return unknown if evidence is missing, ambiguous, unrelated, or insufficient.",
                 "Every evidence item must include a URL and a short quote copied from the provided page text.",
             ],
@@ -54,16 +74,51 @@ def build_llm_payload(
                 "url": page.url,
                 "retrieval_score": page.score,
                 "title": page.title,
+                "chunk_index": page.chunk_index,
+                "chunk_start": page.chunk_start,
+                "chunk_end": page.chunk_end,
                 "content": page.content_snippet[:max_chars_per_page],
             }
             for page in retrieved_pages
         ],
         "output_schema": {
+            "page_company": {
+                "name": "string",
+                "domain": "string",
+                "url": "string",
+                "role": "string",
+                "financing_responsibility": "string",
+                "target_relevance": "string",
+                "quote": "string",
+                "source_url": "string",
+                "notes": "string",
+            },
+            "referenced_entities": [
+                {
+                    "name": "string",
+                    "domain": "string",
+                    "url": "string",
+                    "role": "string",
+                    "financing_responsibility": "string",
+                    "target_relevance": "string",
+                    "quote": "string",
+                    "source_url": "string",
+                    "notes": "string",
+                }
+            ],
             "entity_type": "provider | aggregator | partner_only | unknown",
             "validated": "true | false | null",
             "confidence": "float between 0 and 1",
+            "extraction_confidence": "float between 0 and 1",
+            "needs_additional_extraction": "boolean",
             "evidence": [{"url": "string", "quote": "string", "reason": "string"}],
             "reasoning": "string",
+            "partner_details": [
+                "string; for partner_only only, concise details about the separate partner company mentioned on the page"
+            ],
+            "aggregator_company_details": [
+                "string; for aggregator only, company names, roles/offers, URLs, domains, or website references mentioned in the page"
+            ],
         },
     }
 
@@ -71,6 +126,81 @@ def build_llm_payload(
 def build_llm_prompt(payload: dict) -> str:
     return (
         "You are validating company service evidence.\n"
+        "Return JSON only. Do not include markdown.\n\n"
+        f"{json.dumps(payload, ensure_ascii=False, indent=2)}"
+    )
+
+
+def build_referenced_company_payload(
+    company: CompanyData,
+    retrieved_pages: list[TopKPage],
+    entity_type: str,
+    max_chars_per_page: int = 4_000,
+) -> dict:
+    mode_instructions = {
+        "partner_only": [
+            "The page/domain being validated is partner_only.",
+            "Focus on the company/domain represented by the retrieved page itself.",
+            "Extract separate partner company names mentioned in the chunks, especially any company responsible for financing, underwriting, installment payments, credit, leasing, or payment processing.",
+            "For each referenced partner company, return name, domain or URL if present, role, financing responsibility, and a supporting quote.",
+            "Do not reclassify the page company. Only extract referenced partner companies and their details.",
+        ],
+        "aggregator": [
+            "The page/domain being validated is an aggregator.",
+            "Extract every company mentioned in the chunks, especially from blog, listing, comparison, marketplace, directory, review, affiliate, or lead generation content.",
+            "For each referenced company, return company name, domain or URL if present, role or offer, target-category relevance, and a supporting quote.",
+            "Capture names, domains, URLs, website references, roles/offers, and target-category relevance where available.",
+            "If multiple companies are discussed, include all of them where possible.",
+        ],
+    }.get(entity_type, [])
+    return {
+        "company": asdict(company),
+        "entity_type": entity_type,
+        "task": {
+            "goal": "Extract referenced company information from retrieved chunks.",
+            "target_category": company.target_category,
+            "rules": [
+                "Use only the provided retrieved chunks.",
+                "Do not use outside knowledge.",
+                *mode_instructions,
+                "Return only companies actually referenced in the provided chunks.",
+                "Include source_url and a short supporting quote copied from the chunk whenever possible.",
+                "If a domain or URL is not present, leave that field empty.",
+            ],
+        },
+        "retrieved_chunks": [
+            {
+                "url": page.url,
+                "retrieval_score": page.score,
+                "title": page.title,
+                "chunk_index": page.chunk_index,
+                "chunk_start": page.chunk_start,
+                "chunk_end": page.chunk_end,
+                "content": page.content_snippet[:max_chars_per_page],
+            }
+            for page in retrieved_pages
+        ],
+        "output_schema": {
+            "referenced_companies": [
+                {
+                    "name": "string",
+                    "domain": "string",
+                    "url": "string",
+                    "role": "string",
+                    "financing_responsibility": "string",
+                    "target_relevance": "string",
+                    "quote": "string",
+                    "source_url": "string",
+                    "notes": "string",
+                }
+            ]
+        },
+    }
+
+
+def build_referenced_company_prompt(payload: dict) -> str:
+    return (
+        "You are extracting company references from evidence chunks.\n"
         "Return JSON only. Do not include markdown.\n\n"
         f"{json.dumps(payload, ensure_ascii=False, indent=2)}"
     )
@@ -107,7 +237,21 @@ def parse_llm_judgment(raw: str) -> LLMValidationJudgment:
         confidence=confidence,
         evidence=evidence,
         reasoning=str(data.get("reasoning", "")),
+        page_company=_parse_referenced_company_item(data.get("page_company")),
+        referenced_entities=_parse_referenced_company_list(data.get("referenced_entities", [])),
+        extraction_confidence=_clamp_float(data.get("extraction_confidence", 0.0)),
+        needs_additional_extraction=_normalize_bool(data.get("needs_additional_extraction")),
+        partner_details=_normalize_partner_details(data.get("partner_details")),
+        aggregator_company_details=_normalize_details(data.get("aggregator_company_details")),
     )
+
+
+def parse_referenced_companies(raw: str) -> list[ReferencedCompany]:
+    try:
+        data = json.loads(_extract_json(raw))
+    except json.JSONDecodeError as exc:
+        raise LLMValidationError(f"LLM returned invalid referenced-company JSON: {exc}") from exc
+    return _parse_referenced_company_list(data.get("referenced_companies", []))
 
 
 class OpenAIHTTPValidator:
@@ -138,7 +282,7 @@ class OpenAIHTTPValidator:
         self._log_payload(company, payload)
         prompt = build_llm_prompt(payload)
         logger.info(
-            "Sending LLM request for %s (%s) with %d retrieved pages",
+            "Sending LLM request for %s (%s) with %d retrieved chunks",
             company.company_name,
             company.domain,
             len(retrieved_pages),
@@ -173,11 +317,52 @@ class OpenAIHTTPValidator:
         )
         return judgment
 
+    def extract_referenced_companies(
+        self,
+        company: CompanyData,
+        retrieved_pages: list[TopKPage],
+        entity_type: str,
+    ) -> list[ReferencedCompany]:
+        if not self.api_key:
+            raise LLMValidationError("OPENAI_API_KEY is not configured")
+        payload = build_referenced_company_payload(company, retrieved_pages, entity_type)
+        self._log_extraction_payload(company, payload)
+        prompt = build_referenced_company_prompt(payload)
+        logger.info(
+            "Sending referenced-company extraction request for %s (%s) with %d chunks",
+            company.company_name,
+            company.domain,
+            len(retrieved_pages),
+        )
+        request = urllib.request.Request(
+            self.endpoint,
+            data=json.dumps(
+                {
+                    "model": self.model,
+                    "input": prompt,
+                    "text": {"format": {"type": "json_object"}},
+                }
+            ).encode("utf-8"),
+            headers={
+                "Authorization": f"Bearer {self.api_key}",
+                "Content-Type": "application/json",
+            },
+            method="POST",
+        )
+        try:
+            with urllib.request.urlopen(request, timeout=self.timeout_seconds) as response:
+                data = json.loads(response.read().decode("utf-8"))
+        except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as exc:
+            raise LLMValidationError(f"Referenced-company extraction failed: {exc}") from exc
+        companies = parse_referenced_companies(_response_text(data))
+        logger.info("Extracted %d referenced companies for %s", len(companies), company.domain)
+        return companies
+
     def _log_payload(self, company: CompanyData, payload: dict) -> None:
         pages = payload.get("retrieved_pages", [])
         if self.log_payload_preview:
             logger.info(
-                "LLM payload for %s includes %d pages; full payload is written to %s",
+                "LLM payload for %s includes %d chunks; full payload is written to %s",
                 company.domain,
                 len(pages),
                 self.debug_payload_path or "(disabled)",
@@ -185,10 +370,11 @@ class OpenAIHTTPValidator:
             for index, page in enumerate(pages, start=1):
                 content = " ".join(str(page.get("content", "")).split())
                 logger.info(
-                    "  LLM page %d score=%.4f url=%s preview=%s",
+                    "  LLM chunk %d score=%.4f url=%s chunk_index=%s preview=%s",
                     index,
                     float(page.get("retrieval_score") or 0.0),
                     page.get("url", ""),
+                    page.get("chunk_index", 0),
                     content[:300],
                 )
         if not self.debug_payload_path:
@@ -196,6 +382,21 @@ class OpenAIHTTPValidator:
         self.debug_payload_path.parent.mkdir(parents=True, exist_ok=True)
         record = {
             "timestamp": datetime.now(timezone.utc).isoformat(),
+            "company_name": company.company_name,
+            "domain": company.domain,
+            "target_category": company.target_category,
+            "payload": payload,
+        }
+        with self.debug_payload_path.open("a", encoding="utf-8") as handle:
+            handle.write(json.dumps(record, ensure_ascii=False) + "\n")
+
+    def _log_extraction_payload(self, company: CompanyData, payload: dict) -> None:
+        if not self.debug_payload_path:
+            return
+        self.debug_payload_path.parent.mkdir(parents=True, exist_ok=True)
+        record = {
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "record_type": "referenced_company_extraction",
             "company_name": company.company_name,
             "domain": company.domain,
             "target_category": company.target_category,
@@ -228,6 +429,76 @@ def _normalize_validated(value):
         if normalized in {"null", "none", "uncertain", "unknown", ""}:
             return None
     return value
+
+
+def _normalize_bool(value) -> bool:
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, str):
+        return value.strip().lower() in {"true", "yes", "1"}
+    return bool(value)
+
+
+def _clamp_float(value) -> float:
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        return 0.0
+    return max(0.0, min(number, 1.0))
+
+
+def _parse_referenced_company_item(item) -> ReferencedCompany | None:
+    if not isinstance(item, dict):
+        return None
+    name = str(item.get("name", "")).strip()
+    if not name:
+        return None
+    return ReferencedCompany(
+        name=name,
+        domain=str(item.get("domain", "")).strip(),
+        url=str(item.get("url", "")).strip(),
+        role=str(item.get("role", "")).strip(),
+        financing_responsibility=str(item.get("financing_responsibility", "")).strip(),
+        target_relevance=str(item.get("target_relevance", "")).strip(),
+        quote=str(item.get("quote", "")).strip(),
+        source_url=str(item.get("source_url", "")).strip(),
+        notes=str(item.get("notes", "")).strip(),
+    )
+
+
+def _parse_referenced_company_list(value) -> list[ReferencedCompany]:
+    if not isinstance(value, list):
+        return []
+    companies: list[ReferencedCompany] = []
+    for item in value:
+        company = _parse_referenced_company_item(item)
+        if company is not None:
+            companies.append(company)
+    return companies
+
+
+def _normalize_partner_details(value) -> list[str]:
+    return _normalize_details(value)
+
+
+def _normalize_details(value) -> list[str]:
+    if value is None:
+        return []
+    if isinstance(value, str):
+        stripped = value.strip()
+        return [stripped] if stripped else []
+    if not isinstance(value, list):
+        return []
+    details: list[str] = []
+    for item in value:
+        if isinstance(item, dict):
+            text = "; ".join(f"{key}: {val}" for key, val in item.items() if val)
+        else:
+            text = str(item)
+        text = text.strip()
+        if text:
+            details.append(text)
+    return details
 
 
 def _response_text(data: dict) -> str:

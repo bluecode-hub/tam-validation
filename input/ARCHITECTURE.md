@@ -12,9 +12,18 @@ already exist locally.
 Current important behavior:
 
 - The final validation decision comes from the LLM.
-- BM25 retrieval only selects the best evidence pages to show the LLM.
+- BM25 retrieval selects the best evidence chunks to show the LLM. Pages are
+  chunked before indexing, and the LLM receives the full retrieved chunks.
 - `company_score` is logged and included in the LLM company payload, but it is
   not used in a local scoring formula.
+- Retrieval can run in `boosted` mode or `bm25` mode. `boosted` adds local
+  evidence-term boosts after BM25 scoring; `bm25` uses only BM25/overlap
+  scores.
+- PDF cache files can run in `extract` mode, which uses `pypdf`, or `raw`
+  mode, which preserves the older raw cached-text behavior.
+- Optional referenced-company extraction can run as a second LLM pass for
+  `partner_only` and `aggregator` judgments when
+  `--extract-referenced-companies` is enabled.
 - The system writes results incrementally after every company.
 - If no usable evidence exists, the system returns an `unknown` result without
   calling the LLM.
@@ -25,9 +34,10 @@ Current important behavior:
 input/
   new.py                    CLI entry point and output writer
   validation_engine.py      one-company and batch validation orchestration
-  retrieval.py              HTML text extraction, query generation, retrieval,
-                            evidence boosting, focused snippets
-  domain_index.py           tokenization, BM25 index, in-memory index cache
+  retrieval.py              HTML text extraction, query generation, chunk
+                            retrieval, optional evidence boosting
+  domain_index.py           tokenization, page chunking, BM25 index,
+                            in-memory index cache
   domain_grouping.py        domain normalization and root-domain matching
   llm_validator.py          LLM payload, prompt, API call, response parsing
   models.py                 shared dataclasses
@@ -71,7 +81,7 @@ URL reconstruction from filenames
 domain filtering
    |
    v
-HTML-to-text extraction
+HTML/PDF-to-text extraction
    |
    v
 PageContent objects
@@ -83,16 +93,16 @@ per-company domain page selection
 DomainIndexCache.get_or_build()
    |
    v
-tokenized pages + BM25 index
+page chunks + tokenized chunks + BM25 index
    |
    v
 target/category retrieval queries
    |
    v
-BM25 scores + local evidence boosts
+summed BM25 scores across queries + optional local evidence boosts
    |
    v
-TopKPage evidence windows
+TopKPage evidence chunks
    |
    v
 LLM payload + prompt
@@ -155,7 +165,10 @@ python input\new.py --limit 3 --verbose
 | `--json-output` | `input/validation_results.json` | JSON result path. |
 | `--csv-output` | `input/validation_results.csv` | CSV result path. |
 | `--llm-log-output` | `input/llm_payloads.jsonl` | JSONL debug log containing full LLM payloads. |
-| `--top-k` | `5` | Maximum retrieved evidence pages sent to the LLM per company. |
+| `--top-k` | `8` | Maximum retrieved evidence chunks sent to the LLM per company. |
+| `--retrieval-mode` | `boosted` | `boosted` adds evidence boosts after BM25; `bm25` uses BM25/overlap scoring only. |
+| `--pdf-mode` | `extract` | `extract` uses `pypdf` for PDF URLs; `raw` uses the older raw cached-text behavior. |
+| `--extract-referenced-companies` | `False` | If enabled, runs a second LLM pass for `partner_only` and `aggregator` results to extract referenced companies into `referenced_companies`. |
 | `--verbose` | `False` | Enables debug-level logging. |
 
 ## Environment Loading
@@ -222,12 +235,14 @@ The logs report:
 - run start
 - number of companies
 - target category
+- retrieval mode
+- PDF mode
 - cached pages loaded
 - each company being processed
 - index creation/reuse
 - retrieval query count
-- evidence page URLs and scores
-- LLM payload preview
+- evidence chunk URLs, chunk indexes, and scores
+- LLM payload chunk preview
 - LLM judgment
 - incremental output writes
 
@@ -281,7 +296,7 @@ companies = companies[:N]
 
 So `--limit 3` means only the first three CSV rows are processed.
 
-## Input 2: Cached HTML Pages
+## Input 2: Cached Pages
 
 Loaded from:
 
@@ -295,8 +310,9 @@ by:
 load_page_contents(input_dir / "pages", domains=[company.domain for company in companies])
 ```
 
-Important: these are local cached HTML files. Validation does not fetch new
-pages from the internet.
+Important: these are local cached files under `input/pages/`. They are stored
+with `.html` filenames even when the reconstructed URL points to a PDF. The
+validator does not fetch new pages from the internet.
 
 ### Page Filename to URL
 
@@ -353,13 +369,51 @@ for the current company list.
 
 ### Page Read Limit
 
-Each HTML file is read with:
+Each cached file is capped with:
 
 ```python
 max_chars_per_page = 500_000
 ```
 
-That means only the first 500,000 characters of each HTML file are read.
+That means only the first 500,000 characters of HTML text or first 500,000 PDF
+bytes are read.
+
+### PDF Mode
+
+The CLI option `--pdf-mode` controls how reconstructed `.pdf` URLs are loaded.
+
+Default:
+
+```powershell
+python input\new.py --pdf-mode extract
+```
+
+In `extract` mode, `load_page_contents()` detects URLs ending in `.pdf` and
+uses `pypdf.PdfReader` to extract text. The resulting `PageContent.metadata`
+gets:
+
+```python
+{"source_type": "pdf"}
+```
+
+If `pypdf` is unavailable or the PDF is malformed, the extracted content is an
+empty string. This prevents binary/PDF bytes from leaking into evidence.
+
+Compatibility mode:
+
+```powershell
+python input\new.py --pdf-mode raw
+```
+
+In `raw` mode, cached PDF URLs are read as text and passed through the HTML
+text extractor, matching the older behavior. The metadata gets:
+
+```python
+{"source_type": "pdf_raw"}
+```
+
+This can produce more non-empty retrieval results, but it may also surface
+garbled binary-looking evidence for malformed PDF caches.
 
 ### HTML-to-Text Extraction
 
@@ -571,7 +625,7 @@ It performs these steps:
 5. Build or reuse the domain index.
 6. Handle no-indexable-content cases.
 7. Generate retrieval queries.
-8. Retrieve top evidence pages.
+8. Retrieve top evidence chunks.
 9. Handle no-retrieved-evidence cases.
 10. Call the LLM validator.
 11. Map the LLM judgment into a `ValidationResult`.
@@ -657,9 +711,9 @@ fingerprint.
 If a cached index already exists for the domain and the fingerprint matches,
 the old index is reused.
 
-### Content Cap
+### Content Cap And Chunking
 
-Before tokenization, page text is capped:
+Before chunking and tokenization, page text is capped:
 
 ```python
 page.content[: self.max_content_chars]
@@ -672,6 +726,27 @@ Current default:
 ```
 
 Pages with empty content are removed.
+
+After the cap, each page is split into overlapping chunks before BM25 indexing.
+At runtime, `DomainIndexCache` currently uses:
+
+```python
+chunk_chars = 1_250
+chunk_overlap_chars = 775
+min_chunk_chars = 300
+```
+
+The chunker whitespace-normalizes page text, then creates chunk `PageContent`
+objects with the same source URL and these metadata fields:
+
+```python
+chunk_index
+chunk_start
+chunk_end
+```
+
+If the remaining tail would be shorter than `min_chunk_chars`, it is folded
+into the current chunk instead of creating a tiny final chunk.
 
 ### Tokenization
 
@@ -699,7 +774,7 @@ Output:
 ["achetez", "smartphone", "credit", "en", "mensualite"]
 ```
 
-Pages that produce no tokens are removed from the index.
+Chunks that produce no tokens are removed from the index.
 
 ### BM25 Implementation Choice
 
@@ -739,9 +814,9 @@ Fields:
 | Field | Meaning |
 | --- | --- |
 | `domain` | Root domain being indexed. |
-| `pages` | Pages with non-empty tokenized content. |
+| `pages` | Indexed chunks with non-empty tokenized content. The field name is historical. |
 | `bm25_index` | `BM25Okapi` or `SimpleBM25`. |
-| `tokenized_pages` | Token list for each indexed page. |
+| `tokenized_pages` | Token list for each indexed chunk. The field name is historical. |
 | `fingerprint` | SHA-1 fingerprint for cache reuse. |
 
 ## Validation Step 4: No Indexable Text Safeguard
@@ -924,7 +999,7 @@ Duplicates are removed while preserving order:
 list(dict.fromkeys(queries))
 ```
 
-## Validation Step 6: Retrieval
+## Validation Step 6: Chunk Retrieval
 
 Retrieval happens in:
 
@@ -936,9 +1011,9 @@ Inputs:
 
 | Input | Meaning |
 | --- | --- |
-| `domain_index` | BM25 index for the company's root domain. |
+| `domain_index` | BM25 index over chunks for the company's root domain. |
 | `queries` | Target and company-specific query strings. |
-| `k` | Maximum number of evidence pages to return. |
+| `k` | Maximum number of evidence chunks to return. |
 
 Output:
 
@@ -962,7 +1037,6 @@ This inferred category controls:
 
 - evidence boost terms
 - URL boost hints
-- priority terms for focused snippets
 
 ### BM25 Query Scoring
 
@@ -977,7 +1051,7 @@ domain_index.query_scores(query)
 1. Tokenizes the query.
 2. If there are no query tokens, returns all zero scores.
 3. Gets BM25 scores from the index.
-4. Computes query-token overlap with each page.
+4. Computes query-token overlap with each chunk.
 5. Adds a small overlap bonus:
 
    ```python
@@ -990,31 +1064,65 @@ domain_index.query_scores(query)
    max(float(score), 0.0)
    ```
 
-The output is one score per indexed page.
+The output is one score per indexed chunk.
 
-### Ignoring Zero-Score Pages
+### Ignoring Zero-Score Chunks
 
-Inside `retrieve_top_k()`, pages with score `<= 0` for a query are skipped:
+Inside `retrieve_top_k()`, chunks with score `<= 0` for a query are skipped:
 
 ```python
 if score <= 0:
     continue
 ```
 
-So a page must have at least some BM25/overlap relevance before evidence boosts
+So a chunk must have at least some BM25/overlap relevance before evidence boosts
 matter.
 
-### Evidence Boosting
+### Score Aggregation Across Queries
 
-For each scored page, the raw score is adjusted:
+Each query scores every indexed chunk. For every chunk, the positive scores
+from all queries are summed:
 
 ```python
-adjusted_score = score + evidence_score(page, category)
+totals[chunk_key] = totals.get(chunk_key, 0.0) + score
 ```
+
+So the current final BM25 score is:
+
+```text
+chunk_final_bm25 = sum(BM25/overlap score from every matching query)
+```
+
+This favors chunks that match multiple target/company queries over chunks that
+only match one query strongly.
+
+### Retrieval Modes
+
+The CLI controls whether local evidence boosts are used:
+
+```powershell
+python input\new.py --retrieval-mode boosted
+python input\new.py --retrieval-mode bm25
+```
+
+In `bm25` mode:
+
+```python
+adjusted_score = summed_bm25_score
+```
+
+In `boosted` mode:
+
+```python
+adjusted_score = summed_bm25_score + evidence_score(chunk, category)
+```
+
+The evidence boost is added once per chunk after summing BM25 scores. It is not
+multiplied by the number of matching queries.
 
 `evidence_score()` looks at:
 
-- normalized page content
+- normalized chunk content
 - normalized URL text
 - category-specific evidence terms
 - category-specific URL hints
@@ -1081,13 +1189,13 @@ and at least one finance word:
 credit, pret, mensualite, installment
 ```
 
-then the page gets:
+then the chunk gets:
 
 ```text
 +2.0
 ```
 
-This helps pages about financed phones outrank pages that only mention phones
+This helps chunks about financed phones outrank chunks that only mention phones
 or only mention generic finance.
 
 ### Accent/Mojibake Normalization
@@ -1103,113 +1211,40 @@ Examples:
 
 This is useful because some cached pages contain encoding artifacts.
 
-### Best Score Per URL
-
-Each page can be scored by many queries. Retrieval keeps only the best candidate
-per URL:
-
-```python
-current = best.get(page.url)
-if current is None or candidate.score > current.score:
-    best[page.url] = candidate
-```
-
-So the final score for a URL is the highest adjusted score it got from any
-query.
-
 ### Top K Sorting
 
 After all queries are processed:
 
 ```python
-pages = sorted(best.values(), key=lambda item: item.score, reverse=True)[:k]
+chunks = sorted(candidates, key=lambda item: item.score, reverse=True)[:k]
 ```
 
 Default:
 
 ```text
-top_k = 5
+top_k = 8
 ```
 
 The result is a list of `TopKPage` objects.
 
-## Validation Step 7: Focused Context Windows
+## Validation Step 7: Retrieved Chunk Objects
 
-The LLM is not sent full page text. Each retrieved page gets a focused text
-window created by:
-
-```python
-snippet_for_query(page.content, query, category=category)
-```
-
-Default window size:
-
-```python
-FOCUSED_CONTEXT_CHARS = 2_500
-```
-
-### Snippet Term Selection
-
-The function lowercases/normalizes the content, then builds term lists.
-
-Normal terms:
-
-- query words longer than two characters
-- category evidence terms
-
-For `smartphone_financing`, priority terms are:
-
-```text
-a credit
-... credit
-mensualite
-mensualites
-installment
-installments
-financing
-financement
-```
-
-### Snippet Position Choice
-
-The function first tries to find priority-term positions.
-
-If no priority terms are found, it tries normal query/evidence terms.
-
-If no terms are found at all, it returns the beginning of the content:
-
-```python
-" ".join(content[:window].split())
-```
-
-If positions are found:
-
-1. Candidate starts are placed around the found terms:
-
-   ```python
-   max(position - window // 4, 0)
-   ```
-
-2. Each candidate window is scored by `_window_score()`.
-3. The best candidate window is returned.
-
-`_window_score()` adds:
-
-- `+1.0` for every term appearing in the window
-- `+5.0` if the window contains both product and finance words
-
-Output is whitespace-normalized.
+The old focused context-window step has been removed. The LLM is sent the full
+retrieved chunk text, capped later by the LLM payload builder.
 
 ### TopKPage Output
 
-Each candidate page is stored as:
+Each candidate chunk is stored as:
 
 ```python
 TopKPage(
-    url=page.url,
+    url=chunk.url,
     score=adjusted_score,
-    content_snippet=snippet,
-    title=str(page.metadata.get("title", "")),
+    content_snippet=" ".join(chunk.content.split()),
+    title=str(chunk.metadata.get("title", "")),
+    chunk_index=int(chunk.metadata.get("chunk_index", 0)),
+    chunk_start=int(chunk.metadata.get("chunk_start", 0)),
+    chunk_end=int(chunk.metadata.get("chunk_end", 0)),
 )
 ```
 
@@ -1217,10 +1252,13 @@ Fields:
 
 | Field | Meaning |
 | --- | --- |
-| `url` | Evidence page URL. |
-| `score` | BM25 score plus local evidence boost. |
-| `content_snippet` | Focused context window, currently about 2,500 chars. |
+| `url` | Source page URL for the retrieved chunk. Multiple chunks can share one URL. |
+| `score` | Summed BM25/overlap score, optionally plus one local evidence boost. |
+| `content_snippet` | Full retrieved chunk text. The field name is historical. |
 | `title` | Currently usually blank because loader does not set title metadata. |
+| `chunk_index` | Zero-based chunk number within the source page. |
+| `chunk_start` | Character offset where this chunk starts in normalized page text. |
+| `chunk_end` | Character offset where this chunk ends in normalized page text. |
 
 ## Validation Step 8: No Retrieved Evidence Safeguard
 
@@ -1256,7 +1294,7 @@ service. It only means the cached corpus did not produce retrievable evidence.
 
 ## Validation Step 9: LLM Payload Construction
 
-If retrieved pages exist, the engine calls:
+If retrieved chunks exist, the engine calls:
 
 ```python
 judgment = evidence_validator.validate(company, retrieved)
@@ -1293,7 +1331,23 @@ Example:
 }
 ```
 
-### Payload Task Object
+### Unified Entity-Aware Payload Task
+
+The first LLM call is entity-aware. It does not only classify the page; it
+first maps the page company and referenced entities, then uses that map to
+decide the page-level classification.
+
+Conceptually:
+
+```text
+BM25 chunks
+  -> unified entity-aware validation prompt
+      -> page_company
+      -> referenced_entities
+      -> provider / aggregator / partner_only / unknown
+      -> evidence
+  -> optional second pass only if aggregator extraction looks incomplete
+```
 
 The task tells the LLM:
 
@@ -1314,29 +1368,55 @@ unknown
 
 Rules:
 
-- Use only provided retrieved pages.
+- Use only provided retrieved chunks.
 - Do not use outside knowledge.
+- First identify `page_company`: the company/domain represented by the
+  retrieved page itself.
+- Then extract `referenced_entities`: companies, partners, providers,
+  merchants, banks, telcos, marketplace sellers, websites, or domains mentioned
+  in the chunks that could relate to the target category.
+- For each referenced entity, capture name, domain, URL, role, financing
+  responsibility, target relevance, source URL, and supporting quote where
+  present.
+- Use the entity map to decide `entity_type`. Entity extraction and page
+  classification are treated as interlinked, not separate decisions.
 - Return `provider` only if the company/domain directly offers, finances,
   underwrites, leases, or sells the target service on installments.
 - Return `aggregator` for comparison sites, directories, review sites,
-  affiliate pages, lead-generation pages, or marketplaces listing third-party
-  providers.
+  affiliate pages, lead-generation pages, blog/listing pages, or marketplaces
+  listing third-party providers.
 - Return `partner_only` if the company only says financing is provided by a
   separate partner and the company is not itself the provider.
+- For `partner_only` pages, focus the output on the company/domain represented
+  by the retrieved page itself. If a separate partner company is named, extract
+  concise partner details such as partner name, role, financing responsibility,
+  and relationship to the page company/domain.
+- For `aggregator` pages, identify all companies referenced in the content and
+  extract company names, roles/offers, URLs, domains, website references, and
+  relationships to the target category where available.
 - Return `unknown` if evidence is missing, ambiguous, unrelated, or
   insufficient.
+- Set `extraction_confidence` to confidence that `referenced_entities` is
+  complete for the provided chunks.
+- Set `needs_additional_extraction` to `true` when the page appears to be an
+  aggregator/blog/listing with many company mentions or when referenced entity
+  extraction is likely incomplete.
 - Every evidence item must include a URL and a short quote copied from the
   provided page text.
 
-### Payload Retrieved Pages
+### Payload Retrieved Chunks
 
-Each retrieved page becomes:
+The payload key is still named `retrieved_pages` for compatibility, but each
+entry now represents a retrieved chunk. Each retrieved chunk becomes:
 
 ```python
 {
     "url": page.url,
     "retrieval_score": page.score,
     "title": page.title,
+    "chunk_index": page.chunk_index,
+    "chunk_start": page.chunk_start,
+    "chunk_end": page.chunk_end,
     "content": page.content_snippet[:max_chars_per_page],
 }
 ```
@@ -1344,11 +1424,11 @@ Each retrieved page becomes:
 Default LLM content cap:
 
 ```text
-4,000 characters per page
+4,000 characters per retrieved chunk
 ```
 
-Because retrieval currently creates 2,500-character focused snippets, the whole
-focused snippet is normally included.
+Because chunks are currently around the runtime chunk size, the whole chunk is
+normally included.
 
 ### Payload Output Schema
 
@@ -1356,9 +1436,35 @@ The payload asks for:
 
 ```json
 {
+  "page_company": {
+    "name": "string",
+    "domain": "string",
+    "url": "string",
+    "role": "string",
+    "financing_responsibility": "string",
+    "target_relevance": "string",
+    "quote": "string",
+    "source_url": "string",
+    "notes": "string"
+  },
+  "referenced_entities": [
+    {
+      "name": "string",
+      "domain": "string",
+      "url": "string",
+      "role": "string",
+      "financing_responsibility": "string",
+      "target_relevance": "string",
+      "quote": "string",
+      "source_url": "string",
+      "notes": "string"
+    }
+  ],
   "entity_type": "provider | aggregator | partner_only | unknown",
   "validated": "true | false | null",
   "confidence": "float between 0 and 1",
+  "extraction_confidence": "float between 0 and 1",
+  "needs_additional_extraction": "boolean",
   "evidence": [
     {
       "url": "string",
@@ -1366,9 +1472,60 @@ The payload asks for:
       "reason": "string"
     }
   ],
-  "reasoning": "string"
+  "reasoning": "string",
+  "partner_details": [
+    "string; for partner_only only, details about the separate partner company"
+  ],
+  "aggregator_company_details": [
+    "string; for aggregator only, referenced company names, roles, URLs, domains, or website references"
+  ]
 }
 ```
+
+### Optional Referenced-Company Extraction
+
+If `--extract-referenced-companies` is enabled, the first validation call still
+runs normally and returns `page_company`, `referenced_entities`, classification,
+and evidence. After that, the engine checks whether a second extraction pass is
+actually needed.
+
+The second LLM extraction call runs only when all of these are true:
+
+```text
+--extract-referenced-companies is enabled
+entity_type == "aggregator"
+and one of:
+  needs_additional_extraction == true
+  extraction_confidence < 0.65
+  len(referenced_entities) >= 5
+```
+
+So `partner_only` is handled by the unified first pass. The second pass is a
+refinement path for aggregator/blog/listing pages where the first pass either
+found many entities or explicitly says extraction may be incomplete.
+
+For `aggregator`, the second-pass extraction prompt asks for every referenced
+company in the retrieved chunks, including names, domains, URLs, website
+references, roles/offers, target relevance, quotes, and source URLs where
+available.
+
+The second-pass output is parsed into:
+
+```python
+ReferencedCompany(
+    name: str,
+    domain: str = "",
+    url: str = "",
+    role: str = "",
+    financing_responsibility: str = "",
+    target_relevance: str = "",
+    quote: str = "",
+    source_url: str = "",
+    notes: str = "",
+)
+```
+
+These are stored in `ValidationResult.referenced_companies`.
 
 ## Validation Step 10: LLM Prompt
 
@@ -1389,11 +1546,11 @@ Before the API call, `_log_payload()` runs.
 
 If `log_payload_preview=True`, logs include:
 
-- number of retrieved pages
+- number of retrieved chunks
 - debug payload path
-- each page score
-- each page URL
-- first 300 characters of each page content
+- each chunk score
+- each chunk source URL and `chunk_index`
+- first 300 characters of each chunk content
 
 If `debug_payload_path` exists, it appends one JSONL line:
 
@@ -1592,6 +1749,12 @@ LLMValidationJudgment(
     confidence=confidence,
     evidence=evidence,
     reasoning=str(data.get("reasoning", "")),
+    page_company=_parse_referenced_company_item(data.get("page_company")),
+    referenced_entities=_parse_referenced_company_list(data.get("referenced_entities", [])),
+    extraction_confidence=_clamp_float(data.get("extraction_confidence", 0.0)),
+    needs_additional_extraction=_normalize_bool(data.get("needs_additional_extraction")),
+    partner_details=_normalize_partner_details(data.get("partner_details")),
+    aggregator_company_details=_normalize_details(data.get("aggregator_company_details")),
 )
 ```
 
@@ -1607,6 +1770,12 @@ ValidationResult(
     evidence_pages=[item.url for item in judgment.evidence] or [page.url for page in retrieved],
     supporting_snippets=[item.quote for item in judgment.evidence] or [page.content_snippet for page in retrieved],
     reasoning=judgment.reasoning or "LLM returned no reasoning.",
+    page_company=judgment.page_company,
+    referenced_entities=judgment.referenced_entities,
+    extraction_confidence=judgment.extraction_confidence,
+    needs_additional_extraction=judgment.needs_additional_extraction,
+    partner_details=judgment.partner_details,
+    aggregator_company_details=judgment.aggregator_company_details,
 )
 ```
 
@@ -1623,6 +1792,13 @@ Important:
   ```text
   LLM returned no reasoning.
   ```
+- `partner_details` is populated from the LLM only when returned, mainly for
+  `partner_only` judgments.
+- `aggregator_company_details` is populated from the LLM only when returned,
+  mainly for `aggregator` judgments.
+- `page_company` and `referenced_entities` come from the unified first pass.
+- `referenced_companies` comes only from the optional second pass, and that
+  pass is now used only for aggregator pages that look dense or incomplete.
 
 ## Final Output Dataclass
 
@@ -1636,6 +1812,13 @@ ValidationResult(
     evidence_pages: list[str],
     supporting_snippets: list[str],
     reasoning: str,
+    page_company: ReferencedCompany | None,
+    referenced_entities: list[ReferencedCompany],
+    extraction_confidence: float,
+    needs_additional_extraction: bool,
+    partner_details: list[str],
+    aggregator_company_details: list[str],
+    referenced_companies: list[ReferencedCompany],
 )
 ```
 
@@ -1649,6 +1832,13 @@ Field meanings:
 | `evidence_pages` | URLs supporting the result. |
 | `supporting_snippets` | Evidence quotes or fallback retrieved snippets. |
 | `reasoning` | LLM reasoning or a safeguard/fallback reason. |
+| `page_company` | Entity object for the company/domain represented by the retrieved page itself. |
+| `referenced_entities` | Entity objects extracted in the unified first pass. |
+| `extraction_confidence` | LLM confidence that first-pass entity extraction is complete for the provided chunks. |
+| `needs_additional_extraction` | First-pass signal that an aggregator/listing page likely needs second-pass extraction. |
+| `partner_details` | Partner-company details extracted for `partner_only` results. |
+| `aggregator_company_details` | Referenced company names/details/URLs extracted for `aggregator` results. |
+| `referenced_companies` | Structured second-pass extraction results, only populated when `--extract-referenced-companies` is enabled and an aggregator result has many mentions, low extraction confidence, or `needs_additional_extraction=true`. |
 
 ## CSV Output
 
@@ -1674,6 +1864,13 @@ entity_type
 evidence_pages
 supporting_snippets
 reasoning
+page_company
+referenced_entities
+extraction_confidence
+needs_additional_extraction
+partner_details
+aggregator_company_details
+referenced_companies
 ```
 
 For each completed company, `append_csv_result()` appends one row and flushes
@@ -1690,6 +1887,13 @@ CSV row mapping:
     "evidence_pages": " | ".join(result.evidence_pages),
     "supporting_snippets": " | ".join(result.supporting_snippets),
     "reasoning": result.reasoning,
+    "page_company": json.dumps(asdict(result.page_company) if result.page_company else None, ensure_ascii=False),
+    "referenced_entities": json.dumps([asdict(company) for company in result.referenced_entities], ensure_ascii=False),
+    "extraction_confidence": result.extraction_confidence,
+    "needs_additional_extraction": result.needs_additional_extraction,
+    "partner_details": " | ".join(result.partner_details),
+    "aggregator_company_details": " | ".join(result.aggregator_company_details),
+    "referenced_companies": json.dumps([asdict(company) for company in result.referenced_companies], ensure_ascii=False),
 }
 ```
 
@@ -1698,6 +1902,9 @@ Special CSV behavior:
 - `None` validation is written as a blank value.
 - Multiple evidence pages are joined with ` | `.
 - Multiple snippets are joined with ` | `.
+- Multiple partner or aggregator details are joined with ` | `.
+- `page_company`, `referenced_entities`, and `referenced_companies` are written
+  as JSON strings in CSV cells.
 
 ## JSON Output
 
@@ -1871,6 +2078,8 @@ ValidationResult(
     evidence_pages: list[str],
     supporting_snippets: list[str],
     reasoning: str,
+    partner_details: list[str],
+    aggregator_company_details: list[str],
 )
 ```
 
@@ -1929,7 +2138,6 @@ leasing
 Only `smartphone_financing` currently has all of these target-specific extras:
 
 - evidence terms
-- priority terms
 - URL hints
 - product + finance co-occurrence boost
 
@@ -1948,7 +2156,7 @@ Orange Mali,orangemali.com,0.762
 and command:
 
 ```powershell
-python input\new.py --target-category smartphone_financing --top-k 5
+python input\new.py --target-category smartphone_financing --top-k 8 --retrieval-mode boosted --pdf-mode extract
 ```
 
 The flow is:
@@ -1969,13 +2177,17 @@ The flow is:
 
 5. Cached page filenames under `input/pages/` are converted back to URLs.
 6. Only pages whose root domain is `orangemali.com` are loaded.
-7. Each page's HTML is converted to text.
+7. Each cached HTML page is converted to text. Cached PDF URLs are extracted
+   with `pypdf` in `--pdf-mode extract`, or read with the older raw behavior in
+   `--pdf-mode raw`.
 8. `new.py` filters the loaded pages again to `orangemali.com`.
 9. `validate_company_domain()` starts.
 10. The domain index is built for `orangemali.com`.
-11. Page text is tokenized.
-12. BM25 is built using `rank-bm25` if available, otherwise `SimpleBM25`.
-13. Retrieval queries are generated, including:
+11. Page text is split into overlapping chunks.
+12. Chunk text is tokenized.
+13. BM25 is built over chunks using `rank-bm25` if available, otherwise
+    `SimpleBM25`.
+14. Retrieval queries are generated, including:
 
     ```text
     smartphone financing
@@ -1988,16 +2200,18 @@ The flow is:
     Orange Mali pay later
     ```
 
-14. Every query is scored against every indexed Orange Mali page.
-15. Scores are adjusted with evidence terms and URL hints.
-16. The best score per URL is kept.
-17. The top 5 pages are selected.
-18. A 2,500-character focused context window is extracted from each page.
-19. The LLM payload is built.
+15. Every query is scored against every indexed Orange Mali chunk.
+16. Positive BM25/overlap scores are summed per chunk across all queries.
+17. In `boosted` mode, one local evidence boost is added per chunk. In `bm25`
+    mode, no evidence boost is added.
+18. The top 8 chunks are selected.
+19. The full retrieved chunk text is sent in the LLM payload, with chunk
+    metadata such as `chunk_index`, `chunk_start`, and `chunk_end`.
 20. The payload is appended to `input/llm_payloads.jsonl`.
 21. The prompt is sent to the OpenAI Responses API.
 22. The LLM returns JSON.
-23. The JSON is parsed into `LLMValidationJudgment`.
+23. The JSON is parsed into `LLMValidationJudgment`, including
+    `partner_details` and `aggregator_company_details` when returned.
 24. The judgment is mapped directly to `ValidationResult`.
 25. A row is appended to `input/validation_results.csv`.
 26. `input/validation_results.json` is rewritten with all completed results.
@@ -2051,12 +2265,16 @@ same key. CSV still gets one appended row per processed company.
 | Add or edit target base queries | `retrieval.py`, `BASE_QUERIES_BY_CATEGORY` |
 | Add readable target label | `retrieval.py`, `TARGET_LABELS_BY_CATEGORY` |
 | Add evidence boost terms | `retrieval.py`, `EVIDENCE_TERMS_BY_CATEGORY` |
-| Add priority snippet terms | `retrieval.py`, `PRIORITY_TERMS_BY_CATEGORY` |
 | Add URL boost hints | `retrieval.py`, `URL_HINTS_BY_CATEGORY` |
-| Change focused snippet size | `retrieval.py`, `FOCUSED_CONTEXT_CHARS` |
+| Change chunk size/overlap/minimum | `domain_index.py`, `DomainIndexCache` defaults and `chunk_page_content()` |
 | Change default top K | `new.py`, `--top-k` default |
+| Change retrieval scoring mode options | `new.py`, `--retrieval-mode`; `retrieval.py`, `retrieve_top_k()` |
+| Change PDF extraction behavior | `new.py`, `--pdf-mode`; `validation_engine.py`, `load_page_contents()` and `extract_pdf_text()` |
+| Change referenced-company extraction behavior | `new.py`, `--extract-referenced-companies`; `llm_validator.py`, `build_referenced_company_payload()` |
 | Change LLM model | `llm_validator.py`, `OpenAIHTTPValidator.__init__` |
-| Change prompt or task rules | `llm_validator.py`, `build_llm_payload()` and `build_llm_prompt()` |
+| Change unified entity-aware validation prompt | `llm_validator.py`, `build_llm_payload()` and `parse_llm_judgment()` |
+| Change second-pass extraction trigger thresholds | `validation_engine.py`, `AGGREGATOR_MANY_ENTITY_THRESHOLD` and `LOW_EXTRACTION_CONFIDENCE` |
+| Change prompt or task rules | `llm_validator.py`, `build_llm_payload()`, `build_llm_prompt()`, and `build_referenced_company_payload()` |
 | Change CSV columns | `new.py`, `CSV_FIELDNAMES` and `csv_row()` |
 | Change JSON shape | `new.py`, `write_json_results()` or `models.py` |
 | Change no-evidence fallback behavior | `validation_engine.py` |
@@ -2139,12 +2357,31 @@ markets, adding local-language terms will matter more.
 The current architecture is domain-aware and evidence-first:
 
 - Pages are grouped and validated by root domain.
-- The LLM is only shown cached pages from the company domain.
+- The LLM is only shown retrieved chunks from cached pages on the company
+  domain.
+- Pages are chunked before BM25 indexing, so retrieval works at chunk level
+  rather than whole-page level.
+- BM25 scores are summed across all matching queries per chunk.
+- `--retrieval-mode bm25` uses only BM25/overlap scores.
+- `--retrieval-mode boosted` adds one evidence boost per chunk after BM25
+  summing.
+- `--pdf-mode extract` uses `pypdf` for PDF URLs; `--pdf-mode raw` preserves
+  the older raw cached-text behavior.
 - Retrieval uses target-aware queries instead of one generic search phrase.
 - Smartphone financing has special French/English evidence terms.
 - Smartphone financing has URL hints for pages like `pret-smartphone`,
   `prt-smartphone`, and `smartphones-a-credit`.
-- Context windows are larger and focused around evidence terms.
+- The old focused context-window step has been removed; retrieved chunks are
+  sent directly to the LLM.
+- The first LLM pass is now unified and entity-aware: it returns
+  `page_company`, `referenced_entities`, page classification, and evidence in
+  one response.
+- `partner_only` results can include `partner_details`.
+- `aggregator` results can include `aggregator_company_details` for companies,
+  URLs, domains, and website references mentioned in the content.
+- With `--extract-referenced-companies`, aggregator results get a second
+  extraction pass only when the first pass reports many referenced entities,
+  low extraction confidence, or `needs_additional_extraction=true`.
 - LLM payloads are logged to JSONL for inspection.
 - CSV and JSON outputs are written incrementally after every company.
 - Empty/no-evidence cases return clear `unknown` results instead of crashing or

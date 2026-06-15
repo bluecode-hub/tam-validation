@@ -20,14 +20,18 @@ except ImportError:  # pragma: no cover - depends on optional runtime dependency
 
 logger = logging.getLogger(__name__)
 
+AGGREGATOR_MANY_ENTITY_THRESHOLD = 5
+LOW_EXTRACTION_CONFIDENCE = 0.65
+
 
 def validate_company_domain(
     company: CompanyData,
     domain_pages: list[PageContent],
     index_cache: DomainIndexCache | None = None,
     validator: LLMValidator | None = None,
-    top_k: int = 5,
+    top_k: int = 8,
     use_evidence_boost: bool = True,
+    extract_referenced_companies: bool = False,
 ) -> ValidationResult:
     cache = index_cache or DomainIndexCache()
     evidence_validator = validator or OpenAIHTTPValidator()
@@ -64,7 +68,7 @@ def validate_company_domain(
     logger.info("Generated %d retrieval queries for %s", len(queries), domain)
     logger.debug("Retrieval queries for %s: %s", domain, queries)
     retrieved = retrieve_top_k(index, queries, k=top_k, use_evidence_boost=use_evidence_boost)
-    logger.info("Retrieved %d evidence pages for %s", len(retrieved), domain)
+    logger.info("Retrieved %d evidence chunks for %s", len(retrieved), domain)
     if not retrieved:
         logger.warning("No retrievable evidence pages found for %s", company.domain or company.company_name)
         return ValidationResult(
@@ -77,13 +81,37 @@ def validate_company_domain(
         )
     for index_number, page in enumerate(retrieved, start=1):
         logger.info(
-            "  Evidence page %d score=%.4f url=%s",
+            "  Evidence chunk %d score=%.4f url=%s chunk_index=%d",
             index_number,
             page.score,
             page.url,
+            page.chunk_index,
         )
     judgment = evidence_validator.validate(company, retrieved)
     reasoning = judgment.reasoning or "LLM returned no reasoning."
+    referenced_companies = []
+    should_run_second_pass = (
+        extract_referenced_companies
+        and judgment.entity_type == "aggregator"
+        and (
+            judgment.needs_additional_extraction
+            or judgment.extraction_confidence < LOW_EXTRACTION_CONFIDENCE
+            or len(judgment.referenced_entities) >= AGGREGATOR_MANY_ENTITY_THRESHOLD
+        )
+    )
+    if should_run_second_pass:
+        logger.info(
+            "Running referenced-company extraction for %s entity_type=%s extraction_confidence=%.2f referenced_entities=%d",
+            company.domain or domain,
+            judgment.entity_type,
+            judgment.extraction_confidence,
+            len(judgment.referenced_entities),
+        )
+        referenced_companies = evidence_validator.extract_referenced_companies(
+            company,
+            retrieved,
+            judgment.entity_type,
+        )
     return ValidationResult(
         validated=judgment.validated,
         confidence=judgment.confidence,
@@ -91,6 +119,13 @@ def validate_company_domain(
         evidence_pages=[item.url for item in judgment.evidence] or [page.url for page in retrieved],
         supporting_snippets=[item.quote for item in judgment.evidence] or [page.content_snippet for page in retrieved],
         reasoning=reasoning,
+        page_company=judgment.page_company,
+        referenced_entities=judgment.referenced_entities,
+        extraction_confidence=judgment.extraction_confidence,
+        needs_additional_extraction=judgment.needs_additional_extraction,
+        partner_details=judgment.partner_details,
+        aggregator_company_details=judgment.aggregator_company_details,
+        referenced_companies=referenced_companies,
     )
 
 
@@ -98,8 +133,9 @@ def validate_batch(
     companies: Iterable[CompanyData],
     pages: list[PageContent],
     validator: LLMValidator | None = None,
-    top_k: int = 5,
+    top_k: int = 8,
     use_evidence_boost: bool = True,
+    extract_referenced_companies: bool = False,
 ) -> dict[str, ValidationResult]:
     cache = DomainIndexCache()
     evidence_validator = validator or OpenAIHTTPValidator()
@@ -114,6 +150,7 @@ def validate_batch(
             validator=evidence_validator,
             top_k=top_k,
             use_evidence_boost=use_evidence_boost,
+            extract_referenced_companies=extract_referenced_companies,
         )
     logger.info("Validated %d companies", len(results))
     return results
@@ -153,8 +190,12 @@ def load_page_contents(
             content = extract_pdf_text(path, max_bytes=max_chars_per_page)
             source_type = "pdf"
         else:
-            with path.open("r", encoding="utf-8", errors="ignore") as handle:
-                html = handle.read(max_chars_per_page)
+            try:
+                with path.open("r", encoding="utf-8", errors="ignore") as handle:
+                    html = handle.read(max_chars_per_page)
+            except FileNotFoundError:
+                logger.warning("Cached page disappeared before it could be read: %s", path)
+                continue
             content = html_to_text(html)
             source_type = "pdf_raw" if _is_pdf_url(url) else "html"
         pages.append(
@@ -181,6 +222,9 @@ def extract_pdf_text(path: Path, max_bytes: int = 500_000) -> str:
             if text.strip():
                 parts.append(text.strip())
         return " ".join(" ".join(parts).split())
+    except FileNotFoundError:
+        logger.warning("Cached PDF disappeared before it could be read: %s", path)
+        return ""
     except Exception as exc:  # pragma: no cover - malformed PDFs vary by parser version
         logger.warning("Failed to extract text from PDF cache file %s: %s", path, exc)
         return ""

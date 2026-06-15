@@ -10,28 +10,24 @@ from models import CompanyData, PageContent, TopKPage
 
 logger = logging.getLogger(__name__)
 
-FOCUSED_CONTEXT_CHARS = 2_500
-
-
 BASE_QUERIES_BY_CATEGORY = {
     "smartphone_financing": [
-        "smartphone financing",
-        "phone financing",
-        "smartphone installment payments",
-        "buy phone now pay later",
-        "device financing",
-        "financing options",
-        "consumer financing",
-        "telephone paiement echelonne",
-        "smartphone a credit",
-        "smartphones a credit",
-        "pret smartphone",
-        "pret smartphone tablette",
-        "telephone a credit",
-        "achat smartphone credit",
-        "acheter smartphone a credit",
-        "mensualite smartphone",
-        "paiement mensuel smartphone",
+       "financiacion movil",
+        "financiación móvil",
+        "financiacion smartphone",
+        "financiación smartphone",
+        "movil a plazos",
+        "móvil a plazos",
+        "smartphone a plazos",
+        "telefono a plazos",
+        "teléfono a plazos",
+        "comprar movil a plazos",
+        "comprar móvil a plazos",
+        "pago a plazos",
+        "pago mensual",
+        "financiacion sin intereses",
+        "financiación sin intereses",
+        "0 intereses",
     ],
     "device_financing": [
         "device financing",
@@ -196,30 +192,38 @@ def generate_retrieval_queries(company: CompanyData) -> list[str]:
 def retrieve_top_k(
     domain_index: DomainIndex,
     queries: list[str],
-    k: int = 5,
+    k: int = 8,
     use_evidence_boost: bool = True,
 ) -> list[TopKPage]:
-    best: dict[str, TopKPage] = {}
+    totals: dict[str, float] = {}
+    chunk_pages: dict[str, PageContent] = {}
     category = _category_from_queries(queries)
     for query in queries:
         for page, score in zip(domain_index.pages, domain_index.query_scores(query)):
             if score <= 0:
                 continue
-            adjusted_score = score
-            if use_evidence_boost:
-                adjusted_score += evidence_score(page, category)
-            snippet = snippet_for_query(page.content, query, category=category)
-            candidate = TopKPage(
+            key = _chunk_key(page)
+            totals[key] = totals.get(key, 0.0) + score
+            chunk_pages[key] = page
+    candidates = []
+    for key, score in totals.items():
+        page = chunk_pages[key]
+        adjusted_score = score
+        if use_evidence_boost:
+            adjusted_score += evidence_score(page, category)
+        candidates.append(
+            TopKPage(
                 url=page.url,
                 score=adjusted_score,
-                content_snippet=snippet,
+                content_snippet=" ".join(page.content.split()),
                 title=str(page.metadata.get("title", "")),
+                chunk_index=int(page.metadata.get("chunk_index", 0)),
+                chunk_start=int(page.metadata.get("chunk_start", 0)),
+                chunk_end=int(page.metadata.get("chunk_end", 0)),
             )
-            current = best.get(page.url)
-            if current is None or candidate.score > current.score:
-                best[page.url] = candidate
-    pages = sorted(best.values(), key=lambda item: item.score, reverse=True)[:k]
-    logger.debug("Retrieved %d top pages from %s", len(pages), domain_index.domain)
+        )
+    pages = sorted(candidates, key=lambda item: item.score, reverse=True)[:k]
+    logger.debug("Retrieved %d top chunks from %s", len(pages), domain_index.domain)
     return pages
 
 
@@ -234,21 +238,6 @@ def evidence_score(page: PageContent, category: str = "") -> float:
         if any(finance in lowered_content for finance in ["credit", "pret", "mensualite", "installment"]):
             score += 2.0
     return score
-
-
-def snippet_for_query(content: str, query: str, window: int = FOCUSED_CONTEXT_CHARS, category: str = "") -> str:
-    lowered = _plain_lower(content)
-    terms = [_plain_lower(term) for term in query.split() if len(term) > 2]
-    terms.extend(EVIDENCE_TERMS_BY_CATEGORY.get(category, []))
-    terms = list(dict.fromkeys(term for term in terms if len(term) > 2))
-    priority_terms = [_plain_lower(term) for term in PRIORITY_TERMS_BY_CATEGORY.get(category, [])]
-    positions = _term_positions(lowered, priority_terms) or _term_positions(lowered, terms)
-    if not positions:
-        return " ".join(content[:window].split())
-
-    starts = {max(position - window // 4, 0) for position in positions}
-    start = max(starts, key=lambda candidate: _window_score(lowered[candidate : candidate + window], terms))
-    return " ".join(content[start : start + window].split())
 
 
 def pages_for_domain(pages: list[PageContent], domain: str) -> list[PageContent]:
@@ -292,18 +281,5 @@ def _plain_lower(value: str) -> str:
     return value.lower().translate(replacements)
 
 
-def _window_score(window_text: str, terms: list[str]) -> float:
-    score = sum(1.0 for term in terms if term in window_text)
-    if any(phone in window_text for phone in ["smartphone", "telephone", "tablette"]):
-        if any(finance in window_text for finance in ["credit", "pret", "mensualite", "installment"]):
-            score += 5.0
-    return score
-
-
-def _term_positions(text: str, terms: list[str]) -> list[int]:
-    positions: list[int] = []
-    for term in terms:
-        position = text.find(term)
-        if position >= 0:
-            positions.append(position)
-    return positions
+def _chunk_key(page: PageContent) -> str:
+    return f"{page.url}#{page.metadata.get('chunk_index', 0)}"

@@ -4,9 +4,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "input"))
 
-from domain_index import DomainIndexCache
+from domain_index import DomainIndexCache, chunk_page_content
 from models import CompanyData, PageContent
-from retrieval import FOCUSED_CONTEXT_CHARS, generate_retrieval_queries, html_to_text, retrieve_top_k, snippet_for_query
+from retrieval import generate_retrieval_queries, html_to_text, retrieve_top_k
 
 
 class RetrievalTests(unittest.TestCase):
@@ -52,6 +52,22 @@ class RetrievalTests(unittest.TestCase):
         self.assertEqual(bm25_only[0].url, "https://example.com/generic")
         self.assertEqual(boosted[0].url, "https://example.com/pret-smartphone")
 
+    def test_retrieval_sums_scores_across_queries(self):
+        pages = [
+            PageContent("https://example.com/single", "alpha " * 20),
+            PageContent("https://example.com/multiple", "alpha beta"),
+        ]
+        index = DomainIndexCache().get_or_build("example.com", pages)
+
+        results = retrieve_top_k(
+            index,
+            ["alpha", "beta"],
+            k=1,
+            use_evidence_boost=False,
+        )
+
+        self.assertEqual(results[0].url, "https://example.com/multiple")
+
     def test_company_queries_follow_target_category(self):
         queries = generate_retrieval_queries(CompanyData("LeaseCo", 0.5, "leasing", "lease.test"))
         self.assertIn("LeaseCo leasing", queries)
@@ -76,28 +92,47 @@ class RetrievalTests(unittest.TestCase):
         )
         self.assertIn("smartphones a credit", text)
 
-    def test_snippet_prefers_direct_financing_evidence_over_navigation(self):
-        content = (
-            "Orange Mali Offres Mobiles Telephones mobiles Pret smartphone Services "
-            "Some unrelated header text. "
-            "Achetez vos smartphones et tablettes a credit sur plusieurs 12 mois. "
-            "Offre disponible uniquement chez Orange Mali."
-        )
-        snippet = snippet_for_query(content, "pret smartphone", category="smartphone_financing")
-        self.assertIn("a credit sur plusieurs 12 mois", snippet)
-        self.assertIn("Offre disponible uniquement chez Orange Mali", snippet)
+    def test_index_chunks_content_before_retrieval(self):
+        pages = [
+            PageContent(
+                "https://example.com/long",
+                "boring introduction " * 40
+                + "smartphone financing monthly installment evidence "
+                + "boring footer " * 40,
+            )
+        ]
+        index = DomainIndexCache(chunk_chars=120, chunk_overlap_chars=0).get_or_build("example.com", pages)
+        self.assertGreater(len(index.pages), 1)
 
-    def test_snippet_uses_larger_focused_context_not_full_page(self):
-        content = (
-            "before " * 500
-            + "Achetez vos smartphones et tablettes a credit sur plusieurs 12 mois. "
-            + "Conditions de souscription et mensualite disponibles en agence. "
-            + "after " * 500
+        results = retrieve_top_k(index, ["smartphone financing"], k=1, use_evidence_boost=False)
+
+        self.assertEqual(results[0].url, "https://example.com/long")
+        self.assertIn("smartphone financing", results[0].content_snippet)
+        self.assertLess(len(results[0].content_snippet), len(pages[0].content))
+
+    def test_chunk_page_content_preserves_overlap_metadata(self):
+        chunks = chunk_page_content(
+            PageContent("https://example.com/page", "word " * 900),
+            chunk_chars=100,
+            overlap_chars=10,
+            min_chunk_chars=40,
         )
-        snippet = snippet_for_query(content, "smartphone a credit", category="smartphone_financing")
-        self.assertIn("mensualite disponibles", snippet)
-        self.assertLessEqual(len(snippet), FOCUSED_CONTEXT_CHARS)
-        self.assertLess(len(snippet), len(content))
+
+        self.assertGreater(len(chunks), 1)
+        self.assertEqual(chunks[0].metadata["chunk_index"], 0)
+        self.assertEqual(chunks[1].metadata["chunk_index"], 1)
+        self.assertEqual(chunks[0].url, chunks[1].url)
+
+    def test_chunk_page_content_avoids_tiny_trailing_chunks(self):
+        chunks = chunk_page_content(
+            PageContent("https://example.com/page", "x" * 2600),
+            chunk_chars=2000,
+            overlap_chars=500,
+            min_chunk_chars=1000,
+        )
+
+        self.assertEqual(len(chunks), 1)
+        self.assertEqual(len(chunks[0].content), 2600)
 
 
 if __name__ == "__main__":

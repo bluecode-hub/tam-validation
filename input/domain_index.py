@@ -89,6 +89,9 @@ class DomainIndex:
 class DomainIndexCache:
     _indexes: dict[str, DomainIndex] = field(default_factory=dict)
     max_content_chars: int = 500_000
+    chunk_chars: int = 1_250
+    chunk_overlap_chars: int = 775
+    min_chunk_chars: int = 300
 
     def get_or_build(self, domain: str, pages: list[PageContent]) -> DomainIndex:
         fingerprint = self._fingerprint(pages)
@@ -96,11 +99,18 @@ class DomainIndexCache:
         if cached and cached.fingerprint == fingerprint:
             logger.debug("Reusing cached domain index for %s", domain)
             return cached
-        capped_pages = [
-            PageContent(page.url, page.content[: self.max_content_chars], page.metadata)
-            for page in pages
-            if page.content
-        ]
+        capped_pages = []
+        for page in pages:
+            if not page.content:
+                continue
+            capped_pages.extend(
+                chunk_page_content(
+                    PageContent(page.url, page.content[: self.max_content_chars], page.metadata),
+                    chunk_chars=self.chunk_chars,
+                    overlap_chars=self.chunk_overlap_chars,
+                    min_chunk_chars=self.min_chunk_chars,
+                )
+            )
         tokenized_pairs = [
             (page, tokens)
             for page in capped_pages
@@ -116,7 +126,7 @@ class DomainIndexCache:
             fingerprint=fingerprint,
         )
         self._indexes[domain] = index
-        logger.info("Built domain index for %s with %d pages", domain, len(index_pages))
+        logger.info("Built domain index for %s with %d chunks", domain, len(index_pages))
         return index
 
     @staticmethod
@@ -126,3 +136,53 @@ class DomainIndexCache:
             digest.update(page.url.encode("utf-8", "ignore"))
             digest.update(str(len(page.content)).encode("ascii"))
         return digest.hexdigest()
+
+
+def chunk_page_content(
+    page: PageContent,
+    chunk_chars: int = 2_500,
+    overlap_chars: int = 1_000,
+    min_chunk_chars: int = 1_000,
+) -> list[PageContent]:
+    text = " ".join((page.content or "").split())
+    if not text:
+        return []
+    if len(text) <= chunk_chars:
+        return [
+            PageContent(
+                page.url,
+                text,
+                {**page.metadata, "chunk_index": 0, "chunk_start": 0, "chunk_end": len(text)},
+            )
+        ]
+
+    chunks: list[PageContent] = []
+    start = 0
+    chunk_index = 0
+    while start < len(text):
+        end = min(start + chunk_chars, len(text))
+        if 0 < len(text) - end < min_chunk_chars:
+            end = len(text)
+        if end < len(text):
+            boundary = text.rfind(" ", start, end)
+            if boundary > start + chunk_chars // 2:
+                end = boundary
+        chunk = text[start:end].strip()
+        if chunk:
+            chunks.append(
+                PageContent(
+                    page.url,
+                    chunk,
+                    {
+                        **page.metadata,
+                        "chunk_index": chunk_index,
+                        "chunk_start": start,
+                        "chunk_end": end,
+                    },
+                )
+            )
+            chunk_index += 1
+        if end >= len(text):
+            break
+        start = max(end - overlap_chars, start + 1)
+    return chunks

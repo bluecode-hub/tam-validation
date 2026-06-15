@@ -48,3 +48,2007 @@
     "reasoning": "All retrieved pages are listings of phones for sale on CoinAfrique under the Téléphones & Tablettes category. There is no mention of Téléphones & Tablettes directly providing financing, leasing, or installment purchase services. The company appears to be an aggregator or marketplace listing third-party sales rather than a direct provider or financier of smartphone financing."
   }
 }
+
+
+
+{
+  "orangemali.com": {
+    "validated": true,
+    "confidence": 0.9,
+    "entity_type": "partner_only",
+    "evidence_pages": [
+      "https://www.orangemali.com/fr/prt-smartphone-et-tablette.html"
+    ],
+    "supporting_snippets": [
+      "Orange en partenariat avec Ecobank, vous offre la possibilité de payer à votre rythme et sur plusieurs mensualités des smartphones au meilleur rapport qualité/ prix."
+    ],
+    "reasoning": "The provided chunks from orangemali.com describe a smartphone and tablet installment credit offer available from Orange Mali's own pages. The financing is explicitly stated to be in partnership with Ecobank, who underwrites the credit. Orange Mali sells and offers the service directly but relies on Ecobank for financing responsibility. Therefore, Orange Mali is classified as partner_only since it does not itself finance the service but facilitates the offering with a named financing partner.",
+    "page_company": {
+      "name": "Orange Mali",
+      "domain": "orangemali.com",
+      "url": "https://www.orangemali.com/fr/prt-smartphone-et-tablette.html",
+      "role": "provider",
+      "financing_responsibility": "provided by Ecobank as partner, Orange Mali sells and offers smartphone/tablet financing",
+      "target_relevance": "directly provides smartphone financing service via credit installment offer in partnership with Ecobank",
+      "quote": "Orange en partenariat avec Ecobank, vous offre la possibilité de payer à votre rythme et sur plusieurs mensualités des smartphones au meilleur rapport qualité/ prix.",
+      "source_url": "https://www.orangemali.com/fr/prt-smartphone-et-tablette.html",
+      "notes": "Orange Mali offers smartphones and tablets on credit/installments for several months; financing is enabled via partnership with Ecobank but the Orange Mali domain hosts and promotes this service as its own offering."
+    },
+    "referenced_entities": [
+      {
+        "name": "Ecobank",
+        "domain": "ecobank.com",
+        "url": "",
+        "role": "partner",
+        "financing_responsibility": "financing partner underwriting the smartphone credit",
+        "target_relevance": "provides financing under the Orange Mali smartphone/tablet credit offer",
+        "quote": "Orange en partenariat avec Ecobank, vous offre la possibilité de payer à votre rythme et sur plusieurs mensualités des smartphones au meilleur rapport qualité/ prix.",
+        "source_url": "https://www.orangemali.com/fr/prt-smartphone-et-tablette.html",
+        "notes": "Ecobank is mentioned as the financing partner in Orange Mali's smartphone installment program."
+      }
+    ],
+    "extraction_confidence": 0.95,
+    "needs_additional_extraction": false,
+    "partner_details": [
+      "Ecobank; financing partner underwriting smartphone/tablet credit in partnership with Orange Mali"
+    ],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "bdm-sa.com": {
+    "validated": true,
+    "confidence": 0.9,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://www.bdm-sa.com/cauris-epargne",
+      "https://www.bdm-sa.com/credit-immobilier-2",
+      "https://www.bdm-sa.com/"
+    ],
+    "supporting_snippets": [
+      "La carte CAURIS EPARGNE est une carte de retrait et de paiement à débit immédiat sur compte d’épargne utilisable au Mali.",
+      "Le Crédit Immobilier MRE est un financement par emprunt destiné à financer tout ou une partie d’un achat immobilier.",
+      "La Banque de Développement du Mali SA a été élue Meilleure Banque de l'Afrique de l'Ouest de l'année 2018."
+    ],
+    "reasoning": "Based on the provided chunks from the domain bdm-sa.com, La Banque de Développement du Mali offers typical banking services including savings accounts, current accounts, real estate financing, and payment cards. None of the evidence mentions providing or financing smartphones, or offering installment plans for smartphone purchases. There are no referenced partner entities or providers on the pages that relate to smartphone financing, so the domain does not directly provide the target service category.",
+    "page_company": {
+      "name": "La Banque de Développement du Mali",
+      "domain": "bdm-sa.com",
+      "url": "https://www.bdm-sa.com/",
+      "role": "provider",
+      "financing_responsibility": "direct provider of banking and financing services",
+      "target_relevance": "does not provide smartphone financing services",
+      "quote": "La Banque de Développement du Mali offers a range of banking products like savings accounts, current accounts, credit immobilier (housing loans) and payment cards but does not mention smartphone financing",
+      "source_url": "https://www.bdm-sa.com/",
+      "notes": "The page content references typical banking products including saving and payment cards and real estate financing, but no evidence of smartphone financing or financing on installment for smartphones"
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 0.95,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "ml.coinafrique.com": {
+    "validated": true,
+    "confidence": 0.9,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://ml.coinafrique.com/categorie/accessoires-telephonie",
+      "https://ml.coinafrique.com/annonce/telephones-et-tablettes/iphone-3030814",
+      "https://ml.coinafrique.com/annonce/telephones-et-tablettes/telephone-1543742"
+    ],
+    "supporting_snippets": [
+      "Stabilisateur de Smartphone favorite_border 2 mois 35 000 CFA location_on Bamako, Mali",
+      "iPhone 4 années Bamako, Mali Téléphones & Tablettes Icone Livraison Livraison disponible ... Prix sur demande",
+      "Téléphone 6 années Bamako, Mali Téléphones & Tablettes Icone produit neuf Produit neuf Détails du produit Mini téléphone est de retour"
+    ],
+    "reasoning": "The retrieved page content shows Téléphones & Tablettes is a marketplace or seller of smartphones and accessories, listing products with prices and durations but no explicit mention or evidence of offering smartphone financing services. No financing partner is named. Therefore, the company/domain does not directly provide the target category of smartphone financing. No referenced entities related to financing appear in the content, so the type is classified as 'unknown' due to lack of evidence.",
+    "page_company": {
+      "name": "Téléphones & Tablettes",
+      "domain": "ml.coinafrique.com",
+      "url": "https://ml.coinafrique.com/categorie/accessoires-telephonie",
+      "role": "marketplace seller",
+      "financing_responsibility": "none indicated",
+      "target_relevance": "no direct evidence of smartphone financing service",
+      "quote": "Stabilisateur de Smartphone favorite_border 2 mois 35 000 CFA location_on Bamako, Mali ... iPhone 4 années Bamako, Mali Téléphones & Tablettes Icone Livraison Livraison disponible ... Téléphone 6 années Bamako, Mali Téléphones & Tablettes Icone produit neuf Produit neuf",
+      "source_url": "https://ml.coinafrique.com/categorie/accessoires-telephonie",
+      "notes": "Page shows listings of phones, accessories for sale with prices and durations, no financing or installment info"
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 0.9,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "rebtel.com": {
+    "validated": true,
+    "confidence": 0.9,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://www.rebtel.com/fr/campagne/cms/mali-recharger",
+      "https://www.rebtel.com/fr/campagne/cms/mali-recharger"
+    ],
+    "supporting_snippets": [
+      "Toutes les recharges avec Rebtel sont livrées en quelques minutes. Les crédits sont envoyés vers tous les opérateurs au Mali (Orange, Sotelma-Malitel) et sont reçus instantanément afin que votre destinataire puisse passer des appels, envoyer des SMS et acheter des données.",
+      "Envoyez la recharge à votre famille et vos amis au Mali avec les frais les plus bas possibles. Rapide, sécurisé et directement depuis votre téléphone ou votre ordinateur."
+    ],
+    "reasoning": "The retrieved page content consistently describes Rebtel as a provider of mobile recharge services intended for sending credits to mobile phones in Mali. There is no mention or implication that Rebtel offers smartphone financing, installment plans, or related financial services. No other companies or partners related to smartphone financing are referenced. Therefore, the company represented by the page, Rebtel, does not directly provide the target category service.",
+    "page_company": {
+      "name": "Rebtel",
+      "domain": "rebtel.com",
+      "url": "https://www.rebtel.com/fr/campagne/cms/mali-recharger",
+      "role": "provider",
+      "financing_responsibility": "none",
+      "target_relevance": "Rebtel provides mobile recharge services but does not offer smartphone financing.",
+      "quote": "Toutes les recharges avec Rebtel sont livrées en quelques minutes. Les crédits sont envoyés vers tous les opérateurs au Mali (Orange, Sotelma-Malitel) et sont reçus instantanément afin que votre destinataire puisse passer des appels, envoyer des SMS et acheter des données.",
+      "source_url": "https://www.rebtel.com/fr/campagne/cms/mali-recharger",
+      "notes": "The content exclusively describes mobile recharges and international calling services. No evidence of smartphone financing service is provided."
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 1.0,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "seagm.com": {
+    "validated": true,
+    "confidence": 0.95,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://www.seagm.com/fr/mobile-recharge/Mali",
+      "https://www.seagm.com/fr/mobile-recharge/Mali"
+    ],
+    "supporting_snippets": [
+      "Recharge Malitel Mali mobile credits instantly with SEAGM.com. Instant top up to your phone.",
+      "How to recharge Malitel Mali mobile credits? Recharge Malitel Mali's mobile credit or data in three simple steps... Select top up amount or data bundle and click Pay Now to make payment."
+    ],
+    "reasoning": "The analyzed page from Seagm's domain exclusively discusses mobile prepaid credit and data recharge services. There is no mention of financing smartphones through installments or credit, nor any partners providing such financing. The company's role is as a provider of mobile top-up services only, having no direct offering related to the target category smartphone_financing. Hence, the entity type is classified as unknown for smartphone financing.",
+    "page_company": {
+      "name": "Seagm",
+      "domain": "seagm.com",
+      "url": "https://www.seagm.com/fr/mobile-recharge/Mali",
+      "role": "provider",
+      "financing_responsibility": "none mentioned - provides mobile recharge and credit top-up services, not smartphone financing",
+      "target_relevance": "none",
+      "quote": "Recharge Malitel Mali mobile credits instantly with SEAGM.com. Instant top up to your phone. Pay with Paypal, credit card, online banking and many more.",
+      "source_url": "https://www.seagm.com/fr/mobile-recharge/Mali",
+      "notes": "Page content shows Seagm provides prepaid mobile credits/top-up service but no mention of smartphone financing or installment sales."
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 0.9,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "banqueatlantique.net": {
+    "validated": true,
+    "confidence": 0.9,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://www.banqueatlantique.net/bf/particuliers/atlantique-mobile-bf",
+      "https://www.banqueatlantique.net/bf/particuliers/atlantique-mobile-bf"
+    ],
+    "supporting_snippets": [
+      "Banque Atlantique vous propose ATLANTIQUE MOBILE. Une application totalement gratuite, intégrant des fonctionnalités inédites et exclusives allant de la reconnaissance faciale à la modification du plafond de carte... Vous souhaitez effectuer vos transactions, et accéder 24/7 aux produits et services bancaires depuis votre smartphone ou tablette ?",
+      "Financement de Projets ... Prêt scolaire Crédits Conso Prêt spécial fête Prêt Ramadan Crédit Express 0% Projets Immobiliers Crédit Immobilier"
+    ],
+    "reasoning": "The provided page content extensively details Banque Atlantique's banking products, including digital banking platforms (ANET and Atlantique Mobile) and multiple types of credit and loans. However, none of the chunks mention the bank directly underwriting, leasing, or financing smartphones on installments or as a dedicated service. No partners or third-party financing companies are mentioned in relation to smartphone financing either. Therefore, the page company is identified as Banque Atlantique with a role as a bank. Since no explicit smartphone financing service is provided or clearly referenced, the entity type is 'unknown'. No referenced entities are extracted because no other companies or partners related to smartphone financing are mentioned.",
+    "page_company": {
+      "name": "Banque Atlantique",
+      "domain": "banqueatlantique.net",
+      "url": "https://www.banqueatlantique.net",
+      "role": "bank providing various financial products and services including digital banking",
+      "financing_responsibility": "Provider of banking products but no direct evidence of smartphone financing services or installment plans",
+      "target_relevance": "No direct evidence of offering smartphone financing",
+      "quote": "Banque Atlantique vous propose ATLANTIQUE MOBILE. Une application totalement gratuite, intégrant des fonctionnalités inédites... Vous souhaitez effectuer vos transactions, et accéder 24/7 aux produits et services bancaires depuis votre smartphone ou tablette ?",
+      "source_url": "https://www.banqueatlantique.net/bf/particuliers/atlantique-mobile-bf",
+      "notes": "The retrieved content describes banking services, mobile banking app and various loans/credits but no mention of direct smartphone financing or installment plans for smartphones."
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 0.95,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "bamada.net": {
+    "validated": true,
+    "confidence": 0.9,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://bamada.net/moov-africa-malitel-innove-lapplication-my-moov-pour-gerer-en-toute-simplicite-votre-compte-mobile-depuis-votre-smartphone-ou-tablette",
+      "https://bamada.net/transfert-monetaire-moov-money-innove-encore-au-benefice-de-ses-clients"
+    ],
+    "supporting_snippets": [
+      "Un outil permettant d’effectuer différentes opérations comme le paiement des factures, l’achat des forfaits, les recharges…",
+      "Moov Money... paiement de factures, recharges, transfert d’argent... paiement marchand Sani…"
+    ],
+    "reasoning": "The retrieved pages show that Bamada.net publishes news articles about Moov Africa Malitel, which offers a mobile app 'My Moov' for account management, payments, and transfers through Moov Money. However, there is no mention or evidence that either Bamada.net or Moov Africa Malitel provide smartphone financing directly or via partnership. The content focuses on mobile money services, bill payments, and mobile account operations without any references to smartphone installment plans or financing services. Therefore, the company/domain represented by the pages (Bamada.net) is categorized as 'unknown' for providing smartphone financing because it is a news publisher. The referenced entities (Moov Africa Malitel and Moov Money) are providers of telecommunications and mobile money services but not smartphone financing. No partners or aggregators related to smartphone financing are mentioned.",
+    "page_company": {
+      "name": "Bamada",
+      "domain": "bamada.net",
+      "url": "https://bamada.net/moov-africa-malitel-innove-lapplication-my-moov-pour-gerer-en-toute-simplicite-votre-compte-mobile-depuis-votre-smartphone-ou-tablette",
+      "role": "publisher of news and informational content",
+      "financing_responsibility": "none",
+      "target_relevance": "none",
+      "quote": "Moov Africa Malitel innove : L’application My Moov pour gérer en toute simplicité votre compte mobile depuis votre Smartphone ou tablette | Bamada.net",
+      "source_url": "https://bamada.net/moov-africa-malitel-innove-lapplication-my-moov-pour-gerer-en-toute-simplicite-votre-compte-mobile-depuis-votre-smartphone-ou-tablette",
+      "notes": "Bamada.net is a news website reporting about Moov Africa Malitel and its services; it does not itself provide smartphone financing."
+    },
+    "referenced_entities": [
+      {
+        "name": "Moov Africa Malitel",
+        "domain": "",
+        "url": "",
+        "role": "provider of mobile telecommunications and mobile money services",
+        "financing_responsibility": "none",
+        "target_relevance": "none",
+        "quote": "Moov Africa Malitel a lancé une nouvelle application dénommée My Moov... permet aux clients d’effectuer différentes opérations comme le paiement des factures, les achats, les recharges…",
+        "source_url": "https://bamada.net/moov-africa-malitel-innove-lapplication-my-moov-pour-gerer-en-toute-simplicite-votre-compte-mobile-depuis-votre-smartphone-ou-tablette",
+        "notes": "Moov Africa Malitel offers mobile account management and payment services but there is no evidence they provide smartphone financing."
+      },
+      {
+        "name": "Moov Money",
+        "domain": "",
+        "url": "",
+        "role": "mobile money service associated with Moov Africa Malitel",
+        "financing_responsibility": "none",
+        "target_relevance": "none",
+        "quote": "Moov Money, selon le DG Abdel Aziz Biddine, c’est toute une palette de solutions simples et sécurisés... paiement de factures, recharges, transfert d’argent...",
+        "source_url": "https://bamada.net/transfert-monetaire-moov-money-innove-encore-au-benefice-de-ses-clients",
+        "notes": "Moov Money supports payments and transfers but no mention of financing smartphones on installment."
+      }
+    ],
+    "extraction_confidence": 0.9,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "app.talk-home.com": {
+    "validated": true,
+    "confidence": 0.9,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://cards.talk-home.com/international-calling-rates/mali-calling-card",
+      "https://app.talk-home.com/mobile-top-up/mali/malitel"
+    ],
+    "supporting_snippets": [
+      "You can buy a Talk Home calling card online on our website. Click here if you’d like to buy the Classic card. Click here if you’d like to buy a rechargeable calling card. Enter your email address and payment details at the checkout. You can use either PayPal or any credit card. Once payment is processed, you will instantly receive an email with your card PIN and other useful details.",
+      "Send mobile top-ups to any Mali phone number in Mali instantly with Talk Home App. Get 10% off on your first Malitel top-up."
+    ],
+    "reasoning": "The retrieved pages from the domain app.talk-home.com and associated cards.talk-home.com show that the company is primarily engaged in selling calling cards and mobile phone top-up services. There is no mention or evidence of the company providing smartphone financing or installment payment plans for smartphones. Therefore, the company/domain does not directly provide the target category of smartphone_financing. Since no financing partner or aggregator role is identified, the classification defaults to unknown.",
+    "page_company": {
+      "name": "APP Talk Home",
+      "domain": "app.talk-home.com",
+      "url": "https://app.talk-home.com/mobile-top-up/mali/malitel",
+      "role": "service provider",
+      "financing_responsibility": "none",
+      "target_relevance": "none",
+      "quote": "You can buy a Talk Home calling card online on our website... You can use either PayPal or any credit card. Once payment is processed, you will instantly receive an email with your card PIN and other useful details.",
+      "source_url": "https://cards.talk-home.com/international-calling-rates/mali-calling-card",
+      "notes": "The company offers calling cards and mobile top-ups but does not offer smartphone financing or installment plans related to smartphone purchasing or financing."
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 0.9,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "watra.org": {
+    "validated": true,
+    "confidence": 0.85,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://watra.org/mali",
+      "https://watra.org/mali",
+      "https://watra.org/mali"
+    ],
+    "supporting_snippets": [
+      "The West Africa Telecommunications Regulators Assembly (WATRA) was founded in 2002 to create a unified platform for telecommunications and ICT regulators in the West African region.",
+      "The main operators in the market are Orange, the leading mobile and fixed-line operator, Malitel, the second-largest, Telecel, and Atel. The main services offered by the operators include voice, SMS, data, internet, and mobile money.",
+      "The e-commerce market size was estimated at $50 million in 2020... The main e-commerce platforms are Jumia, Afrikrea, Afrimarket, and Kaymu."
+    ],
+    "reasoning": "The retrieved page is the Mali country page on the WATRA (West Africa Telecommunications Regulators Assembly) website. WATRA acts as a regulatory and coordination body for telecommunications and ICT regulators in West Africa rather than a service or financing provider. The page mentions major telecom operators and e-commerce platforms but does not show WATRA or the operators directly providing smartphone financing or installment plans. No partner offering financing is named. Therefore, the company/domain (watra.org) is not a provider, partner_only, or aggregator of smartphone financing services given the retrieved data. The best classification based on available evidence is 'unknown' for the page company in relation to smartphone financing, meaning no direct involvement has been identified.",
+    "page_company": {
+      "name": "West Africa Telecommunications Regulators Assembly (WATRA)",
+      "domain": "watra.org",
+      "url": "https://watra.org/mali",
+      "role": "regulator assembly platform for telecommunications and ICT regulators in West Africa",
+      "financing_responsibility": "none indicated for smartphone financing",
+      "target_relevance": "none - WATRA is a telecom regulatory body for West Africa and not a direct provider or financier of smartphone financing",
+      "quote": "The West Africa Telecommunications Regulators Assembly (WATRA) was founded in 2002 to create a unified platform for telecommunications and ICT regulators in the West African region.",
+      "source_url": "https://watra.org/mali",
+      "notes": "WATRA serves as a regulatory and coordination body; no evidence found that it provides smartphone financing or related services directly."
+    },
+    "referenced_entities": [
+      {
+        "name": "Orange",
+        "domain": "unknown",
+        "url": "https://watra.org/mali",
+        "role": "mobile and fixed-line operator providing voice, SMS, data, internet, and mobile money",
+        "financing_responsibility": "none stated in the content for smartphone financing",
+        "target_relevance": "related telecom operator mentioned; no evidence of direct smartphone financing",
+        "quote": "Orange, the leading mobile and fixed-line operator... The main services offered include voice, SMS, data, internet, and mobile money.",
+        "source_url": "https://watra.org/mali",
+        "notes": "No direct evidence Orange offers smartphone financing on this page."
+      },
+      {
+        "name": "Malitel",
+        "domain": "unknown",
+        "url": "https://watra.org/mali",
+        "role": "second-largest mobile and fixed-line operator providing voice, SMS, data, internet, and mobile money",
+        "financing_responsibility": "none stated",
+        "target_relevance": "mentioned telecom operator; no direct link to smartphone financing",
+        "quote": "Malitel, the second-largest mobile and fixed-line operator... main services... include voice, SMS, data, internet, and mobile money.",
+        "source_url": "https://watra.org/mali",
+        "notes": "No evidence of smartphone financing by Malitel in provided content."
+      },
+      {
+        "name": "Telecel",
+        "domain": "unknown",
+        "url": "https://watra.org/mali",
+        "role": "third-largest mobile operator with mobile money services",
+        "financing_responsibility": "none indicated",
+        "target_relevance": "telecom operator referenced; no smartphone financing mentioned",
+        "quote": "Telecel, the third-largest mobile operator... main services include voice, SMS, data, internet, and mobile money.",
+        "source_url": "https://watra.org/mali",
+        "notes": "No mention of smartphone financing."
+      },
+      {
+        "name": "Atel",
+        "domain": "unknown",
+        "url": "https://watra.org/mali",
+        "role": "fourth-largest mobile operator offering voice, SMS, data, internet, and mobile money",
+        "financing_responsibility": "none mentioned",
+        "target_relevance": "operator mentioned; no evidence on providing smartphone financing",
+        "quote": "Atel, the fourth-largest mobile operator... main services include voice, SMS, data, internet, and mobile money.",
+        "source_url": "https://watra.org/mali",
+        "notes": "No direct smartphone financing stated."
+      },
+      {
+        "name": "Jumia",
+        "domain": "unknown",
+        "url": "https://watra.org/mali",
+        "role": "e-commerce platform",
+        "financing_responsibility": "none indicated",
+        "target_relevance": "mentioned as main e-commerce platform, no smartphone financing evidence",
+        "quote": "The main e-commerce platforms are Jumia, Afrikrea, Afrimarket, and Kaymu.",
+        "source_url": "https://watra.org/mali",
+        "notes": "No evidence of offering smartphone financing."
+      },
+      {
+        "name": "Afrikrea",
+        "domain": "unknown",
+        "url": "https://watra.org/mali",
+        "role": "e-commerce platform",
+        "financing_responsibility": "none indicated",
+        "target_relevance": "mentioned e-commerce platform; no financing relevant evidence",
+        "quote": "The main e-commerce platforms are Jumia, Afrikrea, Afrimarket, and Kaymu.",
+        "source_url": "https://watra.org/mali",
+        "notes": "No data on smartphone financing."
+      },
+      {
+        "name": "Afrimarket",
+        "domain": "unknown",
+        "url": "https://watra.org/mali",
+        "role": "e-commerce platform",
+        "financing_responsibility": "none indicated",
+        "target_relevance": "mentioned as ecommerce player; no smartphone financing info",
+        "quote": "The main e-commerce platforms are Jumia, Afrikrea, Afrimarket, and Kaymu.",
+        "source_url": "https://watra.org/mali",
+        "notes": "No relevant financing service on the page."
+      },
+      {
+        "name": "Kaymu",
+        "domain": "unknown",
+        "url": "https://watra.org/mali",
+        "role": "e-commerce platform",
+        "financing_responsibility": "none indicated",
+        "target_relevance": "mentioned ecommerce platform; no smartphone financing data",
+        "quote": "The main e-commerce platforms are Jumia, Afrikrea, Afrimarket, and Kaymu.",
+        "source_url": "https://watra.org/mali",
+        "notes": "No evidence on smartphone financing."
+      }
+    ],
+    "extraction_confidence": 0.9,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "maliactu.net": {
+    "validated": true,
+    "confidence": 0.9,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://maliactu.net/moov-money-malitel-rend-les-transferts-gratuits-une-revolution-pour-ses-abonnes"
+    ],
+    "supporting_snippets": [
+      "MaliActu.net est le premier site d'information en ligne du Mali. Politique, societe, economie, sport — toute l'actualite malienne en temps reel."
+    ],
+    "reasoning": "The retrieved page content identifies maliactu.net as an online news information platform about general topics including politics, society, and economics in Mali, with no evidence it directly offers or finances smartphone financing services. No relevant companies or partners related to smartphone financing are mentioned. Hence, the entity type is unknown with high confidence.",
+    "page_company": {
+      "name": "Maliactu",
+      "domain": "maliactu.net",
+      "url": "https://maliactu.net/moov-money-malitel-rend-les-transferts-gratuits-une-revolution-pour-ses-abonnes",
+      "role": "news information provider",
+      "financing_responsibility": "none",
+      "target_relevance": "none",
+      "quote": "MaliActu.net est le premier site d'information en ligne du Mali. Politique, societe, economie, sport — toute l'actualite malienne en temps reel.",
+      "source_url": "https://maliactu.net/moov-money-malitel-rend-les-transferts-gratuits-une-revolution-pour-ses-abonnes",
+      "notes": "The page is an online news information portal with no indication of direct smartphone financing services."
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 0.9,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "zhooma.com": {
+    "validated": true,
+    "confidence": 0.9,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://zhooma.com/samsung-galaxy-s9-plus-64go/pid/n1654",
+      "https://zhooma.com/category-zwg9z/tablette"
+    ],
+    "supporting_snippets": [
+      "Achetez Samsung Galaxy S9 Plus – 64Go 375 000,00 Fcfa ... Modes de Paiement",
+      "Vous pourriez aussi aimer Samsung Galaxy A23 - 128 Go 115 000 Fcfa ... Passer une Commande Suivre ma Commande Modes de Paiement"
+    ],
+    "reasoning": "All retrieved chunks show that Zhooma sells smartphones and tablets directly on their site. Pricing and product listings are displayed along with information on how to order and payment methods. However, there is no explicit evidence that Zhooma itself offers smartphone financing, leasing, or installment payment plans. There are no mentions of partners or third-party financing providers either. Thus, the company/domain is classified as unknown with respect to providing the target category of smartphone financing.",
+    "page_company": {
+      "name": "Zhooma",
+      "domain": "zhooma.com",
+      "url": "https://zhooma.com",
+      "role": "provider/retailer of smartphones and tablets",
+      "financing_responsibility": "not explicitly stated; no clear evidence of financing or installment sales",
+      "target_relevance": "sells smartphones but no direct evidence of financing or installment plans",
+      "quote": "Achetez tous vos articles preférés et soyez livrez en un temps record à travers tout le Mali. ... Samsung Galaxy S9 Plus – 64Go 375 000,00 Fcfa ... Modes de Paiement",
+      "source_url": "https://zhooma.com/samsung-galaxy-s9-plus-64go/pid/n1654",
+      "notes": "The site functions as an ecommerce platform selling smartphones and tablets but contains no explicit mention or offer of smartphone financing, leasing, or installment plans."
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 0.95,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "recharge.com": {
+    "validated": true,
+    "confidence": 0.95,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://www.recharge.com/en/ml/malitel",
+      "https://www.recharge.com/en/ml/malitel"
+    ],
+    "supporting_snippets": [
+      "Top up your Malitel prepaid plan on Recharge.com. You can pay with many trusted payment methods, such as PayPal. When the payment is complete, your balance will be topped up immediately!",
+      "With Recharge.com you can top up your phone immediately. You'll be back on your phone before you know it!"
+    ],
+    "reasoning": "The retrieved pages consistently describe Recharge.com as a platform for purchasing digital top-ups for mobile credit (specifically Malitel prepaid plans). There is no mention or evidence that Recharge.com finances smartphones directly, offers leases, installs payment plans, or underwrites smartphone financing. The only referenced entity related to telecom is Malitel, which is a mobile operator whose prepaid plans are topped up via Recharge.com. This indicates a reseller or payment facilitator role rather than a direct provider of smartphone financing. Therefore, the entity_type is 'unknown' because there is no evidence supporting Recharge.com as a provider, partner_only, or aggregator with respect to smartphone financing.",
+    "page_company": {
+      "name": "Recharge",
+      "domain": "recharge.com",
+      "url": "https://www.recharge.com/en/ml/malitel",
+      "role": "digital top-up platform/reseller",
+      "financing_responsibility": "none",
+      "target_relevance": "no direct smartphone financing offered",
+      "quote": "With Recharge.com you can top up your phone immediately. You'll be back on your phone before you know it! To top up your Malitel plan simply select the amount you need and enter your phone number. You can pay with many trusted payment methods, such as PayPal.",
+      "source_url": "https://www.recharge.com/en/ml/malitel",
+      "notes": "Recharge.com provides prepaid mobile top-up and payment card resale services but does not provide, finance, underwrite, lease, or sell smartphones or smartphone financing plans."
+    },
+    "referenced_entities": [
+      {
+        "name": "Malitel",
+        "domain": "malitel.ml",
+        "url": "https://www.malitel.ml",
+        "role": "mobile network operator whose prepaid plans are recharged by Recharge.com",
+        "financing_responsibility": "none",
+        "target_relevance": "no evidence of smartphone financing services",
+        "quote": "Top up your Malitel prepaid plan on Recharge.com. By using this service, you consent to the terms and conditions of Malitel.",
+        "source_url": "https://www.recharge.com/en/ml/malitel",
+        "notes": "Malitel is referenced as a telecom operator whose prepaid plans are recharged via Recharge.com but there is no mention of providing smartphone financing."
+      }
+    ],
+    "extraction_confidence": 0.9,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "maliweb.net": {
+    "validated": true,
+    "confidence": 0.9,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://www.maliweb.net/economie/telecom/paiement-mobile-et-vtc-orange-money-sintegre-a-moov-pour-transformer-la-mobilite-urbaine-3115026.html",
+      "https://www.maliweb.net/economie/telecom/paiement-mobile-et-vtc-orange-money-sintegre-a-moov-pour-transformer-la-mobilite-urbaine-3115026.html"
+    ],
+    "supporting_snippets": [
+      "Orange Finances Mobiles Mali a annoncé la signature d’un partenariat stratégique avec l’application de VTC Moov.",
+      "L’objectif : faciliter le paiement des courses grâce à l’intégration de la solution Orange Money directement dans l’application de mobilité."
+    ],
+    "reasoning": "The retrieved chunks document a partnership between Orange Finances Mobiles Mali (Orange Money) and the VTC app Moov for mobile payment integration in urban mobility services. Maliweb is the hosting news website reporting this but is not itself providing smartphone financing or installment sales. Neither Orange Money nor Moov are shown to provide smartphone financing; their services relate to mobile money payment and ride-hailing respectively, not financing smartphones. Therefore, Maliweb and its domain maliweb.net do not directly provide smartphone financing. The page represents a news publisher rather than a financing provider, aggregator, or partner_only for financing. The referenced entities are providers of related but different services, and no evidence suggests Maliweb as a provider or partner_only in smartphone financing.",
+    "page_company": {
+      "name": "Maliweb",
+      "domain": "maliweb.net",
+      "url": "https://www.maliweb.net/economie/telecom/paiement-mobile-et-vtc-orange-money-sintegre-a-moov-pour-transformer-la-mobilite-urbaine-3115026.html",
+      "role": "news publisher / media outlet reporting on telecom partnerships",
+      "financing_responsibility": "none (no evidence Maliweb provides financing)",
+      "target_relevance": "none (Maliweb does not offer smartphone financing or related services)",
+      "quote": "Orange Finances Mobiles Mali a annoncé la signature d’un partenariat stratégique avec l’application de VTC Moov.",
+      "source_url": "https://www.maliweb.net/economie/telecom/paiement-mobile-et-vtc-orange-money-sintegre-a-moov-pour-transformer-la-mobilite-urbaine-3115026.html",
+      "notes": "Maliweb is the publisher of the article reporting a partnership between Orange Money and Moov; Maliweb itself does not provide financing services."
+    },
+    "referenced_entities": [
+      {
+        "name": "Orange Finances Mobiles Mali",
+        "domain": "orange.com",
+        "url": "",
+        "role": "provider",
+        "financing_responsibility": "provides mobile money payment solution integrated into Moov app",
+        "target_relevance": "indirect (provides mobile money payment service, not smartphone financing per se)",
+        "quote": "Orange Finances Mobiles Mali a annoncé la signature d’un partenariat stratégique avec l’application de VTC Moov.",
+        "source_url": "https://www.maliweb.net/economie/telecom/paiement-mobile-et-vtc-orange-money-sintegre-a-moov-pour-transformer-la-mobilite-urbaine-3115026.html",
+        "notes": "Orange Money integrates mobile payment into Moov app but no indication of smartphone financing offerings."
+      },
+      {
+        "name": "Moov",
+        "domain": "moov.com",
+        "url": "",
+        "role": "provider",
+        "financing_responsibility": "provides VTC (ride-hailing) application with integrated mobile payment",
+        "target_relevance": "indirect (provides urban mobility service with integrated payment, no evidence of smartphone financing)",
+        "quote": "Orange Money s’intègre à Moov pour transformer la mobilité urbaine. L’objectif : faciliter le paiement des courses grâce à l’intégration de la solution Orange Money directement dans l’application de mobilité.",
+        "source_url": "https://www.maliweb.net/economie/telecom/paiement-mobile-et-vtc-orange-money-sintegre-a-moov-pour-transformer-la-mobilite-urbaine-3115026.html",
+        "notes": "Moov offers transportation service, integrates mobile payment, no financing service"
+      }
+    ],
+    "extraction_confidence": 0.95,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "mobilerecharge.com": {
+    "validated": true,
+    "confidence": 0.9,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://mobilerecharge.com/send/recharge/Mali/Malitel/20Prepaid/20Credit",
+      "https://mobilerecharge.com/send/recharge/Mali/Malitel/20Prepaid/20Credit",
+      "https://mobilerecharge.com/buy/mobile/recharge/mali"
+    ],
+    "supporting_snippets": [
+      "Pay with your PayPal, credit or debit card. It doesn't matter what you choose. Phone is Recharged Your recharge is sent almost instantly and the recipient can enjoy the credit.",
+      "MobileRecharge.com is your reliable and affordable partner for sending mobile recharge to Malitel Prepaid Credit Mali.",
+      "With MobileRecharge.com you can send top-ups to the following mobile operators in Mali: Malitel, Orange and Telecel."
+    ],
+    "reasoning": "The analyzed page content from mobilerecharge.com exclusively describes services related to international mobile airtime top-ups and prepaid credit delivery using upfront payments via PayPal, credit, or debit cards. There is no mention of smartphone financing, installment plans, leasing, or any form of lending or underwriting of smartphones. The referenced companies Malitel, Orange, and Telecel are mentioned solely as operators to which mobile credit can be sent. Hence, the company mobilerecharge.com cannot be classified as a provider, partner_only, or aggregator for smartphone_financing. The correct classification is unknown due to lack of relevant financing service evidence.",
+    "page_company": {
+      "name": "MobileRecharge",
+      "domain": "mobilerecharge.com",
+      "url": "https://mobilerecharge.com/",
+      "role": "provider of international airtime transfer and mobile recharge services",
+      "financing_responsibility": "none",
+      "target_relevance": "does not provide smartphone financing or related installment services",
+      "quote": "Sending mobile recharge to Malitel Prepaid Credit Mali with MobileRecharge.com is easy! ... Pay with your PayPal, credit or debit card. It doesn't matter what you choose. Phone is Recharged Your recharge is sent almost instantly and the recipient can enjoy the credit.",
+      "source_url": "https://mobilerecharge.com/send/recharge/Mali/Malitel/20Prepaid/20Credit",
+      "notes": "MobileRecharge offers instant prepaid mobile credit top-up services via online payment but does not mention any financing, installment plans, leasing, or underwriting of smartphones."
+    },
+    "referenced_entities": [
+      {
+        "name": "Malitel",
+        "domain": "unknown",
+        "url": "https://mobilerecharge.com/send/recharge/Mali/Malitel/20Prepaid/20Credit",
+        "role": "telecom operator / mobile prepaid credit recipient",
+        "financing_responsibility": "none",
+        "target_relevance": "not relevant; telecom operator receiving recharge top-up only",
+        "quote": "Direct Connection to Malitel Prepaid Credit: Ensuring reliable delivery.",
+        "source_url": "https://mobilerecharge.com/send/recharge/Mali/Malitel/20Prepaid/20Credit",
+        "notes": "Malitel is the mobile operator for which MobileRecharge sells prepaid credit top-ups. No financing or smartphone installment service offered."
+      },
+      {
+        "name": "Orange Mali",
+        "domain": "unknown",
+        "url": "https://mobilerecharge.com/buy/mobile/recharge/mali",
+        "role": "telecom operator",
+        "financing_responsibility": "none",
+        "target_relevance": "not relevant; telecommunications operator only",
+        "quote": "With MobileRecharge.com you can send top-ups to the following mobile operators in Mali: Malitel, Orange and Telecel.",
+        "source_url": "https://mobilerecharge.com/buy/mobile/recharge/mali",
+        "notes": "Orange Mali mentioned only as a supported operator for airtime top-up, no smartphone financing."
+      },
+      {
+        "name": "Telecel Mali",
+        "domain": "unknown",
+        "url": "https://mobilerecharge.com/buy/mobile/recharge/mali",
+        "role": "telecom operator",
+        "financing_responsibility": "none",
+        "target_relevance": "not relevant; telecommunications operator only",
+        "quote": "With MobileRecharge.com you can send top-ups to the following mobile operators in Mali: Malitel, Orange and Telecel.",
+        "source_url": "https://mobilerecharge.com/buy/mobile/recharge/mali",
+        "notes": "Telecel Mali mentioned only as a supported operator for airtime top-up, no smartphone financing."
+      }
+    ],
+    "extraction_confidence": 0.95,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "mali-achats.com": {
+    "validated": true,
+    "confidence": 0.9,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://www.mali-achats.com/page/modes-de-paiement",
+      "https://www.mali-achats.com/boutiques/telephonie"
+    ],
+    "supporting_snippets": [
+      "Les achats effectués via Mali-achats, peuvent être réglés : En cash à la livraison des articles ; Via un transfert Mobile Money du réseau national au Mali (Orange Money ou Mobicash), de votre compte sur le compte de Mali-achats ... Pour les articles dont la valeur totale dépasse 200.000 F CFA, un paiement de 50% devra être effectué à l’avance, avant que les articles ne soient livrés à l’acheteur.",
+      "Mali-achats est un site web de vente en ligne au Mali. Avec la plateforme de e-commerce Mali-achats, faîtes vos achats en ligne en toute sécurité et avec aisance au Mali."
+    ],
+    "reasoning": "Mali Achats is an online retailer selling smartphones and related accessories. The provided content mentions payment methods including cash, mobile money transfer, international transfer, and bank transfer. There is a mention of mandatory 50% advance payment for expensive items before delivery, but no references indicate Mali Achats directly provides smartphone financing such as installment payment plans beyond advance payments. No partners or third parties financing are referenced. Therefore, Mali Achats does not directly provide smartphone financing, and there is no evidence it acts as a partner-only or aggregator for financing providers.",
+    "page_company": {
+      "name": "Mali Achats",
+      "domain": "mali-achats.com",
+      "url": "https://www.mali-achats.com/",
+      "role": "e-commerce platform selling smartphones and other electronics",
+      "financing_responsibility": "none indicated",
+      "target_relevance": "sells smartphones but does not provide financing service",
+      "quote": "Mali-achats est un site web de vente en ligne au Mali. Avec la plateforme de e-commerce Mali-achats, faîtes vos achats en ligne en toute sécurité et avec aisance au Mali.",
+      "source_url": "https://www.mali-achats.com/boutiques/telephonie",
+      "notes": "The site sells smartphones and accessories. Payment methods include cash on delivery, mobile money transfers, international money transfers, and bank transfer. Payment conditions require 50% advance for orders over 200,000 F CFA, but this is a payment policy, not a credit/financing offering."
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 0.95,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "monniz.com": {
+    "validated": true,
+    "confidence": 0.9,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://monniz.com/service/forfait-internet-orange-mali",
+      "https://monniz.com/service/recharge-mobile-malitel-mali"
+    ],
+    "supporting_snippets": [
+      "Avec Monniz, restez connecté facilement et rapidement au Mali avec le Forfait internet Orange. Paiement sécurisé : Effectuez vos transactions en toute sérénité grâce à nos options de paiement sécurisées. Livraison instantanée : Recevez votre forfait immédiatement après votre achat.",
+      "Pour recharger votre téléphone mobile avec le service Malitel au Mali, vous pouvez utiliser la plateforme Monniz. La recharge sera créditée instantanément sur le numéro du destinataire."
+    ],
+    "reasoning": "The retrieved content consistently describes Monniz as a platform for prepaid internet and mobile recharges with instant payment and activation. There is no mention or indication that Monniz directly provides, finances, underwrites, leases, or sells smartphones or smartphone financing plans on installments. The referenced telecom operators are service providers for connectivity only and not involved in financing. Therefore, Monniz's entity type regarding smartphone financing is unknown due to insufficient evidence to support provider, aggregator, or partner_only categories.",
+    "page_company": {
+      "name": "Monniz",
+      "domain": "monniz.com",
+      "url": "https://monniz.com/service/forfait-internet-orange-mali",
+      "role": "platform selling prepaid internet and mobile recharge services",
+      "financing_responsibility": "Monniz facilitates payment for prepaid services; no evidence of financing or installment offering",
+      "target_relevance": "Monniz provides prepaid telecom services but does not offer or finance smartphone financing",
+      "quote": "Avec Monniz, restez connecté facilement et rapidement au Mali avec le Forfait internet Orange. Paiement sécurisé : Effectuez vos transactions en toute sérénité grâce à nos options de paiement sécurisées. Livraison instantanée : Recevez votre forfait immédiatement après votre achat.",
+      "source_url": "https://monniz.com/service/forfait-internet-orange-mali",
+      "notes": "The content describes instant purchase and payment for prepaid internet and mobile recharges but does not mention financing, installment plans, leasing, or smartphone financing services."
+    },
+    "referenced_entities": [
+      {
+        "name": "Orange Mali",
+        "domain": "orange.com / orange.ml (implied, not explicitly given)",
+        "url": "",
+        "role": "telecommunications service provider",
+        "financing_responsibility": "None indicated",
+        "target_relevance": "Telecom service provider referenced for prepaid internet packages, not related to smartphone financing",
+        "quote": "Choisir Orange pour votre forfait internet au Mali, c'est opter pour une connectivité fiable et performante. Orange s'impose comme le leader des télécommunications dans le pays.",
+        "source_url": "https://monniz.com/service/forfait-internet-orange-mali",
+        "notes": "Orange Mali is the telecom network whose prepaid internet packages are resold via Monniz."
+      },
+      {
+        "name": "Malitel",
+        "domain": "malitel.ml (implied, not explicitly given)",
+        "url": "",
+        "role": "telecommunications service provider",
+        "financing_responsibility": "None indicated",
+        "target_relevance": "Referenced as another mobile recharge service offered on Monniz; unrelated to smartphone financing",
+        "quote": "Grâce à Malitel et... Pour recharger votre téléphone mobile avec le service Malitel au Mali, vous pouvez utiliser la plateforme Monniz.",
+        "source_url": "https://monniz.com/service/recharge-mobile-malitel-mali",
+        "notes": "Malitel is a telecom provider for prepaid mobile recharge services referenced on Monniz."
+      }
+    ],
+    "extraction_confidence": 0.9,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "samsung.com": {
+    "validated": true,
+    "confidence": 0.9,
+    "entity_type": "partner_only",
+    "evidence_pages": [
+      "https://www.samsung.com/africa/en/offer/ghana-s24-consumer-finance-promo",
+      "https://www.samsung.com/africa/en/offer/ghana-s24-consumer-finance-promo",
+      "https://www.samsung.com/us/apps/samsung-wallet/installment-payments"
+    ],
+    "supporting_snippets": [
+      "Choose a financing plan from a participating bank (Access Bank, UMB, or Stanbic Bank).",
+      "Enjoy Flexible Financing Why wait? There’s no upfront cost. Get the epic new Galaxy S24 Ultra, S24+ or S24 and spread cost for up to 24 months.",
+      "Samsung is a technology provider and is not providing lending services. Installment service provided by Splitit (NMLS# 2630622)."
+    ],
+    "reasoning": "The page belongs to Samsung (samsung.com) offering smartphone financing options for Galaxy S24. However, the financing itself is provided by partner banks (Access Bank, UMB, Stanbic Bank) or third-party services (Splitit for Samsung Wallet installment plans), not by Samsung directly. Samsung facilitates and promotes the financing but does not underwrite or directly finance the smartphone purchases. Therefore, Samsung is classified as partner_only with partner banks as financing providers.",
+    "page_company": {
+      "name": "Samsung",
+      "domain": "samsung.com",
+      "url": "https://www.samsung.com/africa/en/offer/ghana-s24-consumer-finance-promo",
+      "role": "seller and facilitator of smartphone financing",
+      "financing_responsibility": "financing provided by participating banks",
+      "target_relevance": "directly relevant - Samsung offers smartphone financing options for Galaxy S24 devices through partner banks",
+      "quote": "Enjoy Flexible Financing Why wait? There’s no upfront cost. Get the epic new Galaxy S24 Ultra, S24+ or S24 and spread cost for up to 24 months. Participating Banks... Choose a financing plan from a participating bank (Access Bank, UMB, or Stanbic Bank).",
+      "source_url": "https://www.samsung.com/africa/en/offer/ghana-s24-consumer-finance-promo",
+      "notes": "Samsung is the company running the webpage offering Galaxy S24 financing. The financing is provided by banks, not Samsung itself."
+    },
+    "referenced_entities": [
+      {
+        "name": "Access Bank",
+        "domain": "",
+        "url": "",
+        "role": "financing provider",
+        "financing_responsibility": "bank financing approval and loan disbursement",
+        "target_relevance": "directly relevant as a financing bank for smartphone purchase",
+        "quote": "Choose a financing plan from a participating bank (Access Bank, UMB, or Stanbic Bank).",
+        "source_url": "https://www.samsung.com/africa/en/offer/ghana-s24-consumer-finance-promo",
+        "notes": "One of the banks providing financing for Samsung Galaxy S24 purchases."
+      },
+      {
+        "name": "Stanbic Bank",
+        "domain": "",
+        "url": "",
+        "role": "financing provider",
+        "financing_responsibility": "bank financing approval and loan disbursement",
+        "target_relevance": "directly relevant as a financing bank for smartphone purchase",
+        "quote": "Choose a financing plan from a participating bank (Access Bank, UMB, or Stanbic Bank).",
+        "source_url": "https://www.samsung.com/africa/en/offer/ghana-s24-consumer-finance-promo",
+        "notes": "One of the banks providing financing for Samsung Galaxy S24 purchases."
+      },
+      {
+        "name": "UMB",
+        "domain": "",
+        "url": "",
+        "role": "financing provider",
+        "financing_responsibility": "bank financing approval and loan disbursement",
+        "target_relevance": "directly relevant as a financing bank for smartphone purchase",
+        "quote": "Choose a financing plan from a participating bank (Access Bank, UMB, or Stanbic Bank).",
+        "source_url": "https://www.samsung.com/africa/en/offer/ghana-s24-consumer-finance-promo",
+        "notes": "One of the banks providing financing for Samsung Galaxy S24 purchases."
+      },
+      {
+        "name": "CompuGhana Limited",
+        "domain": "",
+        "url": "",
+        "role": "participating store (merchant)",
+        "financing_responsibility": "merchant for device delivery and invoice",
+        "target_relevance": "indirect - store selling devices for financing",
+        "quote": "Find Your Store: Look for a participating store selling your desired device (e.g., CompuGhana Limited or Franko Trading Limited).",
+        "source_url": "https://www.samsung.com/africa/en/offer/ghana-s24-consumer-finance-promo",
+        "notes": "One of the stores selling Samsung Galaxy S24 devices that participate in financing."
+      },
+      {
+        "name": "Franko Trading Limited",
+        "domain": "",
+        "url": "",
+        "role": "participating store (merchant)",
+        "financing_responsibility": "merchant for device delivery and invoice",
+        "target_relevance": "indirect - store selling devices for financing",
+        "quote": "Find Your Store: Look for a participating store selling your desired device (e.g., CompuGhana Limited or Franko Trading Limited).",
+        "source_url": "https://www.samsung.com/africa/en/offer/ghana-s24-consumer-finance-promo",
+        "notes": "One of the stores selling Samsung Galaxy S24 devices that participate in financing."
+      },
+      {
+        "name": "Splitit",
+        "domain": "splitit.com",
+        "url": "https://www.samsung.com/us/apps/samsung-wallet/installment-payments",
+        "role": "installment service provider for Samsung Wallet",
+        "financing_responsibility": "provides installment service, underwriting by Splitit",
+        "target_relevance": "relevant to installment financing via Samsung Wallet in US",
+        "quote": "Samsung is a technology provider and is not providing lending services. Installment service provided by Splitit (NMLS# 2630622).",
+        "source_url": "https://www.samsung.com/us/apps/samsung-wallet/installment-payments",
+        "notes": "Referenced as financing provider for Samsung Wallet installment plans."
+      }
+    ],
+    "extraction_confidence": 0.95,
+    "needs_additional_extraction": false,
+    "partner_details": [
+      "Access Bank; financing provider for smartphone loans; responsible for loan approval and disbursement.",
+      "Stanbic Bank; financing provider for smartphone loans; responsible for loan approval and disbursement.",
+      "UMB; financing provider for smartphone loans; responsible for loan approval and disbursement.",
+      "Splitit; installment financing service provider for Samsung Wallet; provides installment payment plans, underwriting financing."
+    ],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "maxit.orange.com": {
+    "validated": true,
+    "confidence": 0.9,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://maxit.orange.com/en/page-contry-mali.html",
+      "https://maxit.orange.com/en/page-contry-mali.html"
+    ],
+    "supporting_snippets": [
+      "Send mobile credit to your loved ones in Mali with Max it. Flexible, secure internet, call and SMS options. Pay with your bank card. The credit is instantly sent to the recipient's phone.",
+      "Operators available in Mali: Orange, Telecel, Moov Africa. Select operator, choose amount, pay, credit appears within seconds."
+    ],
+    "reasoning": "The retrieved page content exclusively describes Max it's mobile credit top-up services and partner telecom operators (Orange, Telecel, Moov) for Mali. There is no mention or evidence that Max it sells, finances, leases, or underwrites smartphone financing or installment plans. The references and services focus solely on airtime/data top-ups which do not relate to the target category smartphone financing.",
+    "page_company": {
+      "name": "Max it",
+      "domain": "maxit.orange.com",
+      "url": "https://maxit.orange.com/en/page-contry-mali.html",
+      "role": "provider",
+      "financing_responsibility": "direct",
+      "target_relevance": "irrelevant",
+      "quote": "Send mobile credit to your loved ones in Mali with Max it. Flexible, secure internet, call and SMS options. Pay with your bank card. The credit is instantly sent to the recipient's phone.",
+      "source_url": "https://maxit.orange.com/en/page-contry-mali.html",
+      "notes": "Max it facilitates instant mobile top-ups and telecom credit transfer to Mali recipients but does not provide smartphone financing or installment plans."
+    },
+    "referenced_entities": [
+      {
+        "name": "Orange Mali",
+        "domain": "orange.com",
+        "url": "",
+        "role": "mobile operator",
+        "financing_responsibility": "none",
+        "target_relevance": "irrelevant",
+        "quote": "Operators available in Mali: Orange, Telecel, Moov Africa. Select “Orange”, enter the recipient’s number, choose amount and pay; the credit appears within seconds.",
+        "source_url": "https://maxit.orange.com/en/page-contry-mali.html",
+        "notes": "Mobile operator partner for mobile top-ups only, no smartphone financing mentioned."
+      },
+      {
+        "name": "Telecel Mali",
+        "domain": "telecel.com",
+        "url": "",
+        "role": "mobile operator",
+        "financing_responsibility": "none",
+        "target_relevance": "irrelevant",
+        "quote": "Operators available in Mali: Orange, Telecel, Moov Africa. Select Telecel, choose desired plan, confirm your payment; the bundle is activated automatically.",
+        "source_url": "https://maxit.orange.com/en/page-contry-mali.html",
+        "notes": "Mobile operator partner for mobile top-ups only, no smartphone financing mentioned."
+      },
+      {
+        "name": "Moov Africa",
+        "domain": "moov-africa.com",
+        "url": "",
+        "role": "mobile operator",
+        "financing_responsibility": "none",
+        "target_relevance": "irrelevant",
+        "quote": "Operators available in Mali: Orange, Telecel, Moov Africa. From 3€ View top-ups moov africa Moov",
+        "source_url": "https://maxit.orange.com/en/page-contry-mali.html",
+        "notes": "Mobile operator partner for mobile top-ups only, no smartphone financing mentioned."
+      }
+    ],
+    "extraction_confidence": 1.0,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "doctorsim.com": {
+    "validated": true,
+    "confidence": 0.9,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://www.doctorsim.com/fr/ml/topup-phone/mali-moovafrica",
+      "https://www.doctorsim.com/fr/ml/topup-phone/mali-moovafrica"
+    ],
+    "supporting_snippets": [
+      "Topping up or sending money to any prepaid phone from Moov Africa Mali has never been easier. Top up with a wide range of secure payment methods. Pay in the currency of your choice. 100% safe and reliable.",
+      "How do I pay to top up my phone from Moov Africa Mali ? By using one of our secure payment methods which include credit and/or debit card, PayPal, Apple Pay, Cryptocurrency, Visa, MasterCard and American Express..."
+    ],
+    "reasoning": "The provided text and chunks only describe Doctorsim as a service enabling prepaid phone top-ups using multiple payment methods including cards and digital payments. There is no mention of Doctorsim directly offering smartphone financing, installments, leasing, or underwriting. The only referenced company is Moov Africa Mali as a mobile network operator whose airtime is recharged. Therefore, Doctorsim is not a provider of smartphone financing and the entity type is 'unknown' as related to the target category.",
+    "page_company": {
+      "name": "Doctorsim",
+      "domain": "doctorsim.com",
+      "url": "https://www.doctorsim.com/fr/ml/topup-phone/mali-moovafrica",
+      "role": "online phone top-up service provider",
+      "financing_responsibility": "None",
+      "target_relevance": "No direct relevance to smartphone financing",
+      "quote": "Topping up or sending money to any prepaid phone from Moov Africa Mali has never been easier. ... Top up with a wide range of secure payment methods. Pay in the currency of your choice. 100% safe and reliable.",
+      "source_url": "https://www.doctorsim.com/fr/ml/topup-phone/mali-moovafrica",
+      "notes": "Doctorsim provides mobile phone top-up services, including payment through multiple secure methods, but there is no indication it directly provides smartphone financing or installment sales."
+    },
+    "referenced_entities": [
+      {
+        "name": "Moov Africa Mali",
+        "domain": "unknown",
+        "url": "",
+        "role": "mobile network operator/recharge target",
+        "financing_responsibility": "None",
+        "target_relevance": "No direct relevance to smartphone financing",
+        "quote": "How do I pay to top up my phone from Moov Africa Mali ? By using one of our secure payment methods which include credit and/or debit card, PayPal, Apple Pay, Cryptocurrency, Visa, MasterCard and American Express...",
+        "source_url": "https://www.doctorsim.com/fr/ml/topup-phone/mali-moovafrica",
+        "notes": "Moov Africa Mali is mentioned only as a mobile network provider whose airtime can be recharged via Doctorsim."
+      }
+    ],
+    "extraction_confidence": 0.95,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "baluwo.com": {
+    "validated": true,
+    "confidence": 0.9,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://baluwo.com/fr/afrique/mali/recharge-mobile-mali",
+      "https://baluwo.com/fr/afrique/mali/recharge-mobile-mali"
+    ],
+    "supporting_snippets": [
+      "Vous pouvez recharger un téléphone portable maliens directement sur notre plateforme, de manière rapide, simple et surtout sûre.",
+      "Vous pouvez également recharger du crédit avec Malitel , l’un des principaux fournisseurs dans ce pays."
+    ],
+    "reasoning": "The retrieved pages focus exclusively on Baluwo's service for mobile credit recharge and sending money to Mali. Multiple references confirm that Baluwo operates a platform to top-up mobile credit for Malian operators like Malitel and Telecel. There is no mention or implication that Baluwo offers smartphone financing, installment plans, leasing, or any financial service related to smartphone acquisition. The referenced entities are mobile network operators, not financing providers. Thus, the page company role relevant to smartphone financing is unknown, as it does not directly provide or finance this service.",
+    "page_company": {
+      "name": "Baluwo",
+      "domain": "baluwo.com",
+      "url": "https://baluwo.com/fr/afrique/mali/recharge-mobile-mali",
+      "role": "provider",
+      "financing_responsibility": "none",
+      "target_relevance": "none",
+      "quote": "Baluwo propose un service exclusif de recharge de crédit mobile au Mali via sa plateforme, permettant de recharger un téléphone portable malien directement, en ligne et instantanément.",
+      "source_url": "https://baluwo.com/fr/afrique/mali/recharge-mobile-mali",
+      "notes": "Baluwo provides mobile credit recharge services but does not provide smartphone financing services in installments or related financial products."
+    },
+    "referenced_entities": [
+      {
+        "name": "Malitel",
+        "domain": "unknown",
+        "url": "https://baluwo.com/fr/afrique/mali/recharge-mobile-mali",
+        "role": "mobile operator partner",
+        "financing_responsibility": "none",
+        "target_relevance": "none",
+        "quote": "Vous pouvez également recharger du crédit avec Malitel, l’un des principaux fournisseurs dans ce pays, en toute transparence et sécurité.",
+        "source_url": "https://baluwo.com/fr/afrique/mali/recharge-mobile-mali",
+        "notes": "Malitel is referenced as a mobile phone operator partner for mobile credit top-up."
+      },
+      {
+        "name": "Telecel",
+        "domain": "unknown",
+        "url": "https://baluwo.com/fr/afrique/mali/recharge-mobile-mali",
+        "role": "mobile operator partner",
+        "financing_responsibility": "none",
+        "target_relevance": "none",
+        "quote": "Vous pouvez aussi recharger un portable Telecel au Mali, l’une des entreprises de référence dans ce pays africain.",
+        "source_url": "https://baluwo.com/fr/afrique/mali/recharge-mobile-mali",
+        "notes": "Telecel is referenced as another mobile operator partner for mobile credit top-up."
+      }
+    ],
+    "extraction_confidence": 0.95,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "libon.com": {
+    "validated": true,
+    "confidence": 0.9,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://www.libon.com/offre/ml-recharge",
+      "https://www.libon.com/offre/ml-recharge"
+    ],
+    "supporting_snippets": [
+      "Choose a topup from our Airtime, Internet or Bundle services... Buy Your minutes directly on the app or at one of our points of sale... Top-up your loved ones' electricity wherever you are",
+      "Install the application on your mobile and create an account... No hidden costs: the price displayed is the price paid"
+    ],
+    "reasoning": "The retrieved page content exclusively describes Libon's services for prepaid airtime, data, and electricity top-ups, along with international calling. There is no mention of smartphone financing, installment plans, or any financing responsibility by Libon. No partner or third party is referenced in relation to smartphone financing. The company represented by the page does not directly provide the target category service 'smartphone_financing'. Thus, the entity type is 'unknown' given insufficient evidence.",
+    "page_company": {
+      "name": "Libon",
+      "domain": "libon.com",
+      "url": "https://www.libon.com/offre/ml-recharge",
+      "role": "service provider of international calls, airtime, data, and electricity top-up services",
+      "financing_responsibility": "none indicated",
+      "target_relevance": "none",
+      "quote": "Install the application on your mobile and create an account... Buy your minutes directly on the app or at one of our points of sale... Choose a topup from our Airtime, Internet or Bundle services... Top-up your loved ones' electricity wherever you are",
+      "source_url": "https://www.libon.com/offre/ml-recharge",
+      "notes": "Libon provides mobile airtime, internet data top-ups and electricity top-ups but no mentions of smartphone financing, installment sales, or leasing."
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 1.0,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "orangemoney.fr": {
+    "validated": true,
+    "confidence": 0.85,
+    "entity_type": "partner_only",
+    "evidence_pages": [
+      "https://orangemoney.fr/envoyer-de-l-argent-au-mali",
+      "https://orangemoney.fr/envoyer-de-l-argent-au-mali"
+    ],
+    "supporting_snippets": [
+      "Votre proche pourra retirer de l’argent au Mali mais également : Régler ses factures au Mali facilement auprès de sociétés partenaires directement avec son téléphone portable.",
+      "SINGA NI MARA : offre d’épargne et de pico/micro-crédit aux particuliers."
+    ],
+    "reasoning": "The retrieved text from orangemoney.fr describes a mobile money service primarily for sending money, paying bills, purchasing airtime, and related financial services. There is mention of micro-credit from a partner (SINGA NI MARA) but no direct evidence that Orangemoney FR itself provides smartphone financing or installment sales/leasing. Therefore, the entity_type is partner_only with Orangemoney FR as the page company and SINGA NI MARA as a financing partner. No aggregator or direct provider role is found.",
+    "page_company": {
+      "name": "Orangemoney FR",
+      "domain": "orangemoney.fr",
+      "url": "https://orangemoney.fr/envoyer-de-l-argent-au-mali",
+      "role": "provider of mobile money and international money transfer services",
+      "financing_responsibility": "Not explicitly stated for smartphone financing; focuses on money transfer, bill payment, airtime recharge",
+      "target_relevance": "No clear evidence of direct smartphone financing service",
+      "quote": "Votre proche pourra retirer de l’argent au Mali mais également : Régler ses factures au Mali facilement auprès de sociétés partenaires directement avec son téléphone portable... Achetez des recharges prépayées... Transférer de l’argent au Mali ou ailleurs à l’international",
+      "source_url": "https://orangemoney.fr/envoyer-de-l-argent-au-mali",
+      "notes": "The page and chunks describe Orange Money services related to mobile money, bill payments, airtime top-ups, and international money transfers. No mention of smartphone financing or installment sales or leasing of smartphones is found."
+    },
+    "referenced_entities": [
+      {
+        "name": "NSIA",
+        "domain": "unknown",
+        "url": "",
+        "role": "partner providing epargne rémunérée (savings) service accessible via mobile",
+        "financing_responsibility": "Savings product only, no smartphone financing",
+        "target_relevance": "irrelevant to smartphone financing",
+        "quote": "Sini Tono de NSIA : épargne rémunérée sur votre mobile.",
+        "source_url": "https://orangemoney.fr/envoyer-de-l-argent-au-mali",
+        "notes": "Mentioned as a partner offering savings products via mobile, not related to smartphone financing."
+      },
+      {
+        "name": "Rapido",
+        "domain": "unknown",
+        "url": "",
+        "role": "service allowing Orange Money clients to make merchant payments",
+        "financing_responsibility": "Not financing, payment facilitator",
+        "target_relevance": "irrelevant to smartphone financing",
+        "quote": "Rapido : service qui permet aux clients Orange Money d’effectuer des paiements marchands.",
+        "source_url": "https://orangemoney.fr/envoyer-de-l-argent-au-mali",
+        "notes": "Payment service, no financing indicated."
+      },
+      {
+        "name": "SINGA NI MARA",
+        "domain": "unknown",
+        "url": "",
+        "role": "partner providing micro-credit and savings offers",
+        "financing_responsibility": "Micro-credit, but no clear indication that Orangemoney FR finances smartphones",
+        "target_relevance": "potentially relevant to financing but no direct link to smartphone financing",
+        "quote": "SINGA NI MARA : offre d’épargne et de pico/micro-crédit aux particuliers.",
+        "source_url": "https://orangemoney.fr/envoyer-de-l-argent-au-mali",
+        "notes": "Mentioned micro-credit offer, but no direct mention of smartphone financing or installment sales."
+      }
+    ],
+    "extraction_confidence": 0.9,
+    "needs_additional_extraction": false,
+    "partner_details": [
+      "SINGA NI MARA; partner offering micro-credit and savings products to individuals; financing responsibility: micro-credit products but no direct smartphone financing explicitly stated; relationship: financing partner mentioned on Orangemoney FR site."
+    ],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "bossrevolution.com": {
+    "validated": true,
+    "confidence": 0.9,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://www.bossrevolution.com/en-us/country/mali/international-mobile-topup",
+      "https://www.bossrevolution.com/en-us/country/mali/international-mobile-topup"
+    ],
+    "supporting_snippets": [
+      "Our online top-up platform lets you add airtime credit to mobile phones in over 100 countries with just a few simple clicks. Send mobile airtime and top up digitally using our web or mobile app.",
+      "You can even recharge mobile data as well as calling time!"
+    ],
+    "reasoning": "The retrieved chunks from the bossrevolution.com domain all describe services related to mobile airtime top-up and international calling. There is no mention or indication that Bossrevolution sells smartphones or offers smartphone financing, leasing, or installment payment plans. Thus, they do not directly provide the target category 'smartphone_financing'. No other companies or partners are mentioned as providing smartphone financing on the page.",
+    "page_company": {
+      "name": "BOSS Revolution",
+      "domain": "bossrevolution.com",
+      "url": "https://www.bossrevolution.com/en-us/country/mali/international-mobile-topup",
+      "role": "provider",
+      "financing_responsibility": "none",
+      "target_relevance": "none",
+      "quote": "Our online top-up platform lets you add airtime credit to mobile phones in over 100 countries with just a few simple clicks. Send mobile airtime and top up digitally using our web or mobile app.",
+      "source_url": "https://www.bossrevolution.com/en-us/country/mali/international-mobile-topup",
+      "notes": "The company provides international mobile airtime top-up service but does not provide smartphone financing, installment sales, or leasing of smartphones."
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 1.0,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "tecno-mobile.com": {
+    "validated": true,
+    "confidence": 0.8,
+    "entity_type": "partner_only",
+    "evidence_pages": [
+      "https://www.tecno-mobile.com/ml/promotionstore"
+    ],
+    "supporting_snippets": [
+      "lists various TECNO Exclusive stores and electronic market sellers in multiple cities but no mention of financing services by TECNO itself"
+    ],
+    "reasoning": "The retrieved page is a store locator page listing multiple TECNO Exclusive stores and other sellers with no text or indication that TECNO directly offers smartphone financing. The presence of many reseller entities suggests sales through partners. There is no mention of TECNO financing or installment plans directly on the page. Thus, TECNO Smartphones does not appear to be a direct financing provider. The page is best classified as partner_only, with many partner stores selling TECNO products but no direct service evidence from TECNO itself.",
+    "page_company": {
+      "name": "TECNO Smartphones",
+      "domain": "tecno-mobile.com",
+      "url": "https://www.tecno-mobile.com/ml/promotionstore",
+      "role": "Smartphone manufacturer and retailer",
+      "financing_responsibility": "None indicated",
+      "target_relevance": "Does not provide smartphone financing directly",
+      "quote": "promotionstore | TECNO Smartphones ... lists various TECNO Exclusive stores and electronic market sellers in multiple cities but no mention of financing services by TECNO itself",
+      "source_url": "https://www.tecno-mobile.com/ml/promotionstore",
+      "notes": "Page lists physical stores and authorized sellers for TECNO smartphones and accessories with contact and location details but does not offer or mention financing services directly."
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 0.9,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "horonyafinance.com": {
+    "validated": true,
+    "confidence": 0.9,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://www.horonyafinance.com/mali-telecommunications-moov-africa-malitel-desormais-sous-le-controle-de-letat"
+    ],
+    "supporting_snippets": [
+      "Horonya Finance(HF)) est la principale plateforme d’information économique et financière du Burkina Faso avec une couverture intégrale de l’actualité économique et financière africaine."
+    ],
+    "reasoning": "The retrieved page text identifies Horonya Finance as a news and information platform focused on economic and financial news, with no mention of providing smartphone financing or acting as a financing partner. No referenced entities related to smartphone financing or financing responsibilities are present in the chunks. The page does not demonstrate direct provision, financing, underwriting, leasing, or selling of smartphone financing services, nor acting as an aggregator or partner. Therefore, the company is classified as unknown with respect to the target category.",
+    "page_company": {
+      "name": "Horonya Finance",
+      "domain": "horonyafinance.com",
+      "url": "https://www.horonyafinance.com/mali-telecommunications-moov-africa-malitel-desormais-sous-le-controle-de-letat",
+      "role": "Economic and financial news and information platform",
+      "financing_responsibility": "none",
+      "target_relevance": "none",
+      "quote": "Horonya Finance(HF)) est la principale plateforme d’information économique et financière du Burkina Faso avec une couverture intégrale de l’actualité économique et financière africaine.",
+      "source_url": "https://www.horonyafinance.com/mali-telecommunications-moov-africa-malitel-desormais-sous-le-controle-de-letat",
+      "notes": "The content describes Horonya Finance as a news and information platform without mention of providing or financing smartphone financing services."
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 1.0,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "agefaumali.com": {
+    "validated": true,
+    "confidence": 0.9,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://agefaumali.com/",
+      "https://agefaumali.com/"
+    ],
+    "supporting_snippets": [
+      "Le fonds est collecté, auprès des opérateurs de télécommunications (Moov Africa Malitel, Orange Mali SA et Atel Sa), par l’Autorité Malienne de Régulation des Télécommunications/TIC et Postes",
+      "Faciliter la fourniture d’un Accès Universel à l’ensemble de la population malienne grâce à l’utilisation des technologies de l’information et des communications abordables"
+    ],
+    "reasoning": "The provided retrieved page content strongly indicates that AGEFAU’s role is managing a universal access fund to facilitate telecommunications infrastructure and services deployment in Mali. The content mentions funds collected from telecom operators and projects for widespread access, but there is no mention of offering smartphone financing or related consumer installment plans. No companies or partners related to smartphone financing are named. Therefore, the company represented by the domain agefaumali.com does not directly provide the target service smartphone financing. The page cannot be classified as a provider, partner_only, or aggregator with respect to smartphone financing. The best fitting classification is unknown given present evidence.",
+    "page_company": {
+      "name": "AGEFAU - Agence de Gestion du Fonds d'Accès Universel",
+      "domain": "agefaumali.com",
+      "url": "https://agefaumali.com/",
+      "role": "Manager and distributer of Universal Access Funds to facilitate access to telecommunications services and infrastructure across Mali",
+      "financing_responsibility": "Collects and manages funds from telecom operators to finance universal access projects; does not itself finance or sell smartphone financing services",
+      "target_relevance": "Not relevant to smartphone financing; focus is on universal access projects like network coverage, telephony access, training, and infrastructure for underserved areas",
+      "quote": "Le fonds est collecté, auprès des opérateurs de télécommunications (Moov Africa Malitel, Orange Mali SA et Atel Sa), par l’Autorité Malienne de Régulation des Télécommunications/TIC et Postes",
+      "source_url": "https://agefaumali.com/",
+      "notes": "AGEFAU acts as a fund management agency for telecom universal access, not as a direct provider or financier of smartphone installment programs; no evidence of selling or financing smartphones"
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 1.0,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "mboasu.com": {
+    "validated": true,
+    "confidence": 0.9,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://www.mboasu.com/en/Mali.html"
+    ],
+    "supporting_snippets": [
+      "Recharge a mobile in Mali. Recharge mobiles of friends and familly. We have the lowest prices!"
+    ],
+    "reasoning": "All retrieved content from mboasu.com exclusively describes mobile airtime top-up services. There is no mention or implication that Mboasu provides smartphone financing, leasing, installment sales, or underwriting. No referenced partners or providers related to smartphone financing are mentioned. Therefore, the company is classified as unknown for the target category of smartphone_financing.",
+    "page_company": {
+      "name": "Mboasu",
+      "domain": "mboasu.com",
+      "url": "https://www.mboasu.com/en/Mali.html",
+      "role": "provider",
+      "financing_responsibility": "none mentioned",
+      "target_relevance": "none",
+      "quote": "We have the lowest prices! Recharge a mobile in Mali. Recharge mobiles of friends and familly.",
+      "source_url": "https://www.mboasu.com/en/Mali.html",
+      "notes": "The page offers mobile recharge services only; no evidence of smartphone financing, installment sales, or related financial services."
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 1.0,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "waricel.com": {
+    "validated": true,
+    "confidence": 0.9,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://www.waricel.com/orange-money-transfer-mali"
+    ],
+    "supporting_snippets": [
+      "Waricel et son service \"International Mobile Money Transfer\" sont réglementés et régulièrement contrôlés par le groupement de lutte contre la criminalité financière du département du Trésor des États-Unis (Department of Treasury’s Financial Crimes Enforcement Network - FinCEN)"
+    ],
+    "reasoning": "The retrieved page content presents Waricel as a provider of an international mobile money transfer service. There is no mention of smartphone financing, leasing, installment sales, or related financial products offered by Waricel or its partners. The target category 'smartphone_financing' is not addressed; thus, the company/domain does not directly provide the target category. No referenced entities related to smartphone financing appear on the page, indicating the focus is solely on money transfer services.",
+    "page_company": {
+      "name": "Waricel",
+      "domain": "waricel.com",
+      "url": "https://www.waricel.com/orange-money-transfer-mali",
+      "role": "provider of international mobile money transfer services",
+      "financing_responsibility": "none stated or implied for smartphone financing",
+      "target_relevance": "not relevant",
+      "quote": "Waricel et son service \"International Mobile Money Transfer\" sont réglementés et régulièrement contrôlés par le groupement de lutte contre la criminalité financière du département du Trésor des États-Unis (Department of Treasury’s Financial Crimes Enforcement Network - FinCEN)",
+      "source_url": "https://www.waricel.com/orange-money-transfer-mali",
+      "notes": "Waricel provides international mobile money transfer services but there is no mention or evidence that it directly provides smartphone financing or any related installment financing service."
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 1.0,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "topup-balance.com": {
+    "validated": true,
+    "confidence": 0.95,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://topup-balance.com/en-ml/mobile-mali",
+      "https://topup-balance.com/en-ml/mobile-mali"
+    ],
+    "supporting_snippets": [
+      "TopUp-Balance provides a simple and convenient way to top up your mobile phone balance online, no matter where you are. We guarantee the funds will be credited to your balance — just a few clicks are needed to complete the transaction.",
+      "We support more than 10 payment options, including international payment systems and e-wallets. You can also use cryptocurrency payments: Payeer, Perfect Money, MasterCard, VOLET, Visa, Coinbase, CoinPayments, Bitcoin."
+    ],
+    "reasoning": "The retrieved content from topup-balance.com focuses exclusively on enabling users to top up their mobile phone balances online using various payment methods including cryptocurrencies. No text mentions smartphone financing, provision of smartphones, leasing, installment payments, or any related financial services tied to smartphone purchase or financing. Multiple chunks confirm the service is a top-up service, not a financing provider. Therefore, the company/domain does not directly provide the target category 'smartphone_financing'. No other companies or partners related to smartphone financing are mentioned, so referenced_entities is empty and entity_type is unknown.",
+    "page_company": {
+      "name": "TopUp Balance",
+      "domain": "topup-balance.com",
+      "url": "https://topup-balance.com/en-ml/mobile-mali",
+      "role": "online mobile top-up service provider",
+      "financing_responsibility": "none indicated",
+      "target_relevance": "does not provide smartphone financing",
+      "quote": "TopUp-Balance provides a simple and convenient way to top up your mobile phone balance online, no matter where you are. We guarantee the funds will be credited to your balance — just a few clicks are needed to complete the transaction.",
+      "source_url": "https://topup-balance.com/en-ml/mobile-mali",
+      "notes": "The service offers mobile phone top-up and recharge with multiple payment methods including cryptocurrency but does not mention any smartphone financing, installment sales, leasing, or credit provision."
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 0.9,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "maya.net": {
+    "validated": true,
+    "confidence": 0.9,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://maya.net/esim/mali",
+      "https://maya.net/esim/mali",
+      "https://maya.net/esim/mali"
+    ],
+    "supporting_snippets": [
+      "Travel with unlimited high-speed data in Mali with a prepaid travel eSIM. Instant activation via email, no SIM card required!",
+      "Activate any of our Unlimited or Prepaid eSIM plans with your phone's onboard eSIM chip, alongside your existing phone plan.",
+      "Does the Mali eSIM include a local phone number? No, our Mali eSIM plans are data only eSIM plans."
+    ],
+    "reasoning": "Based on all chunks, Maya Mobile operates as a provider of prepaid and unlimited data eSIM plans for travelers in Mali. There is no evidence that Maya Mobile finances smartphones, sells phones on installments, or underwrites smartphone financing. The service is data connectivity only. No partners or other companies related to smartphone financing are mentioned. Therefore, the entity_type is 'unknown' regarding the target category smartphone_financing, since it offers no such service.",
+    "page_company": {
+      "name": "Maya Mobile",
+      "domain": "maya.net",
+      "url": "https://maya.net/esim/mali",
+      "role": "provider",
+      "financing_responsibility": "none",
+      "target_relevance": "no",
+      "quote": "Travel with unlimited high-speed data in Mali with a prepaid travel eSIM. Instant activation via email, no SIM card required!",
+      "source_url": "https://maya.net/esim/mali",
+      "notes": "Maya Mobile offers prepaid eSIM data plans for travel, including unlimited and prepaid data plans activated instantly. There is no mention of smartphone financing or installment plans for phones."
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 0.9,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "rechargemobile.co": {
+    "validated": true,
+    "confidence": 0.9,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://www.rechargemobile.co/fr/mali"
+    ],
+    "supporting_snippets": [
+      "Rechargez en ligne votre mobile au Mali - Recharge Mobile Achetez en ligne du crédit téléphonique pour recharger un numéro prépayé au Mali, pour vous ou vos proches."
+    ],
+    "reasoning": "The retrieved page content only describes Rechargemobile as a mobile airtime top-up service for Mali customers. There is no mention of smartphone financing, installment plans, leasing, or sales of smartphones. No partners or other providers related to smartphone financing are referenced. Therefore, the company/domain cannot be classified as provider, partner_only, or aggregator with respect to the target category 'smartphone_financing'. The best classification based on the evidence is 'unknown'.",
+    "page_company": {
+      "name": "Rechargemobile",
+      "domain": "rechargemobile.co",
+      "url": "https://www.rechargemobile.co/fr/mali",
+      "role": "provider",
+      "financing_responsibility": "none",
+      "target_relevance": "none",
+      "quote": "Rechargez en ligne votre mobile au Mali - Recharge Mobile Achetez en ligne du crédit téléphonique pour recharger un numéro prépayé au Mali, pour vous ou vos proches.",
+      "source_url": "https://www.rechargemobile.co/fr/mali",
+      "notes": "The page describes Rechargemobile as a service for purchasing mobile airtime credit online but does not mention smartphone financing or installment services."
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 1.0,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "allo.monisnap.com": {
+    "validated": true,
+    "confidence": 0.9,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://allo.monisnap.com/gb/countries/ml/operators/malitel"
+    ],
+    "supporting_snippets": [
+      "Allo offers the number 1 mobile phone top-up service in the world. You can buy prepaid cards to top up your mobile or a friend's who lives abroad. Purchase mobile top-ups to credit minutes, texts or mobile data."
+    ],
+    "reasoning": "The retrieved page content exclusively describes Allo Monisnap providing mobile phone top-up services (prepaid credit for calls, texts, and data). There is no mention or implication of financing, leasing, installment plans, or smartphone sales and financing. The target category is smartphone_financing, which is not supported by the evidence. No partners or other referenced entities related to smartphone financing were found in the chunks.",
+    "page_company": {
+      "name": "Allo Monisnap",
+      "domain": "allo.monisnap.com",
+      "url": "https://allo.monisnap.com/gb/countries/ml/operators/malitel",
+      "role": "provider",
+      "financing_responsibility": "company finances and sells prepaid mobile top-ups",
+      "target_relevance": "irrelevant",
+      "quote": "Allo offers the number 1 mobile phone top-up service in the world. You can buy prepaid cards to top up your mobile or a friend's who lives abroad. Purchase mobile top-ups to credit minutes, texts or mobile data.",
+      "source_url": "https://allo.monisnap.com/gb/countries/ml/operators/malitel",
+      "notes": "The page describes Allo Monisnap as providing mobile phone top-up services but does not mention financing or installment services for smartphones or smartphone financing."
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 1.0,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "dgi.gouv.ml": {
+    "validated": true,
+    "confidence": 0.95,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://www.dgi.gouv.ml/"
+    ],
+    "supporting_snippets": [
+      "La DGI accompagne les entreprises nouvelles à travers la bonne information et la conduite à tenir pour bien débuter. Accès rapides - Agenda fiscal - Modèles d'annexe - Attestations - Code Général des Impôts - Droits d'enregistrement - Droits de timbres - Remboursements - Recouvrement - Recours - Liste des contribuables actifs"
+    ],
+    "reasoning": "The retrieved chunks show that the domain dgi.gouv.ml belongs to the Direction Générale des Impôts (DGI) in Mali, primarily a government tax authority. The content exclusively relates to fiscal information, tax obligations, legislative updates, and administrative contact details. There is no indication of the company providing, underwriting, financing, or leasing smartphone financing. No referenced partners or providers related to the target category were found in the retrieved text. Thus, the page company is classified as unknown with respect to smartphone financing.",
+    "page_company": {
+      "name": "DGI Gouv ML",
+      "domain": "dgi.gouv.ml",
+      "url": "https://www.dgi.gouv.ml/",
+      "role": "Government tax and fiscal administration authority in Mali",
+      "financing_responsibility": "None related to smartphone financing",
+      "target_relevance": "None",
+      "quote": "La DGI accompagne les entreprises nouvelles à travers la bonne information et la conduite à tenir pour bien débuter. Accès rapides - Agenda fiscal - Modèles d'annexe - Attestations - Code Général des Impôts - Droits d'enregistrement - Droits de timbres - Remboursements - Recouvrement - Recours - Liste des contribuables actifs",
+      "source_url": "https://www.dgi.gouv.ml/",
+      "notes": "The DGI is a government entity focused on tax collection, fiscal information, and related services. No mention or evidence of smartphone financing or installment plans."
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 0.95,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "financesonefiles.worldbank.org": {
+    "validated": false,
+    "confidence": 0.1,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://documents1.worldbank.org/curated/en/411921632203359301/txt/The-Future-of-Work-in-Africa-Harnessing-the-Potential-of-Digital-Technologies-for-All.txt",
+      "https://blogs.worldbank.org/en/africacan/digital-financial-services-can-bring-inclusion-and-growth-mali"
+    ],
+    "supporting_snippets": [
+      "Au Kenya, le Groupe de la Banque mondiale et sa branche coréenne, en coopération avec d’autres partenaires de développement, fournissent une aide financière et de conseil à la création d’un écosystème de start-ups, d’entrepreneurs et d’innovateurs en agronomie.",
+      "Insights from the World Bank DE4A policy note on Digital financial services (DFS) and the World Bank project to promote access to finance (PAFEEM) highlight the potential to leverage technology in enhancing inclusive growth and recovery in Mali."
+    ],
+    "reasoning": "The provided retrieved content is from World Bank reports and blog pages discussing digital financial services and agricultural technology projects affiliated with the World Bank. There is no direct mention or evidence that the page company/domain financesonefiles.worldbank.org directly provides smartphone financing, sells smartphones on installments, or underwrites financing for smartphones. The content instead describes developmental programs and financial inclusion projects without direct provisioning. Therefore, the company/domain is classified as unknown with low confidence for providing the target service.",
+    "page_company": {
+      "name": "Financesonefiles Worldbank",
+      "domain": "financesonefiles.worldbank.org",
+      "url": "https://financesonefiles.worldbank.org",
+      "role": "unknown",
+      "financing_responsibility": "none indicated",
+      "target_relevance": "none indicated",
+      "quote": "No clear evidence that financesonefiles.worldbank.org directly provides smartphone financing or related installment services.",
+      "source_url": "",
+      "notes": "The retrieved pages are World Bank reports and blog articles about digital financial services and agricultural tech innovations, but do not mention the company or domain financesonefiles.worldbank.org providing smartphone financing."
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 0.7,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "bceao.int": {
+    "validated": null,
+    "confidence": 0.0,
+    "entity_type": "unknown",
+    "evidence_pages": [],
+    "supporting_snippets": [],
+    "reasoning": "No relevant evidence pages were retrieved for validation.",
+    "page_company": null,
+    "referenced_entities": [],
+    "extraction_confidence": 0.0,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "paybindi.com": {
+    "validated": true,
+    "confidence": 0.95,
+    "entity_type": "provider",
+    "evidence_pages": [
+      "https://paybindi.com/",
+      "https://paybindi.com/accueil-mali",
+      "https://paybindi.com/"
+    ],
+    "supporting_snippets": [
+      "Obtenez votre smartphone dès aujourd’hui en versant seulement un dépôt initial de 25 %. Réglez le solde en 2x, 3x, 4x, 5x ou 6x versements égaux selon votre plan de paiement préféré : hebdomadaire, bihebdomadaire ou mensuel, sur une période maximale de 6 mois.",
+      "Leur processus de paiement échelonné m'a vraiment aidée, surtout avec mon budget serré. Je recommande vivement Paybindi à tous ceux qui recherchent un moyen simple et flexible d'obtenir un smartphone de qualité.",
+      "Pour garantir le respect des conditions de paiement, notre technologie PAYBINDI Lock peut verrouiller le smartphone si le solde n’est pas payé selon l’échéancier convenu."
+    ],
+    "reasoning": "The retrieved content consistently shows Paybindi directly offers smartphone financing via leasing with an option to purchase. Multiple customer testimonials and detailed payment plan descriptions confirm that Paybindi itself is responsible for the financing function, rather than acting as an intermediary or lead generator. There is no mention of separate financing partners providing the service, nor is the page structured as an aggregator listing multiple providers. Hence, Paybindi is classified as a provider.",
+    "page_company": {
+      "name": "Paybindi",
+      "domain": "paybindi.com",
+      "url": "https://paybindi.com/",
+      "role": "Smartphone financing provider offering leasing with option to purchase",
+      "financing_responsibility": "Directly provides financing via payment plans and leasing options",
+      "target_relevance": "Directly provides smartphone financing",
+      "quote": "Obtenez votre smartphone dès aujourd’hui en versant seulement un dépôt initial de 25 %. Réglez le solde en 2x, 3x, 4x, 5x ou 6x versements égaux selon votre plan de paiement préféré : hebdomadaire, bihebdomadaire ou mensuel, sur une période maximale de 6 mois.",
+      "source_url": "https://paybindi.com/",
+      "notes": "Paybindi offers a leasing with purchase option on smartphones with flexible installment plans up to 6 months, including technology to lock device if payments are missed."
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 0.9,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "boamali.com": {
+    "validated": true,
+    "confidence": 0.85,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://www.boamali.com/"
+    ],
+    "supporting_snippets": [
+      "Notre offre particuliers Comptes & Services Prêts ... Prêt Ma Maison Prêt Tous à l’Ecole Prêt TABASKI Prêt Ramadan Prêt consommation Prêt Personnel Prêt Fonxionaria Prêt Vitamine Prêt Véhicule IKAMOBILI"
+    ],
+    "reasoning": "The Bank of Africa Mali website demonstrates it is a provider of various loan products directly. However, no chunks mention specific smartphone financing products or installment plans for smartphones. The extracted loan types focus on housing, education, consumption, vehicles, and personal loans but omit smartphone financing explicitly. No external partners or aggregator roles are indicated. Therefore, the entity type is 'unknown' since direct provisioning of smartphone financing is not evidenced.",
+    "page_company": {
+      "name": "Bank of Africa - BOA-Mali",
+      "domain": "boamali.com",
+      "url": "https://www.boamali.com/",
+      "role": "provider",
+      "financing_responsibility": "provides direct financing for various loans",
+      "target_relevance": "no direct evidence of smartphone financing or leasing services found",
+      "quote": "Notre offre particuliers Comptes & Services Prêts ... Prêt Ma Maison Prêt Tous à l’Ecole Prêt TABASKI Prêt Ramadan Prêt consommation Prêt Personnel Prêt Fonxionaria Prêt Vitamine Prêt Véhicule IKAMOBILI ...",
+      "source_url": "https://www.boamali.com/",
+      "notes": "The site lists multiple loan types (housing, personal, vehicle, consumption, education) but does not specifically mention smartphone financing or installment plans for smartphones."
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 0.9,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "pixmania.com": {
+    "validated": true,
+    "confidence": 0.95,
+    "entity_type": "provider",
+    "evidence_pages": [
+      "https://www.pixmania.com/fr/fr/smartphones-iphone.html",
+      "https://www.pixmania.com/fr/fr/smartphones-iphone.html"
+    ],
+    "supporting_snippets": [
+      "Avec le paiement en plusieurs fois, les clients peuvent répartir le coût de leur iPhone sur une période allant de 3 à 36 mois, sans compromettre leur budget.",
+      "Lors du processus d'achat sur notre plateforme, les clients peuvent choisir parmi les différentes options de paiement, y compris le paiement en plusieurs fois."
+    ],
+    "reasoning": "All retrieved content consistently shows pixmania.com offers direct installment payment plans for smartphones without mentioning third-party financing providers. Therefore, pixmania.com is classified as a provider directly offering smartphone financing through a payment-in-installments service.",
+    "page_company": {
+      "name": "Pixmania",
+      "domain": "pixmania.com",
+      "url": "https://www.pixmania.com/fr/fr/smartphones-iphone.html",
+      "role": "seller and financier of smartphones via flexible payment options",
+      "financing_responsibility": "provides direct installment payment plans from 3 to 36 months",
+      "target_relevance": "direct provider of smartphone financing in the form of payment in several installments",
+      "quote": "Avec le paiement en plusieurs fois, les clients peuvent répartir le coût de leur iPhone sur une période allant de 3 à 36 mois, sans compromettre leur budget.",
+      "source_url": "https://www.pixmania.com/fr/fr/smartphones-iphone.html",
+      "notes": "The company offers direct flexible payment options including payment in multiple installments without naming external financing partners."
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 0.9,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "wearetech.africa": {
+    "validated": true,
+    "confidence": 0.9,
+    "entity_type": "partner_only",
+    "evidence_pages": [
+      "https://www.wearetech.africa/fr/fils/solutions/senegal-nixacom-propose-des-paiements-echelonnes-pour-des-produits-tech"
+    ],
+    "supporting_snippets": [
+      "Un client se connecte sur notre site Web et choisit le produit qu'il recherche, remplit un KYC, et une fois que nous avons reçu toutes les informations, nous voyons avec laquelle de nos institutions partenaires ils sont éligibles, nous les finançons directement à travers nous, et nous leur fournissons leur produit"
+    ],
+    "reasoning": "The retrieved content is an article published by Wearetech Africa about Nixacom, a Senegalese startup offering smartphone and tech product financing via BNPL. The evidence shows Nixacom as the direct provider and financer through its platform and partners. Wearetech Africa acts as the publisher and does not itself provide or finance smartphone financing services. According to the rules, Wearetech Africa is classified as partner_only since it references a separate company (Nixacom) providing the target service directly. Extraction confidence is high as the page clearly states roles. No other providers or partners are mentioned to confuse the classification. No additional extraction is needed as this is a focused article about a single named company.",
+    "page_company": {
+      "name": "Wearetech Africa",
+      "domain": "wearetech.africa",
+      "url": "https://www.wearetech.africa/fr/fils/solutions/senegal-nixacom-propose-des-paiements-echelonnes-pour-des-produits-tech",
+      "role": "publisher/platform providing information on a fintech startup",
+      "financing_responsibility": "none",
+      "target_relevance": "indirect",
+      "quote": "Au Sénégal, une jeune pousse propose une solution similaire. Nixacom est une plateforme de commerce en ligne développée par une start-up sénégalaise. Elle permet de se procurer des gadgets technologiques en payant en plusieurs tranches, grâce à un système BNPL",
+      "source_url": "https://www.wearetech.africa/fr/fils/solutions/senegal-nixacom-propose-des-paiements-echelonnes-pour-des-produits-tech",
+      "notes": "Wearetech Africa is the host domain publishing an article about Nixacom, a different company which offers BNPL smartphone financing. Wearetech Africa itself does not provide financing or related services."
+    },
+    "referenced_entities": [
+      {
+        "name": "Nixacom",
+        "domain": "nixacom.sn",
+        "url": "https://www.wearetech.africa/fr/fils/solutions/senegal-nixacom-propose-des-paiements-echelonnes-pour-des-produits-tech",
+        "role": "provider",
+        "financing_responsibility": "direct financing through their own platform and partner institutions",
+        "target_relevance": "direct",
+        "quote": "Un client se connecte sur notre site Web et choisit le produit qu'il recherche, remplit un KYC, et une fois que nous avons reçu toutes les informations, nous voyons avec laquelle de nos institutions partenaires ils sont éligibles, nous les finançons directement à travers nous, et nous leur fournissons leur produit",
+        "source_url": "https://www.wearetech.africa/fr/fils/solutions/senegal-nixacom-propose-des-paiements-echelonnes-pour-des-produits-tech",
+        "notes": "Nixacom offers Buy Now Pay Later (BNPL) installment financing directly, enabling purchase of smartphones and other tech gadgets."
+      }
+    ],
+    "extraction_confidence": 1.0,
+    "needs_additional_extraction": false,
+    "partner_details": [
+      "Nixacom; provider of smartphone financing via BNPL; finances directly through partner institutions; referenced by Wearetech Africa"
+    ],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "afgbankmali.com": {
+    "validated": true,
+    "confidence": 0.9,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://afgbankmali.com/credit"
+    ],
+    "supporting_snippets": [
+      "AFG BANK MALI met à votre disposition d’un crédit à la consommation/équipement, un prêt qui vous est consenti en vue de financer un besoin (achat de matériel, de mobilier, financer des travaux…)"
+    ],
+    "reasoning": "The retrieved content from afgbankmali.com shows that AFG Bank Mali is the page company and a direct provider of credit products including automobile loans, real estate loans, and consumer/equipment loans. However, the target category 'smartphone_financing' is not explicitly mentioned or described in the content. There is no named partner or aggregator nor any other companies mentioned related to smartphone financing. Therefore, the entity_type is unknown as the direct provision of smartphone financing is not evidenced.",
+    "page_company": {
+      "name": "AFG Bank Mali",
+      "domain": "afgbankmali.com",
+      "url": "https://afgbankmali.com/credit",
+      "role": "provider",
+      "financing_responsibility": "direct provider and financer of multiple credit products including automobile credit, consumer/equipment loans, and real estate financing",
+      "target_relevance": "no direct evidence found for smartphone financing; financing products explicitly mention vehicle credit, real estate loans, consumer/equipment credit, but no smartphone financing specified",
+      "quote": "AFG BANK MALI met à votre disposition d’un crédit à la consommation/équipement, un prêt qui vous est consenti en vue de financer un besoin (achat de matériel, de mobilier, financer des travaux…)",
+      "source_url": "https://afgbankmali.com/credit",
+      "notes": "While they offer credit for equipment purchase, smartphone financing is not explicitly referenced in the extracted content."
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 1.0,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "apple.com": {
+    "validated": true,
+    "confidence": 0.95,
+    "entity_type": "partner_only",
+    "evidence_pages": [
+      "https://support.apple.com/fr-ml/guide/apple-card-web-servicing/devf02de526c/web",
+      "https://www.apple.com/fr/shop/browse/financing"
+    ],
+    "supporting_snippets": [
+      "When you purchase an eligible Apple product, you can choose Apple Card Monthly Installments as your payment type at checkout instead of choosing to pay in full. Apple Card is subject to credit approval, available only for qualifying applicants in the United States, and issued by Goldman Sachs Bank USA, Salt Lake City Branch.",
+      "Échelonnez le paiement de vos appareils Apple préférés avec notre offre de financement ... Payez en plusieurs fois avec Cetelem."
+    ],
+    "reasoning": "The main page is hosted on apple.com and describes Apple Card Monthly Installments, which is Apple’s branded financing product allowing customers to pay in installments directly when purchasing Apple products, including smartphones. However, financing through Apple Card requires credit approval and is actually issued by Goldman Sachs Bank USA, making Apple the service provider with financing partners rather than a sole direct provider. Additional evidence shows that on the French Apple Store installment financing is offered through Cetelem, a third-party provider. Hence, Apple is classified as partner_only because while Apple offers the financing service branded as Apple Card, the actual financing responsibility involves partner banks like Goldman Sachs, and third-party financing providers for different regions.",
+    "page_company": {
+      "name": "Apple",
+      "domain": "apple.com",
+      "url": "https://support.apple.com/fr-ml/guide/apple-card-web-servicing/devf02de526c/web",
+      "role": "provider",
+      "financing_responsibility": "Apple offers smartphone financing directly through Apple Card Monthly Installments, a financing service integrated with Apple Card.",
+      "target_relevance": "direct",
+      "quote": "When you purchase an eligible Apple product, you can choose Apple Card Monthly Installments as your payment type at checkout instead of choosing to pay in full. Apple Card is subject to credit approval... and issued by Goldman Sachs Bank USA.",
+      "source_url": "https://support.apple.com/fr-ml/guide/apple-card-web-servicing/devf02de526c/web",
+      "notes": "Apple provides direct financing for smartphones via Apple Card Monthly Installments, with Goldman Sachs as the issuer of the Apple Card used for financing."
+    },
+    "referenced_entities": [
+      {
+        "name": "Goldman Sachs Bank USA",
+        "domain": "goldmansachs.com",
+        "url": "",
+        "role": "financing partner / issuer",
+        "financing_responsibility": "Issuer and financier of the Apple Card which underpins Apple's monthly installment financing program.",
+        "target_relevance": "indirect",
+        "quote": "Apple Card is subject to credit approval, available only for qualifying applicants in the United States, and issued by Goldman Sachs Bank USA, Salt Lake City Branch.",
+        "source_url": "https://support.apple.com/fr-ml/guide/apple-card-web-servicing/devf02de526c/web",
+        "notes": "Goldman Sachs acts as the issuer and financier of the Apple Card, enabling installment financing for Apple products."
+      },
+      {
+        "name": "Cetelem",
+        "domain": "cetelem.fr",
+        "url": "https://www.apple.com/fr/shop/browse/financing",
+        "role": "partner_only - financing provider for French Apple Store installment offers",
+        "financing_responsibility": "Provides financing for installment purchases on Apple Store in France.",
+        "target_relevance": "indirect",
+        "quote": "Échelonnez le paiement de vos appareils Apple préférés avec notre offre de financement Note de bas de page *. Payez en plusieurs fois avec Cetelem. Lors du paiement, vous pourrez choisir les mensualités qui vous conviennent le mieux.",
+        "source_url": "https://www.apple.com/fr/shop/browse/financing",
+        "notes": "Cetelem provides third-party installment financing for Apple product purchases on the French Apple Store."
+      }
+    ],
+    "extraction_confidence": 0.9,
+    "needs_additional_extraction": false,
+    "partner_details": [
+      "Goldman Sachs Bank USA; Issuer of Apple Card and financier for Apple Card Monthly Installments in the US.",
+      "Cetelem; Third-party financing partner providing installment payment options on the French Apple Store."
+    ],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "trustonic.com": {
+    "validated": true,
+    "confidence": 0.9,
+    "entity_type": "partner_only",
+    "evidence_pages": [
+      "https://www.trustonic.com/opinion/redefining-smartphone-purchases-in-africa-with-buy-now-pay-later",
+      "https://www.trustonic.com/opinion/redefining-smartphone-purchases-in-africa-with-buy-now-pay-later",
+      "https://www.trustonic.com/opinion/redefining-smartphone-purchases-in-africa-with-buy-now-pay-later"
+    ],
+    "supporting_snippets": [
+      "Our carrier device financing platform opens new revenue generation opportunities for telecom carriers in underserved markets, including prepaid plans, reducing the risks of bad debt and missed customer payments. ... Our telco financing solution ensures more of your device financing customers pay on time and gives you the tools to manage those that don’t.",
+      "Payflex in South Africa caters to those seeking immediate gratification, providing opportunities to purchase gadgets over a six-week term with no incurred interest.",
+      "Lipa Later, a pioneering Kenyan BNPL startup, has set a robust credit limit of KSh 500,000, conquering barriers to financial inclusion with 12-month payment plans."
+    ],
+    "reasoning": "The retrieved content reveals that Trustonic provides technology solutions that enable carrier and financier partners to offer smartphone financing, including device locking and tools to reduce default risks. However, there is no direct evidence that Trustonic itself finances, underwrites, sells, or leases smartphones on installments. Instead, the page references third-party BNPL providers such as Payflex, Lipa Later, Credpal, and Sympl as the actual financing entities in the smartphone financing space across Africa. Therefore, Trustonic acts as a partner enabling these services but is not itself a provider. This matches the 'partner_only' entity_type under the task rules.",
+    "page_company": {
+      "name": "Trustonic",
+      "domain": "trustonic.com",
+      "url": "https://www.trustonic.com/opinion/redefining-smartphone-purchases-in-africa-with-buy-now-pay-later",
+      "role": "technology and security provider supporting device locking and carrier financing platforms",
+      "financing_responsibility": "none - does not directly provide or finance smartphone purchases",
+      "target_relevance": "related to smartphone financing context but does not directly provide financing or BNPL services",
+      "quote": "Our carrier device financing platform opens new revenue generation opportunities for telecom carriers in underserved markets, including prepaid plans ... Our telco financing solution ensures more of your device financing customers pay on time and gives you the tools to manage those that don’t.",
+      "source_url": "https://www.trustonic.com/opinion/redefining-smartphone-purchases-in-africa-with-buy-now-pay-later",
+      "notes": "Trustonic provides device security and carrier tools to enable smartphone financing for carriers but does not itself underwrite or sell installment financing. It supports partners but is not a direct BNPL provider."
+    },
+    "referenced_entities": [
+      {
+        "name": "Payflex",
+        "domain": "payflex.co.za",
+        "url": "not provided, inferred from context",
+        "role": "BNPL provider enabling interest-free installment payments in South Africa",
+        "financing_responsibility": "direct provider of smartphone financing",
+        "target_relevance": "relevant third-party BNPL provider referenced as an example of a regional financing partner",
+        "quote": "Payflex in South Africa caters to those seeking immediate gratification, providing opportunities to purchase gadgets over a six-week term with no incurred interest.",
+        "source_url": "https://www.trustonic.com/opinion/redefining-smartphone-purchases-in-africa-with-buy-now-pay-later",
+        "notes": "Referenced as an example of a BNPL provider; no evidence Trustonic is itself Payflex."
+      },
+      {
+        "name": "Lipa Later",
+        "domain": "not provided",
+        "url": "not provided",
+        "role": "Kenyan BNPL startup offering installment smartphone financing",
+        "financing_responsibility": "direct BNPL financing provider",
+        "target_relevance": "mentioned as a key third-party BNPL provider in Kenya",
+        "quote": "Lipa Later, a pioneering Kenyan BNPL startup, has set a robust credit limit of KSh 500,000, conquering barriers to financial inclusion with 12-month payment plans.",
+        "source_url": "https://www.trustonic.com/opinion/redefining-smartphone-purchases-in-africa-with-buy-now-pay-later",
+        "notes": "Referenced third-party BNPL provider; not operated by Trustonic."
+      },
+      {
+        "name": "Credpal",
+        "domain": "not provided",
+        "url": "not provided",
+        "role": "localized BNPL service in Nigeria",
+        "financing_responsibility": "direct BNPL financing provider",
+        "target_relevance": "referenced third-party BNPL provider",
+        "quote": "Credpal, Nigeria & Sympl, Egypt: Localized BNPL services attuned to the financial landscapes of their respective markets.",
+        "source_url": "https://www.trustonic.com/opinion/redefining-smartphone-purchases-in-africa-with-buy-now-pay-later",
+        "notes": "Mentioned as a third-party regional BNPL provider."
+      },
+      {
+        "name": "Sympl",
+        "domain": "not provided",
+        "url": "not provided",
+        "role": "localized BNPL service in Egypt",
+        "financing_responsibility": "direct BNPL financing provider",
+        "target_relevance": "third-party BNPL provider referenced",
+        "quote": "Credpal, Nigeria & Sympl, Egypt: Localized BNPL services attuned to the financial landscapes of their respective markets.",
+        "source_url": "https://www.trustonic.com/opinion/redefining-smartphone-purchases-in-africa-with-buy-now-pay-later",
+        "notes": "Third-party provider; not Trustonic."
+      }
+    ],
+    "extraction_confidence": 0.9,
+    "needs_additional_extraction": false,
+    "partner_details": [
+      "Payflex: BNPL provider in South Africa offering interest-free installment payments over six weeks.",
+      "Lipa Later: Kenyan BNPL startup offering up to KSh 500,000 credit with 12-month payment plans.",
+      "Credpal: Nigerian localized BNPL service provider.",
+      "Sympl: Egyptian localized BNPL service provider."
+    ],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "hps-worldwide.com": {
+    "validated": true,
+    "confidence": 0.9,
+    "entity_type": "partner_only",
+    "evidence_pages": [
+      "https://www.hps-worldwide.com/blog/buy-now-pay-later-shaping-global-credit-and-commerce"
+    ],
+    "supporting_snippets": [
+      "At HPS, we’ve engineered PowerCARD to help banks, fintechs, and processors launch BNPL offerings quickly, while maintaining full control, compliance, and customer-centricity."
+    ],
+    "reasoning": "The provided chunks show that HPS Worldwide offers the PowerCARD platform to enable banks, fintechs, and processors to launch BNPL services. There is no evidence that HPS itself finances or provides smartphone financing on installments. Therefore, HPS is classified as partner_only, serving as a technology partner enabling others to provide the target service.",
+    "page_company": {
+      "name": "HPS Worldwide",
+      "domain": "hps-worldwide.com",
+      "url": "https://www.hps-worldwide.com/blog/buy-now-pay-later-shaping-global-credit-and-commerce",
+      "role": "technology provider enabling BNPL infrastructure",
+      "financing_responsibility": "does not provide or finance smartphone financing products itself",
+      "target_relevance": "indirect - provides BNPL technology platform (PowerCARD) to banks, fintechs, and processors who then offer BNPL services",
+      "quote": "At HPS, we’ve engineered PowerCARD to help banks, fintechs, and processors launch BNPL offerings quickly, while maintaining full control, compliance, and customer-centricity.",
+      "source_url": "https://www.hps-worldwide.com/blog/buy-now-pay-later-shaping-global-credit-and-commerce",
+      "notes": "HPS develops and provides BNPL infrastructure technology but does not directly underwrite or finance BNPL or smartphone financing to consumers. Their clients (banks, fintechs, processors) provide the actual financing."
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 0.95,
+    "needs_additional_extraction": false,
+    "partner_details": [
+      "Clients such as banks, fintechs, and processors who use the PowerCARD platform to launch and provide BNPL offerings"
+    ],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "blogs.worldbank.org": {
+    "validated": true,
+    "confidence": 0.8,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://blogs.worldbank.org/en/africacan/digital-financial-services-can-bring-inclusion-and-growth-mali",
+      "https://blogs.worldbank.org/en/africacan/digital-financial-services-can-bring-inclusion-and-growth-mali"
+    ],
+    "supporting_snippets": [
+      "Almost a decade later, people like Moussa can not only call home, but they can also send money, save money, and access insurance and credit through their phones.",
+      "Malian Fintechs are active in this niche and offer payment services, and digital credit and insurance."
+    ],
+    "reasoning": "The page is a blog from the World Bank on digital financial services in Mali. It provides analysis and information about digital credit and payment services offered by third-party Malian fintech companies but does not itself directly provide, finance, underwrite, or sell smartphone financing. No specific companies or partners offering smartphone financing are named. Therefore, the page company is best classified as 'unknown' for direct smartphone financing provision. The references to multiple fintechs suggest some entities provide digital credit but without detailed identification or direct link to smartphone installment financing. The content is informative and not commercial/transactional, so 'aggregator' or 'provider' roles do not fit. 'Partner_only' is not applicable because no separate finance partner for smartphone financing is described.",
+    "page_company": {
+      "name": "Blogs Worldbank",
+      "domain": "blogs.worldbank.org",
+      "url": "https://blogs.worldbank.org/en/africacan/digital-financial-services-can-bring-inclusion-and-growth-mali",
+      "role": "content provider and commentator on digital financial services and inclusion",
+      "financing_responsibility": "none - the page provides informational content but does not finance or underwrite smartphone financing",
+      "target_relevance": "discusses digital financial services including credit and microfinance but does not itself offer smartphone financing services",
+      "quote": "Almost a decade later, people like Moussa can not only call home, but they can also send money, save money, and access insurance and credit through their phones.",
+      "source_url": "https://blogs.worldbank.org/en/africacan/digital-financial-services-can-bring-inclusion-and-growth-mali",
+      "notes": "The blog discusses digital finance broadly and highlights fintechs in Mali providing payment services, digital credit, and insurance, but the blog itself does not directly offer or underwrite financing."
+    },
+    "referenced_entities": [
+      {
+        "name": "Malian Fintechs",
+        "domain": "unknown",
+        "url": "",
+        "role": "provider of payment services and digital credit and insurance",
+        "financing_responsibility": "provides digital credit and insurance services",
+        "target_relevance": "relevant as fintechs offering digital credit, but no direct evidence linking them specifically to smartphone financing",
+        "quote": "Malian Fintechs are active in this niche and offer payment services, and digital credit and insurance.",
+        "source_url": "https://blogs.worldbank.org/en/africacan/digital-financial-services-can-bring-inclusion-and-growth-mali",
+        "notes": "Generic reference to fintech companies in Mali with digital credit offerings, but no specific company is named."
+      }
+    ],
+    "extraction_confidence": 0.9,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "theses.hal.science": {
+    "validated": null,
+    "confidence": 0.0,
+    "entity_type": "unknown",
+    "evidence_pages": [],
+    "supporting_snippets": [],
+    "reasoning": "No relevant evidence pages were retrieved for validation.",
+    "page_company": null,
+    "referenced_entities": [],
+    "extraction_confidence": 0.0,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "finances.ml": {
+    "validated": false,
+    "confidence": 0.1,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://finances.ml/sites/default/files/2019-03/Liste/20des/20Bases/20Legales/Cat/13062016.pdf"
+    ],
+    "supporting_snippets": [
+      "Content is predominantly corrupted or unintelligible binary data."
+    ],
+    "reasoning": "The provided retrieved page content for finances.ml is mainly corrupted or encoded binary data from a PDF, which prevents extracting any meaningful information about the company or referenced entities. There is no readable information or quotes mentioning smartphone financing services or partners. Therefore, the classification cannot be determined and the entity type is unknown. Additional extraction from clearer source data or from a valid webpage would be needed to identify service offering or partners.",
+    "page_company": {
+      "name": "Finances ML",
+      "domain": "finances.ml",
+      "url": "https://finances.ml/sites/default/files/2019-03/Liste/20des/20Bases/20Legales/Cat/13062016.pdf",
+      "role": "unknown",
+      "financing_responsibility": "unknown",
+      "target_relevance": "unknown",
+      "quote": "Content is predominantly corrupted or unintelligible binary data.",
+      "source_url": "https://finances.ml/sites/default/files/2019-03/Liste/20des/20Bases/20Legales/Cat/13062016.pdf",
+      "notes": "All visible chunks retrieved are either corrupted or non-readable binary/pdf data with no intelligible text about smartphone financing or related services."
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 0.1,
+    "needs_additional_extraction": true,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "mastercard.com": {
+    "validated": true,
+    "confidence": 0.95,
+    "entity_type": "provider",
+    "evidence_pages": [
+      "https://www.mastercard.com/global/en/business/payments/consumer-payments/next-gen-payments/mastercard-installments.html",
+      "https://www.mastercard.com/global/en/business/payments/consumer-payments/next-gen-payments/mastercard-installments.html"
+    ],
+    "supporting_snippets": [
+      "Mastercard Installments lets consumers shop now and pay later, buying what they need and spreading payments over time. Consumers can pay in installments across millions of merchants.",
+      "Mastercard Installments Payment Services enables issuers to add installments as a feature on their existing card portfolios."
+    ],
+    "reasoning": "The retrieved content clearly shows Mastercard itself offers the 'Mastercard Installments' service that enables consumers to pay in installments using their debit or credit cards. This is a direct financing service, not a referral or a partner-only mention. No other companies or partners are named as providers for smartphone financing in the retrieved pages. Therefore, Mastercard is identified as the direct provider of the installment payment/financing service relevant to the target category 'smartphone_financing'.",
+    "page_company": {
+      "name": "Mastercard",
+      "domain": "mastercard.com",
+      "url": "https://www.mastercard.com/global/en/business/payments/consumer-payments/next-gen-payments/mastercard-installments.html",
+      "role": "provider",
+      "financing_responsibility": "Mastercard provides and supports installment payment solutions integrated with existing cards; offers the infrastructure and service enabling consumers to pay in installments.",
+      "target_relevance": "Mastercard directly offers installment payment services that allow consumers to shop now and pay later, spreading payments over time, applicable across millions of merchants including smartphone purchases.",
+      "quote": "Mastercard Installments lets consumers shop now and pay later, buying what they need and spreading payments over time. Consumers can pay in installments across millions of merchants. Mastercard Installments - Purchase Now, Pay Later Solutions Mastercard offers a variety of installment payment solutions ... Mastercard Installments Payment Services enables issuers to add installments as a feature on their existing card portfolios.",
+      "source_url": "https://www.mastercard.com/global/en/business/payments/consumer-payments/next-gen-payments/mastercard-installments.html",
+      "notes": "The page describes Mastercard’s own installment solutions embedded within their cards, confirming they are the direct service provider for installment payment options."
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 0.95,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "bnda-mali.com": {
+    "validated": true,
+    "confidence": 0.85,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://www.bnda-mali.com/fr/produit/prets"
+    ],
+    "supporting_snippets": [
+      "Crédit Equipement Nous vous accompagnons dans la concrétisation de vos projets d’achat d’équipements (véhicule, terrain, machine …) Durée maximum : 120 mois Taux : 9% Quotité Cessible (en fonction du salaire) Modalités de remboursement : mensuel"
+    ],
+    "reasoning": "The BNDA is shown clearly as a direct loan provider offering various credit products for equipment, housing, and consumption needs. However, within the provided content, there is no explicit evidence that BNDA offers financing services specifically for smartphones. The 'Crédit Equipement' loan category mentions equipment such as vehicles, land, and machinery but does not list smartphones or similar electronic devices. No partners or third-party providers related to smartphone financing are mentioned either. Therefore, the company/domain cannot be classified as a provider, partner_only, or aggregator with respect to the target category 'smartphone_financing'. The appropriate classification is 'unknown.'",
+    "page_company": {
+      "name": "Banque Nationale de Développement Agricole (BNDA)",
+      "domain": "bnda-mali.com",
+      "url": "https://www.bnda-mali.com/fr/produit/prets",
+      "role": "provider of various loans and financing solutions",
+      "financing_responsibility": "direct financing provider",
+      "target_relevance": "offers various loan products but no specific mention of smartphone financing",
+      "quote": "Crédit Equipement Nous vous accompagnons dans la concrétisation de vos projets d’achat d’équipements (véhicule, terrain, machine …) Durée maximum : 120 mois Taux : 9% Quotité Cessible (en fonction du salaire) Modalités de remboursement : mensuel",
+      "source_url": "https://www.bnda-mali.com/fr/produit/prets",
+      "notes": "The BNDA provides a range of loans including consumer, equipment, and real estate financing but does not explicitly mention smartphone financing or installment plans specific to smartphones."
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 0.9,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "oumistore.com": {
+    "validated": true,
+    "confidence": 0.8,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://oumistore.com/"
+    ],
+    "supporting_snippets": [
+      "OUMISTORE Le partenaire digital n°1 des commerçants et entrepreneurs en Afrique de l'Ouest. Transformons ensemble le commerce local."
+    ],
+    "reasoning": "The retrieved page content only describes Oumistore as a digital partner and commerce platform supporting merchants and entrepreneurs without any mention of the company directly providing or financing smartphones on installment. There are no referenced entities related to financing or smartphone sales. Hence, the company cannot be classified as a provider, partner_only, or aggregator for smartphone financing based on this evidence.",
+    "page_company": {
+      "name": "Oumistore",
+      "domain": "oumistore.com",
+      "url": "https://oumistore.com/",
+      "role": "digital partner and commerce platform for merchants and entrepreneurs",
+      "financing_responsibility": "none indicated",
+      "target_relevance": "none indicated for smartphone financing",
+      "quote": "OUMISTORE Le partenaire digital n°1 des commerçants et entrepreneurs en Afrique de l'Ouest. Transformons ensemble le commerce local.",
+      "source_url": "https://oumistore.com/",
+      "notes": "The page positions Oumistore as a digital commerce platform and partner for merchants with no direct evidence of providing smartphone financing or installment offers."
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 1.0,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  },
+  "alios-finance.com": {
+    "validated": true,
+    "confidence": 0.7,
+    "entity_type": "unknown",
+    "evidence_pages": [
+      "https://www.alios-finance.com/site/fr/mali/countrie.php"
+    ],
+    "supporting_snippets": [
+      "Alios Finance Mali (anciennement connue sous le nom SOMAFI) est une succursale d’Alios Finance Côte d’Ivoire qui propose les solutions de financements suivantes : Crédit-Bail mobilier, Location Longue Durée, Crédit Investissement, Crédit Court Terme"
+    ],
+    "reasoning": "The pages retrieved from the domain alios-finance.com describe Alios Finance as a provider of various financing products such as equipment leasing (Crédit-Bail mobilier) and short/long-term loans. However, the content does not explicitly state that Alios Finance provides direct smartphone financing. Consequently, it is unknown whether they directly provide the target category of smartphone financing. There are no referenced partner companies or other entities mentioned related to smartphone financing. Therefore, the entity type for the page is 'unknown' with moderate confidence due to the absence of explicit evidence.",
+    "page_company": {
+      "name": "Alios Finance",
+      "domain": "alios-finance.com",
+      "url": "https://www.alios-finance.com/site/fr/mali/countrie.php",
+      "role": "provider",
+      "financing_responsibility": "provides financing solutions including Crédit-Bail mobilier, Location Longue Durée, Crédit Investissement, Crédit Court Terme",
+      "target_relevance": "provides financing services which may broadly include asset financing but no explicit mention of smartphone financing",
+      "quote": "Alios Finance Mali (anciennement connue sous le nom SOMAFI) est une succursale d’Alios Finance Côte d’Ivoire qui propose les solutions de financements suivantes : Crédit-Bail mobilier, Location Longue Durée, Crédit Investissement, Crédit Court Terme",
+      "source_url": "https://www.alios-finance.com/site/fr/mali/countrie.php",
+      "notes": "The page lists financing solutions but does not explicitly reference smartphone financing directly."
+    },
+    "referenced_entities": [],
+    "extraction_confidence": 1.0,
+    "needs_additional_extraction": false,
+    "partner_details": [],
+    "aggregator_company_details": [],
+    "referenced_companies": []
+  }
+}

@@ -37,6 +37,9 @@ class TopKPage:
     score: float
     content_snippet: str
     title: str = ""
+    chunk_index: int = 0
+    chunk_start: int = 0
+    chunk_end: int = 0
 
 
 @dataclass(frozen=True)
@@ -54,12 +57,31 @@ class EvidenceQuote:
 
 
 @dataclass(frozen=True)
+class ReferencedCompany:
+    name: str
+    domain: str = ""
+    url: str = ""
+    role: str = ""
+    financing_responsibility: str = ""
+    target_relevance: str = ""
+    quote: str = ""
+    source_url: str = ""
+    notes: str = ""
+
+
+@dataclass(frozen=True)
 class LLMValidationJudgment:
     entity_type: EntityType
     validated: ValidationDecision
     confidence: float
     evidence: list[EvidenceQuote]
     reasoning: str
+    page_company: ReferencedCompany | None = None
+    referenced_entities: list[ReferencedCompany] = field(default_factory=list)
+    extraction_confidence: float = 0.0
+    needs_additional_extraction: bool = False
+    partner_details: list[str] = field(default_factory=list)
+    aggregator_company_details: list[str] = field(default_factory=list)
 
 
 @dataclass(frozen=True)
@@ -70,3 +92,10 @@ class ValidationResult:
     evidence_pages: list[str]
     supporting_snippets: list[str]
     reasoning: str
+    page_company: ReferencedCompany | None = None
+    referenced_entities: list[ReferencedCompany] = field(default_factory=list)
+    extraction_confidence: float = 0.0
+    needs_additional_extraction: bool = False
+    partner_details: list[str] = field(default_factory=list)
+    aggregator_company_details: list[str] = field(default_factory=list)
+    referenced_companies: list[ReferencedCompany] = field(default_factory=list)
