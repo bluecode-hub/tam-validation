@@ -87,44 +87,30 @@ def validate_company_domain(
             page.url,
             page.chunk_index,
         )
-    judgment = evidence_validator.validate(company, retrieved)
-    reasoning = judgment.reasoning or "LLM returned no reasoning."
-    referenced_companies = []
-    should_run_second_pass = (
-        extract_referenced_companies
-        and judgment.entity_type == "aggregator"
-        and (
-            judgment.needs_additional_extraction
-            or judgment.extraction_confidence < LOW_EXTRACTION_CONFIDENCE
-            or len(judgment.referenced_entities) >= AGGREGATOR_MANY_ENTITY_THRESHOLD
-        )
+    logger.info(
+        "Extracting provider company names for %s from %d retrieved chunks",
+        company.domain or domain,
+        len(retrieved),
     )
-    if should_run_second_pass:
-        logger.info(
-            "Running referenced-company extraction for %s entity_type=%s extraction_confidence=%.2f referenced_entities=%d",
-            company.domain or domain,
-            judgment.entity_type,
-            judgment.extraction_confidence,
-            len(judgment.referenced_entities),
-        )
-        referenced_companies = evidence_validator.extract_referenced_companies(
-            company,
-            retrieved,
-            judgment.entity_type,
-        )
+    referenced_companies = evidence_validator.extract_referenced_companies(
+        company,
+        retrieved,
+        "provider_extraction",
+    )
+    reasoning = "Extracted provider company names from retrieved BM25 chunks without page/domain classification."
     return ValidationResult(
-        validated=judgment.validated,
-        confidence=judgment.confidence,
-        entity_type=judgment.entity_type,
-        evidence_pages=[item.url for item in judgment.evidence] or [page.url for page in retrieved],
-        supporting_snippets=[item.quote for item in judgment.evidence] or [page.content_snippet for page in retrieved],
+        validated=None,
+        confidence=0.0,
+        entity_type="unknown",
+        evidence_pages=[page.url for page in retrieved],
+        supporting_snippets=[page.content_snippet for page in retrieved],
         reasoning=reasoning,
-        page_company=judgment.page_company,
-        referenced_entities=judgment.referenced_entities,
-        extraction_confidence=judgment.extraction_confidence,
-        needs_additional_extraction=judgment.needs_additional_extraction,
-        partner_details=judgment.partner_details,
-        aggregator_company_details=judgment.aggregator_company_details,
+        page_company=None,
+        referenced_entities=referenced_companies,
+        extraction_confidence=0.0,
+        needs_additional_extraction=False,
+        partner_details=[],
+        aggregator_company_details=[],
         referenced_companies=referenced_companies,
     )
 

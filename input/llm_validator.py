@@ -135,30 +135,30 @@ def build_llm_prompt(payload: dict) -> str:
 def build_referenced_company_payload(
     company: CompanyData,
     retrieved_pages: list[TopKPage],
-    entity_type: str,
+    entity_type: str = "provider_extraction",
     max_chars_per_page: int = 4_000,
 ) -> dict:
-    mode_instructions = {
-        "aggregator": [
-            "The page/domain being validated is an aggregator.",
-            "Extract every company mentioned in the chunks, especially from blog, listing, comparison, marketplace, directory, review, affiliate, or lead generation content.",
-            "For each referenced company, return company name, domain or URL if present, role or offer, target-category relevance, and a supporting quote.",
-            "Capture names, domains, URLs, website references, roles/offers, and target-category relevance where available.",
-            "If multiple companies are discussed, include all of them where possible.",
-        ],
-    }.get(entity_type, [])
     return {
         "company": asdict(company),
-        "entity_type": entity_type,
         "task": {
-            "goal": "Extract referenced company information from retrieved chunks.",
+            "goal": "Extract the names of every company in the retrieved chunks that provides the target category.",
             "target_category": company.target_category,
             "rules": [
                 "Use only the provided retrieved chunks.",
                 "Do not use outside knowledge.",
-                *mode_instructions,
-                "Return only companies actually referenced in the provided chunks.",
-                "Include source_url and a short supporting quote copied from the chunk whenever possible.",
+                "Do not classify the page, domain, or company being validated.",
+                "Do not decide any page/domain classification.",
+                "Treat the retrieved chunks as one evidence set. The only aim of this call is to extract company names that provide the target category from these chunks.",
+                "Extract every company name that has definite evidence in the chunks showing it provides smartphone financing, mobile phone financing, phone/device installment plans, pay-monthly phones, deferred payment for smartphones, leasing/renting of smartphones, underwriting, lending, credit, or payment financing for smartphones.",
+                "Definite evidence means the chunk explicitly connects that company to providing, offering, financing, underwriting, lending, leasing, enabling installment payments, or handling payment/credit for the target service.",
+                "Include companies even when they are mentioned as a partner, third-party lender, bank, telco, BNPL provider, payment provider, marketplace seller, or financing provider.",
+                "If the page company itself provides the target service, extract the page company name too.",
+                "Exclude companies that are merely mentioned, compared, reviewed, used as examples, or listed without definite evidence that they provide the target service.",
+                "Do not extract a company when the quote only shows it sells phones, publishes an article, hosts a directory, or mentions financing by another unnamed entity.",
+                "For each company, return company name, domain or URL if present, role or offer, financing responsibility, target-category relevance, and a supporting quote that proves the company provides the target service.",
+                "Capture names, domains, URLs, website references, roles/offers, and target-category relevance where available.",
+                "If multiple provider companies are discussed, include all of them where possible.",
+                "Every returned company must include source_url and a short supporting quote copied from the chunk.",
                 "If a domain or URL is not present, leave that field empty.",
             ],
         },

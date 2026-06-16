@@ -160,7 +160,7 @@ class LLMValidatorTests(unittest.TestCase):
         self.assertIn("name: Company B", judgment.aggregator_company_details[1])
         self.assertIn("url: https://company-b.test", judgment.aggregator_company_details[1])
 
-    def test_build_referenced_company_payload_uses_chunks(self):
+    def test_build_referenced_company_payload_extracts_target_providers_from_chunks(self):
         payload = build_referenced_company_payload(
             CompanyData("Listing Blog", 0.8, "smartphone_financing", "listing.test"),
             [
@@ -173,12 +173,16 @@ class LLMValidatorTests(unittest.TestCase):
                     chunk_end=500,
                 )
             ],
-            "aggregator",
         )
 
-        self.assertEqual(payload["entity_type"], "aggregator")
         self.assertEqual(payload["retrieved_chunks"][0]["chunk_index"], 3)
-        self.assertIn("Extract every company", " ".join(payload["task"]["rules"]))
+        rules = " ".join(payload["task"]["rules"])
+        self.assertIn("Do not classify the page, domain, or company", rules)
+        self.assertIn("The only aim of this call is to extract company names", rules)
+        self.assertIn("definite evidence in the chunks", rules)
+        self.assertIn("explicitly connects that company", rules)
+        self.assertIn("Include companies even when they are mentioned as a partner", rules)
+        self.assertIn("Every returned company must include source_url", rules)
         self.assertIn("target_relevance", payload["output_schema"]["referenced_companies"][0])
         self.assertIn("financing_responsibility", payload["output_schema"]["referenced_companies"][0])
 

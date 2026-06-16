@@ -90,7 +90,7 @@ class DomainIndexCache:
     _indexes: dict[str, DomainIndex] = field(default_factory=dict)
     max_content_chars: int = 500_000
     chunk_chars: int = 1_250
-    chunk_overlap_chars: int = 775
+    chunk_overlap_chars: int = 400
     min_chunk_chars: int = 300
 
     def get_or_build(self, domain: str, pages: list[PageContent]) -> DomainIndex:

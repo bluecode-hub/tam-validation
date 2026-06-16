@@ -6,7 +6,7 @@ from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "input"))
 
-from models import CompanyData, EvidenceQuote, LLMValidationJudgment, PageContent, ReferencedCompany
+from models import CompanyData, PageContent, ReferencedCompany
 from validation_engine import load_page_contents, validate_company_domain
 
 
@@ -14,9 +14,11 @@ class StubValidator:
     def __init__(self, judgment, referenced_companies=None):
         self.judgment = judgment
         self.referenced_companies = referenced_companies or []
+        self.validate_calls = []
         self.extract_calls = []
 
     def validate(self, company, retrieved_pages):
+        self.validate_calls.append((company, retrieved_pages))
         return self.judgment
 
     def extract_referenced_companies(self, company, retrieved_pages, entity_type):
@@ -41,7 +43,18 @@ class StubPdfReader:
 
 
 class ValidationEngineTests(unittest.TestCase):
-    def test_validation_confirms_direct_provider(self):
+    def test_validation_extracts_provider_companies_without_classification(self):
+        validator = StubValidator(
+            None,
+            referenced_companies=[
+                ReferencedCompany(
+                    name="Orange",
+                    domain="orange.test",
+                    role="smartphone financing provider",
+                    source_url="https://orange.test/phones",
+                )
+            ],
+        )
         pages = [
             PageContent(
                 "https://orange.test/phones",
@@ -51,64 +64,52 @@ class ValidationEngineTests(unittest.TestCase):
         result = validate_company_domain(
             CompanyData("Orange", 0.8, "smartphone_financing", "orange.test"),
             pages,
-            validator=StubValidator(
-                LLMValidationJudgment(
-                    "provider",
-                    True,
-                    0.9,
-                    [
-                        EvidenceQuote(
-                            "https://orange.test/phones",
-                            "We offer smartphone financing.",
-                            "Direct financing language",
-                        )
-                    ],
-                    "Direct provider evidence found.",
-                )
-            ),
+            validator=validator,
         )
-        self.assertIs(result.validated, True)
-        self.assertEqual(result.entity_type, "provider")
-        self.assertEqual(result.evidence_pages, ["https://orange.test/phones"])
 
-    def test_validation_rejects_aggregator(self):
+        self.assertEqual(validator.validate_calls, [])
+        self.assertEqual(len(validator.extract_calls), 1)
+        self.assertEqual(validator.extract_calls[0][2], "provider_extraction")
+        self.assertIsNone(result.validated)
+        self.assertEqual(result.entity_type, "unknown")
+        self.assertEqual(result.evidence_pages, ["https://orange.test/phones"])
+        self.assertEqual(result.referenced_companies[0].name, "Orange")
+        self.assertEqual(result.referenced_entities[0].name, "Orange")
+
+    def test_validation_extracts_provider_names_from_aggregator_content(self):
+        validator = StubValidator(
+            None,
+            referenced_companies=[
+                ReferencedCompany(
+                    name="ProviderCo",
+                    domain="provider.test",
+                    role="installment provider",
+                    source_url="https://compare.test/bnpl",
+                )
+            ],
+        )
         pages = [
             PageContent(
                 "https://compare.test/bnpl",
-                "Compare the best BNPL providers in this marketplace directory with independent reviews.",
+                "Compare smartphone financing from ProviderCo at provider.test.",
             )
         ]
         result = validate_company_domain(
             CompanyData("Compare", 0.8, "smartphone_financing", "compare.test"),
             pages,
-            validator=StubValidator(
-                LLMValidationJudgment(
-                    "aggregator",
-                    False,
-                    0.9,
-                    [
-                        EvidenceQuote(
-                            "https://compare.test/bnpl",
-                            "Compare the best BNPL providers",
-                            "Comparison directory language",
-                        )
-                    ],
-                    "Aggregator evidence found.",
-                )
-            ),
+            validator=validator,
         )
-        self.assertIs(result.validated, False)
-        self.assertEqual(result.entity_type, "aggregator")
 
-    def test_validation_optionally_extracts_referenced_companies(self):
+        self.assertEqual(validator.validate_calls, [])
+        self.assertEqual(len(validator.extract_calls), 1)
+        self.assertEqual(validator.extract_calls[0][2], "provider_extraction")
+        self.assertIsNone(result.validated)
+        self.assertEqual(result.entity_type, "unknown")
+        self.assertEqual(result.referenced_companies[0].name, "ProviderCo")
+
+    def test_validation_extracts_referenced_companies_even_without_flag(self):
         validator = StubValidator(
-            LLMValidationJudgment(
-                "aggregator",
-                False,
-                0.9,
-                [],
-                "Aggregator evidence found.",
-            ),
+            None,
             referenced_companies=[
                 ReferencedCompany(
                     name="ProviderCo",
@@ -127,49 +128,32 @@ class ValidationEngineTests(unittest.TestCase):
                 )
             ],
             validator=validator,
-            extract_referenced_companies=True,
         )
 
         self.assertEqual(len(validator.extract_calls), 1)
-        self.assertEqual(validator.extract_calls[0][2], "aggregator")
+        self.assertEqual(validator.extract_calls[0][2], "provider_extraction")
         self.assertEqual(result.referenced_companies[0].name, "ProviderCo")
 
-    def test_validation_does_not_extract_referenced_companies_by_default(self):
+    def test_validation_deprecated_extraction_flag_does_not_change_behavior(self):
         validator = StubValidator(
-            LLMValidationJudgment(
-                "aggregator",
-                False,
-                0.9,
-                [],
-                "Aggregator evidence found.",
-            ),
+            None,
             referenced_companies=[ReferencedCompany(name="ProviderCo")],
         )
         result = validate_company_domain(
             CompanyData("Compare", 0.8, "smartphone_financing", "compare.test"),
             [PageContent("https://compare.test/bnpl", "Compare smartphone financing from ProviderCo.")],
             validator=validator,
+            extract_referenced_companies=True,
         )
 
-        self.assertEqual(validator.extract_calls, [])
-        self.assertEqual(result.referenced_companies, [])
+        self.assertEqual(len(validator.extract_calls), 1)
+        self.assertEqual(validator.extract_calls[0][2], "provider_extraction")
+        self.assertEqual(result.referenced_companies[0].name, "ProviderCo")
 
-    def test_validation_skips_second_pass_when_aggregator_extraction_is_complete(self):
+    def test_validation_does_not_skip_provider_extraction_for_complete_aggregator_like_content(self):
         validator = StubValidator(
-            LLMValidationJudgment(
-                "aggregator",
-                False,
-                0.9,
-                [],
-                "Aggregator evidence found.",
-                referenced_entities=[
-                    ReferencedCompany(name="ProviderCo", domain="provider.test"),
-                    ReferencedCompany(name="OtherCo", domain="other.test"),
-                ],
-                extraction_confidence=0.9,
-                needs_additional_extraction=False,
-            ),
-            referenced_companies=[ReferencedCompany(name="ShouldNotBeUsed")],
+            None,
+            referenced_companies=[ReferencedCompany(name="ProviderCo")],
         )
         result = validate_company_domain(
             CompanyData("Compare", 0.8, "smartphone_financing", "compare.test"),
@@ -178,9 +162,8 @@ class ValidationEngineTests(unittest.TestCase):
             extract_referenced_companies=True,
         )
 
-        self.assertEqual(validator.extract_calls, [])
-        self.assertEqual(result.referenced_companies, [])
-        self.assertEqual(result.referenced_entities[0].name, "ProviderCo")
+        self.assertEqual(len(validator.extract_calls), 1)
+        self.assertEqual(result.referenced_companies[0].name, "ProviderCo")
 
     def test_validation_handles_pages_without_indexable_text(self):
         result = validate_company_domain(
