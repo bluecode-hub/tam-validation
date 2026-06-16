@@ -186,6 +186,44 @@ class LLMValidatorTests(unittest.TestCase):
         self.assertIn("target_relevance", payload["output_schema"]["referenced_companies"][0])
         self.assertIn("financing_responsibility", payload["output_schema"]["referenced_companies"][0])
 
+    def test_referenced_company_payload_excludes_simple_post_payment(self):
+        payload = build_referenced_company_payload(
+            CompanyData("PhoneMarket", 0.8, "smartphone_financing", "phonemarket.test"),
+            [
+                TopKPage(
+                    "https://phonemarket.test/pay",
+                    2.0,
+                    "Bol.com lets customers pay up to 400 euros post-payment after delivery.",
+                )
+            ],
+        )
+
+        rules = " ".join(payload["task"]["rules"])
+        self.assertNotIn("deferred payment for smartphones", rules)
+        self.assertNotIn("payment financing for smartphones", rules)
+        self.assertIn("Do not treat simple checkout post-payment", rules)
+        self.assertIn("unless the chunk explicitly describes an installment plan", rules)
+        self.assertIn("loan, lease, credit agreement", rules)
+
+    def test_referenced_company_payload_excludes_merchants_with_named_financing_partners(self):
+        payload = build_referenced_company_payload(
+            CompanyData("Back Market", 0.8, "smartphone_financing", "backmarket.test"),
+            [
+                TopKPage(
+                    "https://coupons.test/backmarket",
+                    2.0,
+                    "Back Market has flexible payment options: Klarna divides the purchase, Oney finances orders, and PayPal offers 3 installments.",
+                )
+            ],
+        )
+
+        rules = " ".join(payload["task"]["rules"])
+        self.assertIn("Do not extract merchants, retailers, shops, marketplaces", rules)
+        self.assertIn("whose role is only selling the device", rules)
+        self.assertIn("extract the named financing/payment-plan providers", rules)
+        self.assertIn("do not extract the merchant", rules)
+        self.assertIn("unless the quote explicitly says the merchant itself finances", rules)
+
     def test_parse_referenced_companies(self):
         companies = parse_referenced_companies(
             """
