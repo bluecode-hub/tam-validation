@@ -224,6 +224,41 @@ class LLMValidatorTests(unittest.TestCase):
         self.assertIn("do not extract the merchant", rules)
         self.assertIn("unless the quote explicitly says the merchant itself finances", rules)
 
+    def test_referenced_company_payload_excludes_editorial_page_company(self):
+        payload = build_referenced_company_payload(
+            CompanyData("Roams", 0.8, "smartphone_financing", "roams.es"),
+            [
+                TopKPage(
+                    "https://roams.es/actualidad/finanzas/iphone-a-plazos",
+                    2.0,
+                    "Roams analyzes whether financing an iPhone in installments is a good idea. Lowi lets customers finance phones.",
+                )
+            ],
+        )
+
+        rules = " ".join(payload["task"]["rules"])
+        self.assertIn("Do not extract the page company/domain itself", rules)
+        self.assertIn("editorial, advisory, comparison", rules)
+        self.assertIn("Writing about, analyzing, recommending", rules)
+
+    def test_referenced_company_payload_excludes_generic_finance_without_device_anchor(self):
+        payload = build_referenced_company_payload(
+            CompanyData("ID Finance", 0.8, "smartphone_financing", "idfinance.com"),
+            [
+                TopKPage(
+                    "https://idfinance.com/",
+                    2.0,
+                    "Plazo helps customers boost purchasing power by providing finance when they need it.",
+                )
+            ],
+        )
+
+        rules = " ".join(payload["task"]["rules"])
+        self.assertIn("generic consumer finance", rules)
+        self.assertIn("financial wellness apps", rules)
+        self.assertIn("unless the same evidence explicitly ties that financing to smartphones", rules)
+        self.assertIn("Do not infer smartphone/device financing from broad fintech", rules)
+
     def test_parse_referenced_companies(self):
         companies = parse_referenced_companies(
             """

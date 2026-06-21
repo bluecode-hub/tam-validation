@@ -10,7 +10,7 @@ from typing import Iterable
 from domain_grouping import group_urls_by_domain, root_domain
 from domain_index import DomainIndexCache
 from llm_validator import LLMValidator, OpenAIHTTPValidator
-from models import CompanyData, DiscoveryResult, PageContent, ValidationResult
+from models import CompanyData, DiscoveryResult, PageContent, ReferencedCompany, ValidationResult
 from retrieval import generate_retrieval_queries, html_to_text, pages_for_domain, retrieve_top_k
 
 try:
@@ -97,6 +97,7 @@ def validate_company_domain(
         retrieved,
         "provider_extraction",
     )
+    referenced_companies = filter_extracted_provider_companies(company, referenced_companies, retrieved)
     reasoning = "Extracted provider company names from retrieved BM25 chunks without page/domain classification."
     return ValidationResult(
         validated=None,
@@ -113,6 +114,157 @@ def validate_company_domain(
         aggregator_company_details=[],
         referenced_companies=referenced_companies,
     )
+
+
+def filter_extracted_provider_companies(
+    company: CompanyData,
+    referenced_companies: list[ReferencedCompany],
+    retrieved_pages: list | None = None,
+) -> list[ReferencedCompany]:
+    return [
+        referenced_company
+        for referenced_company in referenced_companies
+        if not _is_editorial_self_extraction(company, referenced_company)
+        and not _is_speculative_financing_evidence(referenced_company, retrieved_pages)
+        and _has_explicit_target_anchor(referenced_company, retrieved_pages)
+    ]
+
+
+def _is_editorial_self_extraction(company: CompanyData, referenced_company: ReferencedCompany) -> bool:
+    company_domain = root_domain(company.domain)
+    referenced_domain = root_domain(
+        referenced_company.domain
+        or referenced_company.url
+        or referenced_company.source_url
+    )
+    if not company_domain or referenced_domain != company_domain:
+        return False
+    if _normalize_name(referenced_company.name) != _normalize_name(company.company_name):
+        return False
+
+    evidence_text = " ".join(
+        [
+            referenced_company.role,
+            referenced_company.financing_responsibility,
+            referenced_company.target_relevance,
+            referenced_company.quote,
+            referenced_company.notes,
+        ]
+    ).lower()
+    editorial_terms = (
+        "advis",
+        "analys",
+        "article",
+        "blog",
+        "compar",
+        "directory",
+        "guide",
+        "listing",
+        "news",
+        "rank",
+        "recommend",
+        "review",
+    )
+    direct_terms = (
+        "underwrite",
+        "lender",
+        "loan provider",
+        "credit provider",
+        "lease provider",
+        "direct financing",
+        "finances purchases",
+        "finances smartphones",
+        "provides installments",
+        "offers installments",
+    )
+    return any(term in evidence_text for term in editorial_terms) and not any(
+        term in evidence_text for term in direct_terms
+    )
+
+
+def _normalize_name(value: str) -> str:
+    return "".join(character for character in value.lower() if character.isalnum())
+
+
+def _is_speculative_financing_evidence(
+    referenced_company: ReferencedCompany,
+    retrieved_pages: list | None = None,
+) -> bool:
+    evidence_text = " ".join(
+        [
+            referenced_company.quote,
+            referenced_company.role,
+            referenced_company.financing_responsibility,
+            referenced_company.target_relevance,
+            referenced_company.notes,
+        ]
+    ).lower()
+    source_url = referenced_company.source_url or referenced_company.url
+    if source_url and retrieved_pages:
+        evidence_text = " ".join([evidence_text, _source_page_text(source_url, retrieved_pages)]).lower()
+    speculative_terms = (
+        "potentially",
+        "may include",
+        "could support",
+        "can support",
+        "possibly",
+        "various payment method",
+        "various payment methods",
+        "might offer",
+    )
+    return any(term in evidence_text for term in speculative_terms)
+
+
+def _has_explicit_target_anchor(
+    referenced_company: ReferencedCompany,
+    retrieved_pages: list | None = None,
+) -> bool:
+    if not any(
+        [
+            referenced_company.quote,
+            referenced_company.role,
+            referenced_company.financing_responsibility,
+            referenced_company.source_url,
+            referenced_company.url,
+        ]
+    ):
+        return True
+    evidence_text = " ".join(
+        [
+            referenced_company.quote,
+            referenced_company.role,
+            referenced_company.financing_responsibility,
+        ]
+    ).lower()
+    source_url = referenced_company.source_url or referenced_company.url
+    if source_url and retrieved_pages:
+        evidence_text = " ".join([evidence_text, _source_page_text(source_url, retrieved_pages)]).lower()
+    target_terms = (
+        "cell phone",
+        "device",
+        "dispositivo",
+        "handset",
+        "iphone",
+        "mobile phone",
+        "movil",
+        "móvil",
+        "phone",
+        "smartphone",
+        "tablet",
+        "wearable",
+    )
+    return any(term in evidence_text for term in target_terms)
+
+
+def _source_page_text(source_url: str, retrieved_pages: list) -> str:
+    matching_text: list[str] = []
+    for page in retrieved_pages:
+        page_url = getattr(page, "url", "")
+        if page_url != source_url:
+            continue
+        matching_text.append(getattr(page, "content_snippet", ""))
+        matching_text.append(getattr(page, "title", ""))
+    return " ".join(matching_text)
 
 
 def validate_batch(
@@ -173,7 +325,7 @@ def load_page_contents(
         if wanted_domains and root_domain(url) not in wanted_domains:
             continue
         if _is_pdf_url(url) and extract_pdfs:
-            content = extract_pdf_text(path, max_bytes=max_chars_per_page)
+            content = extract_pdf_text(path, max_chars=max_chars_per_page)
             source_type = "pdf"
         else:
             try:
@@ -195,18 +347,24 @@ def load_page_contents(
     return pages
 
 
-def extract_pdf_text(path: Path, max_bytes: int = 500_000) -> str:
+def extract_pdf_text(path: Path, max_chars: int = 500_000) -> str:
     if PdfReader is None:
         logger.warning("pypdf is not installed; unable to extract text from PDF cache file %s", path)
         return ""
     try:
-        data = path.read_bytes()[:max_bytes]
+        data = path.read_bytes()
         reader = PdfReader(BytesIO(data))
         parts = []
+        extracted_chars = 0
         for page in reader.pages:
             text = page.extract_text() or ""
             if text.strip():
-                parts.append(text.strip())
+                clean_text = text.strip()
+                remaining_chars = max_chars - extracted_chars
+                if remaining_chars <= 0:
+                    break
+                parts.append(clean_text[:remaining_chars])
+                extracted_chars += len(parts[-1])
         return " ".join(" ".join(parts).split())
     except FileNotFoundError:
         logger.warning("Cached PDF disappeared before it could be read: %s", path)
