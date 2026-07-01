@@ -1,10 +1,13 @@
-import sys
+﻿import sys
 import unittest
+import urllib.error
 from pathlib import Path
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "input"))
 
 from llm_validator import (
+    OpenAIHTTPValidator,
     build_llm_payload,
     build_llm_prompt,
     build_referenced_company_payload,
@@ -12,7 +15,18 @@ from llm_validator import (
     parse_llm_judgment,
 )
 from models import CompanyData, TopKPage
+class StubHTTPResponse:
+    def __init__(self, body):
+        self.body = body
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc, traceback):
+        return False
+
+    def read(self):
+        return self.body
 
 class LLMValidatorTests(unittest.TestCase):
     def test_build_payload_contains_company_and_pages(self):
@@ -183,8 +197,12 @@ class LLMValidatorTests(unittest.TestCase):
         self.assertIn("explicitly connects that company", rules)
         self.assertIn("Include companies even when they are mentioned as a partner", rules)
         self.assertIn("Every returned company must include source_url", rules)
+        self.assertIn("llm_confidence_score as an integer from 1 to 5", rules)
+        self.assertIn("llm_confidence_reasoning explaining why", rules)
         self.assertIn("target_relevance", payload["output_schema"]["referenced_companies"][0])
-        self.assertIn("financing_responsibility", payload["output_schema"]["referenced_companies"][0])
+        self.assertIn("match_responsibility", payload["output_schema"]["referenced_companies"][0])
+        self.assertIn("llm_confidence_score", payload["output_schema"]["referenced_companies"][0])
+        self.assertIn("llm_confidence_reasoning", payload["output_schema"]["referenced_companies"][0])
 
     def test_referenced_company_payload_excludes_simple_post_payment(self):
         payload = build_referenced_company_payload(
@@ -269,7 +287,9 @@ class LLMValidatorTests(unittest.TestCase):
                   "domain": "bankco.test",
                   "url": "https://bankco.test/finance",
                   "role": "financing partner",
-                  "financing_responsibility": "underwrites installments",
+                  "match_responsibility": "underwrites installments",
+                  "llm_confidence_score": 4,
+                  "llm_confidence_reasoning": "The quote names BankCo as the financing provider.",
                   "target_relevance": "smartphone financing",
                   "quote": "Financing provided by BankCo",
                   "source_url": "https://retailer.test/phones",
@@ -285,8 +305,38 @@ class LLMValidatorTests(unittest.TestCase):
         self.assertEqual(companies[0].name, "BankCo")
         self.assertEqual(companies[0].domain, "bankco.test")
         self.assertEqual(companies[0].role, "financing partner")
-        self.assertEqual(companies[0].financing_responsibility, "underwrites installments")
+        self.assertEqual(companies[0].match_responsibility, "underwrites installments")
+        self.assertEqual(companies[0].llm_confidence_score, "4")
+        self.assertEqual(companies[0].llm_confidence_reasoning, "The quote names BankCo as the financing provider.")
         self.assertEqual(companies[0].target_relevance, "smartphone financing")
+
+    def test_openai_validator_retries_transient_http_errors(self):
+        responses = [
+            urllib.error.HTTPError("https://api.test", 500, "server error", {}, None),
+            StubHTTPResponse(b'{"output_text": "{\\"referenced_companies\\": []}"}'),
+        ]
+
+        def fake_urlopen(request, timeout):
+            response = responses.pop(0)
+            if isinstance(response, Exception):
+                raise response
+            return response
+
+        validator = OpenAIHTTPValidator(
+            api_key="test-key",
+            endpoint="https://api.test",
+            max_retries=2,
+        )
+        with patch("llm_validator.time.sleep"), patch("llm_validator.urllib.request.urlopen", fake_urlopen):
+            companies = validator.extract_referenced_companies(
+                CompanyData("Example", 0.8, "test_category", "example.com"),
+                [TopKPage("https://example.com", 1.0, "Example evidence")],
+                "criteria_extraction",
+            )
+
+        self.assertEqual(companies, [])
+        self.assertEqual(responses, [])
 
 if __name__ == "__main__":
     unittest.main()
+

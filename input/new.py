@@ -8,10 +8,11 @@ import os
 from dataclasses import asdict
 from pathlib import Path
 
+from criteria_config import ValidationCriteria, default_criteria_path, load_criteria_config
 from domain_grouping import root_domain
 from domain_index import DomainIndexCache
 from models import ValidationResult
-from llm_validator import OpenAIHTTPValidator
+from llm_validator import LLMValidationError, OpenAIHTTPValidator
 from retrieval import pages_for_domain
 from validation_engine import load_companies, load_page_contents, validate_company_domain
 
@@ -20,9 +21,11 @@ CSV_FIELDNAMES = [
     "domain",
     "target_category",
     "extraction_status",
-    "provider_company_count",
-    "provider_company_names",
-    "provider_company_details",
+    "matched_company_count",
+    "matched_company_names",
+    "matched_company_llm_confidence_scores",
+    "matched_company_llm_confidence_reasoning",
+    "matched_company_details",
     "evidence_quotes",
     "source_urls",
     "top_chunk_urls",
@@ -65,13 +68,18 @@ def write_json_results(path: Path, results: dict[str, ValidationResult]) -> None
     )
 
 
-def write_csv_results(path: Path, results: dict[str, ValidationResult], target_category: str = "") -> None:
+def write_csv_results(
+    path: Path,
+    results: dict[str, ValidationResult],
+    target_category: str = "",
+    criteria: ValidationCriteria | None = None,
+) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=CSV_FIELDNAMES)
         writer.writeheader()
         for domain, result in results.items():
-            writer.writerow(csv_row(domain, result, target_category))
+            writer.writerow(csv_row(domain, result, target_category, criteria))
 
 
 def prepare_csv_results(path: Path) -> None:
@@ -80,28 +88,43 @@ def prepare_csv_results(path: Path) -> None:
         csv.DictWriter(handle, fieldnames=CSV_FIELDNAMES).writeheader()
 
 
-def append_csv_result(path: Path, domain: str, result: ValidationResult, target_category: str = "") -> None:
+def append_csv_result(
+    path: Path,
+    domain: str,
+    result: ValidationResult,
+    target_category: str = "",
+    criteria: ValidationCriteria | None = None,
+) -> None:
     with path.open("a", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=CSV_FIELDNAMES)
-        writer.writerow(csv_row(domain, result, target_category))
+        writer.writerow(csv_row(domain, result, target_category, criteria))
         handle.flush()
 
 
-def csv_row(domain: str, result: ValidationResult, target_category: str = "") -> dict[str, object]:
-    provider_companies = result.referenced_companies or result.referenced_entities
-    provider_names = _unique_nonempty(company.name for company in provider_companies)
+def csv_row(
+    domain: str,
+    result: ValidationResult,
+    target_category: str = "",
+    criteria: ValidationCriteria | None = None,
+) -> dict[str, object]:
+    matched_companies = result.referenced_companies or result.referenced_entities
+    matched_names = _unique_nonempty(company.name for company in matched_companies)
     source_urls = _unique_nonempty(
-        (company.source_url or company.url or company.domain) for company in provider_companies
+        (company.source_url or company.url or company.domain) for company in matched_companies
     )
-    evidence_quotes = _unique_nonempty(company.quote for company in provider_companies)
+    evidence_quotes = _unique_nonempty(company.quote for company in matched_companies)
+    llm_confidence_scores = _unique_nonempty(company.llm_confidence_score for company in matched_companies)
+    llm_confidence_reasoning = _unique_nonempty(company.llm_confidence_reasoning for company in matched_companies)
     return {
         "domain": domain,
         "target_category": target_category,
-        "extraction_status": extraction_status(result),
-        "provider_company_count": len(provider_names),
-        "provider_company_names": " | ".join(provider_names),
-        "provider_company_details": json.dumps(
-            [asdict(company) for company in provider_companies],
+        "extraction_status": extraction_status(result, criteria),
+        "matched_company_count": len(matched_names),
+        "matched_company_names": " | ".join(matched_names),
+        "matched_company_llm_confidence_scores": " | ".join(llm_confidence_scores),
+        "matched_company_llm_confidence_reasoning": " | ".join(llm_confidence_reasoning),
+        "matched_company_details": json.dumps(
+            [asdict(company) for company in matched_companies],
             ensure_ascii=False,
         ),
         "evidence_quotes": " | ".join(evidence_quotes),
@@ -112,9 +135,9 @@ def csv_row(domain: str, result: ValidationResult, target_category: str = "") ->
     }
 
 
-def extraction_status(result: ValidationResult) -> str:
+def extraction_status(result: ValidationResult, criteria: ValidationCriteria | None = None) -> str:
     if result.referenced_companies or result.referenced_entities:
-        return "providers_found"
+        return criteria.output_positive_label if criteria else "matches_found"
     lowered_reasoning = result.reasoning.lower()
     if "no domain pages" in lowered_reasoning:
         return "no_domain_pages"
@@ -122,7 +145,7 @@ def extraction_status(result: ValidationResult) -> str:
         return "no_indexable_text"
     if "no relevant evidence" in lowered_reasoning:
         return "no_relevant_chunks"
-    return "no_providers_found"
+    return criteria.output_negative_label if criteria else "no_matches_found"
 
 
 def _unique_nonempty(values) -> list[str]:
@@ -146,18 +169,14 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Run domain-aware company validation.")
     parser.add_argument("--input-dir", default=Path(__file__).parent, type=Path)
     parser.add_argument("--target-category", default="smartphone_financing")
+    parser.add_argument("--config-yaml", type=Path, default=None)
+    parser.add_argument("--companies-csv", type=Path, default=None)
     parser.add_argument("--limit", type=int, default=0)
     parser.add_argument("--env-file", type=Path, default=None)
     parser.add_argument("--json-output", type=Path, default=None)
     parser.add_argument("--csv-output", type=Path, default=None)
     parser.add_argument("--llm-log-output", type=Path, default=None)
     parser.add_argument("--top-k", type=int, default=8)
-    parser.add_argument(
-        "--retrieval-mode",
-        choices=["boosted", "bm25"],
-        default="boosted",
-        help="Use boosted retrieval scoring or plain BM25-only ranking.",
-    )
     parser.add_argument(
         "--pdf-mode",
         choices=["extract", "raw"],
@@ -167,25 +186,31 @@ def main() -> None:
     parser.add_argument(
         "--extract-referenced-companies",
         action="store_true",
-        help="Deprecated; provider-company extraction now always runs after BM25 retrieval.",
+        help="Deprecated; criteria extraction now always runs after BM25 retrieval.",
     )
     parser.add_argument("--verbose", action="store_true")
     args = parser.parse_args()
     configure_logging(args.verbose)
     input_dir = args.input_dir.resolve()
     load_env_file(args.env_file or default_env_file(input_dir))
+    config_path = args.config_yaml or default_criteria_path(input_dir, args.target_category)
+    criteria = load_criteria_config(config_path) if config_path.exists() else None
+    target_category = criteria.name if criteria else args.target_category
+    companies_csv = args.companies_csv or input_dir / "companies_scored.csv"
 
-    companies = load_companies(input_dir / "companies_scored.csv", args.target_category)
+    companies = load_companies(companies_csv, target_category)
     if args.limit:
         companies = companies[: args.limit]
     logging.info(
         "Starting validation run: companies=%d target_category=%s",
         len(companies),
-        args.target_category,
+        target_category,
     )
-    logging.info("Retrieval mode: %s", args.retrieval_mode)
+    logging.info("Criteria config: %s", config_path if criteria else "(none)")
+    logging.info("Companies CSV: %s", companies_csv)
+    logging.info("Retrieval mode: bm25")
     logging.info("PDF mode: %s", args.pdf_mode)
-    logging.info("Provider-company extraction: enabled")
+    logging.info("Criteria extraction: enabled")
     pages = load_page_contents(
         input_dir / "pages",
         domains=[company.domain for company in companies],
@@ -196,23 +221,34 @@ def main() -> None:
     llm_log_output = args.llm_log_output or input_dir / "llm_payloads.jsonl"
     prepare_log_file(llm_log_output)
     prepare_csv_results(csv_output)
-    validator = OpenAIHTTPValidator(debug_payload_path=llm_log_output)
+    validator = OpenAIHTTPValidator(debug_payload_path=llm_log_output, criteria=criteria)
     cache = DomainIndexCache()
     results: dict[str, ValidationResult] = {}
     for index, company in enumerate(companies, start=1):
         domain = company.domain or company.company_name
         logging.info("Processing company %d/%d: %s", index, len(companies), domain)
-        result = validate_company_domain(
-            company,
-            pages_for_domain(pages, root_domain(company.domain)),
-            index_cache=cache,
-            validator=validator,
-            top_k=args.top_k,
-            use_evidence_boost=args.retrieval_mode == "boosted",
-            extract_referenced_companies=args.extract_referenced_companies,
-        )
+        try:
+            result = validate_company_domain(
+                company,
+                pages_for_domain(pages, root_domain(company.domain)),
+                index_cache=cache,
+                validator=validator,
+                top_k=args.top_k,
+                extract_referenced_companies=args.extract_referenced_companies,
+                criteria=criteria,
+            )
+        except LLMValidationError as exc:
+            logging.error("Validation failed for %s: %s", domain, exc)
+            result = ValidationResult(
+                validated=None,
+                confidence=0.0,
+                entity_type="unknown",
+                evidence_pages=[],
+                supporting_snippets=[],
+                reasoning=f"LLM validation failed: {exc}",
+            )
         results[domain] = result
-        append_csv_result(csv_output, domain, result, args.target_category)
+        append_csv_result(csv_output, domain, result, target_category, criteria)
         write_json_results(json_output, results)
         logging.info("Wrote incremental result for %s to %s", domain, csv_output)
     logging.info("Wrote JSON results to %s", json_output)

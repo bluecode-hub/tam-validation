@@ -1,4 +1,4 @@
-import sys
+﻿import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -7,7 +7,7 @@ from unittest.mock import patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "input"))
 
 from models import CompanyData, PageContent, ReferencedCompany
-from validation_engine import extract_pdf_text, filter_extracted_provider_companies, load_page_contents, validate_company_domain
+from validation_engine import extract_pdf_text, load_page_contents, validate_company_domain
 
 
 class StubValidator:
@@ -80,7 +80,7 @@ class ValidationEngineTests(unittest.TestCase):
 
         self.assertEqual(validator.validate_calls, [])
         self.assertEqual(len(validator.extract_calls), 1)
-        self.assertEqual(validator.extract_calls[0][2], "provider_extraction")
+        self.assertEqual(validator.extract_calls[0][2], "criteria_extraction")
         self.assertIsNone(result.validated)
         self.assertEqual(result.entity_type, "unknown")
         self.assertEqual(result.evidence_pages, ["https://orange.test/phones"])
@@ -113,7 +113,7 @@ class ValidationEngineTests(unittest.TestCase):
 
         self.assertEqual(validator.validate_calls, [])
         self.assertEqual(len(validator.extract_calls), 1)
-        self.assertEqual(validator.extract_calls[0][2], "provider_extraction")
+        self.assertEqual(validator.extract_calls[0][2], "criteria_extraction")
         self.assertIsNone(result.validated)
         self.assertEqual(result.entity_type, "unknown")
         self.assertEqual(result.referenced_companies[0].name, "ProviderCo")
@@ -142,7 +142,7 @@ class ValidationEngineTests(unittest.TestCase):
         )
 
         self.assertEqual(len(validator.extract_calls), 1)
-        self.assertEqual(validator.extract_calls[0][2], "provider_extraction")
+        self.assertEqual(validator.extract_calls[0][2], "criteria_extraction")
         self.assertEqual(result.referenced_companies[0].name, "ProviderCo")
 
     def test_validation_deprecated_extraction_flag_does_not_change_behavior(self):
@@ -158,10 +158,10 @@ class ValidationEngineTests(unittest.TestCase):
         )
 
         self.assertEqual(len(validator.extract_calls), 1)
-        self.assertEqual(validator.extract_calls[0][2], "provider_extraction")
+        self.assertEqual(validator.extract_calls[0][2], "criteria_extraction")
         self.assertEqual(result.referenced_companies[0].name, "ProviderCo")
 
-    def test_validation_does_not_skip_provider_extraction_for_complete_aggregator_like_content(self):
+    def test_validation_does_not_skip_criteria_extraction_for_complete_aggregator_like_content(self):
         validator = StubValidator(
             None,
             referenced_companies=[ReferencedCompany(name="ProviderCo")],
@@ -175,116 +175,6 @@ class ValidationEngineTests(unittest.TestCase):
 
         self.assertEqual(len(validator.extract_calls), 1)
         self.assertEqual(result.referenced_companies[0].name, "ProviderCo")
-
-    def test_validation_filters_editorial_self_extraction(self):
-        validator = StubValidator(
-            None,
-            referenced_companies=[
-                ReferencedCompany(
-                    name="Roams",
-                    domain="roams.es",
-                    role="provider and analysis of smartphone financing options",
-                    financing_responsibility="direct provider and advisor on smartphone financing",
-                    quote="Analizamos pros, contras y te damos el truco financiero definitivo.",
-                    source_url="https://roams.es/actualidad/finanzas/iphone-a-plazos",
-                ),
-                ReferencedCompany(
-                    name="Lowi",
-                    role="provider of smartphone financing via installment plans",
-                    quote="Ya puedes financiar tu iPhone o Samsung con Lowi",
-                    source_url="https://roams.es/companias-telefonicas/lowi/moviles",
-                ),
-            ],
-        )
-
-        result = validate_company_domain(
-            CompanyData("Roams", 0.8, "smartphone_financing", "roams.es"),
-            [
-                PageContent(
-                    "https://roams.es/actualidad/finanzas/iphone-a-plazos",
-                    "Analizamos si financiar tu iPhone a plazos es buena idea. Lowi permite financiar moviles.",
-                )
-            ],
-            validator=validator,
-        )
-
-        self.assertEqual([company.name for company in result.referenced_companies], ["Lowi"])
-
-    def test_filter_keeps_direct_page_company_provider(self):
-        companies = filter_extracted_provider_companies(
-            CompanyData("Orange", 0.8, "smartphone_financing", "orange.test"),
-            [
-                ReferencedCompany(
-                    name="Orange",
-                    domain="orange.test",
-                    role="direct financing provider",
-                    financing_responsibility="Orange offers installments for smartphones",
-                    quote="We offer smartphone financing with monthly installments.",
-                    source_url="https://orange.test/phones",
-                )
-            ],
-        )
-
-        self.assertEqual(len(companies), 1)
-        self.assertEqual(companies[0].name, "Orange")
-
-    def test_validation_filters_generic_finance_without_phone_anchor(self):
-        validator = StubValidator(
-            None,
-            referenced_companies=[
-                ReferencedCompany(
-                    name="Plazo",
-                    role="Financial app providing financing to increase purchasing power",
-                    financing_responsibility="Provides financing to customers",
-                    target_relevance="implying device or installment financing",
-                    quote="Providing finance when they need it and offering value-added services.",
-                    source_url="https://idfinance.com/",
-                )
-            ],
-        )
-
-        result = validate_company_domain(
-            CompanyData("Financial Apps", 0.8, "smartphone_financing", "idfinance.com"),
-            [
-                PageContent(
-                    "https://idfinance.com/",
-                    "Building accessible financial apps. Plazo provides finance when customers need it.",
-                )
-            ],
-            validator=validator,
-        )
-
-        self.assertEqual(result.referenced_companies, [])
-        self.assertEqual(result.referenced_entities, [])
-
-    def test_validation_filters_speculative_bnpl_language(self):
-        validator = StubValidator(
-            None,
-            referenced_companies=[
-                ReferencedCompany(
-                    name="Getnet",
-                    role="global payment platform",
-                    financing_responsibility="Can support various payment methods, potentially including BNPL solutions.",
-                    target_relevance="Could support smartphone checkout financing.",
-                    quote="Flexible integration options can support various payment methods, potentially including Buy Now Pay Later.",
-                    source_url="https://getnet.example/payments",
-                )
-            ],
-        )
-
-        result = validate_company_domain(
-            CompanyData("Getnet", 0.8, "smartphone_financing", "getnet.example"),
-            [
-                PageContent(
-                    "https://getnet.example/payments",
-                    "Getnet enhances checkout and increases acceptance rates. Payment methods may include BNPL.",
-                )
-            ],
-            validator=validator,
-        )
-
-        self.assertEqual(result.referenced_companies, [])
-        self.assertEqual(result.referenced_entities, [])
 
     def test_validation_handles_pages_without_indexable_text(self):
         result = validate_company_domain(

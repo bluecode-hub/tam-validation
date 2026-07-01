@@ -23,35 +23,6 @@ class RetrievalTests(unittest.TestCase):
         self.assertEqual(results[0].url, "https://example.com/finance")
         self.assertGreater(results[0].score, 0)
 
-    def test_retrieval_can_run_without_evidence_boost(self):
-        pages = [
-            PageContent(
-                "https://example.com/generic",
-                "smartphone financing " * 20,
-            ),
-            PageContent(
-                "https://example.com/pret-smartphone",
-                "smartphone financing credit pret mensualite telephone tablette",
-            ),
-        ]
-        index = DomainIndexCache().get_or_build("example.com", pages)
-
-        bm25_only = retrieve_top_k(
-            index,
-            ["smartphone financing"],
-            k=1,
-            use_evidence_boost=False,
-        )
-        boosted = retrieve_top_k(
-            index,
-            ["smartphone financing"],
-            k=1,
-            use_evidence_boost=True,
-        )
-
-        self.assertEqual(bm25_only[0].url, "https://example.com/generic")
-        self.assertEqual(boosted[0].url, "https://example.com/pret-smartphone")
-
     def test_retrieval_sums_scores_across_queries(self):
         pages = [
             PageContent("https://example.com/single", "alpha " * 20),
@@ -63,7 +34,6 @@ class RetrievalTests(unittest.TestCase):
             index,
             ["alpha", "beta"],
             k=1,
-            use_evidence_boost=False,
         )
 
         self.assertEqual(results[0].url, "https://example.com/multiple")
@@ -104,7 +74,7 @@ class RetrievalTests(unittest.TestCase):
         index = DomainIndexCache(chunk_chars=120, chunk_overlap_chars=0).get_or_build("example.com", pages)
         self.assertGreater(len(index.pages), 1)
 
-        results = retrieve_top_k(index, ["smartphone financing"], k=1, use_evidence_boost=False)
+        results = retrieve_top_k(index, ["smartphone financing"], k=1)
 
         self.assertEqual(results[0].url, "https://example.com/long")
         self.assertIn("smartphone financing", results[0].content_snippet)

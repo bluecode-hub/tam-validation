@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import logging
 import re
@@ -6,6 +6,7 @@ from html.parser import HTMLParser
 
 from domain_grouping import root_domain
 from domain_index import DomainIndex
+from criteria_config import ValidationCriteria
 from models import CompanyData, PageContent, TopKPage
 
 logger = logging.getLogger(__name__)
@@ -13,20 +14,20 @@ logger = logging.getLogger(__name__)
 BASE_QUERIES_BY_CATEGORY = {
     "smartphone_financing": [
        "financiacion movil",
-        "financiación móvil",
+        "financiaciÃ³n mÃ³vil",
         "financiacion smartphone",
-        "financiación smartphone",
+        "financiaciÃ³n smartphone",
         "movil a plazos",
-        "móvil a plazos",
+        "mÃ³vil a plazos",
         "smartphone a plazos",
         "telefono a plazos",
-        "teléfono a plazos",
+        "telÃ©fono a plazos",
         "comprar movil a plazos",
-        "comprar móvil a plazos",
+        "comprar mÃ³vil a plazos",
         "pago a plazos",
         "pago mensual",
         "financiacion sin intereses",
-        "financiación sin intereses",
+        "financiaciÃ³n sin intereses",
         "0 intereses",
     ],
     "device_financing": [
@@ -66,55 +67,6 @@ TARGET_LABELS_BY_CATEGORY = {
 }
 
 
-EVIDENCE_TERMS_BY_CATEGORY = {
-    "smartphone_financing": [
-        "smartphone",
-        "smartphones",
-        "telephone",
-        "telephones",
-        "tablette",
-        "tablettes",
-        "credit",
-        "pret",
-        "financement",
-        "mensualite",
-        "mensualites",
-        "echelonne",
-        "installment",
-        "installments",
-        "monthly",
-        "pay later",
-        "a credit",
-        "à crédit",
-    ],
-}
-
-PRIORITY_TERMS_BY_CATEGORY = {
-    "smartphone_financing": [
-        "a credit",
-        "à crédit",
-        "mensualite",
-        "mensualites",
-        "installment",
-        "installments",
-        "financing",
-        "financement",
-    ],
-}
-
-URL_HINTS_BY_CATEGORY = {
-    "smartphone_financing": [
-        "smartphone",
-        "smartphones",
-        "telephone",
-        "telephones",
-        "credit",
-        "pret",
-        "prt-smartphone",
-        "pret-smartphone",
-        "smartphones-a-credit",
-    ],
-}
 
 
 class TextExtractor(HTMLParser):
@@ -172,20 +124,33 @@ def html_to_text(html: str) -> str:
         return " ".join(without_tags.split())
 
 
-def generate_retrieval_queries(company: CompanyData) -> list[str]:
-    target_label = target_label_for_category(company.target_category)
-    queries = list(BASE_QUERIES_BY_CATEGORY.get(company.target_category, [target_label]))
+def generate_retrieval_queries(
+    company: CompanyData,
+    criteria: ValidationCriteria | None = None,
+) -> list[str]:
+    target_label = criteria.label if criteria else target_label_for_category(company.target_category)
+    queries = list(criteria.retrieval_terms if criteria else BASE_QUERIES_BY_CATEGORY.get(company.target_category, [target_label]))
     name = company.company_name.strip()
     if name:
-        queries.extend(
-            [
-                f"{name} {target_label}",
-                f"{name} financing",
-                f"{name} installment plans",
-                f"{name} pay later",
-                f"{name} {company.target_category.replace('_', ' ')}",
-            ]
-        )
+        if criteria and criteria.company_query_templates:
+            queries.extend(
+                template.format(
+                    company=name,
+                    label=criteria.label,
+                    name=criteria.name.replace("_", " "),
+                )
+                for template in criteria.company_query_templates
+            )
+        else:
+            queries.extend(
+                [
+                    f"{name} {target_label}",
+                    f"{name} financing",
+                    f"{name} installment plans",
+                    f"{name} pay later",
+                    f"{name} {company.target_category.replace('_', ' ')}",
+                ]
+            )
     return list(dict.fromkeys(queries))
 
 
@@ -193,11 +158,10 @@ def retrieve_top_k(
     domain_index: DomainIndex,
     queries: list[str],
     k: int = 8,
-    use_evidence_boost: bool = True,
+    criteria: ValidationCriteria | None = None,
 ) -> list[TopKPage]:
     totals: dict[str, float] = {}
     chunk_pages: dict[str, PageContent] = {}
-    category = _category_from_queries(queries)
     for query in queries:
         for page, score in zip(domain_index.pages, domain_index.query_scores(query)):
             if score <= 0:
@@ -208,13 +172,10 @@ def retrieve_top_k(
     candidates = []
     for key, score in totals.items():
         page = chunk_pages[key]
-        adjusted_score = score
-        if use_evidence_boost:
-            adjusted_score += evidence_score(page, category)
         candidates.append(
             TopKPage(
                 url=page.url,
-                score=adjusted_score,
+                score=score,
                 content_snippet=" ".join(page.content.split()),
                 title=str(page.metadata.get("title", "")),
                 chunk_index=int(page.metadata.get("chunk_index", 0)),
@@ -227,19 +188,6 @@ def retrieve_top_k(
     return pages
 
 
-def evidence_score(page: PageContent, category: str = "") -> float:
-    lowered_content = _plain_lower(page.content)
-    lowered_url = _plain_lower(page.url.replace("-", " ").replace("/", " "))
-    terms = EVIDENCE_TERMS_BY_CATEGORY.get(category, [])
-    url_hints = URL_HINTS_BY_CATEGORY.get(category, [])
-    score = sum(0.25 for term in terms if _plain_lower(term) in lowered_content)
-    score += sum(0.5 for hint in url_hints if _plain_lower(hint) in lowered_url)
-    if any(phone in lowered_content for phone in ["smartphone", "telephone", "tablette"]):
-        if any(finance in lowered_content for finance in ["credit", "pret", "mensualite", "installment"]):
-            score += 2.0
-    return score
-
-
 def pages_for_domain(pages: list[PageContent], domain: str) -> list[PageContent]:
     wanted = root_domain(domain)
     return [page for page in pages if root_domain(page.url) == wanted]
@@ -249,33 +197,25 @@ def target_label_for_category(target_category: str) -> str:
     return TARGET_LABELS_BY_CATEGORY.get(target_category, target_category.replace("_", " ").strip())
 
 
-def _category_from_queries(queries: list[str]) -> str:
-    query_text = " ".join(queries).lower()
-    for category in BASE_QUERIES_BY_CATEGORY:
-        if any(query.lower() in query_text for query in BASE_QUERIES_BY_CATEGORY[category]):
-            return category
-    return ""
-
-
 def _plain_lower(value: str) -> str:
     replacements = str.maketrans(
         {
-            "à": "a",
-            "á": "a",
-            "â": "a",
-            "ä": "a",
-            "ç": "c",
-            "è": "e",
-            "é": "e",
-            "ê": "e",
-            "ë": "e",
-            "î": "i",
-            "ï": "i",
-            "ô": "o",
-            "ö": "o",
-            "ù": "u",
-            "û": "u",
-            "ü": "u",
+            "Ã ": "a",
+            "Ã¡": "a",
+            "Ã¢": "a",
+            "Ã¤": "a",
+            "Ã§": "c",
+            "Ã¨": "e",
+            "Ã©": "e",
+            "Ãª": "e",
+            "Ã«": "e",
+            "Ã®": "i",
+            "Ã¯": "i",
+            "Ã´": "o",
+            "Ã¶": "o",
+            "Ã¹": "u",
+            "Ã»": "u",
+            "Ã¼": "u",
         }
     )
     return value.lower().translate(replacements)
