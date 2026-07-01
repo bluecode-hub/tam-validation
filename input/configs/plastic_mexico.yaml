@@ -1,0 +1,49 @@
+criteria:
+  name: plastic_automotive_parts_manufacturer_mexico
+  label: Plastic automotive parts manufacturer (Mexico)
+  description: Companies that manufacture plastic/polymer automotive parts or components (e.g. injection-molded trim, bumpers, dashboards, connectors, under-hood parts) at a facility located in Mexico.
+
+  complete_match:
+    - The company manufactures, molds, or produces plastic automotive parts, components, or assemblies at a Mexico-based facility.
+    - The company is a Tier 1/Tier 2 automotive supplier with confirmed plastic-part manufacturing operations in Mexico.
+
+  partial_match:
+    - "The company manufactures plastic products generally, with no clear automotive connection."
+    - "The company manufactures automotive parts generally, with no clear plastic/polymer connection."
+    - "The company manufactures plastic automotive parts, but no Mexico facility is confirmed."
+    - "The company has a Mexico facility, but it's unclear whether it makes plastic parts, automotive parts, or both."
+    - "The company appears only in a directory/list heading (e.g. 'Top Plastic Auto Parts Makers in Mexico') with no company-specific detail."
+    - "The company supplies, distributes, imports, or exports plastic automotive parts without evidence it manufactures them."
+
+  reject:
+    - The company only uses, sells, or distributes plastic automotive parts (e.g. dealers, retailers, repair shops) without manufacturing them.
+    - The company manufactures plastic parts or automotive parts but has no presence in Mexico at all.
+    - The evidence is speculative ("may produce", "could manufacture", "potentially supplies", etc.).
+
+  extraction_rules:
+    - Complete match requires explicit evidence of BOTH plastic-automotive-part manufacturing AND a Mexico-based operation.
+    - Partial match requires definite (not speculative) evidence of plastic manufacturing OR automotive-part manufacturing, but missing one element (plastic, automotive, or Mexico).
+    - All partial matches get LOW confidence, regardless of how many partial conditions apply. Only complete matches can get medium/high confidence.
+    - Directory/list-only mentions ("including [Company]") are extracted as low-confidence partial matches, noted as directory-level evidence.
+    - Manufacturing/molding/producing language outweighs supplying/distributing/trading language as evidence.
+    - The molding process (injection, blow, compression) need not be specified — a Mexico plant + a stated plastic automotive product line is enough for a complete match.
+
+  retrieval_terms:
+    - plastic automotive parts manufacturer Mexico
+    - automotive plastic injection molding Mexico
+    - automotive plastic components manufacturer Mexico
+    - Tier 1 automotive plastic supplier Mexico
+    - plastic bumper / dashboard / trim manufacturer Mexico
+    - automotive plastic connector manufacturer Mexico
+    - under-hood plastic components manufacturer Mexico
+    - maquiladora plastic automotive parts
+
+  company_query_templates:
+    - "{company} {label}"
+    - "{company} plastic automotive parts"
+    - "{company} Mexico plant automotive"
+    - "{company} Tier 1 automotive supplier Mexico"
+    - "{company} automotive plastic molding Mexico"
+
+  output_positive_label: manufacturers_found
+  output_negative_label: no_manufacturers_found

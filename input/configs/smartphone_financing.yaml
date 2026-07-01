@@ -1,0 +1,56 @@
+﻿criteria:
+  name: smartphone_financing
+  label: smartphone financing
+  description: Companies that provide financing, installment plans, leasing, lending, or credit agreements for smartphones or related devices.
+
+  complete_match:
+    - The company directly provides smartphone financing.
+    - The company offers phone or device installment plans.
+    - The company underwrites, lends, leases, or handles credit agreements for smartphones or devices.
+
+  partial_match:
+    - The company is named as a partner, lender, bank, telco, BNPL provider, payment provider, or financing provider for phone/device purchases.
+    - The page lists or compares third-party smartphone financing providers.
+
+  reject:
+    - Generic checkout post-payment, pay-after-delivery, invoice payment, deferred payment, generic BNPL, or ordinary payment methods without an installment plan, loan, lease, credit agreement, device financing, or phone-specific monthly financing.
+    - Generic consumer finance, personal loans, credit products, financial wellness apps, loan origination, cashback, or generic finance language without an explicit smartphone/device purchase connection.
+    - Editorial, advisory, comparison, directory, affiliate, review, news, or blog content by the page company itself unless it names actual third-party providers.
+    - Speculative evidence such as potentially, may include, could support, can support, possibly, or might offer.
+
+  extraction_rules:
+    - Extract every company name that has definite evidence in the chunks showing it provides smartphone financing, mobile phone financing, phone/device installment plans, pay-monthly phones, leasing/renting of smartphones, underwriting, lending, credit agreements, or installment payment financing specifically for smartphones/devices.
+    - Definite evidence means the chunk explicitly connects that company to providing, offering, financing, underwriting, lending, leasing, enabling installment payments, or handling credit agreements for the target service.
+    - Do not infer smartphone/device financing from broad fintech, lending, BNPL, or credit language. The supporting quote must explicitly contain the target product/service connection.
+    - Include companies even when they are mentioned as a partner, third-party lender, bank, telco, BNPL provider, payment provider, or financing provider.
+    - Do not extract merchants, retailers, shops, marketplaces, coupon sites, comparison sites, or page companies whose role is only selling the device, hosting the checkout, listing the offer, or making third-party payment options available.
+    - When a quote says a merchant offers flexible payment through named companies, extract the named financing/payment-plan providers and do not extract the merchant unless the quote explicitly says the merchant itself finances, underwrites, lends, leases, or provides the installment credit.
+
+  retrieval_terms:
+    - financiacion movil
+    - financiaciÃ³n mÃ³vil
+    - financiacion smartphone
+    - financiaciÃ³n smartphone
+    - movil a plazos
+    - mÃ³vil a plazos
+    - smartphone a plazos
+    - telefono a plazos
+    - telÃ©fono a plazos
+    - comprar movil a plazos
+    - comprar mÃ³vil a plazos
+    - pago a plazos
+    - pago mensual
+    - financiacion sin intereses
+    - financiaciÃ³n sin intereses
+    - 0 intereses
+
+  company_query_templates:
+    - "{company} {label}"
+    - "{company} financing"
+    - "{company} installment plans"
+    - "{company} pay later"
+    - "{company} {name}"
+
+  output_positive_label: providers_found
+  output_negative_label: no_providers_found
+

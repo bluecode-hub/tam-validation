@@ -1,0 +1,83 @@
+criteria:
+  name: pbt_plastic_manufacturer
+  label: PBT plastic manufacturer
+  description: Companies that manufacture polybutylene terephthalate (PBT) resin, PBT pellets, PBT compounds, or PBT-based engineering-plastic materials.
+
+  complete_match:
+    - The company manufactures PBT resin, PBT pellets, or PBT compounds.
+    - The company produces polybutylene terephthalate (PBT) resin or PBT-based engineering plastics.
+    - The company operates PBT polymerization, compounding, extrusion, pelletizing, or other PBT-material production capacity.
+    - The company manufactures reinforced, glass-filled, flame-retardant, mineral-filled, or specialty PBT compounds.
+    - The company produces PBT grades or PBT engineering thermoplastic compounds under its own product line.
+    - The company manufactures engineering thermoplastic compounds explicitly based on PBT.
+    - The company manufactures PBT compounds even if upstream PBT polymerization is outsourced.
+    - The company explicitly states that it manufactures, produces, compounds, extrudes, pelletizes, or processes PBT materials into commercial resin or compound products.
+
+  partial_match:
+    - "The company is a general plastic manufacturer or plastic goods manufacturer with no specific mention of PBT."
+    - "The company manufactures plastic products, plastic components, or plastic materials broadly, without any reference to PBT or engineering plastics."
+    - "The company is described using umbrella terms such as plastics manufacturer, polymer manufacturer, polymer producer, plastic goods maker, or plastic product manufacturer, with no explicit PBT connection."
+    - "The company manufactures engineering plastics or polyester materials in general, with no explicit mention of PBT."
+    - "The company manufactures thermoplastics, synthetic resins, industrial plastics, or engineering materials broadly, with no PBT-specific evidence."
+    - "The company manufactures engineering plastic compounds but evidence does not explicitly connect the compounds to PBT."
+    - "The company appears in a directory, marketplace, or list heading for plastic compound manufacturers, thermoplastic companies, resin manufacturers, or broad plastic manufacturers, but company-specific manufacturing evidence is limited."
+    - "The company distributes, supplies, trades, imports, exports, or resells PBT resin, PBT pellets, or PBT compounds, but manufacturing is unclear."
+    - "The company provides PBT material specifications, datasheets, product catalogs, or technical support, but evidence does not confirm it produces PBT."
+    - "The company lists PBT among supported materials or product offerings, but the evidence does not explicitly state that the company manufactures PBT materials."
+
+  reject:
+    - The company only uses PBT in finished products, molded parts, electrical components, connectors, consumer goods, or industrial products.
+    - The company only sells, trades, imports, distributes, exports, or supplies PBT without evidence that it manufactures PBT materials.
+    - The company only publishes PBT specifications, datasheets, articles, market reports, or generic plastics information.
+    - The evidence is speculative, such as "may produce", "could manufacture", "potentially supplies", "might offer", or similar uncertain language.
+
+  extraction_rules:
+    - Extract every company name with definite evidence that it either manufactures broad plastic products as a partial match or manufactures, produces, compounds, polymerizes, extrudes, or pelletizes PBT resin, PBT pellets, polybutylene terephthalate, PBT compounds, or PBT-based engineering-plastic materials as a complete match.
+    - Definite evidence must explicitly connect the company to broad plastic manufacturing for a partial match, or to PBT manufacturing or production for a complete match.
+    - Manufacturing, production, compounding, polymerization, extrusion, and pelletizing language are stronger evidence than supplying, distributing, trading, importing, exporting, or reselling.
+    - Every company matched through partial_match conditions MUST be assigned a LOW confidence score. Do not assign medium or high confidence to any partial match, regardless of how many partial conditions are met.
+    - Only complete_match conditions can justify a medium or high confidence score.
+    - Require an explicit textual association between the company and PBT manufacturing activity before assigning a complete match.
+    - Broad plastic manufacturers, plastic goods manufacturers, and finished plastic goods manufacturers may be extracted as partial matches when the text gives definite evidence that the company manufactures plastic products, even without explicit PBT evidence.
+    - Directory titles, list headings, and summary text such as "Top Plastic Compound Manufacturers", "Thermoplastic Companies", "Resin Manufacturers", or "including [Company]" may be used to extract the named company as a low-confidence partial match when the heading/list category is relevant to plastic manufacturing.
+    - When a company is named only in a directory heading, list title, or "including [Company]" summary without company-specific details, extract it as a partial match with low confidence and explain that the evidence is directory-level rather than company-specific.
+    - Do not assign medium or high confidence to broad plastic manufacturers unless PBT manufacturing is explicitly connected to the company.
+    - Do not extract companies that only use PBT as an input in finished goods or components unless they also manufacture plastic products broadly; if they manufacture plastic products broadly, treat them as low-confidence partial matches.
+    - PBT compound manufacturing alone is sufficient for a complete match even if the company does not perform polymerization.
+    - Glass-filled, reinforced, flame-retardant, mineral-filled, or specialty PBT compound manufacturing qualifies as PBT manufacturing when the company is identified as the manufacturer or producer.
+
+  retrieval_terms:
+    - PBT plastic manufacturer Bangladesh
+    - PBT resin manufacturer Bangladesh
+    - PBT pellets manufacturer Bangladesh
+    - PBT compound manufacturer Bangladesh
+    - polybutylene terephthalate manufacturer Bangladesh
+    - PBT engineering plastics manufacturer Bangladesh
+    - PBT polymer producer Bangladesh
+    - PBT compounding manufacturer Bangladesh
+    - PBT resin producer Bangladesh
+    - PBT compound producer Bangladesh
+    - PBT polymer manufacturer Bangladesh
+    - PBT material manufacturer Bangladesh
+    - PBT granules manufacturer Bangladesh
+    - glass filled PBT manufacturer Bangladesh
+    - reinforced PBT manufacturer Bangladesh
+    - flame retardant PBT manufacturer Bangladesh
+    - engineering thermoplastic compound manufacturer Bangladesh
+    - PBT compounder Bangladesh
+    - PBT masterbatch manufacturer Bangladesh
+
+  company_query_templates:
+    - "{company} {label}"
+    - "{company} PBT resin"
+    - "{company} PBT pellets"
+    - "{company} PBT compound"
+    - "{company} polybutylene terephthalate"
+    - "{company} PBT manufacturer"
+    - "{company} glass filled PBT"
+    - "{company} reinforced PBT"
+    - "{company} flame retardant PBT"
+    - "{company} engineering thermoplastic compounds"
+
+  output_positive_label: manufacturers_found
+  output_negative_label: no_manufacturers_found

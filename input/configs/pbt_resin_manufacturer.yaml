@@ -1,0 +1,49 @@
+﻿criteria:
+  name: pbt_resin_manufacturer
+  label: PBT resin or pellets manufacturer
+  description: Companies that manufacture polybutylene terephthalate (PBT) resin, PBT pellets, or PBT compounds.
+
+  complete_match:
+    - The company manufactures PBT resin.
+    - The company produces polybutylene terephthalate resin.
+    - The company manufactures PBT pellets, PBT compounds, or engineering-plastic PBT materials.
+    - The company operates production, polymerization, compounding, or pelletizing capacity for PBT.
+
+  partial_match:
+    - The company distributes or supplies PBT resin, but manufacturing is unclear.
+    - The company sells PBT compounds or pellets, but the evidence does not prove it manufactures them.
+    - The company manufactures broader engineering plastics or polyester materials and PBT is mentioned, but PBT manufacturing is not explicit.
+
+  reject:
+    - The company only uses PBT in finished products or components.
+    - The company only publishes specifications, datasheets, articles, or market reports about PBT.
+    - The company only trades generic chemicals or plastics without explicit PBT evidence.
+    - The evidence is speculative, such as may produce, could manufacture, potentially supplies, or might offer.
+
+  extraction_rules:
+    - Extract companies with definite evidence that they manufacture, produce, compound, polymerize, pelletize, distribute, or supply PBT resin, PBT pellets, polybutylene terephthalate, or PBT compounds.
+    - Mark manufacturing or production language as stronger evidence than distribution, supply, trading, or resale language.
+    - Do not infer PBT manufacturing from broad plastics, polymer, chemical, or automotive-material language unless PBT is explicitly connected to the company.
+    - Do not extract companies that only use PBT as an input in finished goods.
+
+  retrieval_terms:
+    - PBT resin
+    - PBT pellets
+    - PBT compound
+    - polybutylene terephthalate
+    - engineering plastics PBT
+    - PBT manufacturer
+    - PBT producer
+    - PBT supplier
+
+  company_query_templates:
+    - "{company} {label}"
+    - "{company} PBT resin"
+    - "{company} PBT pellets"
+    - "{company} polybutylene terephthalate"
+    - "{company} PBT manufacturer"
+    - "{company} PBT compound"
+
+  output_positive_label: matches_found
+  output_negative_label: no_matches_found
+
